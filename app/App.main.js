@@ -104,5 +104,5 @@ function start() {
     });
 }
 
-console.log("lol");
+//console.log("lol");
 
