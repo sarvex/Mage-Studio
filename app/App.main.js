@@ -104,3 +104,5 @@ function start() {
     });
 }
 
+console.log("lol");
+
