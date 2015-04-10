@@ -7,6 +7,10 @@ window.onload = function() {
         "app/App.Exporter",
         "app/App.Exporter.Helper",
         "app/App.Exporter.WageHelper",
+        "app/App.ScriptEditor",
+        "app/App.ScriptEditor.Helper",
+        "app/App.ScriptEditor.Layout",
+        "app/App.ScriptEditor.Tab",
         "app/Interface",
         "app/Manager.Scene",
         "app/Manager.Mesh",
@@ -51,6 +55,8 @@ function start() {
             this.interface.init();
             this.sm.init();
             this.interface.afterSceneCreation();
+            //script editor
+            this.scriptEditor = new ScriptEditor("#scriptcontainer");
             //restorer
             this.restorer = new Restorer(this.storage.load());
             //exporter
@@ -86,6 +92,20 @@ function start() {
             app.sm.init();
             //dispatching new project signal
             app.interface.events.newProject.dispatch();
+        },
+
+        //showing script editor
+        openEditor: function() {
+            //setting flag to true
+            app.interface.disableEvents = true;
+            //triggering event
+            app.interface.events.scriptEditorOpened.dispatch();
+        },
+
+        closeEditor: function() {
+            app.interface.disableEvents = false;
+            //triggering closing event
+            app.interface.events.scriptEditorClosed.dispatch();
         }
     });
 

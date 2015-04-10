@@ -14,6 +14,18 @@
         %script{:type=>"text/javascript", :src=>"app/lib/HashMap.js"}
         %script{:type=>"text/javascript", :src=>"app/lib/colorpicker.js"}
 
+        / script editor imports
+        %script{:type=>"text/javascript", :src=>"app/lib/codemirror.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/keypress.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/jshint.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/jBox.min.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/coffee-script.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/addons/javascript.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/addons/coffeescript.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/addons/active-line.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/addons/matchbrackets.js"}
+        %script{:type=>"text/javascript", :src=>"app/lib/addons/closebrackets.js"}
+
         / actual three.js import
         %script{:type=>"text/javascript", :src=>"app/lib/three.min.js"}
 
@@ -24,6 +36,13 @@
         %script{:type=>"text/javascript", :src=>"app/lib/TransformControls.js"}
         %script{:type=>"text/javascript", :src=>"app/lib/stats.min.js"}
 
+        / adding style
+        %link{:rel=>'stylesheet', :type=>'text/css', :href=>'http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300'}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/jBox.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/TooltipDark.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/console_themes/monokai.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/codemirror.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/themes/monokai.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/bootstrap.dark.min.css"}
         %link{:rel=>"stylesheet", :href=>"css/font-awesome/css/font-awesome.min.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/colorpicker.css"}
@@ -48,7 +67,7 @@
                                 %span.icon-bar
                                 %span.icon-bar
                             %a.navbar-brand{:href=>"#"}
-                                Brand
+                                Wage Editor
                         / Collect the nav links, forms, and other content for toggling
                         #bs-example-navbar-collapse-1.collapse.navbar-collapse
                             %ul.nav.navbar-nav
@@ -102,7 +121,7 @@
                                             %a{:href=>"#"}
                                                 Settings
                                         %li
-                                            %a{:href=>"#"}
+                                            %a{:href=>"javascript:app.openEditor();"}
                                                 Script Editor
                                         %li.divider
                                         %li
@@ -125,7 +144,7 @@
                                                 Version
                                         %li
                                             %a{:href=>"#"}
-                                                FAQ
+                                                Powered by
                                         %li
                                             %a{:href=>"#"}
                                                 Wiki
@@ -133,6 +152,35 @@
                                         %li
                                             %a{:href=>"#"}
                                                 About
+        / main container
+        #scriptcontainer
+            #projectContainer
+                %button#newFolder.topcoat-button--large--cta
+                    new folder
+                %ul#project
+                    %li.folder
+                        %i.fa.fa-folder-o
+                            scripts
+                    %li.file.js
+            #codeContainer
+                #tabs
+                    %ul
+                        %li#tab_0.tab.active
+                            %i.fa.fa-remove.close
+                            %span
+                                Root.js
+                        %li#add_tab
+                            +
+                / parte superiore dell'editor
+                #upper_console
+                    #closeEditor.toggle.fa.fa-close
+
+                #main_container.monokai{:style=>"margin-top: #555;"}
+                    #editor_0.editor.visible
+                    %ul#messages
+                    %i#errorAlert.fa.fa-exclamation-circle
+                    #coffee_compiler.invisible
+                        COMPILE
         / main container
         #maincontainer.container-fluid
             #innercontainer.row

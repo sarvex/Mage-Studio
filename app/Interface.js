@@ -34,6 +34,10 @@ Class("Interface", {
             closedProject: new signals.Signal(),
             //loading project
             loadProject: new signals.Signal(),
+            //script editor opened
+            scriptEditorOpened: new signals.Signal(),
+            //Script editor closed
+            scriptEditorClosed: new signals.Signal(),
 
             //autosave event 
             autosaveChange: new signals.Signal(),
@@ -281,5 +285,15 @@ Class("Interface", {
 
     onMouseDown: function(event) {
         //app.mm.onMouseDown(event);
+    },
+
+    //hide element
+    hide: function(elementid) {
+        $(elementid).css("display", "none");
+    },
+
+    //show element
+    show: function(elementid) {
+        $(elementid).css("display", "block");
     }
 });
