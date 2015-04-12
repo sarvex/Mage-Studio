@@ -162,20 +162,25 @@
                         %i.fa.fa-folder-o
                             scripts
                     %li.file.js
+                        %i.fa.fa-file-code-o
+                            main.js
+                    %li.file.js
+                        %i.fa.fa-file-code-o
+                            config.js
             #codeContainer
                 #tabs
                     %ul
                         %li#tab_0.tab.active
                             %i.fa.fa-remove.close
                             %span
-                                Root.js
+                                main.js
                         %li#add_tab
                             +
                 / parte superiore dell'editor
                 #upper_console
                     #closeEditor.toggle.fa.fa-close
 
-                #main_container.monokai{:style=>"margin-top: #555;"}
+                #main_container.monokai
                     #editor_0.editor.visible
                     %ul#messages
                     %i#errorAlert.fa.fa-exclamation-circle
@@ -327,6 +332,8 @@
                                     .row.panel-content
                                         #soundsCount.col-md-12.panel-content-title
                                             Sounds: 0
+                        #playSceneContainer.row
+                            %img{:src=>"img/play.png"}
                 #center.column
                     #scenecontainer
                 #right-column.column

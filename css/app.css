@@ -184,6 +184,9 @@ a {
     float: left;
 }
 
+#playSceneContainer { margin-top: 100%}
+#playSceneContainer img {margin-left:40%; margin-right: 40%; width: 20%;}
+
 
 /*
     RIGHT SIDEBAR CSS
