@@ -7,7 +7,7 @@
 rm -r app.nw
 
 #zipping new app
-zip -r -X app.nw .
+zip -r -X app.nw . -x \*.git\* 
 
 #launching nw app
 #nw app.nw

@@ -54,6 +54,18 @@ Class("ScriptEditor", {
 		this.createEditor(this.currentTab, "main.js", "javascript");
 		//setting up lint worker
 		this.setUpLintWorker();
+		//reading scaffolds/wage/app/main.js content
+		console.log("before require");
+		var req = window.require || false;
+		if (window.require !== undefined) {
+			console.log("about to call require");
+			var fs =  require("fs");
+			fs.readFile("scaffolds/wage/app/main.js", {encoding: "utf8"}, function(err, data) {
+				app.scriptEditor.editors[0].codeMirror.setValue(data);
+			});
+		} else {
+			console.log("require not found");
+		}
 	},
 
 	setListeners: function() {

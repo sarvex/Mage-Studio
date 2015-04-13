@@ -234,7 +234,7 @@ a {
 
 #codeContainer {
     width: 85%;
-    height: 100%;
+    height: calc(100% - 10px);
 }
 
 #projectContainer {
@@ -263,6 +263,11 @@ ul#project {
 ul#project li {
     list-style: none;
 }
+
+ul.subfolder {padding-left: 20px;}
+ul.subfolder li.file {list-style-image: url("../img/arrow.png") !important;}
+
+ul#project li, ul.subfolder li {margin: 5px;}
 
 body {
     margin : 0;
@@ -295,7 +300,7 @@ body * {
 #main_container {
     position: absolute;
     top: 50px;
-    height: 100%;
+    height: 90%;
     width: 100%;
     border-top: 1px solid #555;
 }
@@ -313,6 +318,7 @@ body * {
     height: 50px;
     width: 50%;
     background-color: #111; /*#1B221E;*/
+    margin-left: -1px;
 }
 
 #upper_console {
