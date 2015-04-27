@@ -1,10 +1,11 @@
 Class("ScriptTab", {
 
-	ScriptTab : function(id, name, type) {
+	ScriptTab : function(id, name, type, savename) {
 
 		this.text = [];
 		this.name = name;
 		this.type = type;
+		this.savename = savename;
 		this.errors = [];
 		this.tooltips = [];
 		this.compiled = "";
@@ -64,7 +65,7 @@ Class("ScriptTab", {
 	},
 
 	_textToString : function() {
-		return this.text.join(" ");
+		return this.text.join("\n");
 	},
 
 	saveError : function(error) {

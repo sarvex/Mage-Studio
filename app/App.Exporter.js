@@ -11,7 +11,7 @@ Class("Exporter", {
         this.fs = require("fs");
 
         //creating helper
-        this.helper = new ExporterHelper();
+        //this.helper = new ExporterHelper();
         var flags = {
             "lights": false,
             "meshes": false
@@ -50,7 +50,7 @@ Class("Exporter", {
         var currentStep = 1;
         app.interface.footer.incProgressBar(currentStep, totalSteps);
         currentStep++;
-        app.exporter.helper.requestDirectory(function(dir) {
+        app.filehelper.requestDirectory(function(dir) {
             //we chose directory
             var directory = dir;
             app.interface.footer.incProgressBar(currentStep, totalSteps);

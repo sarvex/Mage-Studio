@@ -37,6 +37,16 @@ Class("ScriptEditor", {
 				app.scriptEditor.init(),
 				app.scriptEditor.isNew = false;
 			}
+			//checking if we have a working directory where we can save files
+			var cwd = app.storage.get("cwd");
+			if (!cwd) {
+				alert("Please, choose your project workspace.");
+				app.filehelper.requestDirectory(function(directory) {
+					// storing cwd
+					app.storage.set("cwd", directory);
+				});
+			}
+			//fade in of script editor
 			$(app.scriptEditor.container).fadeIn(200);
 		});
 
@@ -50,22 +60,65 @@ Class("ScriptEditor", {
 		//creating layout
 		this.layout = new ScriptLayout();
 		this.layout.set();
+		//creating sidebar
+		this.sidebar = new ScriptSidebar();
+		this.sidebar.init();
 		//creating editor
-		this.createEditor(this.currentTab, "main.js", "javascript");
+		this.createEditor(this.currentTab, "main.js", "javascript", app.storage.currentProject+"_main.js");
 		//setting up lint worker
 		this.setUpLintWorker();
+		//trying to recover main.js from storage
+		var content = app.storage.get(app.storage.currentProject+"_main.js");
+		if (content) {
+			console.log("setting content");
+			// we don't need to store tab content
+			app.scriptEditor.editors[0].codeMirror.setValue(content);
+		}
 		//reading scaffolds/wage/app/main.js content
-		console.log("before require");
-		var req = window.require || false;
-		if (window.require !== undefined) {
+		else if (window.require !== undefined) {
 			console.log("about to call require");
 			var fs =  require("fs");
 			fs.readFile("scaffolds/wage/app/main.js", {encoding: "utf8"}, function(err, data) {
+				// setting tab value
 				app.scriptEditor.editors[0].codeMirror.setValue(data);
+				//we need to store data
+				app.storage.set(app.storage.currentProject+"_main.js", data);
 			});
 		} else {
-			console.log("require not found");
+			console.log("something bad happened");
+			return;
 		}
+		//creating config.js file
+		/*
+		this.addNewTab("config.js", "javascript");
+		var content = app.storage.get(app.storage.currentProject+"_config.js");
+		if (content) {
+			console.log("setting config content");
+			// we don't need to store tab content
+			app.scriptEditor.editors[1].codeMirror.setValue(content);
+		}
+		//reading scaffolds/wage/app/config.js content
+		else if (window.require !== undefined) {
+			console.log("about to call require");
+			var fs =  require("fs");
+			fs.readFile("scaffolds/wage/app/config.js", {encoding: "utf8"}, function(err, data) {
+				// setting tab value
+				app.scriptEditor.editors[1].codeMirror.setValue(data);
+				//we need to store data
+				app.storage.set(app.storage.currentProject+"_config.js", data);
+			});
+		} else {
+			console.log("something bad happened");
+			return;
+		}
+		*/
+		//selecting first tab, then refresh
+		this.selectTab(0);
+		console.log("calling refresh inside init on editor_0");
+		setTimeout(function() {
+			app.scriptEditor.editors[0].codeMirror.refresh();
+		}, 100);
+
 	},
 
 	setListeners: function() {
@@ -136,59 +189,83 @@ Class("ScriptEditor", {
 					toCheck : i
 				});
 		 	} 
-			
 		}
-		
 	},
 
 	_eval : function() {
 		app.scriptEditor.lint();
-		/*
-		for (var i=0; i< app.numTab; i++) {
-			switch (app.editors[i].type) {
+		for (var i=0; i< app.scriptEditor.numTab; i++) {
+			switch (app.scriptEditor.editors[i].type) {
 				case "javascript" : {
-					app.editors[i].saveText();
-					eval(app.editors[i]._textToString());
+					app.scriptEditor.editors[i].saveText();
+					//storing data
+					var text = app.scriptEditor.editors[i]._textToString();
+					app.storage.set(app.scriptEditor.editors[i].savename, text);
+					//now saving file
+					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_")[1];
+					var dir = app.storage.get("cwd");
+					if (dir) {
+						console.log(dir+"/app/"+path);
+						app.filehelper.write(dir+"/app/"+path, text);
+					}
+					break;
 				}
 				case "coffeescript" : {
-					app.editors[i].saveText();
-					eval(app.editors[i].compiled);
+					app.scriptEditor.editors[i].saveText();
+					//storing data
+					//storing data
+					var text = app.scriptEditor.editors[i].compiled;
+					app.storage.set(app.scriptEditor.editors[i].savename, text);
+					//now saving file
+					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_")[1];
+					var dir = app.storage.get("cwd");
+					if (dir) {
+						console.log(dir+"/app/"+path);
+						app.filehelper.write(dir+"/app/"+path, text);
+					}
+					break;
 				}
  			} 
-		}*/
+		}
 	},
 
-	addNewTab : function() {
+	addNewTab : function(name, type) {
 		var previous = this.currentTab;
 		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
 		
 		this.numTab ++;
 		this.activeTabs ++;
-		//selecting new tab
-		var filename = prompt("Please insert script's name.");
-
-		if (!(typeof filename == "string"))  {
-			console.log("Please use a valid filename.");
-			return;
+		//if we don't provide name nor type, we need to ask one
+		var _name, _type, _id;
+		if ((name == undefined) || (type == undefined)) {
+			//selecting new tab
+			var filename = prompt("Please insert script's name.");
+			if (!(typeof filename == "string")) {
+				console.log("Please use a valid filename.");
+				return;
+			}
+			if (app.scriptEditor.FILE_EXTENSIONS.indexOf(filename.split(".")[1]) == -1) {
+				//trying to use a invalid file extension
+				console.log("Please use a valid file extension.");
+				return;
+			}
+			_name = filename;
+			_type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
+			_id = app.storage.currentProject+"_"+filename;
+		} else {
+			_name = name;
+			_type = type;
+			_id = app.storage.currentProject+"_"+_name;
 		}
-		if (app.scriptEditor.FILE_EXTENSIONS.indexOf(filename.split(".")[1]) == -1) {
-			//trying to use a invalid file extension
-			console.log("Please use a valid file extension.");
-			return;
-		}
-		
-
-		$('#add_tab').before(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+filename+"</span>", {checkHtml : false}));
+		$('#add_tab').before(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
 		$('#editor_'+app.scriptEditor.currentTab).after(app.scriptEditor.helper.div("editor_"+(app.scriptEditor.numTab-1), "editor invisible", "", {checkHtml : false}));
 		this.setTabListener();
-		var name = filename;
-		var type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
-		this.createEditor((app.scriptEditor.numTab -1), name, type);
+		this.createEditor((app.scriptEditor.numTab -1), _name, _type, _id);
 		this.selectTab((app.scriptEditor.numTab -1));
 	},
 
-	createEditor : function(tab, name, type) {
-		this.editors[tab] = new ScriptTab("editor_"+tab, name, type);
+	createEditor : function(tab, name, type, id) {
+		this.editors[tab] = new ScriptTab("editor_"+tab, name, type, id);
 	},
 
 	selectTab : function(tab) {
@@ -210,6 +287,8 @@ Class("ScriptEditor", {
 		this.currentTab = tab;
 		//this.editors[tab].focus();
 		$('#editor_'+tab).click();
+		console.log("calling refresh inside selectTab on editor_"+tab);
+		app.scriptEditor.editors[tab].codeMirror.refresh();
 	},
 
 	removeTab : function(tab) {

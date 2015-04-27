@@ -59,7 +59,9 @@ Class("SceneManager", {
             if (this.children.length > 0 ) app.sm.hierarchy++;
 
             for ( var i = 0, l = this.children.length; i < l; i ++ ) {
-                this.children[ i ].traverse( callback );
+                if (this.children[ i ].traverse) {
+                    this.children[ i ].traverse( callback );
+                }
             }
             if (app.sm.hierarchy > 0) app.sm.hierarchy--;
         }

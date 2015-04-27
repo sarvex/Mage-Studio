@@ -41,14 +41,14 @@ a {
 }
 
 #maincontainer, #scriptcontainer {
-    height: calc(100% - 40px);
-    top: 40px;
+    height: calc(100% - 28px);
+    top: 28px;
     width: 100%;
     position: absolute;
 }
 
 #innercontainer {
-    height: calc(100% - 40px);
+    height: calc(100% - 28px);
 }
 
 .column {
@@ -247,7 +247,7 @@ a {
     border-right: 1px solid #555;
 }
 
-#newFolder {
+#newFolder, #newScript {
     width: 90%;
     height: 30px;
     font-size: 14px;
@@ -256,8 +256,8 @@ a {
 }
 
 ul#project {
-    margin-top: 20px;
-    padding-left: 15px;
+    margin-top: 0px;
+    padding-left: 35px;
 }
 
 ul#project li {
@@ -267,7 +267,16 @@ ul#project li {
 ul.subfolder {padding-left: 20px;}
 ul.subfolder li.file {list-style-image: url("../img/arrow.png") !important;}
 
-ul#project li, ul.subfolder li {margin: 5px;}
+ul#project li, ul.subfolder li {margin: 2px; padding: 5px;}
+ul#project li.file:hover {
+    cursor: pointer;
+    background: #2a9fd6;
+}
+
+ul#project i.fa-folder-o:hover {
+    cursor: pointer;
+    border: 1px solid #2a9fd6;
+}
 
 body {
     margin : 0;

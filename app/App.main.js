@@ -4,10 +4,12 @@ window.onload = function() {
         "app/App.Global",
         "app/App.Restorer",
         "app/App.Storage",
+        "app/App.Player",
         "app/App.Exporter",
-        "app/App.Exporter.Helper",
+        "app/App.FileHelper",
         "app/App.Exporter.WageHelper",
         "app/App.ScriptEditor",
+        "app/App.ScriptEditor.Sidebar",
         "app/App.ScriptEditor.Helper",
         "app/App.ScriptEditor.Layout",
         "app/App.ScriptEditor.Tab",
@@ -40,10 +42,14 @@ function start() {
             this.mm = new MeshManager();
             //light manager
             this.lm = new LightManager();
+            //player
+            this.player = new Player();
             //util
             this.util = new Global();
             //storage
             this.storage = new Storage();
+            //file helper
+            this.filehelper = new FileHelper();
             //check if new project or not
             if (this.storage.currentProject == "BaseProject") {
                 this.storage.currentProject = prompt("Choose project's name.");
@@ -123,6 +129,3 @@ function start() {
         //on check failure
     });
 }
-
-//console.log("lol");
-

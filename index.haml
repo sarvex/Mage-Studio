@@ -54,7 +54,7 @@
         %script{:type=>"text/javascript", :src=>"app/App.main.js"}
     %body
         / navbar
-        .navbar-sm
+        .navbar-xs
             .navbar-primary
                 %nav#nav.navbar.navbar-inverse
                     .container-fluid
@@ -157,21 +157,25 @@
             #projectContainer
                 %button#newFolder.topcoat-button--large--cta
                     new folder
+                %button#newScript.topcoat-button--large--cta
+                    new script
+                %i#rootFolder.fa.fa-folder-o{'data-path'=>'', :style=>"margin-top: 20px; margin-left: 15px;"}
+                    app
                 %ul#project
-                    %li.folder
+                    %li.folder{'data-path'=>'/scripts'}
                         %i.fa.fa-folder-o
                             scripts
-                            %ul.subfolder
-                                %li.file.js
-                                    %i.fa.fa-file-code-o
-                                        camera.js
-                                %li.folder
-                                    %i.fa.fa-folder-o
-                                        cube
-                                        %ul.subfolder
-                                            %li.file.js
-                                                %i.fa.fa-file-code-o
-                                                    mybox.js
+                        %ul.subfolder
+                            %li.file.js
+                                %i.fa.fa-file-code-o
+                                    camera.js
+                            %li.folder
+                                %i.fa.fa-folder-o
+                                    cube
+                                %ul.subfolder
+                                    %li.file.js
+                                        %i.fa.fa-file-code-o
+                                            mybox.js
                     %li.file.js
                         %i.fa.fa-file-code-o
                             main.js
@@ -343,8 +347,18 @@
                                     .row.panel-content
                                         #soundsCount.col-md-12.panel-content-title
                                             Sounds: 0
-                        #playSceneContainer.row
-                            %img{:src=>"img/play.png"}
+                        %h1
+                            .topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
+                                .topcoat-button-bar__item
+                                    %button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.play();"}
+                                        %i.fa.fa-play
+                                            Play
+                                .topcoat-button-bar__item
+                                    %button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.pause();"}
+                                        %i.fa.fa-pause
+                                            Pause
+                        / #playSceneContainer.row
+                        /    %img{:src=>"img/play.png"}
                 #center.column
                     #scenecontainer
                 #right-column.column

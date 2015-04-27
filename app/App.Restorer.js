@@ -90,7 +90,7 @@ Class("Restorer", {
             } else if (l.light.object.type == "AmbientLight") {
                 //we just need to set helper false
                 o.helper = false;
-            } else if (l.light.object.typ == "PointLight") {
+            } else if (l.light.object.type == "PointLight") {
                 var sphereSize = 50;
                 o.helper = new THREE.PointLightHelper(o.light, sphereSize);
 
