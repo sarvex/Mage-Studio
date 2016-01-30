@@ -4,11 +4,13 @@ Class("Global", {
         this.author = "Marco Stagni";
         this.website = "http://marcostagni.com";
         this.thanksTo = ["Mr Doob", "THREE.js"];
+        // adding String contains method
+        String.prototype.contains = function(e) { return this.indexOf(e) > -1 };
     },
 
     _numToHex: function(number) {
-        var str = Number(number).toString(16); 
-        return str.length == 1 ? "0" + str : str; 
+        var str = Number(number).toString(16);
+        return str.length == 1 ? "0" + str : str;
     },
 
     RgbToHex: function(r, g, b) {
