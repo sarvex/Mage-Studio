@@ -5,18 +5,18 @@
 }
 
 .navbar-primary .navbar { background:#222; border-bottom:none; }
-.navbar-primary .navbar .nav > li > a {color: #aaa;}
+.navbar-primary .navbar .nav > li > a {color: #aaa;font-size: 11px;text-transform: lowercase;font-weight: bold;}
 .navbar-primary .navbar .nav > li > a:hover {color: #fff; background-color: #555;}
 .navbar-primary .navbar .nav .active > a,.navbar .nav .active > a:hover {color: #fff; background-color: #555;}
-.navbar-primary .navbar .nav li > a .caret, .tnav .navbar .nav li > a:hover .caret {border-top-color: #fff;border-bottom-color: #fff;}
+.navbar-primary .navbar .nav li > a .caret, .tnav .navbar .nav li > a:hover .caret {border-top-color: #fff;border-bottom-color: #fff;/* visibility: hidden; *//* font-size: 1px; */}
 .navbar-primary .navbar .nav > li.dropdown.open.active > a:hover {}
-.navbar-primary .navbar .nav > li.dropdown.open > a {color: #fff;background-color: #2a9fd6  ;border-color: #fff;}
+.navbar-primary .navbar .nav > li.dropdown.open > a {color: #fff;background-color: #4FC1E9;border-color: #fff;}
 .navbar-primary .navbar .nav > li.dropdown.open.active > a:hover .caret, .tnav .navbar .nav > li.dropdown.open > a .caret {border-top-color: #fff;}
 .navbar-primary .navbar .navbar-brand {color:#fff;}
 .navbar-primary .navbar .nav.pull-right {margin-left: 10px; margin-right: 0;}
 .navbar-xs .navbar-primary .navbar { min-height:28px; height: 28px; }
-.navbar-xs .navbar-primary .navbar .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 28px; }
-.navbar-xs .navbar-primary .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px; }
+.navbar-xs .navbar-primary .navbar .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 28px;font-family: "LeckerliOne";font-weight: bold;font-style: italic;color: #FFCE54;}
+.navbar-xs .navbar-primary .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px;text-transform: uppercase;}
 .navbar-sm .navbar-primary .navbar { min-height:40px; height: 40px; }
 .navbar-sm .navbar-primary .navbar .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 40px; }
 .navbar-sm .navbar-primary .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 40px; }
@@ -65,6 +65,8 @@ a {
 .column .title {
     color: #ccc;
     margin-left: 20px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .panel-column {
@@ -83,9 +85,10 @@ a {
 }
 
 .panel-content-title {
-    line-height: 35px;
-    font-size: 12px;
-    height: 35px;
+    line-height: 28px;
+    font-size: 10px;
+    /* height: 35px; */
+    font-weight: bold;
 }
 
 .panel-title-medium {
@@ -97,7 +100,8 @@ a {
 }
 
 .panel-body{
-    padding-top: 10px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 .settingButton {
@@ -108,6 +112,8 @@ a {
     background-color: #222;
     border: 1px solid rgba(255,255,255,0.1);
     width: 16%;
+    text-transform: uppercase;
+    font-size: 11px;
 }
 
 #right-column {
@@ -131,7 +137,7 @@ a {
 
 
 /*
-    
+
     LEFT SIDEBAR CSS
 
 */
@@ -366,9 +372,9 @@ body * {
 
 .toggle:last-child {
     /* background-color: blue; */
-    margin-left: 10px; 
-    border-left: 1px solid #2e2f2a; 
-    border-top-left-radius: 4px; 
+    margin-left: 10px;
+    border-left: 1px solid #2e2f2a;
+    border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 
@@ -475,10 +481,10 @@ body * {
     margin: 0;
 
 */
-    /* border-bottom: 50px solid white; */  
-    /* border-left: 30px solid transparent; */  
-    /* border-right: 30px solid transparent; */  
-    /* height: 0; */  
+    /* border-bottom: 50px solid white; */
+    /* border-left: 30px solid transparent; */
+    /* border-right: 30px solid transparent; */
+    /* height: 0; */
     /* width: 100px; */
     top: 26px;
     margin-left: 0px;
@@ -678,4 +684,3 @@ body * {
     max-width: 80%;
     word-wrap: break-word;
 }
-

@@ -5,8 +5,11 @@
             Wage Editor
 
         / basic imports, we don't need angular or react
-        %script{:type=>"text/javascript", :src=>"app/lib/jquery.min.js"}
-        %script{:type=>"text/javascript", :src=>"app/lib/signals.min.js"}
+        %script
+            window.$ = window.jQuery = require('./app/lib/jquery.min');
+        %script
+            window.signals = require('./app/lib/signals.min');
+        /%script{:type=>"text/javascript", :src=>"app/lib/signals.min.js"}
         %script{:type=>"text/javascript", :src=>"app/lib/bootstrap.min.js"}
         %script{:type=>"text/javascript", :src=>"app/lib/classy.min.js"}
         %script{:type=>"text/javascript", :src=>"app/lib/json2.js"}
@@ -67,7 +70,7 @@
                                 %span.icon-bar
                                 %span.icon-bar
                             %a.navbar-brand{:href=>"#"}
-                                Wage Editor
+                                Wage
                         / Collect the nav links, forms, and other content for toggling
                         #bs-example-navbar-collapse-1.collapse.navbar-collapse
                             %ul.nav.navbar-nav

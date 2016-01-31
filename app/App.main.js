@@ -52,7 +52,8 @@ function start() {
             this.filehelper = new FileHelper();
             //check if new project or not
             if (this.storage.currentProject == "BaseProject") {
-                this.storage.currentProject = prompt("Choose project's name.");
+                // TODO find replacement for javacript prompt
+                this.storage.currentProject = "TEST";//prompt("Choose project's name.");
                 this.storage.set("currentProject", this.storage.currentProject);
             }
         },
@@ -77,7 +78,8 @@ function start() {
         },
 
         new: function() {
-            var projectName = prompt("Choose project's name.");
+            // TODO find replacement for prompt
+            var projectName = "TEST";//prompt("Choose project's name.");
             app.storage.currentProject = projectName;
             app.storage.set("currentProject", projectName);
             //stopping animation
