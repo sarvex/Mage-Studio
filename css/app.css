@@ -36,8 +36,10 @@ a {
 }
 
 .list-group-item:hover {
-    background: #2a9fd6;
-    color: white;
+    background: #4FC1E9;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #maincontainer, #scriptcontainer {
@@ -130,11 +132,17 @@ a {
 }
 
 #footer {
-    min-height: 40px;
-    height: 40px;
+    min-height: 30px;
+    height: 30px;
     background: #222;
 }
 
+#footer .footer-text {
+    line-height: 30px;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 
 /*
 
