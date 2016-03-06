@@ -1,0 +1,33 @@
+{
+  "name": "WageEditor",
+  "description": "Wage Engine Editor",
+  "main": "main.js",
+  "authors": [
+    "Marco Stagni <marcostagni.com>"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "Wage",
+    "Editor",
+    "THREE.js",
+    "WebGL",
+    "Game",
+    "Development",
+    "3D",
+    "Canvas",
+    "HTML5"
+  ],
+  "homepage": "https://github.com/marco-ponds/WageEditor",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "^1.1.3"
+  }
+}

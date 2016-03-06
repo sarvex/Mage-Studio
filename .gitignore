@@ -4,3 +4,4 @@ Thumbs.db
 *.log
 *.html
 *.nw
+app/bower_components

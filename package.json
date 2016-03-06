@@ -4,11 +4,12 @@
   "description": "Wage Engine Editor",
   "main": "main.js",
   "scripts": {
+    "prestart": "sh scripts/haml.sh",
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "git+https://github.com/marco-ponds/WageEditor"
   },
   "keywords": [
       "Wage",
@@ -24,10 +25,12 @@
   "author": "Marco Stagni <marcostagni.com>",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/marco-ponds/WageEditor/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/marco-pondst/WageEditor#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
+    "electron-prebuilt": "^0.36.0",
+    "haml": "*",
+    "bower": "*"
   }
 }
