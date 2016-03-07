@@ -1,0 +1,8 @@
+{
+    "name": "First Game",
+    "author": "Marco Stagni",
+    "description": "this is just a sample game",
+    "scenes": [
+        "scene1"
+    ]
+}
