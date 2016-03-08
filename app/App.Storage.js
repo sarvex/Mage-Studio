@@ -8,6 +8,7 @@ Class("Storage", {
         this.autoSave = false;
         this.autoSaveId = undefined;
         this.autoSaveTimer = 10000; //saving every 10 seconds
+        this.workspace = (localStorage.getItem("workspace")) ? localStorage.getItem("workspace") : null;
         this.currentProject = (localStorage.getItem("currentProject")) ? localStorage.getItem("currentProject") : "BaseProject"; //reference to current project
     },
 

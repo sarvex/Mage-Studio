@@ -19,6 +19,7 @@ window.onload = function() {
         "app/Manager.Light",
         "app/Manager.Model",
         "app/Input.Keyboard",
+        "app/Interface.Dialog",
         "app/Interface.Footer",
         "app/Interface.Sidebar",
         "app/Interface.Sidebar.MeshListener",
@@ -50,6 +51,8 @@ function start() {
             this.storage = new Storage();
             //file helper
             this.filehelper = new FileHelper();
+            // dialogs
+            this.dialog = new Dialog();
             //check if new project or not
             if (this.storage.currentProject == "BaseProject") {
                 // TODO find replacement for javacript prompt
