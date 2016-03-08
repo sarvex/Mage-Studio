@@ -4,7 +4,7 @@
   "description": "Wage Engine Editor",
   "main": "main.js",
   "scripts": {
-    "prestart": "sh scripts/haml.sh",
+    "prestart": "./scripts/haml.sh",
     "start": "electron main.js"
   },
   "repository": {
