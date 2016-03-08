@@ -1,17 +1,22 @@
-var iframe;
-window.addEventListener("load", function() {
-    iframe = document.createElement("iframe");
-    document.body.appendChild(iframe);
-    iframe.src = "scenes/scene1";
+var game = {};
 
-    console.log("sending message");
-    iframe.onload = function() {
-        iframe.contentWindow.postMessage("Hi, scene!", "http://localhost:8000");
+window.addEventListener("load", function() {
+
+    function loadData() {
+        var data = JSON.parse(this.responseText);
+
+        game.name = data.name;
+        game.author = data.author;
+        game.description = data.description;
+
+        Router.init({
+            "scenes": data.scenes,
+            "firstScene": data.firstScene
+        });
     }
-    function receiveMessage(event) {
-        console.log("inside router");
-        console.log(event);
-    }
-    window.addEventListener("onmessage", receiveMessage, false);
-    window.addEventListener("message", receiveMessage, false);
+    
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", loadData);
+    oReq.open("GET", "game.json");
+    oReq.send();
 });

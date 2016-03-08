@@ -2,7 +2,13 @@
     "name": "First Game",
     "author": "Marco Stagni",
     "description": "this is just a sample game",
+    "firstScene": "scene1",
     "scenes": [
-        "scene1"
+        {
+            "name": "scene1"
+        },
+        {
+            "name": "scene2"
+        }
     ]
 }
