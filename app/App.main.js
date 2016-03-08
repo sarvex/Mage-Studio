@@ -54,10 +54,24 @@ function start() {
             // dialogs
             this.dialog = new Dialog();
             //check if new project or not
-            if (this.storage.currentProject == "BaseProject") {
-                // TODO find replacement for javacript prompt
-                this.storage.currentProject = "TEST";//prompt("Choose project's name.");
-                this.storage.set("currentProject", this.storage.currentProject);
+            if (!this.storage.workspace) {
+                this.dialog.prompt("Workspace", "Please choose a valid workspace", function(value) {
+                    app.storage.workspace = value;
+                    app.storage.set("workspace", value);
+                    if (app.storage.currentProject == "BaseProject") {
+                        app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
+                            app.storage.currentProject = value;
+                            app.storage.set("currentProject", app.storage.currentProject);
+                            swal.close();
+                        });
+                    }
+                });
+            } else if (this.storage.currentProject == "BaseProject") {
+                app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
+                    app.storage.currentProject = value;
+                    app.storage.set("currentProject", app.storage.currentProject);
+                    swal.close();
+                });
             }
         },
 

@@ -10,7 +10,7 @@ Class("Dialog", {
                 title: _title,
                 text: _message,
                 type: "input",
-                showCancelButton: true,
+                showCancelButton: false,
                 closeOnConfirm: false,
                 animation: "slide-from-top",
                 inputPlaceholder: "Write something"
