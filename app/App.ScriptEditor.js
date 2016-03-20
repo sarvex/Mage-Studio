@@ -188,7 +188,7 @@ Class("ScriptEditor", {
 					config : app.scriptEditor.LINT_CONFIG,
 					toCheck : i
 				});
-		 	} 
+		 	}
 		}
 	},
 
@@ -225,21 +225,21 @@ Class("ScriptEditor", {
 					}
 					break;
 				}
- 			} 
+ 			}
 		}
 	},
 
 	addNewTab : function(name, type) {
 		var previous = this.currentTab;
 		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
-		
+
 		this.numTab ++;
 		this.activeTabs ++;
 		//if we don't provide name nor type, we need to ask one
 		var _name, _type, _id;
 		if ((name == undefined) || (type == undefined)) {
 			//selecting new tab
-			var filename = prompt("Please insert script's name.");
+			var filename = app.dialog.prompt("Please insert script's name.");
 			if (!(typeof filename == "string")) {
 				console.log("Please use a valid filename.");
 				return;
@@ -303,7 +303,7 @@ Class("ScriptEditor", {
 
 			$('#editor_'+tab).remove();
 			$('#tab_'+tab).remove();
-			this.activeTabs -= 1; 
+			this.activeTabs -= 1;
 			//this.editors[tab] = {};
 			this.selectTab(tab-1);
 		}

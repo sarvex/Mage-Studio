@@ -247,12 +247,12 @@ a {
 }
 
 #codeContainer {
-    width: 85%;
+    width: calc(100% - 200px);
     height: calc(100% - 10px);
 }
 
 #projectContainer {
-    width: 15%;
+    width: 200px;
     /* height: calc(100% - 60px); */
     height: 100%;
     overflow: auto;
@@ -280,17 +280,26 @@ ul#project li {
 }
 
 ul.subfolder {padding-left: 20px;}
-ul.subfolder li.file {list-style-image: url("../img/arrow.png") !important;}
+ul.subfolder li.file {/* list-style-image: url("../img/arrow.png") !important; */}
 
 ul#project li, ul.subfolder li {margin: 2px; padding: 5px;}
-ul#project li.file:hover {
+ul#project li.file:hover i {
     cursor: pointer;
-    background: #2a9fd6;
+    /* background: #2a9fd6; */
+    font-weight: bold;
+}
+
+ul#project li.file:hover i::before {
+    color: #FFCE54;
 }
 
 ul#project i.fa-folder-o:hover {
     cursor: pointer;
-    border: 1px solid #2a9fd6;
+    font-weight: bold;
+    /* border: 1px solid #2a9fd6; */
+}
+ul#project i.fa-folder-o:hover::before {
+    color: #2a9fd6;
 }
 
 body {
