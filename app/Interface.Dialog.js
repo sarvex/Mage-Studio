@@ -26,27 +26,30 @@ Class("Dialog", {
         }
     },
 
-    success: function(title, message) {
+    success: function(title, message, callback) {
         if (this.allowed.indexOf("success") > -1) {
-            swal(title, message, "success");
+            swal(title, message, "success", _callback);
         }
     },
 
-    error: function(title, message) {
+    error: function(title, message, callback) {
         if (this.allowed.indexOf("error") > -1) {
-            swal(title, message, "error");
+            var _callback = callback ? callback : function() {};
+            swal(title, message, "error", _callback);
         }
     },
 
-    warn: function(title, message) {
+    warn: function(title, message, callback) {
         if (this.allowed.indexOf("warn") > -1) {
-            swal(title, message, "warning");
+            var _callback = callback ? callback : function() {};
+            swal(title, message, "warning", _callback);
         }
     },
 
-    info: function(title, message) {
+    info: function(title, message, callback) {
         if (this.allowed.indexOf("info") > -1) {
-            swal(title, message, "info");
+            var _callback = callback ? callback : function() {};
+            swal(title, message, "info", _callback);
         }
     },
 });

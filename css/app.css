@@ -253,9 +253,10 @@ a {
 
 #projectContainer {
     width: 15%;
-    height: calc(100% - 60px);
+    /* height: calc(100% - 60px); */
+    height: 100%;
     overflow: auto;
-    margin-top: 50px;
+    margin-top: 0px;
     background: #222;
     border-top: 1px solid #555;
     border-right: 1px solid #555;
@@ -322,8 +323,8 @@ body * {
 
 #main_container {
     position: absolute;
-    top: 50px;
-    height: 90%;
+    top: 35px;
+    height: calc(100% - 25px);
     width: 100%;
     border-top: 1px solid #555;
 }
@@ -338,15 +339,15 @@ body * {
 
 #tabs {
     position: absolute;
-    height: 50px;
+    height: 35px;
     width: 50%;
-    background-color: #111; /*#1B221E;*/
+    background-color: #111;/*#1B221E;*/
     margin-left: -1px;
 }
 
 #upper_console {
     position: absolute;
-    height: 80px;
+    height: 35px;
     width: 50%;
     left: 50%;
 }
@@ -354,15 +355,18 @@ body * {
 .toggle {
     position: relative;
     float: right;
-    padding: 10px;
-    border-top: 1px solid #2e2f2a;
+    /* padding: 10px; */
+    border-top: 1px solid #555;
     border-left: 1px solid #2e2f2a;
-    border-bottom: 1px solid #2e2f2a;
-    /* border-radius: 4px; */
+    border-bottom: 0px solid #555;
+    border-radius: 0px !important;
     /* margin: 10px; */
-    margin-top: 10px;
-    background-color: #222; /*#272822;*/
+    /* margin-top: 10px; */
+    background-color: #222;/*#272822;*/
     font-size: 10px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    line-height: 35px;
 }
 
 .toggle:hover {
@@ -373,7 +377,7 @@ body * {
 .toggle:first-child {
     /* background-color: red; */
     margin-right: 10px;
-    border-right: 1px solid #2e2f2a;
+    border-right: 1px solid #555;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -381,7 +385,7 @@ body * {
 .toggle:last-child {
     /* background-color: blue; */
     margin-left: 10px;
-    border-left: 1px solid #2e2f2a;
+    border-left: 1px solid #555;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
@@ -451,7 +455,7 @@ body * {
     padding: 0;
     /* top: 31px; */
     position: relative;
-    height: 49px;
+    height: 35px;
 }
 
 #tabs ul li {
@@ -461,17 +465,19 @@ body * {
 
 #tabs ul li.tab {
     list-style: none;
-    background-color: #222; /*#272822;*/
-    height: 30px;
     position: relative;
-    width: 100px;
+    background-color: #222;/*#272822;*/
+    height: 35px;
+    position: relative;
+    float: left;
+    width: 80px;
     text-align: center;
-    display: inline;
-    padding: 8px;
-    padding-left: 20px;
+    display: block;
+    /* padding: 5px; */
+    line-height: 35px;
+    padding-left: 10px;
     padding-right: 20px;
-
-/*
+    /*
     border-bottom: 30px solid #fff;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
@@ -493,40 +499,47 @@ body * {
     /* border-left: 30px solid transparent; */
     /* border-right: 30px solid transparent; */
     /* height: 0; */
+    border-top: 0px;
     /* width: 100px; */
-    top: 26px;
-    margin-left: 0px;
+    /* top: 26px; */
+    margin: 0px;
     /* margin-right: 2px; */
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    /* border-top-right-radius: 4px; */
+    /* border-top-left-radius: 4px; */
 }
 
 #tabs ul li.tab .close {
     font-size: 7px;
     top: 2px;
+    line-height: 8px;
     position: absolute;
     left: 80%;
     border: 1px solid white;
     border-radius: 10px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
     padding: 1px;
     padding-left: 2px;
     padding-right: 2px;
 }
 
 #tabs ul li#add_tab {
-    min-height: 30px;
+    /* min-height: 30px; */
     width: 30px;
-    padding: 3px;
-    padding-left: 6px;
-    padding-right: 6px;
-    border-radius: 4px;
+    /* padding: 3px; */
+    /* padding-left: 6px; */
+    /* padding-right: 6px; */
+    /* border-radius: 4px; */
     background-color: #222;
     color: white;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-left: 6px;
     border: 1px solid #555;
+    /* border-right: 1px solid #555; */
+    border-bottom: 0px;
     position: relative;
-    top: 25px;
+    /* top: 8px; */
+    height: 35px;
 }
 
 #tabs ul li span {
