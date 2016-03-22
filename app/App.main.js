@@ -55,12 +55,12 @@ function start() {
             this.dialog = new Dialog();
             //check if new project or not
             if (!this.storage.workspace) {
-                var remote = require("remote");
-                var _dialog = remote.require("dialog");
+                this._remote = require("remote");
+                this._dialog = this._remote.require("dialog");
                 this.dialog.info("Workspace", "Please choose a valid workspace", function() {
-                    _dialog.showOpenDialog({properties: ['openDirectory']},function (value) {
-                        app.storage.workspace = value;
-                        app.storage.set("workspace", value);
+                    app._dialog.showOpenDialog({properties: ['openDirectory']},function (value) {
+                        app.storage.workspace = value[0];
+                        app.storage.set("workspace", value[0]);
                         if (app.storage.currentProject == "BaseProject") {
                             app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
                                 app.storage.currentProject = value;

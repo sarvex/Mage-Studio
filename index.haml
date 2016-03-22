@@ -120,7 +120,7 @@
                                                 Sound
                                 %li.dropdown
                                     %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown", :role=>"button", "aria-expanded"=>"false"}
-                                        Project
+                                        View
                                         %span.caret
                                     %ul.dropdown-menu{:role=>"menu"}
                                         %li
@@ -129,7 +129,11 @@
                                         %li
                                             %a{:href=>"javascript:app.openEditor();"}
                                                 Script Editor
-                                        %li.divider
+                                %li.dropdown
+                                    %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown", :role=>"button", "aria-expanded"=>"false"}
+                                        Build
+                                        %span.caret
+                                    %ul.dropdown-menu{:role=>"menu"}
                                         %li
                                             %a{:href=>"javascript:app.exporter.wage();"}
                                                 Wage Build
@@ -138,7 +142,7 @@
                                                 Mobile Build
                                         %li
                                             %a{:href=>"#"}
-                                                NodeWebkit Build
+                                                Electron Build
                             %ul.nav.navbar-nav.navbar-right
                                 %li.dropdown
                                     %a.dropdown-toggle.fa.fa-question{:href=>"#", "data-toggle"=>"dropdown", :role=>"button", "aria-expanded"=>"false"}

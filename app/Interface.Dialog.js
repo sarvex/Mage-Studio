@@ -28,28 +28,46 @@ Class("Dialog", {
 
     success: function(title, message, callback) {
         if (this.allowed.indexOf("success") > -1) {
-            swal(title, message, "success", _callback);
+            var _callback = (typeof(callback) == "function") ? callback : function() {};
+            swal({
+                "title": title,
+                "text": message,
+                "type": "success"
+            }, _callback);
         }
     },
 
     error: function(title, message, callback) {
         if (this.allowed.indexOf("error") > -1) {
-            var _callback = callback ? callback : function() {};
-            swal(title, message, "error", _callback);
+            var _callback = (typeof(callback) == "function") ? callback : function() {};
+            swal({
+                "title": title,
+                "text": message,
+                "type": "error"
+            }, _callback);
         }
     },
 
     warn: function(title, message, callback) {
         if (this.allowed.indexOf("warn") > -1) {
-            var _callback = callback ? callback : function() {};
-            swal(title, message, "warning", _callback);
+            var _callback = (typeof(callback) == "function") ? callback : function() {};
+            swal({
+                "title": title,
+                "text": message,
+                "type": "warning"
+            }, _callback);
         }
     },
 
     info: function(title, message, callback) {
         if (this.allowed.indexOf("info") > -1) {
-            var _callback = callback ? callback : function() {};
-            swal(title, message, "info", _callback);
+            var _callback = (typeof(callback) == "function") ? callback : new Function();
+            console.log(_callback);
+            swal({
+                "title": title,
+                "text": message,
+                "type": "info"
+            }, _callback);
         }
     },
 });
