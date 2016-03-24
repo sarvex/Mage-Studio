@@ -202,7 +202,7 @@ Class("ScriptEditor", {
 					var text = app.scriptEditor.editors[i]._textToString();
 					app.storage.set(app.scriptEditor.editors[i].savename, text);
 					//now saving file
-					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_")[1];
+					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_"+app.storage.currentScene+"_")[1];
 					var dir = app.storage.get("cwd");
 					if (dir) {
 						console.log(dir+"/app/"+path);
@@ -217,7 +217,7 @@ Class("ScriptEditor", {
 					var text = app.scriptEditor.editors[i].compiled;
 					app.storage.set(app.scriptEditor.editors[i].savename, text);
 					//now saving file
-					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_")[1];
+					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_"+app.storage.currentScene+"_")[1];
 					var dir = app.storage.get("cwd");
 					if (dir) {
 						console.log(dir+"/app/"+path);
@@ -251,11 +251,11 @@ Class("ScriptEditor", {
 			}
 			_name = filename;
 			_type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
-			_id = app.storage.currentProject+"_"+filename;
+			_id = app.storage.currentProject+"_"+app.storage.currentScene+"_"+filename;
 		} else {
 			_name = name;
 			_type = type;
-			_id = app.storage.currentProject+"_"+_name;
+			_id = app.storage.currentProject+"_"+app.storage.currentScene+"_"+_name;
 		}
 		$('#add_tab').before(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
 		$('#editor_'+app.scriptEditor.currentTab).after(app.scriptEditor.helper.div("editor_"+(app.scriptEditor.numTab-1), "editor invisible", "", {checkHtml : false}));

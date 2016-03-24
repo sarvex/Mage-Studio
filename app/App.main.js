@@ -66,6 +66,7 @@ function start() {
                                 app.storage.currentProject = value;
                                 app.storage.set("currentProject", app.storage.currentProject);
                                 swal.close();
+                                app.storage.createProject();
                             });
                         }
                     });
@@ -75,6 +76,7 @@ function start() {
                     app.storage.currentProject = value;
                     app.storage.set("currentProject", app.storage.currentProject);
                     swal.close();
+                    app.storage.createProject();
                 });
             }
         },
@@ -100,27 +102,32 @@ function start() {
 
         new: function() {
             // TODO find replacement for prompt
-            var projectName = "TEST";//prompt("Choose project's name.");
-            app.storage.currentProject = projectName;
-            app.storage.set("currentProject", projectName);
-            //stopping animation
-            cancelAnimationFrame(app.sm.animId);
-            app.sm.renderer.domElement.addEventListener('dblclick', null, false);//remove listener to render
-            app.sm.scene = null;
-            app.sm.projector = null;
-            app.sm.camera = null;
-            app.sm.controls = null;
-            app.sm.transformControl = null;
-            var empty = function(element) {
-                while (element.lastChild) element.removeChild(element.lastChild);
-            }
-            empty(app.sm.container);
-            //wiping all stored data
-            app.storage.clear();
-            //trying to recreate scene
-            app.sm.init();
-            //dispatching new project signal
-            app.interface.events.newProject.dispatch();
+            app.dialog.prompt("Project", "Please choose a name for your project", function(projectName) {
+                app.storage.currentProject = projectName;
+                app.storage.set("currentProject", app.storage.currentProject);
+                swal.close();
+
+                app.storage.currentProject = projectName;
+                app.storage.set("currentProject", projectName);
+                //stopping animation
+                cancelAnimationFrame(app.sm.animId);
+                app.sm.renderer.domElement.addEventListener('dblclick', null, false);//remove listener to render
+                app.sm.scene = null;
+                app.sm.projector = null;
+                app.sm.camera = null;
+                app.sm.controls = null;
+                app.sm.transformControl = null;
+                var empty = function(element) {
+                    while (element.lastChild) element.removeChild(element.lastChild);
+                }
+                empty(app.sm.container);
+                //wiping all stored data
+                app.storage.clear();
+                //trying to recreate scene
+                app.sm.init();
+                //dispatching new project signal
+                app.interface.events.newProject.dispatch();
+            });
         },
 
         //showing script editor

@@ -3,7 +3,7 @@ Class("Restorer", {
         //check if there's something to restore or not
         this.nothingToRestore = true;
         for (var k in app.storage.keys) {
-            if (data[app.storage.currentProject+"_"+k]) {
+            if (data[app.storage.currentProject+"_"+app.storage.currentScene+"_"+k]) {
                 this.nothingToRestore = false;
             }
         }

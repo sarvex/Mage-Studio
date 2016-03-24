@@ -21,12 +21,12 @@ Class("MyGame", {
 			event.source.postMessage("Hi, router!", event.origin);
 		}
 		window.addEventListener("message", eventListener, false);
-		parent.postMessage("Hi router from child", "http://localhost:8000")
+		parent.postMessage("Hi router from child", "http://localhost:8080")
 
 
 		var geometry = new THREE.CubeGeometry(20, 20, 20);
 		var material = new THREE.MeshBasicMaterial({
-			color: 0x00ff00,
+			color: 0xff0000,
 			wireframe : true
 		});
 

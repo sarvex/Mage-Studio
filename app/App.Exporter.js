@@ -23,7 +23,7 @@ Class("Exporter", {
         var data = app.storage.load();
         var allFailed = true;
         for (var k in app.storage.keys) {
-            if (data[app.storage.currentProject+"_"+k]) {
+            if (data[app.storage.currentProject+"_"+app.storage.currentScene+"_"+k]) {
                 allFailed = false;
                 break;
             }

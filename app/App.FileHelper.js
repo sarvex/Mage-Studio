@@ -47,5 +47,11 @@ Class("FileHelper", {
             //writing text to file
             app.filehelper.fs.write(descriptor, text, callback);
         });
+    },
+
+    rename: function(pre, post, callback) {
+        this.fs.rename(pre, post, function(err) {
+            callback();
+        })
     }
 })
