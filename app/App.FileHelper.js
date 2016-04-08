@@ -2,6 +2,7 @@ Class("FileHelper", {
     FileHelper: function() {
         try {
             this.fs = require("fs");
+            this.path = require("path");
             this.nw = true;
         } catch(e) {
             this.nw = false;
@@ -53,5 +54,11 @@ Class("FileHelper", {
         this.fs.rename(pre, post, function(err) {
             callback();
         })
+    },
+
+    listDirectories: function(path) {
+        return this.fs.readdirSync(path).filter(function(file) {
+            return app.filehelper.fs.statSync(app.filehelper.path.join(path, file)).isDirectory();
+        });
     }
 })
