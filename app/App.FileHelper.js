@@ -31,21 +31,17 @@ Class("FileHelper", {
     },
 
     writeAppend: function(path, text, callback) {
-        //if we're not using node-webkit return
         if (!this.nw) return;
         this.fs.open(path, "a", "0666", function(error, descriptor) {
             if (error) return;
-            //writing text to file
             app.filehelper.fs.write(descriptor, text, callback);
         });
     },
 
     write: function(path, text, callback) {
-        //if we're not using node-webkit return
         if (!this.nw) return;
         this.fs.open(path, "w", "0666", function(error, descriptor) {
             if (error) return;
-            //writing text to file
             app.filehelper.fs.write(descriptor, text, callback);
         });
     },
