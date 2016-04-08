@@ -53,23 +53,24 @@ Class("Storage", {
                     app.filehelper.rename(pre, post, function() {
                         app.storage.currentScene = name;
                         app.storage.set("currentScene", name);
+                        app.storage.save();
                     })
                 });
             });
-            return;
+        } else {
+            //sending save started event
+            app.interface.events.saveStarted.dispatch();
+            //storing elements
+            for (k in app.storage.keys) {
+                //getting json version of our map
+                var value = JSON.stringify(app[app.storage.keys[k]].map);
+                app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_"+k, value);
+            }
+            //saving lastTime we did a save
+            app.storage.lastTime = new Date();
+            //triggering saveEvent event
+            app.interface.events.saveEvent.dispatch();
         }
-        //sending save started event
-        app.interface.events.saveStarted.dispatch();
-        //storing elements
-        for (k in app.storage.keys) {
-            //getting json version of our map
-            var value = JSON.stringify(app[app.storage.keys[k]].map);
-            app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_"+k, value);
-        }
-        //saving lastTime we did a save
-        app.storage.lastTime = new Date();
-        //triggering saveEvent event
-        app.interface.events.saveEvent.dispatch();
     },
 
     //basic method to store elements

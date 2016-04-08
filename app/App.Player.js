@@ -23,6 +23,8 @@ Class("Player", {
     },
 
     play: function() {
+        this.iframe.height = this.container.clientHeight;
+        this.iframe.width = this.container.clientWidth;
         var dir = app.storage.workspace + "/" + app.storage.currentProject;
         this._app = this.connect().use(this.serveStatic(dir));
         this._server = this.http.createServer(this._app);
