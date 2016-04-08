@@ -56,7 +56,7 @@ Class("Storage", {
                         app.storage.save();
                     })
                 });
-            });
+            }, false, false);
         } else {
             //sending save started event
             app.interface.events.saveStarted.dispatch();

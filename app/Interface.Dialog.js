@@ -21,51 +21,67 @@ Class("Dialog", {
                     return false
                 }
                 callback(inputValue);
+                swal.close();
                 //swal("Nice!", "You wrote: " + inputValue, "success");
             });
         }
     },
 
-    success: function(title, message, callback) {
+    success: function(title, message, callback, closeCancel, closeConfirm) {
         if (this.allowed.indexOf("success") > -1) {
+            var closeOnConfirm = closeConfirm;
+            var closeOnCancel = closeCancel;
             var _callback = (typeof(callback) == "function") ? callback : function() {};
             swal({
                 "title": title,
                 "text": message,
+                "closeOnCancel": closeOnCancel,
+                "closeOnConfirm": closeOnConfirm,
                 "type": "success"
             }, _callback);
         }
     },
 
-    error: function(title, message, callback) {
+    error: function(title, message, callback, closeCancel, closeConfirm) {
         if (this.allowed.indexOf("error") > -1) {
+            var closeOnConfirm = closeConfirm;
+            var closeOnCancel = closeCancel;
             var _callback = (typeof(callback) == "function") ? callback : function() {};
             swal({
                 "title": title,
                 "text": message,
+                "closeOnCancel": closeOnCancel,
+                "closeOnConfirm": closeOnConfirm,
                 "type": "error"
             }, _callback);
         }
     },
 
-    warn: function(title, message, callback) {
+    warn: function(title, message, callback, closeCancel, closeConfirm) {
         if (this.allowed.indexOf("warn") > -1) {
+            var closeOnConfirm = closeConfirm;
+            var closeOnCancel = closeCancel;
             var _callback = (typeof(callback) == "function") ? callback : function() {};
             swal({
                 "title": title,
                 "text": message,
+                "closeOnCancel": closeOnCancel,
+                "closeOnConfirm": closeOnConfirm,
                 "type": "warning"
             }, _callback);
         }
     },
 
-    info: function(title, message, callback) {
+    info: function(title, message, callback, closeCancel, closeConfirm) {
         if (this.allowed.indexOf("info") > -1) {
-            var _callback = (typeof(callback) == "function") ? callback : new Function();
-            console.log(_callback);
+            var closeOnConfirm = closeConfirm;
+            var closeOnCancel = closeCancel;
+            var _callback = (typeof(callback) == "function") ? callback : function() {};
             swal({
                 "title": title,
                 "text": message,
+                "closeOnCancel": closeOnCancel,
+                "closeOnConfirm": closeOnConfirm,
                 "type": "info"
             }, _callback);
         }
