@@ -39,7 +39,7 @@ Class("Interface", {
             //Script editor closed
             scriptEditorClosed: new signals.Signal(),
 
-            //autosave event 
+            //autosave event
             autosaveChange: new signals.Signal(),
             //Save event
             saveEvent: new signals.Signal(),
@@ -142,6 +142,7 @@ Class("Interface", {
         this.footer = new Footer();
         //creating sidebar loader
         this.loader = new SidebarLoader();
+        this.sceneSelector = new SceneSelector();
         // setting listeners
         this.setListeners();
     },
@@ -164,6 +165,7 @@ Class("Interface", {
         this.rightSidebar.setListeners();
         this.loader.setListeners();
         this.footer.setListeners();
+        this.sceneSelector.setListeners();
         //setting onykeydown listener
         document.addEventListener('keydown', app.interface.onKeyDown, false);
         //setting resize event listener
@@ -186,7 +188,7 @@ Class("Interface", {
             var control = $(this).data("type");
             $('#'+control+'caret').removeClass('fa-caret-down').addClass('fa-caret-right');
         });
-        
+
         //setting input events: color, slider checkbox
         this.setInputEvents("#fogColor");
     },
@@ -229,7 +231,7 @@ Class("Interface", {
             var flag = $(this).data("flag");
             console.log(flag);
             if (flag in app.interface.flags) {
-                //retriving checked status 
+                //retriving checked status
                 app.interface.flags[flag] = this.checked;
                 //triggering event
                 console.log(flag+"Change");

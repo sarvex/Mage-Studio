@@ -19,6 +19,7 @@ window.onload = function() {
         "app/Manager.Light",
         "app/Manager.Model",
         "app/Input.Keyboard",
+        "app/Interface.SceneSelector",
         "app/Interface.Dialog",
         "app/Interface.Footer",
         "app/Interface.Sidebar",

@@ -124,7 +124,7 @@
                                         %span.caret
                                     %ul.dropdown-menu{:role=>"menu"}
                                         %li
-                                            %a{:href=>"#"}
+                                            %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#sceneSelectorModal"}
                                                 Scenes
                                         %li
                                             %a{:href=>"javascript:app.openEditor();"}
@@ -399,6 +399,20 @@
                                 .progress-bar#progressBar{:role=>"progressbar", "aria-valuenow"=>"60", "aria-valuemin"=>"0", "aria-valuemax"=>"100", :style=>"width: 0%;"}
                                     0%
         / modals
+        / scene selector modal
+        #sceneSelectorModal.wagemodal.modal.fade.bs-example-modal-sm{:tabindex=>"-1", :role=>"dialog", "aria-labelledby"=>"myModalLabel", "aria-hidden"=>"true"}
+            .modal-dialog{:style=>"z-index:99999;"}
+                .modal-content
+                    .modal-header
+                        %h4#addMeshModalTitle.modal-title
+                            Scene Selection
+                    .modal-body
+                        %ul#sceneList.list-group
+                            %li.scene-item
+                                1
+                    .modal-footer
+                        %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
+                            Close
         / addMeshModal
         #addMeshModal.wagemodal.modal.fade.bs-example-modal-sm{:tabindex=>"-1", :role=>"dialog", "aria-labelledby"=>"myModalLabel", "aria-hidden"=>"true"}
             .modal-dialog{:style=>"z-index:99999;"}
