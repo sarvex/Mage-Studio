@@ -6,6 +6,7 @@ Class("SceneSelector", {
 
     setListeners: function() {
         this.modal.on('show.bs.modal', function() {
+            app.interface.sceneSelector.list.innerHTML = "";
             var scenes = app.filehelper.listScenes();
             for (var i in scenes) {
                 var block = app.interface.sceneSelector.createSceneBlock(scenes[i], 'scene-item');

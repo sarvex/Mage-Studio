@@ -144,6 +144,36 @@ a {
     font-weight: bold;
 }
 
+
+/*
+    scene selector
+*/
+ul#sceneSelectorList {
+    padding: 0;
+    margin: 0;
+    height: 100px;
+    overflow-x: auto;
+}
+
+li.scene-item {
+    list-style: none;
+    position: relative;
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-right: 20px;
+    border: 1px solid #555;
+    line-height: 100px;
+    text-align: center;
+    font-size: 12px;
+}
+
+li.scene-item:last-child {
+    border: 1px dashed #555;
+    font-weight: bold;
+    font-size: 42px;
+}
+
 /*
 
     LEFT SIDEBAR CSS

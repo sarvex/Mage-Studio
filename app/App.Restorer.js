@@ -8,8 +8,8 @@ Class("Restorer", {
             }
         }
         if (this.nothingToRestore) return;
-        this.lights = data[app.storage.currentProject+"_lights"];
-        this.meshes = data[app.storage.currentProject+"_meshes"];
+        this.lights = data[app.storage.currentProject+"_" + app.storage.currentScene + "_lights"];
+        this.meshes = data[app.storage.currentProject+"_" + app.storage.currentScene + "_meshes"];
         //flags
         this.meshesFlag = (this.meshes.keys.length > 0);
         this.lightsFlag = (this.lights.keys.length > 0); // true/false whether we recovered something or not

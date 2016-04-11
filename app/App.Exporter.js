@@ -2,9 +2,9 @@
 Class("Exporter", {
     Exporter: function() {
         //including necessary modules
-        var require = window.require || false;  
+        var require = window.require || false;
         if (!require) {
-            alert("Exporter not available. Can be used only with standalone package. Please download it.");
+            app.dialog.info("Exporter not available. Can be used only with standalone package. Please download it.");
             return;
         }
         this.ncp = require("ncp").ncp;
@@ -78,7 +78,7 @@ Class("Exporter", {
         1 requesting for directory
         2 when directory is ready, proceed
 
-        wage: 
+        wage:
             copy build folder to destination
             create classes and objects
 

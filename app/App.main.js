@@ -1,5 +1,6 @@
 window.onload = function() {
     include([
+        "app/strings",
         "app/lib/jsColorPicker.min",
         "app/App.Global",
         "app/App.Restorer",
@@ -62,7 +63,7 @@ function start() {
                     app._dialog.showOpenDialog({properties: ['openDirectory']},function (value) {
                         app.storage.workspace = value[0];
                         app.storage.set("workspace", value[0]);
-                        if (app.storage.currentProject == "BaseProject") {
+                        if (app.storage.currentProject == STRINGS.defaultProject) {
                             app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
                                 app.storage.currentProject = value;
                                 app.storage.set("currentProject", app.storage.currentProject);
@@ -72,7 +73,7 @@ function start() {
                         }
                     });
                 });
-            } else if (this.storage.currentProject == "BaseProject") {
+            } else if (this.storage.currentProject == STRINGS.defaultProject) {
                 app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
                     app.storage.currentProject = value;
                     app.storage.set("currentProject", app.storage.currentProject);

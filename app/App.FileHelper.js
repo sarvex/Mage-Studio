@@ -58,6 +58,10 @@ Class("FileHelper", {
         });
     },
 
+    listContent: function(path) {
+        return this.fs.readdirSync(path);
+    },
+
     listScenes: function() {
         return app.filehelper.listDirectories(app.storage.workspace + "/" + app.storage.currentProject + "/scenes");
     }

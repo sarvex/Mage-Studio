@@ -38,14 +38,25 @@ Class("ScriptEditor", {
 				app.scriptEditor.isNew = false;
 			}
 			//checking if we have a working directory where we can save files
-			var cwd = app.storage.get("cwd");
-			if (!cwd) {
-				alert("Please, choose your project workspace.");
-				app.filehelper.requestDirectory(function(directory) {
-					// storing cwd
-					app.storage.set("cwd", directory);
-				});
+			var workspace = app.storage.get("workspace");
+			if (!workspace) {
+				app.dialog.info("Workspace", "Please choose a valid workspace", function() {
+                    app._dialog.showOpenDialog({properties: ['openDirectory']},function (value) {
+                        app.storage.workspace = value[0];
+                        app.storage.set("workspace", value[0]);
+                        if (app.storage.currentProject == STRINGS.defaultProject) {
+                            app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
+                                app.storage.currentProject = value;
+                                app.storage.set("currentProject", app.storage.currentProject);
+                                swal.close();
+                                app.storage.createProject();
+                            });
+                        }
+                    });
+                });
 			}
+			// retrieve content of the script folder for this scene
+
 			//fade in of script editor
 			$(app.scriptEditor.container).fadeIn(200);
 		});
