@@ -73,6 +73,7 @@ Class("Storage", {
             var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene;
             var sceneJson = JSON.stringify(app.storage.exporter.parse(app.sm.scene));
             app.filehelper.write(dir, sceneJson, function() {
+                //app.storage.createGameJSON();
                 app.interface.events.saveEvent.dispatch();
             })
         }
@@ -130,7 +131,7 @@ Class("Storage", {
         var scenes = app.filehelper.listScenes();
         var firstScene = scene ? scene : scenes[0];
 
-        var gameJSON = JSONS.game;
+        var gameJSON = JSON.parse(JSON.stringify(JSONS.game));
         gameJSON['firstScene'] = firstScene;
         gameJSON['scenes'] = [];
         for (var i in scenes) {
@@ -139,7 +140,8 @@ Class("Storage", {
                 'name': s
             });
         }
-        var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene
-        app.filehelper.write(JSON.stringify(gameJSON))
+        console.log(gameJSON);
+        var dir = app.storage.workspace + "/" + app.storage.currentProject;
+        app.filehelper.write(dir, JSON.stringify(gameJSON))
     }
 })

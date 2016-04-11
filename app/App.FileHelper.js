@@ -39,7 +39,6 @@ Class("FileHelper", {
     },
 
     write: function(path, text, callback) {
-        if (!this.nw) return;
         this.fs.open(path, "w", "0666", function(error, descriptor) {
             if (error) return;
             app.filehelper.fs.write(descriptor, text, callback);
