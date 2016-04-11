@@ -11,6 +11,7 @@ Class("Storage", {
         this.workspace = (localStorage.getItem("workspace")) ? localStorage.getItem("workspace") : null;
         this.currentProject = (localStorage.getItem("currentProject")) ? localStorage.getItem("currentProject") : "BaseProject"; //reference to current project
         this.currentScene = (localStorage.getItem("currentScene")) ? localStorage.getItem("currentScene") : "BaseScene";
+        this.exporter = new THREE.SceneExporter();
     },
 
     //Setting listeners if we want auto save or not
@@ -68,8 +69,12 @@ Class("Storage", {
             }
             //saving lastTime we did a save
             app.storage.lastTime = new Date();
-            //triggering saveEvent event
-            app.interface.events.saveEvent.dispatch();
+            // saving to file
+            var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene;
+            var sceneJson = JSON.stringify(app.storage.exporter.parse(app.sm.scene));
+            app.filehelper.write(dir, sceneJson, function() {
+                app.interface.events.saveEvent.dispatch();
+            })
         }
     },
 
@@ -119,5 +124,22 @@ Class("Storage", {
             if (err) app.dialog.error("Error!", "Error while creating project");
             else app.dialog.success("Done", "Your project is good to go");
         });
+    },
+
+    createGameJSON: function(scene) {
+        var scenes = app.filehelper.listScenes();
+        var firstScene = scene ? scene : scenes[0];
+
+        var gameJSON = JSONS.game;
+        gameJSON['firstScene'] = firstScene;
+        gameJSON['scenes'] = [];
+        for (var i in scenes) {
+            var s = scenes[i];
+            gameJSON['scenes'].push({
+                'name': s
+            });
+        }
+        var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene
+        app.filehelper.write(JSON.stringify(gameJSON))
     }
 })

@@ -1,6 +1,6 @@
 window.onload = function() {
     include([
-        "app/strings",
+        "app/COSTANTS",
         "app/lib/jsColorPicker.min",
         "app/App.Global",
         "app/App.Restorer",

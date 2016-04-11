@@ -47,9 +47,7 @@ Class("FileHelper", {
     },
 
     rename: function(pre, post, callback) {
-        this.fs.rename(pre, post, function(err) {
-            callback();
-        })
+        this.fs.rename(pre, post, callback);
     },
 
     listDirectories: function(path) {
