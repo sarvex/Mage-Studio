@@ -23,6 +23,7 @@ Class("Player", {
     },
 
     play: function() {
+        app.storage.save();
         this.iframe.height = this.container.clientHeight;
         this.iframe.width = this.container.clientWidth;
         var dir = app.storage.workspace + "/" + app.storage.currentProject;

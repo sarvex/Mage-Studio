@@ -40,7 +40,7 @@ Class("FileHelper", {
 
     write: function(path, text, callback) {
         this.fs.open(path, "w", "0666", function(error, descriptor) {
-            if (error) return;
+            if (error) callback(error);
             app.filehelper.fs.write(descriptor, text, callback);
         });
     },

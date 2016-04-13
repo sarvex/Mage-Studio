@@ -62,18 +62,22 @@ Class("Storage", {
             //sending save started event
             app.interface.events.saveStarted.dispatch();
             //storing elements
+            var sceneJson = {};
             for (k in app.storage.keys) {
                 //getting json version of our map
                 var value = JSON.stringify(app[app.storage.keys[k]].map);
+                sceneJson[k] = value;
                 app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_"+k, value);
             }
+            console.log(sceneJson);
             //saving lastTime we did a save
             app.storage.lastTime = new Date();
             // saving to file
             var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene;
-            var sceneJson = JSON.stringify(app.storage.exporter.parse(app.sm.scene));
-            app.filehelper.write(dir, sceneJson, function() {
-                //app.storage.createGameJSON();
+            var json = JSON.stringify(sceneJson);//JSON.stringify(app.storage.exporter.parse(app.sm.scene));
+            app.filehelper.write(dir + "/scene.json", json, function(error) {
+                if (error) console.log(error);
+                app.storage.createGameJSON();
                 app.interface.events.saveEvent.dispatch();
             })
         }
@@ -142,6 +146,10 @@ Class("Storage", {
         }
         console.log(gameJSON);
         var dir = app.storage.workspace + "/" + app.storage.currentProject;
-        app.filehelper.write(dir, JSON.stringify(gameJSON))
+        app.filehelper.write(dir + "/game.json", JSON.stringify(gameJSON))
+    },
+
+    createScriptJSON: function() {
+
     }
 })
