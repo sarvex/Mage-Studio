@@ -26,10 +26,8 @@ Class("MyGame", {
 		//restoring meshes
 		var meshes = JSON.parse(app._scene.meshes);
 		var lights = JSON.parse(app._scene.lights);
-        for (var i=0; i<meshes.total; i++) {
-            var k = meshes.keys[i];
-            //recreating mesh
-            var _mesh = app.loader.parse(meshes.map[k]);
+        for (var i=0; i<meshes.length; i++) {
+            var _mesh = this.loader.parse(meshes[i]);
             //every mesh must have castshadow and receive shadow enabled
             _mesh.castShadow = true;
             _mesh.receiveShadow = true;
@@ -39,9 +37,8 @@ Class("MyGame", {
 			mesh.mesh.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
         }
         //restoring lights
-        for (var j=0; j<lights.total; j++) {
-            var k = lights.keys[j];
-            var l = lights.map[k];
+        for (var j=0; j<lights.length; j++) {
+            var l = lights.map[j];
             //recreating light, holder, target, helper
             var o = {
                 holder: (l.holder) ? app.loader.parse(l.holder) : false,

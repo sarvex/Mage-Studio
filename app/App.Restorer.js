@@ -21,10 +21,10 @@ Class("Restorer", {
         //if nothing to restore, return
         if (this.nothingToRestore) return;
         //restoring meshes
-        for (var i=0; i<this.meshes.total; i++) {
-            var k = this.meshes.keys[i];
+        for (var i=0; i<this.meshes.length; i++) {
+            //var k = this.meshes.keys[i];
             //recreating mesh
-            var mesh = this.loader.parse(this.meshes.map[k]);
+            var mesh = this.loader.parse(this.meshes[i]);
             //every mesh must have castshadow and receive shadow enabled
             mesh.castShadow = true;
             mesh.receiveShadow = true;
@@ -55,9 +55,8 @@ Class("Restorer", {
             app.interface.events.meshAdded.dispatch();
         }
         //restoring lights
-        for (var j=0; j<this.lights.total; j++) {
-            var k = this.lights.keys[j];
-            var l = this.lights.map[k];
+        for (var j=0; j<this.lights.length; j++) {
+            var l = this.lights[j];
             //recreating light, holder, target, helper
             var o = {
                 flag: "light",

@@ -84,35 +84,14 @@ Class("Storage", {
         } else {
             //sending save started event
             app.interface.events.saveStarted.dispatch();
-            //storing elements
-            var sceneJson = {};
-            for (k in app.storage.keys) {
-                //getting json version of our map
-                var value = JSON.stringify(app[app.storage.keys[k]].map);
-                sceneJson[k] = value;
-                app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_"+k, value);
-            }
-            console.log(sceneJson);
+
+            app.storage.createSceneJSON();
+            app.storage.createGameJSON();
+            app.storage.createAssetsJSON();
+
             //saving lastTime we did a save
             app.storage.lastTime = new Date();
-            // saving to file
-            var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene;
-            var json = JSON.stringify(sceneJson);//JSON.stringify(app.storage.exporter.parse(app.sm.scene));
-            app.filehelper.write(dir + "/scene.json", json, function(error) {
-                if (error) console.log(error);
-                app.storage.createGameJSON();
-                app.interface.events.saveEvent.dispatch();
-            });
-
-            // now storing assets
-            var assets = {};
-            var assets_string = 'var Assets = {';
-            for (var i in app.assets.allowedAssets) {
-                var key = app.assets.allowedAssets[i];
-                console.log(key);
-                assets_string += __upperCaseFirstLetter__(key) + ':' + JSON.stringify(app.assets[key]) + ",";
-            }
-            assets_string += '}';
+            app.interface.events.saveEvent.dispatch();
         }
     },
 
@@ -180,6 +159,56 @@ Class("Storage", {
             console.log(err);
             if (err) app.dialog.error("Error!", "Error while creating project");
             else app.dialog.success("Done", "Your project is good to go");
+        });
+    },
+
+    createAssetsJSON: function() {
+        // now storing assets
+        var assets = {};
+        var assets_string = 'var Assets = {';
+        for (var i in app.assets.allowedAssets) {
+            var key = app.assets.allowedAssets[i];
+            var value = JSON.stringify(app.assets[key]);
+            assets_string += __upperCaseFirstLetter__(key) + ':' + value + ",";
+            app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_asset_"+k, value);
+        }
+        assets_string += '}';
+    },
+
+    createSceneJSON: function() {
+        //storing elements
+        var sceneJson = {};
+        for (k in app.storage.keys) {
+            //getting json version of our map
+            //var value = JSON.stringify(app[app.storage.keys[k]].map);
+            var value = '[';
+            var type = app.storage.keys[k];
+            var manager = app[type].map;
+            for (var i in manager.keys) {
+                var key = manager.keys[i];
+                if (k == 'lights') {
+                    value += '{'
+                    var object = manager.map[key];
+                    value += object.holder ? '"holder":' + JSON.stringify(object.holder.toJSON()) + ',' : 'false,';
+                    value += object.target ? '"target":' + JSON.stringify(object.target.toJSON()) + ',' : 'false,';
+                    value += '"light":' + JSON.stringify(object.light.toJSON());
+                    value += '},';
+                } else if ((k == 'meshes') || (k == 'models')) {
+                    var json = JSON.stringify(manager.map[key].toJSON());
+                    value += json +",";
+                }
+            }
+            value = value.length > 1 ? value.slice(0, value.length - 1) + "]" : "[]";
+            sceneJson[k] = value;
+            app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_"+k, value);
+        }
+        console.log(sceneJson);
+        // saving to file
+        var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene;
+        var json = JSON.stringify(sceneJson);//JSON.stringify(app.storage.exporter.parse(app.sm.scene));
+        app.filehelper.write(dir + "/scene.json", json, function(error) {
+            if (error) console.log(error);
+
         });
     },
 
