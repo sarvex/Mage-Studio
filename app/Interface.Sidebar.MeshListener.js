@@ -85,7 +85,7 @@ Class("MeshListener", {
         //setting group
         o.group = $('#meshGroup').val();
 
-        //setting position 
+        //setting position
         o.position.set($('#position_x').val(), $('#position_y').val(), $('#position_z').val());
 
         //settting rotation
@@ -120,23 +120,22 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#lightMap').next().html(
-            "textures/"+ path + 
+            "textures/"+ path +
             "<img style='height:30px; margin-left:5px;' src='textures/"+path+"'></img>"
         );
     },
 
-    onTextureLoaded: function(event) {
+    onTextureLoaded: function(_path) {
         if (app.sm.typeClicked != "mesh") return;
-        var path = event.target.files[0].name;//$(this).val().split("path")[1];
-        console.log(path);
+        var path = app.storage.getSceneDir() + '/' + _path;//event.target.files[0].name;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
             now using $(this).val().spit(C:/)
         */
-        var texture = THREE.ImageUtils.loadTexture("textures/"+path);
+        var texture = THREE.ImageUtils.loadTexture(path);
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(2, 2);
+        texture.repeat.set(1, 1);
         //setting new material
         var o = app.mm.map.get(app.sm.uuid);
         o.material.map = texture;
@@ -154,22 +153,22 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#textureMap').next().html(
-            "textures/"+ path + 
-            "<img style='height:30px; margin-left:5px;' src='textures/"+path+"'></img>"
+            "textures/"+ path +
+            "<img style='height:30px; margin-left:5px;' src='"+path+"'></img>"
         );
     },
 
-    onSpecularMapLoaded: function(event) {
+    onSpecularMapLoaded: function(_path) {
         if (app.sm.typeClicked != "mesh") return;
-        var path = event.target.files[0].name;//$(this).val().split("path")[1];
+        var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
             now using $(this).val().spit(C:/)
         */
-        var texture = THREE.ImageUtils.loadTexture("textures/"+path);
+        var texture = THREE.ImageUtils.loadTexture(path);
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(2, 2);
+        texture.repeat.set(1, 1);
         //setting new material
         var o = app.mm.map.get(app.sm.uuid);
         o.material.specularMap = texture;
@@ -187,19 +186,19 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#specularMap').next().html(
-            "textures/"+ path + 
-            "<img style='height:30px; margin-left:5px;' src='textures/"+path+"'></img>"
+            "textures/"+ path +
+            "<img style='height:30px; margin-left:5px;' src='"+path+"'></img>"
         );
     },
 
-    onAlphaMapLoaded: function(event) {
+    onAlphaMapLoaded: function(_path) {
         if (app.sm.typeClicked != "mesh") return;
-        var path = event.target.files[0].name;//$(this).val().split("path")[1];
+        var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
             now using $(this).val().spit(C:/)
         */
-        var texture = THREE.ImageUtils.loadTexture("textures/"+path);
+        var texture = THREE.ImageUtils.loadTexture(path);
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(2, 2);
@@ -220,19 +219,19 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#alphaMap').next().html(
-            "textures/"+ path + 
-            "<img style='height:30px; margin-left:5px;' src='textures/"+path+"'></img>"
+            "textures/"+ path +
+            "<img style='height:30px; margin-left:5px;' src='"+path+"'></img>"
         );
     },
 
     onEnvMapLoaded: function(event) {
         if (app.sm.typeClicked != "mesh") return;
-        var path = event.target.files[0].name;//$(this).val().split("path")[1];
+        var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
             now using $(this).val().spit(C:/)
         */
-        var texture = THREE.ImageUtils.loadTexture("textures/"+path);
+        var texture = THREE.ImageUtils.loadTexture(path);
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(2, 2);
@@ -253,8 +252,8 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#envMap').next().html(
-            "textures/"+ path + 
-            "<img style='height:30px; margin-left:5px;' src='textures/"+path+"'></img>"
+            "textures/"+ path +
+            "<img style='height:30px; margin-left:5px;' src='"+path+"'></img>"
         );
     },
 

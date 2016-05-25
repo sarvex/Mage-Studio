@@ -80,6 +80,8 @@ Class("Interface", {
             lightAdded: new signals.Signal(),
             //sound added event
             soundAdded: new signals.Signal(),
+            // model addede event
+            modelAdded: new signals.Signal(),
 
             //element position change events
             positionChange: new signals.Signal(),

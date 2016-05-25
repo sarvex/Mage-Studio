@@ -28,7 +28,9 @@ Class("SceneManager", {
             app.mm.update();
             //updating light manager
             app.lm.update();
-            
+            // updating model manager
+            app.modm.update();
+
             //rendering scene
             app.sm.render();
 
@@ -69,7 +71,7 @@ Class("SceneManager", {
         // attaching grid to the scene
         this.grid = new THREE.GridHelper(1000,100);
         this.scene.add( this.grid );
-       
+
         // creating renderer
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );
         //this.renderer.setClearColor( this.scene.fog.color );
@@ -78,9 +80,9 @@ Class("SceneManager", {
         this.renderer.setPixelRatio( window.devicePixelRatio );
         this.renderer.setSize($(this.container).width(), $(this.container).height());
         //enabling shadows
-        this.renderer.shadowMapEnabled = true;
+        this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMapSoft = true;
-        this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         this.container.appendChild( this.renderer.domElement );
 
@@ -122,7 +124,7 @@ Class("SceneManager", {
         app.interface.events.fogColorChange.add(this.onFogColorChanged);
         //adding fog density change listener
         app.interface.events.fogDensityChange.add(this.onFogDensityChanged);
-        //registering for shadow enabled 
+        //registering for shadow enabled
         app.interface.events.shadowChange.add(this.onShadowChange);
     },
 
@@ -224,7 +226,7 @@ Class("SceneManager", {
 
         //triggering select mesh event only if not holder or target, but light or mesh
         // #TODO remember to add "model" to typeclicked
-        //if ((app.sm.typeClicked == "mesh") || (app.sm.typeClicked == "light")) {
+        //if ((app.sm.typeClicked == "mesh") || (app.sm.typeClicked == "light") || (app.sm.typeClicked == 'model')) {
             app.interface.events.selectedMesh.dispatch();
         //}
     },

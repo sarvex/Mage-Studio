@@ -447,20 +447,8 @@
                             Add > Model
                     .modal-body
                         %ul.list-group
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('cube');"}
-                                Cube
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('sphere')"}
-                                Sphere
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('cylinder');"}
-                                Cylinder
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('plane')"}
-                                Plane
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('dodecahedron')"}
-                                Dodecahedron
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('tube')"}
-                                Tube
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('thorus')"}
-                                Thorus
+                            %li.list-group-item{:onclick=>"app.modm.addModel('json'); $('#addModelModal').modal('hide');"}
+                                Load JSON
                     .modal-footer
                         %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
                             Close
@@ -491,20 +479,8 @@
                             Add > Model
                     .modal-body
                         %ul.list-group
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('cube');"}
-                                Cube
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('sphere')"}
-                                Sphere
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('cylinder');"}
-                                Cylinder
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('plane')"}
-                                Plane
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('dodecahedron')"}
-                                Dodecahedron
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('tube')"}
-                                Tube
-                            %li.list-group-item{:onclick=>"app.mm.addMesh('thorus')"}
-                                Thorus
+                            %li.list-group-item{:onclick=>"app.modm.addModel('json');"}
+                                Load JSON
                     .modal-footer
                         %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
                             Close

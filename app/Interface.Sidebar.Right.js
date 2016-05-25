@@ -12,7 +12,7 @@ Class("RightSidebar", {
         //calling super method
         this._setListeners();
 
-        //Setting mesh listeners 
+        //Setting mesh listeners
         this.meshListener.setListeners();
         //Setting light listeners
         this.lightListener.setListeners();
@@ -83,11 +83,15 @@ Class("RightSidebar", {
             //setting textures listeners
             //listening for file inputs
             // #TODO should write texture name
-            $('#textureMap').unbind().change(app.interface.rightSidebar.meshListener.onTextureLoaded);
-            $('#lightMap').unbind().change(app.interface.rightSidebar.meshListener.onLightMapLoaded);
-            $('#specularMap').unbind().change(app.interface.rightSidebar.meshListener.onSpecularMapLoaded);
-            $('#alphaMap').unbind().change(app.interface.rightSidebar.meshListener.onAlphaMapLoaded);
-            $('#envMap').unbind().change(app.interface.rightSidebar.meshListener.onEnvMapLoaded);
+            $('input[data-type="image-asset"]').unbind().click(function() {
+                var method = 'on' + __upperCaseFirstLetter__($(this).data('image')) + 'Loaded';
+                app.assets.addAsset('images', app.interface.rightSidebar.meshListener[method]);
+            });
+            //$('#textureMap').unbind().change(app.interface.rightSidebar.meshListener.onTextureLoaded);
+            //$('#lightMap').unbind().change(app.interface.rightSidebar.meshListener.onLightMapLoaded);
+            //$('#specularMap').unbind().change(app.interface.rightSidebar.meshListener.onSpecularMapLoaded);
+            //$('#alphaMap').unbind().change(app.interface.rightSidebar.meshListener.onAlphaMapLoaded);
+            //$('#envMap').unbind().change(app.interface.rightSidebar.meshListener.onEnvMapLoaded);
 
             //setting updateMesh click listener
             $('#updateMesh').click(app.interface.rightSidebar.meshListener.updateMeshRotPosName);
@@ -107,31 +111,31 @@ Class("RightSidebar", {
             //Setting textures info if available
             if (o.material.map) {
                 $('#textureMap').next().html(
-                    o.material.map.sourceFile + 
+                    o.material.map.sourceFile +
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.map.sourceFile+"'></img>"
                 );
             }
             if (o.material.lightMap) {
                 $('#lightMap').next().html(
-                    o.material.lightMap.sourceFile + 
+                    o.material.lightMap.sourceFile +
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.lightMap.sourceFile+"'></img>"
                 );
             }
             if (o.material.specularMap) {
                 $('#specularMap').next().html(
-                    o.material.specularMap.sourceFile + 
+                    o.material.specularMap.sourceFile +
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.specularMap.sourceFile+"'></img>"
                 );
             }
             if (o.material.envMap) {
                 $('#envMap').next().html(
-                    o.material.envMap.sourceFile + 
+                    o.material.envMap.sourceFile +
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.envMap.sourceFile+"'></img>"
                 );
             }
             if (o.material.alphaMap) {
                 $('#alphaMap').next().html(
-                    o.material.alphaMap.sourceFile + 
+                    o.material.alphaMap.sourceFile +
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.alphaMap.sourceFile+"'></img>"
                 );
             }

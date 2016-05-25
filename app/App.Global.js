@@ -15,5 +15,10 @@ Class("Global", {
 
     RgbToHex: function(r, g, b) {
         return "#" + this._numToHex(r) + this._numToHex(g) + this._numToHex(b);
+    },
+
+    // very simple bind
+    bind: function(method, scope) {
+        return method.bind(scope);
     }
 });

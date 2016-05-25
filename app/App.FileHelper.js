@@ -9,6 +9,10 @@ Class("FileHelper", {
         }
     },
 
+    checkDirectory: function(dir) {
+        return this.fs.existsSync(dir);
+    },
+
     requestDirectory: function(callback) {
         //if we're not using node-webkit return
         if (!this.nw) return;

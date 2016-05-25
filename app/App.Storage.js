@@ -2,7 +2,8 @@ Class("Storage", {
     Storage: function() {
         this.keys = {
             "lights": "lm",
-            "meshes": "mm"
+            "meshes": "mm",
+            'models': "modm"
         };
         this.lastTime = new Date();
         this.autoSave = false;
@@ -12,11 +13,26 @@ Class("Storage", {
         this.currentProject = (localStorage.getItem("currentProject")) ? localStorage.getItem("currentProject") : "BaseProject"; //reference to current project
         this.currentScene = (localStorage.getItem("currentScene")) ? localStorage.getItem("currentScene") : "BaseScene";
         this.exporter = new THREE.SceneExporter();
+        this.filehelper = new FileHelper();
     },
 
     //Setting listeners if we want auto save or not
     setListeners: function() {
         app.interface.events.autosaveChange.add(this.onAutosaveChange);
+    },
+
+    getBaseDir: function() {
+        if (this.workspace && this.currentProject && this.currentScene) {
+            return this.workspace + '/' + this.currentProject;
+        }
+        return false;
+    },
+
+    getSceneDir: function() {
+        var dir = this.getBaseDir();
+        if (dir) {
+            return dir + '/scenes/' + this.currentScene;
+        }
     },
 
     //listenning for autosave toggle
@@ -45,10 +61,17 @@ Class("Storage", {
 
     //save elements
     save: function() {
+        var dir = app.storage.workspace + "/" + app.storage.currentProject;
+
+        if (!app.filehelper.checkDirectory(dir)) {
+            app.dialog.error(STRINGS.NO_DIRECTORY.title, STRINGS.NO_DIRECTORY.message);
+            return false;
+        }
+
         if (app.storage.currentScene == "BaseScene") {
-            app.dialog.warn("Save Scene", "You should choose a name for your scene", function() {
-                app.dialog.prompt("Choose name", "Please choose a name for your scene", function(name) {
-                    var basedir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/";
+            app.dialog.warn(STRINGS.MISSING_SCENE_NAME.title, STRINGS.MISSING_SCENE_NAME.message, function() {
+                app.dialog.prompt(STRINGS.CHOOSE_SCENE.title, STRINGS.CHOOSE_SCENE.message, function(name) {
+                    var basedir = dir + "/scenes/";
                     var pre = basedir + "" + app.storage.currentScene;
                     var post = basedir + "" + name;
                     app.filehelper.rename(pre, post, function() {
@@ -79,7 +102,17 @@ Class("Storage", {
                 if (error) console.log(error);
                 app.storage.createGameJSON();
                 app.interface.events.saveEvent.dispatch();
-            })
+            });
+
+            // now storing assets
+            var assets = {};
+            var assets_string = 'var Assets = {';
+            for (var i in app.assets.allowedAssets) {
+                var key = app.assets.allowedAssets[i];
+                console.log(key);
+                assets_string += __upperCaseFirstLetter__(key) + ':' + JSON.stringify(app.assets[key]) + ",";
+            }
+            assets_string += '}';
         }
     },
 
@@ -108,8 +141,28 @@ Class("Storage", {
         localStorage.clear();
     },
 
+    // checking workspace existence in path and storage
+    checkWorkspace: function() {
+        if (!this.workspace) return false;
+
+        return this.filehelper.checkDirectory(this.workspace);
+    },
+
+    isDefaultProject: function() {
+        return this.currentProject === STRINGS.defaultProject;
+    },
+
     // create project folder, and copy scaffold in it
-    createProject: function() {
+    createProject: function(name) {
+        var dir = app.storage.workspace + "/" + name;
+        if (app.filehelper.checkDirectory(dir)) {
+            // project must not exist
+            return false;
+        }
+
+        app.storage.currentProject = name;
+        app.storage.set("currentProject", app.storage.currentProject);
+
         if (!app.storage.workspace) {
             app.dialog.error("Missing Workspace", "Please set your workspace under settings panel");
             return;
@@ -120,7 +173,6 @@ Class("Storage", {
         }
         var ncp = require("ncp").ncp;
         var fs = require("fs");
-        var dir = app.storage.workspace + "/" + app.storage.currentProject;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }

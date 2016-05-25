@@ -17,8 +17,10 @@ window.onload = function() {
         "app/Interface",
         "app/Manager.Scene",
         "app/Manager.Mesh",
+        "app/Manager.Model",
         "app/Manager.Light",
         "app/Manager.Model",
+        "app/Manager.Assets",
         "app/Input.Keyboard",
         "app/Interface.SceneSelector",
         "app/Interface.Dialog",
@@ -37,6 +39,8 @@ function start() {
 
     Class("Editor", {
         Editor: function() {
+            //file helper
+            this.filehelper = new FileHelper();
             //interface
             this.interface = new Interface();
             //scene manager
@@ -45,41 +49,43 @@ function start() {
             this.mm = new MeshManager();
             //light manager
             this.lm = new LightManager();
+            // model manager
+            this.modm = new ModelManager();
+            // assets manager
+            this.assets = new AssetsManager();
             //player
             this.player = new Player();
             //util
             this.util = new Global();
             //storage
             this.storage = new Storage();
-            //file helper
-            this.filehelper = new FileHelper();
             // dialogs
             this.dialog = new Dialog();
             //check if new project or not
-            if (!this.storage.workspace) {
+            if (!this.storage.checkWorkspace()) {
                 this._remote = require("remote");
                 this._dialog = this._remote.require("dialog");
-                this.dialog.info("Workspace", "Please choose a valid workspace", function() {
-                    app._dialog.showOpenDialog({properties: ['openDirectory']},function (value) {
-                        app.storage.workspace = value[0];
-                        app.storage.set("workspace", value[0]);
-                        if (app.storage.currentProject == STRINGS.defaultProject) {
-                            app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
-                                app.storage.currentProject = value;
-                                app.storage.set("currentProject", app.storage.currentProject);
+                this.dialog.info(STRINGS.CHOOSE_WORKSPACE.title, STRINGS.CHOOSE_WORKSPACE.message, this.util.bind(function() {
+                    this._dialog.showOpenDialog({properties: ['openDirectory']}, this.util.bind(function (value) {
+                        this.storage.workspace = value[0];
+                        this.storage.set("workspace", value[0]);
+                        if (this.storage.isDefaultProject()) {
+                            this.dialog.prompt(STRINGS.CHOOSE_PROJECT.title, STRINGS.CHOOSE_PROJECT.message, this.util.bind(function(value) {
                                 swal.close();
-                                app.storage.createProject();
-                            });
+                                if (this.storage.createProject(value)) {
+                                    this.dialog.error(STRINGS.NOT_EMPTY_FOLDER.title, STRINGS.NOT_EMPTY_FOLDER.message);
+                                }
+                            }, this));
                         }
-                    });
-                });
-            } else if (this.storage.currentProject == STRINGS.defaultProject) {
-                app.dialog.prompt("Project", "Please choose a name for your project", function(value) {
-                    app.storage.currentProject = value;
-                    app.storage.set("currentProject", app.storage.currentProject);
+                    }, this));
+                }, this));
+            } else if (this.storage.isDefaultProject()) {
+                this.dialog.prompt(STRINGS.CHOOSE_PROJECT.title, STRINGS.CHOOSE_PROJECT.message, this.util.bind(function(value) {
                     swal.close();
-                    app.storage.createProject();
-                });
+                    if (this.storage.createProject(value)) {
+                        this.dialog.error(STRINGS.NOT_EMPTY_FOLDER, STRINGS.NOT_EMPTY_FOLDER.message);
+                    }
+                }, this));
             }
         },
 
@@ -104,7 +110,7 @@ function start() {
 
         new: function() {
             // TODO find replacement for prompt
-            app.dialog.prompt("Project", "Please choose a name for your project", function(projectName) {
+            app.dialog.prompt(STRINGS.CHOOSE_PROJECT.title, STRINGS.CHOOSE_PROJECT.message, function(projectName) {
                 app.storage.currentProject = projectName;
                 app.storage.set("currentProject", app.storage.currentProject);
                 swal.close();
@@ -150,7 +156,8 @@ function start() {
     // App object
     window.app = {};
     Util.start();
-    Util.check.start(function() {
+    Util.check.start(function(message) {
+        console.log('%c' + message, 'color: green;');
         //on check success
         app = new Editor();
         app.init();
