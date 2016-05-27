@@ -172,7 +172,12 @@ Class("Storage", {
             assets_string += __upperCaseFirstLetter__(key) + ':' + value + ",";
             app.storage.set(app.storage.currentProject+"_"+app.storage.currentScene+"_asset_"+k, value);
         }
+        assets_string =assets_string.slice(0, assets_string.length - 1);
         assets_string += '}';
+        var dir = app.storage.workspace + "/" + app.storage.currentProject + "/scenes/" + app.storage.currentScene +'/app';
+        app.filehelper.write(dir + "/assets.js", assets_string, function(error) {
+            if (error) console.log(error);
+        });
     },
 
     createSceneJSON: function() {
@@ -189,8 +194,8 @@ Class("Storage", {
                 if (k == 'lights') {
                     value += '{'
                     var object = manager.map[key];
-                    value += object.holder ? '"holder":' + JSON.stringify(object.holder.toJSON()) + ',' : 'false,';
-                    value += object.target ? '"target":' + JSON.stringify(object.target.toJSON()) + ',' : 'false,';
+                    value += object.holder ? '"holder":' + JSON.stringify(object.holder.toJSON()) + ',' : '"holder":false,';
+                    value += object.target ? '"target":' + JSON.stringify(object.target.toJSON()) + ',' : '"target":false,';
                     value += '"light":' + JSON.stringify(object.light.toJSON());
                     value += '},';
                 } else if ((k == 'meshes') || (k == 'models')) {
@@ -208,7 +213,6 @@ Class("Storage", {
         var json = JSON.stringify(sceneJson);//JSON.stringify(app.storage.exporter.parse(app.sm.scene));
         app.filehelper.write(dir + "/scene.json", json, function(error) {
             if (error) console.log(error);
-
         });
     },
 
