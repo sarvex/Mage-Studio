@@ -38,7 +38,7 @@ Class("MyGame", {
         }
         //restoring lights
         for (var j=0; j<lights.length; j++) {
-            var l = lights.map[j];
+            var l = lights[j];
             //recreating light, holder, target, helper
             var o = {
                 holder: (l.holder) ? app.loader.parse(l.holder) : false,
@@ -46,22 +46,21 @@ Class("MyGame", {
                 target: (l.target) ? app.loader.parse(l.target) : false,
                 light: (l.light) ? app.loader.parse(l.light) : false
             };
-			var l = {};
             //setting helpers ecc
-            if (o.light.object.type == "DirectionalLight") {
+            if (l.light.object.type == "DirectionalLight") {
 				console.warn("Directional Lights  still not supported");
                 var size = 50;
                 o.light.castShadow = true;
-                o.light.shadowCameraVisible = true;
-                o.light.shadowMapWidth = 512;
-                o.light.shadowMapHeight = 512;
+                //o.light.shadowCameraVisible = true;
+                o.light.shadowMaSizeWidth = 512;
+                o.light.shadowMapSizeHeight = 512;
                 var d = 200;
                 o.light.shadowCameraLeft = -d;
                 o.light.shadowCameraRight = d;
                 o.light.shadowCameraTop = d;
                 o.light.shadowCameraBottom = -d;
                 o.light.shadowCameraFar = 1000;
-                o.light.shadowDarkness = 0.2;
+                //o.light.shadowDarkness = 0.2;
             } else if (l.light.object.type == "AmbientLight") {
                 l = new AmbientLight(l.light.color, l.light.intensity, l.light.position);
             } else if (l.light.object.type == "PointLight") {
