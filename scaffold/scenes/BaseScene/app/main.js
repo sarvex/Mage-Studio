@@ -27,7 +27,8 @@ Class("MyGame", {
 		var meshes = JSON.parse(app._scene.meshes);
 		var lights = JSON.parse(app._scene.lights);
         for (var i=0; i<meshes.length; i++) {
-            var _mesh = this.loader.parse(meshes[i]);
+			var current = meshes[i];
+            var _mesh = this.loader.parse(current);
             //every mesh must have castshadow and receive shadow enabled
             _mesh.castShadow = true;
             _mesh.receiveShadow = true;
@@ -35,6 +36,14 @@ Class("MyGame", {
 			mesh.mesh.position.set(_mesh.position.x, _mesh.position.y, _mesh.position.z);
 			mesh.mesh.rotation.set(_mesh.rotation.x, _mesh.rotation.y, _mesh.rotation.z);
 			mesh.mesh.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
+			// setting texture
+			if (current.textureKey) {
+				var texture = ImagesEngine.get(current.textureKey);
+				texture.wrapS = THREE.RepeatWrapping;
+		        texture.wrapT = THREE.RepeatWrapping;
+		        texture.repeat.set(1, 1);
+				mesh.mesh.material.map = texture;
+			}
         }
         //restoring lights
         for (var j=0; j<lights.length; j++) {

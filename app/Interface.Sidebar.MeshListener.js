@@ -125,13 +125,10 @@ Class("MeshListener", {
         );
     },
 
-    onTextureLoaded: function(_path) {
+    onTextureLoaded: function(key, _path) {
         if (app.sm.typeClicked != "mesh") return;
         var path = app.storage.getSceneDir() + '/' + _path;//event.target.files[0].name;//$(this).val().split("path")[1];
-        /*
-            #TODO whn using node webkit, we will read the file properly,
-            now using $(this).val().spit(C:/)
-        */
+
         var texture = THREE.ImageUtils.loadTexture(path);
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
@@ -140,6 +137,7 @@ Class("MeshListener", {
         var o = app.mm.map.get(app.sm.uuid);
         o.material.map = texture;
         o.material.needsUpdate = true;
+        o.textureKey = key;
         //resetting click listener
         app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
@@ -153,7 +151,7 @@ Class("MeshListener", {
         });
         //we added our texture
         $('#textureMap').next().html(
-            "textures/"+ path +
+            path +
             "<img style='height:30px; margin-left:5px;' src='"+path+"'></img>"
         );
     },

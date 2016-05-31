@@ -37,9 +37,8 @@ Class('AssetsManager', {
                 var key = value.slice(value.lastIndexOf('/') + 1, value.indexOf('.'));
                 app.assets['images'][key] = value;
 
-                callback(value);
+                callback(key, value);
             }
-            //callback();
         }, this));
     }
 })
