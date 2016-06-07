@@ -198,17 +198,17 @@ Class("LightManager", {
         directionalLight.castShadow = true;
         //directionalLight.shadowCameraVisible = true;
 
-        directionalLight.shadowMapWidth = 512;
-        directionalLight.shadowMapHeight = 512;
+        directionalLight.shadow.mapSize.width = 512;
+        directionalLight.shadow.mapSize.height = 512;
 
         var d = 200;
-        directionalLight.shadowCameraLeft = -d;
-        directionalLight.shadowCameraRight = d;
-        directionalLight.shadowCameraTop = d;
-        directionalLight.shadowCameraBottom = -d;
+        directionalLight.shadow.camera.left = -d;
+        directionalLight.shadow.camera.right = d;
+        directionalLight.shadow.camera.top = d;
+        directionalLight.shadow.camera.bottom = -d;
         // #TODO be able to change shadow camera far
-        directionalLight.shadowCameraFar = 1000;
-        directionalLight.shadowDarkness = 0.2;
+        directionalLight.shadow.camera.far = 1000;
+        //directionalLight.shadowDarkness = 0.2;
 
         return {
             light: directionalLight,

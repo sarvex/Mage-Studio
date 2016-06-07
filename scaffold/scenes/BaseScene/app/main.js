@@ -36,6 +36,8 @@ Class("MyGame", {
 			mesh.mesh.position.set(_mesh.position.x, _mesh.position.y, _mesh.position.z);
 			mesh.mesh.rotation.set(_mesh.rotation.x, _mesh.rotation.y, _mesh.rotation.z);
 			mesh.mesh.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
+			mesh.mesh.castShadow = true;
+			mesh.mesh.receiveShadow = true;
 			// setting texture
 			if (current.textureKey) {
 				var texture = ImagesEngine.get(current.textureKey);
@@ -57,19 +59,19 @@ Class("MyGame", {
             };
             //setting helpers ecc
             if (l.light.object.type == "DirectionalLight") {
-				console.warn("Directional Lights  still not supported");
-                var size = 50;
-                o.light.castShadow = true;
-                //o.light.shadowCameraVisible = true;
-                o.light.shadowMaSizeWidth = 512;
-                o.light.shadowMapSizeHeight = 512;
+				l = new DirectionalLight(o.light.color, o.light.intensity, o.light.distance, o.light.position, o.target);
+                /*var size = 50;
+                l.light.castShadow = true;
+                //l.light.shadowCameraVisible = true;
+                l.light.shadowMaSizeWidth = 512;
+                l.light.shadowMapSizeHeight = 512;
                 var d = 200;
-                o.light.shadowCameraLeft = -d;
-                o.light.shadowCameraRight = d;
-                o.light.shadowCameraTop = d;
-                o.light.shadowCameraBottom = -d;
-                o.light.shadowCameraFar = 1000;
-                //o.light.shadowDarkness = 0.2;
+                l.light.shadowCameraLeft = -d;
+                l.light.shadowCameraRight = d;
+                l.light.shadowCameraTop = d;
+                l.light.shadowCameraBottom = -d;
+                l.light.shadowCameraFar = 1000;*/
+                //l.light.shadowDarkness = 0.2;
             } else if (l.light.object.type == "AmbientLight") {
                 l = new AmbientLight(l.light.color, l.light.intensity, l.light.position);
             } else if (l.light.object.type == "PointLight") {
