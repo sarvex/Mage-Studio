@@ -165,13 +165,13 @@ Class("LightManager", {
         //every light must cast shadow
         pointLight.castShadow = true;
         var d = 200;
-        pointLight.shadowCamera.left = -d;
-        pointLight.shadowCamera.right = d;
-        pointLight.shadowCamera.top = d;
-        pointLight.shadowCamera.bottom = -d;
+        pointLight.shadow.camera.left = -d;
+        pointLight.shadow.camera.right = d;
+        pointLight.shadow.camera.top = d;
+        pointLight.shadow.camera.bottom = -d;
         // #TODO be able to change shadow camera far
-        pointLight.shadowCamera.far = 1000;
-        pointLight.shadowDarkness = 0.2;
+        pointLight.shadow.camera.far = 1000;
+        //pointLight.shadowDarkness = 0.2;
 
         return {
             light: pointLight,

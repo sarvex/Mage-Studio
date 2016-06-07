@@ -73,19 +73,19 @@ Class("Restorer", {
                 var size = 50;
                 o.helper = new THREE.DirectionalLightHelper(o.light, size);
                 o.light.castShadow = true;
-                o.light.shadowCameraVisible = true;
+                //o.light.shadowCameraVisible = true;
 
-                o.light.shadowMapWidth = 512;
-                o.light.shadowMapHeight = 512;
+                o.light.shadow.mapSize.Width = 512;
+                o.light.shadow.mapSize.Height = 512;
 
                 var d = 200;
-                o.light.shadowCameraLeft = -d;
-                o.light.shadowCameraRight = d;
-                o.light.shadowCameraTop = d;
-                o.light.shadowCameraBottom = -d;
+                o.light.shadow.camera.left = -d;
+                o.light.shadow.camera.right = d;
+                o.light.shadow.camera.top = d;
+                o.light.shadow.camera.botom = -d;
                 // #TODO be able to change shadow camera far
-                o.light.shadowCameraFar = 1000;
-                o.light.shadowDarkness = 0.2;
+                o.light.shadow.camera.far = 1000;
+                //o.light.shadowDarkness = 0.2;
             } else if (l.light.object.type == "AmbientLight") {
                 //we just need to set helper false
                 o.helper = false;
@@ -96,13 +96,13 @@ Class("Restorer", {
                 //every light must cast shadow
                 o.light.castShadow = true;
                 var d = 200;
-                o.light.shadowCameraLeft = -d;
-                o.light.shadowCameraRight = d;
-                o.light.shadowCameraTop = d;
-                o.light.shadowCameraBottom = -d;
+                o.light.shadow.camera.left = -d;
+                o.light.shadow.camera.right = d;
+                o.light.shadow.camera.top = d;
+                o.light.shadow.camera.botom = -d;
                 // #TODO be able to change shadow camera far
-                o.light.shadowCameraFar = 1000;
-                o.light.shadowDarkness = 0.2;
+                o.light.shadow.camera.far = 1000;
+                //o.light.shadowDarkness = 0.2;
             }
             //we're now ready to add our lights to the scene
             //add light to scene
