@@ -30,7 +30,7 @@
 }
 
 #tabs, #upper_console {
-	background-color: #111;
+	background-color: #222;
 }
 
 #tabs ul li#add_tab:hover, #coffee_compiler:hover {

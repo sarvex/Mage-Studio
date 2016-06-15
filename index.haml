@@ -2,7 +2,7 @@
 %html
     %head
         %title
-            Wage Editor
+            Mage Studio
 
         / basic imports, we don't need angular or react
         %script
@@ -74,7 +74,7 @@
                                 %span.icon-bar
                                 %span.icon-bar
                             %a.navbar-brand{:href=>"#"}
-                                Wage
+                                Mage
                         / Collect the nav links, forms, and other content for toggling
                         #bs-example-navbar-collapse-1.collapse.navbar-collapse
                             %ul.nav.navbar-nav
@@ -177,33 +177,33 @@
                 %i#rootFolder.fa.fa-folder-o{'data-path'=>'', :style=>"margin-top: 20px; margin-left: 15px;"}
                     app
                 %ul#project
-                    %li.folder{'data-path'=>'/scripts'}
-                        %i.fa.fa-folder-o
-                            scripts
-                        %ul.subfolder
-                            %li.file.js
-                                %i.fa.fa-file-code-o
-                                    camera.js
-                            %li.folder
-                                %i.fa.fa-folder-o
-                                    cube
-                                %ul.subfolder
-                                    %li.file.js
-                                        %i.fa.fa-file-code-o
-                                            mybox.js
-                    %li.file.js
-                        %i.fa.fa-file-code-o
-                            main.js
-                    %li.file.js
-                        %i.fa.fa-file-code-o
-                            config.js
+                    //%li.folder{'data-path'=>'/scripts'}
+                    //    %i.fa.fa-folder-o
+                    //        scripts
+                    //    %ul.subfolder
+                    //        %li.file.js
+                    //            %i.fa.fa-file-code-o
+                    //                camera.js
+                    //        %li.folder
+                    //            %i.fa.fa-folder-o
+                    //                cube
+                    //            %ul.subfolder
+                    //                %li.file.js
+                    //                    %i.fa.fa-file-code-o
+                    //                        mybox.js
+                    //%li.file.js
+                    //    %i.fa.fa-file-code-o
+                    //        main.js
+                    //%li.file.js
+                    //    %i.fa.fa-file-code-o
+                    //        config.js
             #codeContainer
                 #tabs
                     %ul
-                        %li#tab_0.tab.active
-                            %i.fa.fa-remove.close
-                            %span
-                                main.js
+                        //%li#tab_0.tab.active
+                        //    %i.fa.fa-remove.close
+                        //    %span
+                        //        main.js
                         %li#add_tab.tab
                             +
                 / parte superiore dell'editor

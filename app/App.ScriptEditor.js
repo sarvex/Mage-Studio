@@ -74,6 +74,7 @@ Class("ScriptEditor", {
 		//creating sidebar
 		this.sidebar = new ScriptSidebar();
 		this.sidebar.init();
+		/*
 		//creating editor
 		this.createEditor(this.currentTab, "main.js", "javascript", app.storage.currentProject+"_main.js");
 		//setting up lint worker
@@ -99,37 +100,13 @@ Class("ScriptEditor", {
 			console.log("something bad happened");
 			return;
 		}
-		//creating config.js file
-		/*
-		this.addNewTab("config.js", "javascript");
-		var content = app.storage.get(app.storage.currentProject+"_config.js");
-		if (content) {
-			console.log("setting config content");
-			// we don't need to store tab content
-			app.scriptEditor.editors[1].codeMirror.setValue(content);
-		}
-		//reading scaffolds/wage/app/config.js content
-		else if (window.require !== undefined) {
-			console.log("about to call require");
-			var fs =  require("fs");
-			fs.readFile("scaffolds/wage/app/config.js", {encoding: "utf8"}, function(err, data) {
-				// setting tab value
-				app.scriptEditor.editors[1].codeMirror.setValue(data);
-				//we need to store data
-				app.storage.set(app.storage.currentProject+"_config.js", data);
-			});
-		} else {
-			console.log("something bad happened");
-			return;
-		}
-		*/
-		//selecting first tab, then refresh
+
 		this.selectTab(0);
 		console.log("calling refresh inside init on editor_0");
 		setTimeout(function() {
 			app.scriptEditor.editors[0].codeMirror.refresh();
 		}, 100);
-
+		*/
 	},
 
 	setListeners: function() {

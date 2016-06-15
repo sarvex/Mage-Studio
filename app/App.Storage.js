@@ -33,6 +33,12 @@ Class("Storage", {
         if (dir) {
             return dir + '/scenes/' + this.currentScene;
         }
+        return false;
+    },
+
+    getScriptsDir: function() {
+        var sceneDir = app.storage.getSceneDir();
+        return sceneDir ? sceneDir + '/app/scripts' : false;
     },
 
     //listenning for autosave toggle
@@ -105,6 +111,11 @@ Class("Storage", {
     //getting elements from localstorage
     get: function(key) {
         return localStorage.getItem(key);
+    },
+
+    getScriptContent: function(scriptName, callback) {
+        var path = this.getSceneDir() + '/app/scripts/' + scriptName;
+        this.filehelper.read(path, callback);
     },
 
     //clearing all data for this project

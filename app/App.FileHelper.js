@@ -49,6 +49,14 @@ Class("FileHelper", {
         });
     },
 
+    read: function(path, calblack) {
+        this.fs.readFile(path, {encoding: "utf8"}, function(err, data) {
+            if (!err) {
+                callback(data);
+            }
+        });
+    },
+
     rename: function(pre, post, callback) {
         this.fs.rename(pre, post, callback);
     },
@@ -60,7 +68,20 @@ Class("FileHelper", {
     },
 
     listContent: function(path) {
-        return this.fs.readdirSync(path);
+        var content = this.fs.readdirSync(path),
+            map = [];
+
+        for (var i=0; i<content.length; i++) {
+            map.push({
+                name: content[i],
+                type: app.filehelper.fs.statSync(app.filehelper.path.join(path, content[i])).isDirectory() ?
+                        'directory' :
+                        'file',
+                path: path
+            });
+        }
+
+        return map;
     },
 
     listScenes: function() {

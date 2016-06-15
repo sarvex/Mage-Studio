@@ -9,6 +9,10 @@ Class("ScriptSidebar", {
         //holding current path
         this.currentPath = "";
         this.lastClicked = undefined;
+
+        this.projectContainer = '#projectContainer';
+        this.projectList = this.projectContainer + ' #project';
+        this.rootFolder = this.projectContainer + ' #rootFolder';
     },
 
     init: function() {
@@ -37,6 +41,29 @@ Class("ScriptSidebar", {
             //storing current path
             app.scriptEditor.sidebar.currentPath = $(this).data("path");
         });
+
+        app.scriptEditor.sidebar.setSidebar();
+    },
+
+    setSidebar: function() {
+        $(app.scriptEditor.sidebar.rootFolder).text(' '+
+            app.storage.currentScene +
+            '/app/');
+        // retrieve scene script folder content
+        var content = app.filehelper.listContent(app.storage.getScriptsDir());
+        for (var i=0; i<content.length; i++) {
+            var el = content[i];
+            var li = document.createElement('li');
+            $(li).addClass(el.type);
+            if (el.type == 'directory') {
+                $(li).append('<i class="fa fa-folder-o"> ' + el.name + '</i>')
+                $(li).append('<ul class="subfolder"></ul>');
+            } else {
+                $(li).addClass('js');
+                $(li).append('<i class="fa fa-file-code-o"> ' + el.name + '</i>')
+            }
+            $(app.scriptEditor.sidebar.projectList).append(li);
+        }
     },
 
     newFolder: function() {
@@ -48,4 +75,3 @@ Class("ScriptSidebar", {
         //if we are in root
     }
 });
-

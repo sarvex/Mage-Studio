@@ -310,21 +310,20 @@ iframe.scenePlayer {
 
 ul#project {
     margin-top: 0px;
-    padding-left: 35px;
+    padding-left: 24px;
 }
 
 ul#project li {
     list-style: none;
 }
 
-ul.subfolder {padding-left: 20px;}
+ul.subfolder {padding-left: 9px;}
 ul.subfolder li.file {/* list-style-image: url("../img/arrow.png") !important; */}
 
 ul#project li, ul.subfolder li {margin: 2px; padding: 5px;}
 ul#project li.file:hover i {
     cursor: pointer;
     /* background: #2a9fd6; */
-    font-weight: bold;
 }
 
 ul#project li.file:hover i::before {
@@ -333,7 +332,6 @@ ul#project li.file:hover i::before {
 
 ul#project i.fa-folder-o:hover {
     cursor: pointer;
-    font-weight: bold;
     /* border: 1px solid #2a9fd6; */
 }
 ul#project i.fa-folder-o:hover::before {
@@ -387,8 +385,8 @@ body * {
 #tabs {
     position: absolute;
     height: 35px;
-    width: 50%;
-    background-color: #111;/*#1B221E;*/
+    width: 100%;
+    background-color: #222;/*#1B221E;*/
     margin-left: -1px;
 }
 
