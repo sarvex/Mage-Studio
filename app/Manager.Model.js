@@ -68,8 +68,8 @@ Class("ModelManager", {
     //Creation methods
 
     _addJson: function() {
-        this._remote = require("remote");
-        this._dialog = this._remote.require("dialog");
+        this._remote = require('electron').remote;
+        this._dialog = this._remote.dialog;
         this._dialog.showOpenDialog({properties: ['openFile']}, app.util.bind(function (value) {
             var path = value[0],
                 loader = new THREE.JSONLoader();

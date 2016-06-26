@@ -28,8 +28,8 @@ Class('AssetsManager', {
     },
 
     _addImages: function(callback) {
-        this._remote = require("remote");
-        this._dialog = this._remote.require("dialog");
+        this._remote = require('electron').remote;
+        this._dialog = this._remote.dialog;
         this._dialog.showOpenDialog({properties: ['openFile']}, app.util.bind(function (pathList) {
             if (pathList[0]) {
                 var path = pathList[0];

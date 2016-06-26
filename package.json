@@ -12,15 +12,15 @@
     "url": "git+https://github.com/marco-ponds/WageEditor"
   },
   "keywords": [
-      "Wage",
-      "Editor",
-      "THREE.js",
-      "WebGL",
-      "Game",
-      "Development",
-      "3D",
-      "Canvas",
-      "HTML5"
+    "Wage",
+    "Editor",
+    "THREE.js",
+    "WebGL",
+    "Game",
+    "Development",
+    "3D",
+    "Canvas",
+    "HTML5"
   ],
   "author": "Marco Stagni <marcostagni.com>",
   "license": "CC0-1.0",
@@ -29,11 +29,12 @@
   },
   "homepage": "https://github.com/marco-pondst/WageEditor#readme",
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0",
     "bower": "*",
-    "ncp": "*",
     "connect": "*",
-    "serve-static": "*",
-    "directory-tree": "*"
+    "directory-tree": "*",
+    "electron-prebuilt": "^1.2.5",
+    "ncp": "*",
+    "remote": "*",
+    "serve-static": "*"
   }
 }

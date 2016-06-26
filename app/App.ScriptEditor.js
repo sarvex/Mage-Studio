@@ -74,6 +74,7 @@ Class("ScriptEditor", {
 		//creating sidebar
 		this.sidebar = new ScriptSidebar();
 		this.sidebar.init();
+		this.setUpLintWorker();
 		/*
 		//creating editor
 		this.createEditor(this.currentTab, "main.js", "javascript", app.storage.currentProject+"_main.js");
@@ -107,6 +108,20 @@ Class("ScriptEditor", {
 			app.scriptEditor.editors[0].codeMirror.refresh();
 		}, 100);
 		*/
+	},
+
+	openFile: function(name, path) {
+		//this.createEditor(this.currentTab, name, "javascript", app.storage.getStorageKey(path));
+		var fs =  require("fs");
+		fs.readFile(path, {encoding: "utf8"}, function(err, data) {
+
+			app.scriptEditor.addNewTab(name, 'javascript', app.storage.getStorageKey(path));
+			// setting tab value
+			app.scriptEditor.editors[app.scriptEditor.currentTab - 1].codeMirror.setValue(data);
+			//we need to store data
+			//app.storage.set(app.storage.currentProject+"_", data);
+			app.scriptEditor._refreshTab(this.currentTab);
+		});
 	},
 
 	setListeners: function() {
@@ -180,6 +195,12 @@ Class("ScriptEditor", {
 		}
 	},
 
+	_refreshTab: function(index) {
+		setTimeout(function() {
+			app.scriptEditor.editors[index].codeMirror.refresh();
+		}, 100);
+	},
+
 	_eval : function() {
 		app.scriptEditor.lint();
 		for (var i=0; i< app.scriptEditor.numTab; i++) {
@@ -217,7 +238,7 @@ Class("ScriptEditor", {
 		}
 	},
 
-	addNewTab : function(name, type) {
+	addNewTab : function(name, type, id) {
 		var previous = this.currentTab;
 		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
 
@@ -243,7 +264,7 @@ Class("ScriptEditor", {
 		} else {
 			_name = name;
 			_type = type;
-			_id = app.storage.currentProject+"_"+app.storage.currentScene+"_"+_name;
+			_id = id ? id : app.storage.getStorageKey(name);
 		}
 		$('#add_tab').before(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
 		$('#editor_'+app.scriptEditor.currentTab).after(app.scriptEditor.helper.div("editor_"+(app.scriptEditor.numTab-1), "editor invisible", "", {checkHtml : false}));

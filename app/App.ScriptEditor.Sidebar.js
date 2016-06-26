@@ -21,28 +21,28 @@ Class("ScriptSidebar", {
         //setting listener for new script button
         $('#newScript').click(app.scriptEditor.sidebar.newScript);
         //setting listener for li elements clicks
-        $('ul#project li').click(function() {
-            //clicked a subfolder
-            if ($(this).hasClass("folder")) {
-                //storing last clicked
-                app.scriptEditor.sidebar.lastClicked = $(this);
-                //storing current path
-                app.scriptEditor.sidebar.currentPath = $(this).data("path");
-            }
-            //clicked a file
-            else if ($(this).hasClass("file")) {
-                //we should open a new tab with this file
-            }
-        });
-        //click on root folder
-        $('#rootFolder').click(function() {
-            //storing last clicked
-            app.scriptEditor.sidebar.lastClicked = $(this);
-            //storing current path
-            app.scriptEditor.sidebar.currentPath = $(this).data("path");
-        });
-
+        app.scriptEditor.sidebar.setListeners();
         app.scriptEditor.sidebar.setSidebar();
+    },
+
+    setListeners: function() {
+        $('ul#project li').unbind().click(function() {
+            //clicked a subfolder
+            var path = $(this).data("path");
+            if ($(this).hasClass("directory")) {
+                if (!$(this).find('.subfolder').hasClass('hidden')) {
+                    // subfolder è gia presente
+                    $(this).find('.subfolder').addClass('hidden');
+                    $(this).find('.subfolder').empty();
+                } else {
+                    // subfolder non presente
+                    app.scriptEditor.sidebar.expandSubDirectory($(this), path);
+                    $(this).find('.subfolder').removeClass('hidden');
+                }
+            } else if ($(this).hasClass("file")) {
+                app.scriptEditor.sidebar.openFile($(this).text(), path)
+            }
+        });
     },
 
     setSidebar: function() {
@@ -50,20 +50,36 @@ Class("ScriptSidebar", {
             app.storage.currentScene +
             '/app/');
         // retrieve scene script folder content
-        var content = app.filehelper.listContent(app.storage.getScriptsDir());
+        app.scriptEditor.sidebar._createFileTree(app.storage.getScriptsDir(), $(app.scriptEditor.sidebar.projectList));
+    },
+
+    _createFileTree: function(path, container) {
+        var content = app.filehelper.listContent(path);
         for (var i=0; i<content.length; i++) {
             var el = content[i];
             var li = document.createElement('li');
             $(li).addClass(el.type);
+            $(li).data('path', el.path + "/" + el.name);
             if (el.type == 'directory') {
                 $(li).append('<i class="fa fa-folder-o"> ' + el.name + '</i>')
-                $(li).append('<ul class="subfolder"></ul>');
+                $(li).append('<ul class="subfolder hidden"></ul>');
             } else {
                 $(li).addClass('js');
                 $(li).append('<i class="fa fa-file-code-o"> ' + el.name + '</i>')
             }
-            $(app.scriptEditor.sidebar.projectList).append(li);
+            console.log(li);
+            container.append(li);
         }
+        app.scriptEditor.sidebar.setListeners();
+    },
+
+    openFile: function(name, path) {
+        app.scriptEditor.openFile(name, path);
+    },
+
+    expandSubDirectory: function(element, path) {
+        var container = element.find('.subfolder');
+        app.scriptEditor.sidebar._createFileTree(path, container);
     },
 
     newFolder: function() {

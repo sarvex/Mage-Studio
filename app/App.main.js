@@ -63,8 +63,8 @@ function start() {
             this.dialog = new Dialog();
             //check if new project or not
             if (!this.storage.checkWorkspace()) {
-                this._remote = require("remote");
-                this._dialog = this._remote.require("dialog");
+                this._remote = require('electron').remote;
+                this._dialog = this._remote.dialog;
                 this.dialog.info(STRINGS.CHOOSE_WORKSPACE.title, STRINGS.CHOOSE_WORKSPACE.message, this.util.bind(function() {
                     this._dialog.showOpenDialog({properties: ['openDirectory']}, this.util.bind(function (value) {
                         this.storage.workspace = value[0];
