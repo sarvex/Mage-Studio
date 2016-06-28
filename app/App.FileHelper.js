@@ -84,6 +84,20 @@ Class("FileHelper", {
         return map;
     },
 
+    getAllFiles: function(dir, filelist) {
+          var files = app.filehelper.fs.readdirSync(dir);
+          filelist = filelist || [];
+          files.forEach(function(file) {
+            if (app.filehelper.fs.statSync(dir + '/' + file).isDirectory()) {
+              filelist = app.filehelper.getAllFiles(dir + '/' + file, filelist);
+            }
+            else {
+              filelist.push({name:file, path:dir + "/" + file});
+            }
+          });
+          return filelist;
+    },
+
     listScenes: function() {
         return app.filehelper.listDirectories(app.storage.workspace + "/" + app.storage.currentProject + "/scenes");
     }

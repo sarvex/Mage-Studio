@@ -28,6 +28,10 @@ Class("MyGame", {
 		var lights = JSON.parse(app._scene.lights);
         for (var i=0; i<meshes.length; i++) {
 			var current = meshes[i];
+			console.log(current);
+
+			// loading script
+
             var _mesh = this.loader.parse(current);
             //every mesh must have castshadow and receive shadow enabled
             _mesh.castShadow = true;

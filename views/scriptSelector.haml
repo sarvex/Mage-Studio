@@ -1,0 +1,11 @@
+.panel.panel-default
+    .panel-heading
+        %h3.panel-title
+            Script
+    .panel-body
+        .row.panel-content{:style=>"padding-left:0; margin-top: 10px;"}
+            .dropdown{:style=>"margin-bottom:10px;"}
+                #changeScript.topcoat-button--large--cta.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown", "aria-expanded"=>"true", :style=>"margin-left: 13px;height: 20px;line-height: 20px;"}
+                    Change Script
+                    %span.caret
+                %ul.dropdown-menu#scriptSelector{:role=>"menu", "aria-labelledby"=>"changeScript"}

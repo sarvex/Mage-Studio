@@ -5,6 +5,9 @@ Class("SidebarLoader", {
         //storing file names
         this.baseUrl = "views/";
         this.views = {
+            //scripts
+            "scriptSelector": "scriptSelector.html",
+            //materials
             "meshHeader": "meshheader.html",
             "MeshBasicMaterial": "MeshBasicMaterial.html",
             "MeshPhongMaterial": "MeshPhongMaterial.html",

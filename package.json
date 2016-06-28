@@ -1,7 +1,7 @@
 {
-  "name": "WageEditor",
+  "name": "MageStudio",
   "version": "0.0.1",
-  "description": "Wage Engine Editor",
+  "description": "Mage Studio",
   "main": "main.js",
   "scripts": {
     "prestart": "./scripts/haml.sh",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/marco-ponds/WageEditor"
   },
   "keywords": [
-    "Wage",
+    "Mage",
     "Editor",
     "THREE.js",
     "WebGL",

@@ -21,8 +21,8 @@ Class("ScriptEditor", {
 
 		this.currentTheme = "monokai";
 		this.currentTab = 0;
-		this.numTab = 1;
-		this.activeTabs = 1;
+		this.numTab = 0;
+		this.activeTabs = 0;
 		this.editors = [];
 
 		//creating helper
@@ -115,12 +115,12 @@ Class("ScriptEditor", {
 		var fs =  require("fs");
 		fs.readFile(path, {encoding: "utf8"}, function(err, data) {
 
-			app.scriptEditor.addNewTab(name, 'javascript', app.storage.getStorageKey(path));
+			app.scriptEditor.addNewTab(name.trim(), 'javascript', app.storage.getStorageKey(path));
 			// setting tab value
-			app.scriptEditor.editors[app.scriptEditor.currentTab - 1].codeMirror.setValue(data);
+			app.scriptEditor.editors[app.scriptEditor.currentTab].codeMirror.setValue(data);
 			//we need to store data
 			//app.storage.set(app.storage.currentProject+"_", data);
-			app.scriptEditor._refreshTab(this.currentTab);
+			app.scriptEditor._refreshTab(app.scriptEditor.currentTab);
 		});
 	},
 
@@ -213,10 +213,8 @@ Class("ScriptEditor", {
 					//now saving file
 					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_"+app.storage.currentScene+"_")[1];
 					var dir = app.storage.get("cwd");
-					if (dir) {
-						console.log(dir+"/app/"+path);
-						app.filehelper.write(dir+"/app/"+path, text);
-					}
+					console.log(path);
+					app.filehelper.write(path, text);
 					break;
 				}
 				case "coffeescript" : {
@@ -228,10 +226,8 @@ Class("ScriptEditor", {
 					//now saving file
 					var path = app.scriptEditor.editors[i].savename.split(app.storage.currentProject+"_"+app.storage.currentScene+"_")[1];
 					var dir = app.storage.get("cwd");
-					if (dir) {
-						console.log(dir+"/app/"+path);
-						app.filehelper.write(dir+"/app/"+path, text);
-					}
+					console.log(path);
+					app.filehelper.write(path, text);
 					break;
 				}
  			}

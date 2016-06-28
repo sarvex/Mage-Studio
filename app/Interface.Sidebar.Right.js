@@ -55,8 +55,11 @@ Class("RightSidebar", {
         var o = app.mm.map.get(app.sm.uuid);
         var views = ["meshHeader"];
         views.push(o.material.type);
+        views.push("scriptSelector");
         //loading views
         app.interface.loader.loadArray(views, function() {
+
+            app.interface.rightSidebar._setScriptSelector();
             //resetting interface input listeners
             app.interface.setInputEvents("#meshColor");
             //we are now sure views have been inflated
@@ -139,7 +142,28 @@ Class("RightSidebar", {
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.alphaMap.sourceFile+"'></img>"
                 );
             }
+            if (o.script) {
+                $('#changeScript').text(o.script);
+            }
         });
+    },
+
+    _setScriptSelector: function() {
+        var scripts = app.filehelper.getAllFiles(app.storage.getScriptsDir());
+        for (var i in scripts) {
+            var li = document.createElement('li');
+            li.role = 'presentation';
+            var a = document.createElement('a');
+            a.role = 'menuitem';
+            a.tabindex = '-1';
+            a.dataset['path'] = scripts[i].path;
+            a.onclick = function() {
+                app.interface.rightSidebar.meshListener.changeScript(this.dataset['path'], scripts[i].name);
+            }
+            a.innerText = scripts[i].name;
+            li.appendChild(a);
+            $('#scriptSelector').append(li);
+        }
     },
 
     // handling light
