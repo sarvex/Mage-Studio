@@ -297,6 +297,7 @@ Class("MeshListener", {
     changeScript: function(path, name) {
         var key = app.storage.getStorageKey(path);
         app.mm.map.get(app.sm.uuid).userData['script'] = key;
+        app.mm.map.get(app.sm.uuid).userData['script_name'] = name;
         app.mm.map.get(app.sm.uuid).userData['script_key'] = app.storage.getStorageKey('');
         $('#changeScript').text(name);
     },

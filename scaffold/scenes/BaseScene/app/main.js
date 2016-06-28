@@ -31,6 +31,15 @@ Class("MyGame", {
 			console.log(current);
 
 			// loading script
+			var script = current.object.userData['script'],
+				dir = false,
+				file = false;
+			if (script) {
+				// we have the script for this mesh
+				script = script.slice(script.lastIndexOf('scripts/') + 8);
+			 	dir = script.slice(0, script.indexOf('/')),
+				file = script.slice(script.indexOf('/') + 1);
+			}
 
             var _mesh = this.loader.parse(current);
             //every mesh must have castshadow and receive shadow enabled
@@ -49,6 +58,9 @@ Class("MyGame", {
 		        texture.wrapT = THREE.RepeatWrapping;
 		        texture.repeat.set(1, 1);
 				mesh.mesh.material.map = texture;
+			}
+			if (dir && file) {
+				mesh.addScript(file.replace('.js', ''), dir);
 			}
         }
         //restoring lights

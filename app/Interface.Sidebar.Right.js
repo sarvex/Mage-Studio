@@ -142,8 +142,8 @@ Class("RightSidebar", {
                     "<img style='height:30px; margin-left: 5px;' src='"+o.material.alphaMap.sourceFile+"'></img>"
                 );
             }
-            if (o.script) {
-                $('#changeScript').text(o.script);
+            if (o.userData['script_name']) {
+                $('#changeScript').text(o.userData['script_name']);
             }
         });
     },
