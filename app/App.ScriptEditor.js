@@ -49,7 +49,9 @@ Class("ScriptEditor", {
                                 app.storage.currentProject = value;
                                 app.storage.set("currentProject", app.storage.currentProject);
                                 swal.close();
-                                app.storage.createProject();
+								if (!this.storage.createProject(value)) {
+                                    this.dialog.error(STRINGS.NOT_EMPTY_FOLDER.title, STRINGS.NOT_EMPTY_FOLDER.message);
+                                }
                             });
                         }
                     });

@@ -72,7 +72,7 @@ function start() {
                         if (this.storage.isDefaultProject()) {
                             this.dialog.prompt(STRINGS.CHOOSE_PROJECT.title, STRINGS.CHOOSE_PROJECT.message, this.util.bind(function(value) {
                                 swal.close();
-                                if (this.storage.createProject(value)) {
+                                if (!this.storage.createProject(value)) {
                                     this.dialog.error(STRINGS.NOT_EMPTY_FOLDER.title, STRINGS.NOT_EMPTY_FOLDER.message);
                                 }
                             }, this));
@@ -82,7 +82,7 @@ function start() {
             } else if (this.storage.isDefaultProject()) {
                 this.dialog.prompt(STRINGS.CHOOSE_PROJECT.title, STRINGS.CHOOSE_PROJECT.message, this.util.bind(function(value) {
                     swal.close();
-                    if (this.storage.createProject(value)) {
+                    if (!this.storage.createProject(value)) {
                         this.dialog.error(STRINGS.NOT_EMPTY_FOLDER, STRINGS.NOT_EMPTY_FOLDER.message);
                     }
                 }, this));
