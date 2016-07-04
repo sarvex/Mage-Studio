@@ -25,6 +25,9 @@ Class("ScriptEditor", {
 		this.activeTabs = 0;
 		this.editors = [];
 
+		this.refreshInterval = 1000;
+		this.refreshId = undefined;
+
 		//creating helper
 		this.helper = new ScriptHelper();
 
@@ -57,13 +60,15 @@ Class("ScriptEditor", {
                     });
                 });
 			}
-			// retrieve content of the script folder for this scene
+			// set timeout to update files hierarchy
+			//app.scriptEditor.refreshId = setInterval(app.scriptEditor.sidebar.setSidebar, app.scriptEditor.refreshInterval);
 
 			//fade in of script editor
 			$(app.scriptEditor.container).fadeIn(200);
 		});
 
 		app.interface.events.scriptEditorClosed.add(function() {
+			//clearInterval(app.scriptEditor.refreshId);
 			$(app.scriptEditor.container).fadeOut(200);
 		});
 	},

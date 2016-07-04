@@ -50,6 +50,7 @@ Class("ScriptSidebar", {
             app.storage.currentScene +
             '/app/');
         // retrieve scene script folder content
+        $(app.scriptEditor.sidebar.projectList).html('');
         app.scriptEditor.sidebar._createFileTree(app.storage.getScriptsDir(), $(app.scriptEditor.sidebar.projectList));
     },
 
