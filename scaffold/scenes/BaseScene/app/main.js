@@ -31,7 +31,7 @@ Class("MyGame", {
 			console.log(current);
 
 			// loading script
-			var script = current.object.userData['script'],
+			var script = current.object.userData ? current.object.userData['script'] : false,
 				dir = false,
 				file = false;
 			if (script) {
@@ -132,6 +132,14 @@ Class("MyGame", {
 
 		//example for camera movement
 		//app.camera.addScript("cameraScript", "camera");
+	},
+
+	progressAnimation: function(next) {
+		new Vivus("mage", {type: 'oneByOne', duration: 1000, onReady: function() {
+			$('#mage').css('visibility', 'visible');
+		}});
+		$('#loader').delay(5000).fadeOut(1000);
+		next();
 	},
 
 	preload: function(next) {
