@@ -764,3 +764,8 @@ body * {
     max-width: 80%;
     word-wrap: break-word;
 }
+
+.mage-player .play_button, .mage-player .pause_button {
+    font-weight: bold;
+    font-size: 10px;
+}

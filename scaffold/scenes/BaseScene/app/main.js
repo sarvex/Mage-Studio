@@ -25,6 +25,10 @@ Class("MyGame", {
 
 		//restoring meshes
 		var meshes = JSON.parse(app._scene.meshes);
+		var models = JSON.parse(app._scene.models);
+		for (var i in models) {
+			meshes.push(models[i]);
+		}
 		var lights = JSON.parse(app._scene.lights);
         for (var i=0; i<meshes.length; i++) {
 			var current = meshes[i];
@@ -42,25 +46,40 @@ Class("MyGame", {
 			}
 
             var _mesh = this.loader.parse(current);
-            //every mesh must have castshadow and receive shadow enabled
-            _mesh.castShadow = true;
-            _mesh.receiveShadow = true;
-			var mesh = new Mesh(_mesh.geometry, _mesh.material);
-			mesh.mesh.position.set(_mesh.position.x, _mesh.position.y, _mesh.position.z);
-			mesh.mesh.rotation.set(_mesh.rotation.x, _mesh.rotation.y, _mesh.rotation.z);
-			mesh.mesh.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
-			mesh.mesh.castShadow = true;
-			mesh.mesh.receiveShadow = true;
-			// setting texture
-			if (current.textureKey) {
-				var texture = ImagesEngine.get(current.textureKey);
-				texture.wrapS = THREE.RepeatWrapping;
-		        texture.wrapT = THREE.RepeatWrapping;
-		        texture.repeat.set(1, 1);
-				mesh.mesh.material.map = texture;
-			}
-			if (dir && file) {
-				mesh.addScript(file.replace('.js', ''), dir);
+
+			if (_mesh.name.indexOf('_camera') > -1) {
+				// dealing with a camera
+				var camType = _mesh.name.replace('_', '').toLowerCase();
+				if (app.camera.object.type.toLowerCase() === camType) {
+					app.camera.object.position.set(_mesh.position.x, _mesh.position.y, _mesh.position.z);
+					app.camera.object.rotation.set(_mesh.rotation.x, _mesh.rotation.y, _mesh.rotation.z);
+					app.camera.object.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
+
+					if (dir && file) {
+						app.camera.addScript(file.replace('.js', ''), dir);
+					}
+				}
+			} else {
+				//every mesh must have castshadow and receive shadow enabled
+	            _mesh.castShadow = true;
+	            _mesh.receiveShadow = true;
+				var mesh = new Mesh(_mesh.geometry, _mesh.material);
+				mesh.mesh.position.set(_mesh.position.x, _mesh.position.y, _mesh.position.z);
+				mesh.mesh.rotation.set(_mesh.rotation.x, _mesh.rotation.y, _mesh.rotation.z);
+				mesh.mesh.scale.set(_mesh.scale.x, _mesh.scale.y, _mesh.scale.z);
+				mesh.mesh.castShadow = true;
+				mesh.mesh.receiveShadow = true;
+				// setting texture
+				if (current.textureKey) {
+					var texture = ImagesEngine.get(current.textureKey);
+					texture.wrapS = THREE.RepeatWrapping;
+			        texture.wrapT = THREE.RepeatWrapping;
+			        texture.repeat.set(1, 1);
+					mesh.mesh.material.map = texture;
+				}
+				if (dir && file) {
+					mesh.addScript(file.replace('.js', ''), dir);
+				}
 			}
         }
         //restoring lights
@@ -145,7 +164,6 @@ Class("MyGame", {
 	preload: function(next) {
 		var oReq = new XMLHttpRequest();
 		oReq.addEventListener("load", function() {
-			//console.log(this.responseText);
 			var scene = JSON.parse(this.responseText);
 			app.loadScene(scene, next);
 		});

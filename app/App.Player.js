@@ -29,12 +29,17 @@ Class("Player", {
         var dir = app.storage.workspace + "/" + app.storage.currentProject;
         this._app = this.connect().use(this.serveStatic(dir));
         this._server = this.http.createServer(this._app);
-        this._server.listen(8080, function(){
-            console.log('Server running on 8080...');
-            console.log(arguments);
-            app.player.iframe.src = "http://localhost:8080";
-            app.player.container.appendChild(app.player.iframe);
-        });
+        try {
+            this._server.listen(V.SERVER.PORT, function(error){
+                console.log('Server running on 8080...');
+                console.log(arguments);
+                app.player.iframe.src = V.SERVER.ADDRESS + ':' + V.SERVER.PORT;
+                app.player.container.appendChild(app.player.iframe);
+            });
+        } catch (e) {
+            console.error(e);
+            app.dialog.error(STRINGS.ERROR_CREATING_PLAYER.title, STRINGS.ERROR_CREATING_PLAYER.message, true, true);
+        }
     },
 
     pause: function() {

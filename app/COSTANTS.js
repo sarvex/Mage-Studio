@@ -8,7 +8,15 @@ var STRINGS = {
     CHOOSE_PROJECT: {title: 'Project', message: 'Please, Choose a valid name for your project'},
     CHOOSE_SCENE: {title: 'Scene', message: 'Please, Choose a valid name for your scene'},
     MISSING_SCENE_NAME: {title: 'Save scene', message: 'You should choose a name for your scene first.'},
-    ERROR_NEW_PROJECT: {title: 'Error!', message:'Couldn\'t save your project'}
+    ERROR_NEW_PROJECT: {title: 'Error!', message:'Couldn\'t save your project'},
+    ERROR_CREATING_PLAYER: {title: 'Error!', message:'Couldn\'t create server.'}
+}
+
+var V = {
+    SERVER: {
+        ADDRESS: 'http://localhost',
+        PORT: 8080
+    }
 }
 
 var JSONS = {

@@ -51,15 +51,6 @@ canvas {
 }
 
 #gui {
-    z-index: 300;
-    position: absolute;
-    /* color: #eee; */
-    padding-left: 30px;
-    width: 400px;
-    /* padding-top: 20px; */
-    height: 100%;
-    box-shadow: 12px 0px 18px #333;
-    background: #333;
 }
 
 #loader {

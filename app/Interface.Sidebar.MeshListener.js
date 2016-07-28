@@ -26,8 +26,10 @@ Class("MeshListener", {
 
     //position change listener
     onPositionChange: function() {
-        if (app.sm.typeClicked != "mesh") return;
-        var position = app.mm.map.get(app.sm.uuid).position;
+        //if (app.sm.typeClicked != "mesh") return;
+        var position = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid).position :
+            app.modm.map.get(app.sm.uuid).position;
         //writing new position
         $('#position_x').val(position.x);
         $('#position_y').val(position.y);
@@ -36,8 +38,10 @@ Class("MeshListener", {
 
     //rotation change listener
     onRotationChange: function() {
-        if (app.sm.typeClicked != "mesh") return;
-        var rotation = app.mm.map.get(app.sm.uuid).rotation;
+        //if (app.sm.typeClicked != "mesh") return;
+        var rotation = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid).rotation :
+            app.modm.map.get(app.sm.uuid).rotation;
         //writing new rotation
         $('#rotation_x').val(rotation.x);
         $('#rotation_y').val(rotation.y);
@@ -45,39 +49,57 @@ Class("MeshListener", {
     },
 
     //mesh color change event
-    onMeshColorChange: function(color) {
-        if (app.sm.typeClicked != "mesh") return;
+    onMeshColorChange: function(_color) {
+        //if (app.sm.typeClicked != "mesh") return;
         //changing color with new color
-        window.test = app.mm.map.get(app.sm.uuid);
-        app.mm.map.get(app.sm.uuid).material.color = new THREE.Color(color);
+        var color = new THREE.Color(_color);
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).material.color = color;
+        } else {
+            app.modm.map.get(app.sm.uuid).material.color = color;
+        }
     },
 
     //mesh visible change
     onMeshVisibleChange: function(flag) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //changing mesh visibility
-        app.mm.map.get(app.sm.uuid).visible = flag;
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).visible = flag;
+        } else {
+            app.modm.map.get(app.sm.uuid).visible = flag;
+        }
     },
 
     //mesh wireframe change event
     onMeshWireframeChange: function(flag) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //changing wireframe with new value
-        app.mm.map.get(app.sm.uuid).material.wireframe = flag;
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).material.wireframe = flag;
+        } else {
+            app.modm.map.get(app.sm.uuid).material.wireframe = flag;
+        }
     },
 
     //mesh fog change
     onMeshFogChange: function(flag) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //changing mesh fog
-        app.mm.map.get(app.sm.uuid).fog = flag;
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).fog = flag;
+        } else {
+            app.modm.map.get(app.sm.uuid).fog = flag;
+        }
     },
 
     //mesh update rotation, position and name
     updateMeshRotPosName: function() {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //changing mesh fog
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
 
         //setting name
         o.name = $('#meshName').val();
@@ -94,7 +116,7 @@ Class("MeshListener", {
 
     //texture events listeners
     onLightMapLoaded: function(event) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         var path = $(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -104,10 +126,14 @@ Class("MeshListener", {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(2, 2);
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
+
         o.material.lightMap = texture;
         o.material.needsUpdate = true;
         //resetting click listener
+        var typeClicked = app.sm.typeClicked;
         app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
             //now only adding this mesh to the transform control
@@ -115,7 +141,7 @@ Class("MeshListener", {
             app.sm.deselect();
             //Setting uuid to the scene
             app.sm.uuid = event.target.uuid;
-            app.sm.typeClicked = "mesh";
+            app.sm.typeClicked = typeClicked;
             app.sm.select(event.target, "translate");
         });
         //we added our texture
@@ -126,7 +152,7 @@ Class("MeshListener", {
     },
 
     onTextureLoaded: function(key, _path) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         var path = app.storage.getSceneDir() + '/' + _path;//event.target.files[0].name;//$(this).val().split("path")[1];
 
         var texture = THREE.ImageUtils.loadTexture(path);
@@ -134,19 +160,22 @@ Class("MeshListener", {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
         //setting new material
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
         o.material.map = texture;
         o.material.needsUpdate = true;
         o.textureKey = key;
         //resetting click listener
-        app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
+        var typeClicked = app.sm.typeClicked;
+        app.interface.meshEvents.unbind(o, "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
             //now only adding this mesh to the transform control
             if (app.sm.lastClicked.uuid == event.target.uuid) return;
             app.sm.deselect();
             //Setting uuid to the scene
             app.sm.uuid = event.target.uuid;
-            app.sm.typeClicked = "mesh";
+            app.sm.typeClicked = typeClicked;
             app.sm.select(event.target, "translate");
         });
         //we added our texture
@@ -157,7 +186,7 @@ Class("MeshListener", {
     },
 
     onSpecularMapLoaded: function(_path) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -168,10 +197,13 @@ Class("MeshListener", {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
         //setting new material
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
         o.material.specularMap = texture;
         o.material.needsUpdate = true;
         //resetting click listener
+        var typeClicked = app.sm.typeClicked;
         app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
             //now only adding this mesh to the transform control
@@ -179,7 +211,7 @@ Class("MeshListener", {
             app.sm.deselect();
             //Setting uuid to the scene
             app.sm.uuid = event.target.uuid;
-            app.sm.typeClicked = "mesh";
+            app.sm.typeClicked = typeClicked;
             app.sm.select(event.target, "translate");
         });
         //we added our texture
@@ -190,7 +222,7 @@ Class("MeshListener", {
     },
 
     onAlphaMapLoaded: function(_path) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -201,10 +233,13 @@ Class("MeshListener", {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(2, 2);
         //setting new material
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
         o.material.alphaMap = texture;
         o.material.needsUpdate = true;
         //resetting click listener
+        var typeClicked = app.sm.typeClicked;
         app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
             //now only adding this mesh to the transform control
@@ -212,7 +247,7 @@ Class("MeshListener", {
             app.sm.deselect();
             //Setting uuid to the scene
             app.sm.uuid = event.target.uuid;
-            app.sm.typeClicked = "mesh";
+            app.sm.typeClicked = typeClicked;
             app.sm.select(event.target, "translate");
         });
         //we added our texture
@@ -223,7 +258,7 @@ Class("MeshListener", {
     },
 
     onEnvMapLoaded: function(event) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -234,10 +269,13 @@ Class("MeshListener", {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(2, 2);
         //setting new material
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
         o.material.envMap = texture;
         o.material.needsUpdate = true;
         //resetting click listener
+        var typeClicked = app.sm.typeClicked;
         app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
         app.interface.meshEvents.bind(o, "click", function(event) {
             //now only adding this mesh to the transform control
@@ -245,7 +283,7 @@ Class("MeshListener", {
             app.sm.deselect();
             //Setting uuid to the scene
             app.sm.uuid = event.target.uuid;
-            app.sm.typeClicked = "mesh";
+            app.sm.typeClicked = typeClicked;
             app.sm.select(event.target, "translate");
         });
         //we added our texture
@@ -257,11 +295,13 @@ Class("MeshListener", {
 
     //setting listener for material change
     changeMaterial: function(material) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //setting new material, then reload sidebar triggering
         console.log(material);
         if (app.mm.allowedMaterials.indexOf(material) != -1) {
-            var o = app.mm.map.get(app.sm.uuid);
+            var o = app.sm.typeClicked == 'mesh' ?
+                app.mm.map.get(app.sm.uuid) :
+                app.modm.map.get(app.sm.uuid);
             // #TODO should recreate mesh with exact properties of previous material
             var material_prop = {
                 visible: o.material.visible,
@@ -277,6 +317,7 @@ Class("MeshListener", {
             o.material = new THREE[material](material_prop);
             o.material.needsUpdate = true;
             //resetting click listener
+            var typeClicked = app.sm.typeClicked;
             app.interface.meshEvents.unbind(app.mm.map.get(app.sm.uuid), "click");
             app.interface.meshEvents.bind(o, "click", function(event) {
                 //now only adding this mesh to the transform control
@@ -284,7 +325,7 @@ Class("MeshListener", {
                 app.sm.deselect();
                 //Setting uuid to the scene
                 app.sm.uuid = event.target.uuid;
-                app.sm.typeClicked = "mesh";
+                app.sm.typeClicked = typeClicked;
                 app.sm.select(event.target, "translate");
             });
             //triggering event
@@ -295,24 +336,39 @@ Class("MeshListener", {
     },
 
     changeScript: function(path, name) {
-        var key = app.storage.getStorageKey(path);
-        app.mm.map.get(app.sm.uuid).userData['script'] = key;
-        app.mm.map.get(app.sm.uuid).userData['script_name'] = name;
-        app.mm.map.get(app.sm.uuid).userData['script_key'] = app.storage.getStorageKey('');
+        var key = app.storage.getStorageKey(path),
+            userData = {
+                'script': key,
+                'script_name': name,
+                'script_key': app.storage.getStorageKey('')
+            };
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).userData = userData;
+        } else {
+            app.modm.map.get(app.sm.uuid).userData = userData;
+        }
         $('#changeScript').text(name);
     },
 
     //receive shadow change event listener
     onMeshReceiveShadowChange: function(flag) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //retrieving object
-        app.mm.map.get(app.sm.uuid).receiveShadow = flag;
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).receiveShadow = flag;
+        } else {
+            app.modm.map.get(app.sm.uuid).receiveShadow = flag;
+        }
     },
 
     //cast shadow change event listener
     onMeshCastShadowChange: function(flag) {
-        if (app.sm.typeClicked != "mesh") return;
+        //if (app.sm.typeClicked != "mesh") return;
         //retrieving object
-        app.mm.map.get(app.sm.uuid).castShadow = flag;
+        if (app.sm.typeClicked == 'mesh') {
+            app.mm.map.get(app.sm.uuid).castShadow = flag;
+        } else {
+            app.modm.map.get(app.sm.uuid).castShadow = flag;
+        }
     }
 });

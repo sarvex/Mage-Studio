@@ -10,8 +10,10 @@ Class("Restorer", {
         if (this.nothingToRestore) return;
         this.lights = data[app.storage.currentProject+"_" + app.storage.currentScene + "_lights"];
         this.meshes = data[app.storage.currentProject+"_" + app.storage.currentScene + "_meshes"];
+        this.models = data[app.storage.currentProject+"_" + app.storage.currentScene + "_models"];
         //flags
         this.meshesFlag = (this.meshes.keys.length > 0);
+        this.modelsFlag = (this.models.keys.length > 0);
         this.lightsFlag = (this.lights.keys.length > 0); // true/false whether we recovered something or not
         //object loader
         this.loader = new THREE.ObjectLoader();
@@ -187,6 +189,40 @@ Class("Restorer", {
             app.interface.events.lightAdded.dispatch();
         }
         //restoring models
+        for (var i=0; i<this.models.length; i++) {
+            //var k = this.meshes.keys[i];
+            //recreating mesh
+            var model = this.loader.parse(this.models[i]);
+            model.castShadow = true;
+            model.receiveShadow = true;
+            //changing model name
+            model.name = name ? name : "Model_"+app.modm.modelsCount;
+            model.group = "World";
+            model.flag = "model";
+            //store new model in our map
+            app.modm.store(model.uuid, model);
+            //add new model to the scene and to modeles list
+            app.sm.scene.add(app.modm.map.get(model.uuid));
+            app.modm.models.push(app.modm.map.get(model.uuid));
+            //forcing scene to update itself
+            app.sm.update();
+            //attach new model to transform control
+            //app.sm.transformControl.attach(model);
+            //creating a callback for our model
+            app.interface.meshEvents.bind(app.modm.map.get(model.uuid), "click", function(event) {
+                //now only adding this model to the transform control
+                if (app.sm.lastClicked.uuid == event.target.uuid) return;
+                app.sm.deselect();
+                //Setting uuid to the scene
+                app.sm.uuid = event.target.uuid;
+                app.sm.typeClicked = "model";
+                app.sm.select(event.target, "translate");
+            });
+            //increasing modelcount
+            app.modm.modelsCount++;
+            //calling addedmodel event
+            app.interface.events.modelAdded.dispatch();
+        }
         //restoring sounds
         //updating all materials
         if (this.meshesFlag) {

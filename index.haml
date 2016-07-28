@@ -4,7 +4,7 @@
         %title
             Mage Studio
 
-        / basic imports, we don't need angular or react
+        / basic imports, we don't need angular or react, yet
         %script
             window.$ = window.jQuery = require('./app/lib/jquery.min');
         %script
@@ -111,6 +111,9 @@
                                         %li
                                             %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#addModelModal"}
                                                 Model
+                                        %li
+                                            %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#addCameraModal"}
+                                                Camera
                                         %li.divider
                                         %li
                                             %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#addLightModal"}
@@ -365,15 +368,17 @@
                                         #soundsCount.col-md-12.panel-content-title
                                             Sounds: 0
                         %h1
-                            .topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
+                            .mage-player.topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
                                 .topcoat-button-bar__item
-                                    %button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.play();"}
+                                    %button.play_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.play();"}
                                         %i.fa.fa-play
-                                            Play
+                                        %span
+                                            PLAY
                                 .topcoat-button-bar__item
-                                    %button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.pause();"}
+                                    %button.pause_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.pause();"}
                                         %i.fa.fa-pause
-                                            Pause
+                                        %span
+                                            PAUSE
                         / #playSceneContainer.row
                         /    %img{:src=>"img/play.png"}
                 #center.column
@@ -451,6 +456,20 @@
                         %ul.list-group
                             %li.list-group-item{:onclick=>"app.modm.addModel('json'); $('#addModelModal').modal('hide');"}
                                 Load JSON
+                    .modal-footer
+                        %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
+                            Close
+        / add camera modal
+        #addCameraModal.wagemodal.modal.fade.bs-example-modal-sm{:tabindex=>"-1", :role=>"dialog", "aria-labelledby"=>"myModalLabel", "aria-hidden"=>"true"}
+            .modal-dialog{:style=>"z-index:99999;"}
+                .modal-content
+                    .modal-header
+                        %h4#addCamerahModalTitle.modal-title
+                            Add > Camera
+                    .modal-body
+                        %ul.list-group
+                            %li.list-group-item{:onclick=>"app.modm.addCamera('perspective'); $('#addCameraModal').modal('hide');"}
+                                Perspective Camera
                     .modal-footer
                         %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
                             Close

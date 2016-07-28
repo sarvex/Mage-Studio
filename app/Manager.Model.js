@@ -8,6 +8,9 @@ Class("ModelManager", {
         this.allowedModels = [
             "json"
         ];
+        this.allowedCameras = [
+            "perspective"
+        ];
         this.modelsCount = 0;
     },
 
@@ -20,24 +23,46 @@ Class("ModelManager", {
     },
 
     addModel: function(type) {
-        /*
-            if type is allowed, proceed to call the proper creation method
-            then store it inside our map, adding a callback method
-            to the stored mesh -> listening to user click;
-        */
         if (this.allowedModels.indexOf(type) != -1) {
             //we're creating a valid mesh
             this["_add"+__upperCaseFirstLetter__(type)]();
         }
     },
 
-    completeAddModel: function(model) {
-        console.log(model);
+    addCamera: function(camera) {
+        if (this.allowedCameras.indexOf(camera) != -1) {
+            //we're creating a valid mesh
+            this["_add"+__upperCaseFirstLetter__(camera)]();
+        }
+    },
+
+    _load: function(path, _color, name) {
+        var loader = new THREE.JSONLoader(),
+            color = _color ? _color : 0xffffff;
+        loader.load(path, app.util.bind(function(geometry, materials) {
+            var faceMaterial;
+            if (materials && materials.length > 0) {
+                var material = materials[0];
+                material.morphTargets = true;
+                material.color.setHex(color);
+                console.log(geometry, material);
+                faceMaterial = new THREE.MultiMaterial(materials);
+            } else {
+                faceMaterial = new THREE.MeshBasicMaterial({wireframe: true, color: color});
+            }
+
+            var mesh = new THREE.Mesh(geometry, faceMaterial);
+            this.completeAddModel(mesh, name);
+        }, this));
+    },
+
+    completeAddModel: function(model, name) {
+        //console.log(model);
         //every model must have castshadow and receive shadow enabled
         model.castShadow = true;
         model.receiveShadow = true;
         //changing model name
-        model.name = "Model_"+this.modelsCount;
+        model.name = name ? name : "Model_"+this.modelsCount;
         model.group = "World";
         model.flag = "model";
         //store new model in our map
@@ -66,31 +91,16 @@ Class("ModelManager", {
     },
 
     //Creation methods
-
     _addJson: function() {
         this._remote = require('electron').remote;
         this._dialog = this._remote.dialog;
         this._dialog.showOpenDialog({properties: ['openFile']}, app.util.bind(function (value) {
-            var path = value[0],
-                loader = new THREE.JSONLoader();
-
-            console.log(path);
-
-            loader.load(path, app.util.bind(function(geometry, materials) {
-                var material = materials[ 0 ];
-                material.morphTargets = true;
-                material.color.setHex(0xffaaaa);
-                material.wireframe = true;
-
-                console.log(geometry, materials);
-
-                var faceMaterial = new THREE.MultiMaterial(materials);
-
-                var mesh = new THREE.Mesh(geometry, faceMaterial);
-
-                this.completeAddModel(mesh);
-            }, this));
+            var path = value[0];
+            this._load(path);
         }, this));
     },
 
+    _addPerspective: function() {
+        this._load("models/perspective_camera.json", 0xff5555, "perspective_camera");
+    }
 });

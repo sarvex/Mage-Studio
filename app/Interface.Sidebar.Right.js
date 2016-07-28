@@ -32,6 +32,7 @@ Class("RightSidebar", {
         console.log(app.sm.typeClicked);
         switch(app.sm.typeClicked) {
             case "mesh":
+            case "model":
                 //we clicked on a mesh
                 app.interface.rightSidebar._handleMesh();
                 break;
@@ -52,7 +53,9 @@ Class("RightSidebar", {
         //we must check element type [mesh, light, sound, model]
         //loading corresponding views
         //we should load views depending on mesh properties
-        var o = app.mm.map.get(app.sm.uuid);
+        var o = app.sm.typeClicked == 'mesh' ?
+            app.mm.map.get(app.sm.uuid) :
+            app.modm.map.get(app.sm.uuid);
         var views = ["meshHeader"];
         views.push(o.material.type);
         views.push("scriptSelector");
@@ -157,8 +160,9 @@ Class("RightSidebar", {
             a.role = 'menuitem';
             a.tabindex = '-1';
             a.dataset['path'] = scripts[i].path;
+            a.dataset['name'] = scripts[i].name
             a.onclick = function() {
-                app.interface.rightSidebar.meshListener.changeScript(this.dataset['path'], scripts[i].name);
+                app.interface.rightSidebar.meshListener.changeScript(this.dataset['path'], this.dataset['name']);
             }
             a.innerText = scripts[i].name;
             li.appendChild(a);

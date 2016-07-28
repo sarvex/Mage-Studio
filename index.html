@@ -4,7 +4,7 @@
     <title>
       Mage Studio
     </title>
-    <!-- basic imports, we don't need angular or react -->
+    <!-- basic imports, we don't need angular or react, yet -->
     <script>
       window.$ = window.jQuery = require('./app/lib/jquery.min');
     </script>
@@ -128,6 +128,11 @@
                     <li>
                       <a data-target='#addModelModal' data-toggle='modal' href='#'>
                         Model
+                      </a>
+                    </li>
+                    <li>
+                      <a data-target='#addCameraModal' data-toggle='modal' href='#'>
+                        Camera
                       </a>
                     </li>
                     <li class='divider'></li>
@@ -529,19 +534,21 @@
               </div>
             </div>
             <h1>
-              <div class='topcoat-button-bar' style='margin-right:auto; margin-left:auto; '>
+              <div class='mage-player topcoat-button-bar' style='margin-right:auto; margin-left:auto; '>
                 <div class='topcoat-button-bar__item'>
-                  <button class='topcoat-button-bar__button--large' onclick='javascript:app.player.play();'>
-                    <i class='fa fa-play'>
-                      Play
-                    </i>
+                  <button class='play_button topcoat-button-bar__button--large' onclick='javascript:app.player.play();'>
+                    <i class='fa fa-play'></i>
+                    <span>
+                      PLAY
+                    </span>
                   </button>
                 </div>
                 <div class='topcoat-button-bar__item'>
-                  <button class='topcoat-button-bar__button--large' onclick='javascript:app.player.pause();'>
-                    <i class='fa fa-pause'>
-                      Pause
-                    </i>
+                  <button class='pause_button topcoat-button-bar__button--large' onclick='javascript:app.player.pause();'>
+                    <i class='fa fa-pause'></i>
+                    <span>
+                      PAUSE
+                    </span>
                   </button>
                 </div>
               </div>
@@ -667,6 +674,30 @@
             <ul class='list-group'>
               <li class='list-group-item' onclick="app.modm.addModel('json'); $('#addModelModal').modal('hide');">
                 Load JSON
+              </li>
+            </ul>
+          </div>
+          <div class='modal-footer'>
+            <button class='topcoat-button--large--cta' data-dismiss='modal' type='button'>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add camera modal -->
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='wagemodal modal fade bs-example-modal-sm' id='addCameraModal' role='dialog' tabindex='-1'>
+      <div class='modal-dialog' style='z-index:99999;'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title' id='addCamerahModalTitle'>
+              Add > Camera
+            </h4>
+          </div>
+          <div class='modal-body'>
+            <ul class='list-group'>
+              <li class='list-group-item' onclick="app.modm.addCamera('perspective'); $('#addCameraModal').modal('hide');">
+                Perspective Camera
               </li>
             </ul>
           </div>
