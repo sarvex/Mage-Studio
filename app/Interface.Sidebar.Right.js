@@ -110,7 +110,11 @@ Class("RightSidebar", {
             $('#fogToggle').attr('checked', o.fog);
 
             //setting color
-            var colorString = app.util.RgbToHex(parseInt(o.material.color.r), parseInt(o.material.color.g), parseInt(o.material.color.b));
+            var colorString = '#000000';
+            if (o.material.color)
+                colorString = app.util.RgbToHex(parseInt(o.material.color.r), parseInt(o.material.color.g), parseInt(o.material.color.b));
+
+
             $('#meshColor').val(colorString);
             $('#meshColor').css('background-color', colorString);
 
