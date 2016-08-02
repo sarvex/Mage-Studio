@@ -26,7 +26,7 @@ Class("MeshListener", {
 
     //position change listener
     onPositionChange: function() {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var position = app.sm.typeClicked == 'mesh' ?
             app.mm.map.get(app.sm.uuid).position :
             app.modm.map.get(app.sm.uuid).position;
@@ -38,7 +38,7 @@ Class("MeshListener", {
 
     //rotation change listener
     onRotationChange: function() {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var rotation = app.sm.typeClicked == 'mesh' ?
             app.mm.map.get(app.sm.uuid).rotation :
             app.modm.map.get(app.sm.uuid).rotation;
@@ -50,7 +50,7 @@ Class("MeshListener", {
 
     //mesh color change event
     onMeshColorChange: function(_color) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //changing color with new color
         var color = new THREE.Color(_color);
         if (app.sm.typeClicked == 'mesh') {
@@ -62,7 +62,7 @@ Class("MeshListener", {
 
     //mesh visible change
     onMeshVisibleChange: function(flag) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //changing mesh visibility
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).visible = flag;
@@ -73,7 +73,7 @@ Class("MeshListener", {
 
     //mesh wireframe change event
     onMeshWireframeChange: function(flag) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //changing wireframe with new value
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).material.wireframe = flag;
@@ -84,7 +84,7 @@ Class("MeshListener", {
 
     //mesh fog change
     onMeshFogChange: function(flag) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //changing mesh fog
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).fog = flag;
@@ -95,7 +95,7 @@ Class("MeshListener", {
 
     //mesh update rotation, position and name
     updateMeshRotPosName: function() {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //changing mesh fog
         var o = app.sm.typeClicked == 'mesh' ?
             app.mm.map.get(app.sm.uuid) :
@@ -116,7 +116,7 @@ Class("MeshListener", {
 
     //texture events listeners
     onLightMapLoaded: function(event) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var path = $(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -152,7 +152,7 @@ Class("MeshListener", {
     },
 
     onTextureLoaded: function(key, _path) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var path = app.storage.getSceneDir() + '/' + _path;//event.target.files[0].name;//$(this).val().split("path")[1];
 
         var texture = THREE.ImageUtils.loadTexture(path);
@@ -186,7 +186,7 @@ Class("MeshListener", {
     },
 
     onSpecularMapLoaded: function(_path) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -222,7 +222,7 @@ Class("MeshListener", {
     },
 
     onAlphaMapLoaded: function(_path) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -258,7 +258,7 @@ Class("MeshListener", {
     },
 
     onEnvMapLoaded: function(event) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         var path = app.storage.getSceneDir() + '/' + _path;//$(this).val().split("path")[1];
         /*
             #TODO whn using node webkit, we will read the file properly,
@@ -295,7 +295,7 @@ Class("MeshListener", {
 
     //setting listener for material change
     changeMaterial: function(material) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //setting new material, then reload sidebar triggering
         console.log(material);
         if (app.mm.allowedMaterials.indexOf(material) != -1) {
@@ -352,7 +352,7 @@ Class("MeshListener", {
 
     //receive shadow change event listener
     onMeshReceiveShadowChange: function(flag) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //retrieving object
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).receiveShadow = flag;
@@ -363,7 +363,7 @@ Class("MeshListener", {
 
     //cast shadow change event listener
     onMeshCastShadowChange: function(flag) {
-        if (app.sm.typeClicked != "mesh" || app.sm.typeClicked != "model") return;
+        if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;
         //retrieving object
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).castShadow = flag;
