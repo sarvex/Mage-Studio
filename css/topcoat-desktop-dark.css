@@ -239,10 +239,10 @@
 .topcoat-button--large,
 .topcoat-button--large--quiet,
 .topcoat-button-bar__button--large {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 3rem;
-  padding: 0 0.875rem;
+  line-height: 2rem;
+  padding: 0 0 1;
 }
 
 .topcoat-button--large--quiet {
