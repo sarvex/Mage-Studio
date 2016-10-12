@@ -49,7 +49,7 @@ Class("FileHelper", {
         });
     },
 
-    read: function(path, calblack) {
+    read: function(path, callback) {
         this.fs.readFile(path, {encoding: "utf8"}, function(err, data) {
             if (!err) {
                 callback(data);
@@ -85,17 +85,17 @@ Class("FileHelper", {
     },
 
     getAllFiles: function(dir, filelist) {
-          var files = app.filehelper.fs.readdirSync(dir);
-          filelist = filelist || [];
-          files.forEach(function(file) {
+        var files = app.filehelper.fs.readdirSync(dir);
+        filelist = filelist || [];
+        files.forEach(function(file) {
             if (app.filehelper.fs.statSync(dir + '/' + file).isDirectory()) {
-              filelist = app.filehelper.getAllFiles(dir + '/' + file, filelist);
+                filelist = app.filehelper.getAllFiles(dir + '/' + file, filelist);
             }
             else {
-              filelist.push({name:file, path:dir + "/" + file});
+                filelist.push({name:file, path:dir + "/" + file});
             }
-          });
-          return filelist;
+        });
+        return filelist;
     },
 
     listScenes: function() {
