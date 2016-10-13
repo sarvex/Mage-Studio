@@ -1,7 +1,6 @@
 Class("ScriptTab", {
 
 	ScriptTab : function(id, name, type, savename) {
-
 		this.text = [];
 		this.name = name;
 		this.type = type;
@@ -19,9 +18,7 @@ Class("ScriptTab", {
 			matchBrackets: true,
 			theme: "monokai"
 		});
-
 		this.setCodeListeners();
-
 	},
 
 	focus : function() {
@@ -44,16 +41,24 @@ Class("ScriptTab", {
 			var compiled = CoffeeScript.compile(this.text.join("\n")).split("\n");
 			this.compiled = compiled.slice(1, compiled.length-2).join("\n");
 			app.scriptEditor._eval();
-			$('#coffee_compiler i').css("color", "green");
-			$('#coffee_compiler i').removeClass().addClass("fa fa-check");
+			this._setCompilerStatus('success');
 		} catch (e) {
-			$('#coffee_compiler i').css("color", "red");
-			$('#coffee_compiler i').removeClass().addClass("fa fa-remove");
+			this._setCompilerStatus('error');
 		}
 		setTimeout(function() {
 			$('#coffee_compiler i').removeClass().addClass("fa");
 			$('#coffee_compiler i').css("color", "white");
 		}, 2000);
+	},
+
+	_setCompilerStatus: function(status) {
+		if (status === 'success') {
+			$('#coffee_compiler i').css("color", "green");
+			$('#coffee_compiler i').removeClass().addClass("fa fa-check");
+		} else {
+			$('#coffee_compiler i').css("color", "red");
+			$('#coffee_compiler i').removeClass().addClass("fa fa-remove");
+		}
 	},
 
 	saveText : function() {
