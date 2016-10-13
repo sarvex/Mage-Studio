@@ -40,7 +40,7 @@ Class("Footer", {
     onSaveEvent: function() {
         //we are saving the project
         $('#status i').removeClass().addClass('fa fa-check');
-        var toPrint = app.storage.lastTime.toJSON().replace("-", "/").replace("-", "/").replace("-", "/").replace("T", " ").split(".")[0]
+        var toPrint = app.storage.lastTime.toJSON().replace(/-/g, "/").replace("T", " ").split(".")[0]
         $('#status span').text("Saved! " + toPrint);
         app.interface.footer.completeProgressBar();
     },

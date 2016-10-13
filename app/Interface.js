@@ -142,6 +142,7 @@ Class("Interface", {
         this.rightSidebar = new RightSidebar();
         this.sidebarHelper = new HelperSidebar();
         this.footer = new Footer();
+        this.header = new Header();
         //creating sidebar loader
         this.loader = new SidebarLoader();
         this.sceneSelector = new SceneSelector();
@@ -158,6 +159,9 @@ Class("Interface", {
 
         //Setting footer
         this.footer.set();
+
+        //setting header
+        this.header.set();
     },
 
     setListeners: function() {

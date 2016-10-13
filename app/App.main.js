@@ -24,6 +24,7 @@ window.onload = function() {
         "app/Input.Keyboard",
         "app/Interface.SceneSelector",
         "app/Interface.Dialog",
+        "app/Interface.Header",
         "app/Interface.Footer",
         "app/Interface.Sidebar",
         "app/Interface.Sidebar.MeshListener",
