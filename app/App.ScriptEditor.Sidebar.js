@@ -26,20 +26,27 @@ Class("ScriptSidebar", {
     },
 
     setListeners: function() {
-        $('ul#project li').unbind().click(function() {
+        $('ul#project li.directory i.directoryName').unbind().click(function() {
             //clicked a subfolder
-            var path = $(this).data("path");
-            if ($(this).hasClass("directory")) {
-                if (!$(this).find('.subfolder').hasClass('hidden')) {
+            var parent = $(this).parent(),
+                path = parent.data("path");
+            if (parent.hasClass("directory") && path) {
+                if (!parent.find('.subfolder').hasClass('hidden')) {
                     // subfolder è gia presente
-                    $(this).find('.subfolder').addClass('hidden');
-                    $(this).find('.subfolder').empty();
+                    parent.find('.subfolder').addClass('hidden');
+                    parent.find('.subfolder').empty();
                 } else {
                     // subfolder non presente
-                    app.scriptEditor.sidebar.expandSubDirectory($(this), path);
-                    $(this).find('.subfolder').removeClass('hidden');
+                    app.scriptEditor.sidebar.expandSubDirectory(parent, path);
+                    parent.find('.subfolder').removeClass('hidden');
                 }
-            } else if ($(this).hasClass("file")) {
+            }
+        });
+
+        $('ul#project li.file').unbind().click(function() {
+            var path = $(this).data("path");
+
+            if (path) {
                 app.scriptEditor.sidebar.openFile($(this).text(), path)
             }
         });
@@ -62,11 +69,11 @@ Class("ScriptSidebar", {
             $(li).addClass(el.type);
             $(li).data('path', el.path + "/" + el.name);
             if (el.type == 'directory') {
-                $(li).append('<i class="fa fa-folder-o"> ' + el.name + '</i>')
+                $(li).append('<i class="fa fa-folder-o directoryName"><span class="name">' + el.name + '</span></i>')
                 $(li).append('<ul class="subfolder hidden"></ul>');
             } else {
                 $(li).addClass('js');
-                $(li).append('<i class="fa fa-file-code-o"> ' + el.name + '</i>')
+                $(li).append('<i class="fa fa-file-code-o"><span class="name">' + el.name + '</span></i>')
             }
             console.log(li);
             container.append(li);

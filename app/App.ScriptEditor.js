@@ -13,6 +13,8 @@ Class("ScriptEditor", {
 	LINT_GLOBALS : "/*global alert $ window document console setInterval setTimeout require*/\n",
 
 	ScriptEditor : function(container) {
+		this.zeroState = true;
+		this.zeroStateMessage = $('.empty-message');
 		this.container = container;
 		// adding monokai class to container
 		$(container).addClass("monokai");
@@ -118,6 +120,10 @@ Class("ScriptEditor", {
 	},
 
 	openFile: function(name, path) {
+		if (app.scriptEditor.zeroState) {
+			app.scriptEditor.zeroState = false;
+			$('h1.empty-message').addClass('hidden');
+		}
 		//this.createEditor(this.currentTab, name, "javascript", app.storage.getStorageKey(path));
 		var fs =  require("fs");
 		fs.readFile(path, {encoding: "utf8"}, function(err, data) {

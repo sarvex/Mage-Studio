@@ -284,6 +284,15 @@ iframe.scenePlayer {
 
 /*adding script editor css*/
 
+.empty-message {
+    width: 100%;
+    height: 100%;
+    color: #3a3a3a;
+    line-height: 400px;
+    text-align: center;
+    font-family: "Source Sans";
+}
+
 #scriptcontainer {
     display:none;
     z-index: 999;
@@ -309,9 +318,7 @@ iframe.scenePlayer {
     height: 100%;
     overflow: auto;
     margin-top: 0px;
-    background: #222;
-    border-top: 1px solid #555;
-    border-right: 1px solid #555;
+    background: #111;
 }
 
 #newFolder, #newScript {
@@ -320,6 +327,11 @@ iframe.scenePlayer {
     font-size: 14px;
     margin: 5px 5% 5px 5%;
     font-family: "Source Sans";
+}
+
+#rootFolder {
+    margin-top: 20px;
+    margin-left: 15px;
 }
 
 ul#project {
@@ -331,10 +343,24 @@ ul#project li {
     list-style: none;
 }
 
+ul#project li span.name {
+    font-family: "Source Sans";
+    margin-left: 5px;
+    /* padding-bottom: 9px; */
+    font-size: 12px;
+    line-height: 15px;
+}
+
+ul#project i.fa-folder-o {
+    height: 100%;
+    width: 100%;
+    line-height: 20px;
+}
+
 ul.subfolder {padding-left: 9px;}
 ul.subfolder li.file {/* list-style-image: url("../img/arrow.png") !important; */}
 
-ul#project li, ul.subfolder li {margin: 2px; padding: 5px;}
+ul#project li, ul.subfolder li {/* margin: 2px; */padding: 5px;font-size: 15px;}
 ul#project li.file:hover i {
     cursor: pointer;
     /* background: #2a9fd6; */
@@ -400,7 +426,7 @@ body * {
     position: absolute;
     height: 35px;
     width: 100%;
-    background-color: #222;/*#1B221E;*/
+    background-color: #111;/*#1B221E;*/
     margin-left: -1px;
 }
 
@@ -515,6 +541,7 @@ body * {
     /* top: 31px; */
     position: relative;
     height: 35px;
+    background: #111;
 }
 
 #tabs ul li {

@@ -246,7 +246,7 @@
         <!-- new folder -->
         <!-- %button#newScript.topcoat-button--large--cta -->
         <!-- new script -->
-        <i class='fa fa-folder-o' data-path='' id='rootFolder' style='margin-top: 20px; margin-left: 15px;'>
+        <i class='fa fa-folder-o' data-path='' id='rootFolder'>
           app
         </i>
         <ul id='project'>
@@ -279,9 +279,8 @@
             <!-- /    %i.fa.fa-remove.close -->
             <!-- /    %span -->
             <!-- /        main.js -->
-            <li class='tab' id='add_tab'>
-              +
-            </li>
+            <!-- /%li#add_tab.tab -->
+            <!-- /    + -->
           </ul>
         </div>
         <!-- parte superiore dell'editor -->
@@ -289,11 +288,10 @@
           <div class='toggle fa fa-close' id='closeEditor'></div>
         </div>
         <div class='monokai' id='main_container'>
-          <div class='editor visible' id='editor_0'>
-            <h1 class='empty-message'>
-              Select a file on the left
-            </h1>
-          </div>
+          <h1 class='empty-message'>
+            Select a file on the left
+          </h1>
+          <div class='editor visible' id='editor_0'></div>
           <ul id='messages'></ul>
           <i class='fa fa-exclamation-circle' id='errorAlert'></i>
           <div class='invisible' id='coffee_compiler'>
