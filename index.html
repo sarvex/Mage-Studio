@@ -247,7 +247,7 @@
         <!-- %button#newScript.topcoat-button--large--cta -->
         <!-- new script -->
         <i class='fa fa-folder-o' data-path='' id='rootFolder'>
-          app
+          <span></span>
         </i>
         <ul id='project'>
           <!-- /%li.folder{'data-path'=>'/scripts'} -->
@@ -285,11 +285,15 @@
         </div>
         <!-- parte superiore dell'editor -->
         <div id='upper_console'>
-          <div class='toggle fa fa-close' id='closeEditor'></div>
+          <div class='toggle fa fa-close' id='closeEditor'>
+            <span>
+              Close
+            </span>
+          </div>
         </div>
         <div class='monokai' id='main_container'>
           <h1 class='empty-message'>
-            Select a file on the left
+            select a file on the left
           </h1>
           <div class='editor visible' id='editor_0'></div>
           <ul id='messages'></ul>

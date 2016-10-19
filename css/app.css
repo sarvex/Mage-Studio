@@ -334,6 +334,10 @@ iframe.scenePlayer {
     margin-left: 15px;
 }
 
+#rootFolder span {
+    font-family: "Source Sans";
+}
+
 ul#project {
     margin-top: 0px;
     padding-left: 24px;
@@ -368,6 +372,7 @@ ul#project li.file:hover i {
 
 ul#project li.file:hover i::before {
     color: #FFCE54;
+    font-weight: bold;
 }
 
 ul#project i.fa-folder-o:hover {
@@ -376,6 +381,7 @@ ul#project i.fa-folder-o:hover {
 }
 ul#project i.fa-folder-o:hover::before {
     color: #2a9fd6;
+    font-weight: bold;
 }
 
 body {
@@ -411,7 +417,7 @@ body * {
     top: 35px;
     height: calc(100% - 25px);
     width: 100%;
-    border-top: 1px solid #555;
+    /* border-top: 1px solid #555; */
 }
 
 .visible {
@@ -420,14 +426,6 @@ body * {
 
 .invisible {
     display: none !important;
-}
-
-#tabs {
-    position: absolute;
-    height: 35px;
-    width: 100%;
-    background-color: #111;/*#1B221E;*/
-    margin-left: -1px;
 }
 
 #upper_console {
@@ -441,38 +439,42 @@ body * {
     position: relative;
     float: right;
     /* padding: 10px; */
-    border-top: 1px solid #555;
-    border-left: 1px solid #2e2f2a;
-    border-bottom: 0px solid #555;
-    border-radius: 0px !important;
+    /* border-top: 1px solid #555; */
+    /* border-left: 1px solid #2e2f2a; */
+    /* border-bottom: 0px solid #555; */
+    /* border-radius: 0px !important; */
     /* margin: 10px; */
     /* margin-top: 10px; */
-    background-color: #222;/*#272822;*/
-    font-size: 10px;
+    /* background-color: #222; *//*#272822;*/
+    font-size: 12px;
     height: 35px;
     padding: 0px 10px 0px 10px;
     line-height: 35px;
 }
 
-.toggle:hover {
+.toggle span {
+    font-family: "Source Sans";
+}
+
+.toggle:hover span {
     color: #fff;
-    background-color: #3a3a38;
+    cursor: pointer;
 }
 
 .toggle:first-child {
     /* background-color: red; */
     margin-right: 10px;
-    border-right: 1px solid #555;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    /* border-right: 1px solid #555; */
+    /* border-top-right-radius: 4px; */
+    /* border-bottom-right-radius: 4px; */
 }
 
 .toggle:last-child {
     /* background-color: blue; */
     margin-left: 10px;
-    border-left: 1px solid #555;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    /* border-left: 1px solid #555; */
+    /* border-top-left-radius: 4px; */
+    /* border-bottom-left-radius: 4px; */
 }
 
 .toggle.active {
@@ -533,104 +535,6 @@ body * {
 
 .toolbar.MacOS div#reduce:hover {
     background-color: #BC782A;
-}
-
-#tabs ul {
-    margin:0;
-    padding: 0;
-    /* top: 31px; */
-    position: relative;
-    height: 35px;
-    background: #111;
-}
-
-#tabs ul li {
-    display: inline;
-    opacity: 1 !important;
-}
-
-#tabs ul li.tab {
-    list-style: none;
-    position: relative;
-    background-color: #222;/*#272822;*/
-    height: 35px;
-    position: relative;
-    float: left;
-    width: 80px;
-    text-align: center;
-    display: block;
-    /* padding: 5px; */
-    line-height: 35px;
-    padding-left: 10px;
-    padding-right: 20px;
-    /*
-    border-bottom: 30px solid #fff;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-radius:2px;
-    height: 30px;
-    width: 100px;
-    color:white;
-    text-align:center;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 30px;
-    font-style: italic;
-
-    display: inline;
-    margin: 0;
-
-*/
-    /* border-bottom: 50px solid white; */
-    /* border-left: 30px solid transparent; */
-    /* border-right: 30px solid transparent; */
-    /* height: 0; */
-    border-top: 0px;
-    /* width: 100px; */
-    /* top: 26px; */
-    margin: 0px;
-    /* margin-right: 2px; */
-    /* border-top-right-radius: 4px; */
-    /* border-top-left-radius: 4px; */
-}
-
-#tabs ul li.tab .close {
-    font-size: 7px;
-    top: 2px;
-    line-height: 8px;
-    position: absolute;
-    left: 80%;
-    border: 1px solid white;
-    border-radius: 10px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    padding: 1px;
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-#tabs ul li#add_tab {
-    /* min-height: 30px; */
-    width: 30px;
-    /* padding: 3px; */
-    /* padding-left: 6px; */
-    /* padding-right: 6px; */
-    /* border-radius: 4px; */
-    background-color: #222;
-    color: white;
-    /* margin-top: 20px; */
-    margin-left: 6px;
-    border: 1px solid #555;
-    /* border-right: 1px solid #555; */
-    border-bottom: 0px;
-    position: relative;
-    /* top: 8px; */
-    height: 35px;
-}
-
-#tabs ul li span {
-    position: relative;
-    /* top: 20px; */
 }
 
 .editor {

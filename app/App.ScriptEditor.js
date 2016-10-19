@@ -16,6 +16,8 @@ Class("ScriptEditor", {
 		this.zeroState = true;
 		this.zeroStateMessage = $('.empty-message');
 		this.container = container;
+
+		this.tabs = $('#tabs ul');
 		// adding monokai class to container
 		$(container).addClass("monokai");
 
@@ -122,7 +124,7 @@ Class("ScriptEditor", {
 	openFile: function(name, path) {
 		if (app.scriptEditor.zeroState) {
 			app.scriptEditor.zeroState = false;
-			$('h1.empty-message').addClass('hidden');
+			app.scriptEditor.zeroStateMessage.addClass('hidden');
 		}
 		//this.createEditor(this.currentTab, name, "javascript", app.storage.getStorageKey(path));
 		var fs =  require("fs");
@@ -275,7 +277,7 @@ Class("ScriptEditor", {
 			_type = type;
 			_id = id ? id : app.storage.getStorageKey(name);
 		}
-		$('#add_tab').before(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
+		app.scriptEditor.tabs.append(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
 		$('#editor_'+app.scriptEditor.currentTab).after(app.scriptEditor.helper.div("editor_"+(app.scriptEditor.numTab-1), "editor invisible", "", {checkHtml : false}));
 		this.setTabListener();
 		this.createEditor((app.scriptEditor.numTab -1), _name, _type, _id);

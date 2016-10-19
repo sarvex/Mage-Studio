@@ -12,7 +12,7 @@ Class("ScriptSidebar", {
 
         this.projectContainer = '#projectContainer';
         this.projectList = this.projectContainer + ' #project';
-        this.rootFolder = this.projectContainer + ' #rootFolder';
+        this.rootFolder = this.projectContainer + ' #rootFolder span';
     },
 
     init: function() {
