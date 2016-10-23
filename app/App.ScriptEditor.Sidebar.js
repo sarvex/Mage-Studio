@@ -21,12 +21,17 @@ Class("ScriptSidebar", {
         //setting listener for new script button
         $('#newScript').click(app.scriptEditor.sidebar.newScript);
         //setting listener for li elements clicks
-        app.scriptEditor.sidebar.setListeners();
         app.scriptEditor.sidebar.setSidebar();
+        app.scriptEditor.sidebar.setListeners();
     },
 
     setListeners: function() {
-        $('ul#project li.directory i.directoryName').unbind().click(function() {
+
+        this.folderSelector = $('ul#project li.directory i.directoryName');
+        this.fileSelector = $('ul#project li.file');
+        this.contextMenu = $('#projectContainer .context-menu-container');
+
+        app.scriptEditor.sidebar.folderSelector.unbind().click(function() {
             //clicked a subfolder
             var parent = $(this).parent(),
                 path = parent.data("path");
@@ -41,14 +46,22 @@ Class("ScriptSidebar", {
                     parent.find('.subfolder').removeClass('hidden');
                 }
             }
+        }).on('contextmenu', function(evt) {
+            evt.preventDefault();
+            app.scriptEditor.sidebar._showContextMenu(event, 'folder');
+            return false;
         });
 
-        $('ul#project li.file').unbind().click(function() {
+        app.scriptEditor.sidebar.fileSelector.unbind().click(function() {
             var path = $(this).data("path");
 
             if (path) {
                 app.scriptEditor.sidebar.openFile($(this).text(), path)
             }
+        }).on('contextmenu', function(evt) {
+            evt.preventDefault();
+            app.scriptEditor.sidebar._showContextMenu(event, 'file');
+            return false;
         });
     },
 
@@ -59,6 +72,23 @@ Class("ScriptSidebar", {
         // retrieve scene script folder content
         $(app.scriptEditor.sidebar.projectList).html('');
         app.scriptEditor.sidebar._createFileTree(app.storage.getScriptsDir(), $(app.scriptEditor.sidebar.projectList));
+    },
+
+    _closeContextMenu: function() {
+
+    },
+
+    _showContextMenu: function(event, type) {
+        var x = event.screenX,
+            y = event.screenY;
+
+        app.scriptEditor.sidebar.contextMenu.css({
+            'left': x + 'px',
+            'top': x + 'px'
+        }).addClass('visible');
+
+        // primo click fuori dal context menu chiude il context menu
+
     },
 
     _createFileTree: function(path, container) {
@@ -75,7 +105,6 @@ Class("ScriptSidebar", {
                 $(li).addClass('js');
                 $(li).append('<i class="fa fa-file-code-o"><span class="name">' + el.name + '</span></i>')
             }
-            console.log(li);
             container.append(li);
         }
         app.scriptEditor.sidebar.setListeners();

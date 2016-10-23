@@ -321,6 +321,15 @@ iframe.scenePlayer {
     background: #111;
 }
 
+.context-menu-container {
+    position: absolute;
+    display: none;
+}
+
+.context-menu-container.visible {
+    display: block;
+}
+
 #newFolder, #newScript {
     width: 90%;
     height: 30px;

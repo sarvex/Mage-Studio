@@ -44,6 +44,7 @@ Class("ScriptEditor", {
 				app.scriptEditor.init(),
 				app.scriptEditor.isNew = false;
 			}
+			app.scriptEditor.sidebar.setSidebar();
 			//checking if we have a working directory where we can save files
 			var workspace = app.storage.get("workspace");
 			if (!workspace) {

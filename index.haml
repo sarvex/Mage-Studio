@@ -178,6 +178,21 @@
         / main container
         #scriptcontainer
             #projectContainer
+                .context-menu-container
+                    //%a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown", :role=>"button", "aria-expanded"=>"false"}
+                    %ul.context-menu
+                        %li
+                            %a{:href=>"#"}
+                                new folder
+                        %li
+                            %a{:href=>"#"}
+                                new file
+                        %li
+                            %a{:href=>"#"}
+                                delete
+                        %li
+                            %a{:href=>"#"}
+                                rename
                 /%button#newFolder.topcoat-button--large--cta
                 /    new folder
                 /%button#newScript.topcoat-button--large--cta
