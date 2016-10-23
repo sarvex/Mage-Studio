@@ -16,7 +16,7 @@
 .navbar-primary .navbar .nav.pull-right {margin-left: 10px; margin-right: 0;}
 .navbar-xs .navbar-primary .navbar { min-height:28px; height: 28px; }
 .navbar-xs .navbar-primary .navbar .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 28px;font-family: "LeckerliOne";font-weight: bold;font-style: italic;color: #FFCE54;}
-.navbar-xs .navbar-primary .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px;text-transform: uppercase;}
+.navbar-xs .navbar-primary .navbar .navbar-nav > li > a {padding-top: 0px;padding-bottom: 0px;line-height: 28px;text-transform: uppercase;/* font-family: Source Sans; */}
 .navbar-sm .navbar-primary .navbar { min-height:40px; height: 40px; }
 .navbar-sm .navbar-primary .navbar .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 40px; }
 .navbar-sm .navbar-primary .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 40px; }
@@ -431,8 +431,9 @@ body * {
 #upper_console {
     position: absolute;
     height: 35px;
-    width: 50%;
-    left: 50%;
+    width: 15%;
+    padding-right: 20px;
+    left: 85%;
 }
 
 .toggle {

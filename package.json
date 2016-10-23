@@ -4,8 +4,8 @@
   "description": "Mage Studio",
   "main": "main.js",
   "scripts": {
-    "prestart": "./scripts/haml.sh",
-    "start": "electron main.js"
+    "build": "./scripts/haml.sh",
+    "start": "npm run build && electron main.js"
   },
   "repository": {
     "type": "git",
