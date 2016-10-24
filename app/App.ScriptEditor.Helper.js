@@ -9,7 +9,7 @@ Class("ScriptHelper", {
 		if (typeof(classes) == "object") {
 			c = "";
 			for (var i in classes) {
-				c += classes[i] + " "; 
+				c += classes[i] + " ";
 			}
 		} else if (typeof(classes) == "string") {
 			c = classes;
@@ -52,7 +52,7 @@ Class("ScriptHelper", {
 		if (typeof(classes) == "object") {
 			c = "";
 			for (var i in classes) {
-				c += classes[i] + " "; 
+				c += classes[i] + " ";
 			}
 		} else if (typeof(classes) == "string") {
 			c = classes;
@@ -95,7 +95,7 @@ Class("ScriptHelper", {
 		if (typeof(classes) == "object") {
 			c = "";
 			for (var i in classes) {
-				c += classes[i] + " "; 
+				c += classes[i] + " ";
 			}
 		} else if (typeof(classes) == "string") {
 			c = classes;
@@ -138,7 +138,7 @@ Class("ScriptHelper", {
 		if (typeof(classes) == "object") {
 			c = "";
 			for (var i in classes) {
-				c += classes[i] + " "; 
+				c += classes[i] + " ";
 			}
 		} else if (typeof(classes) == "string") {
 			c = classes;
@@ -181,7 +181,7 @@ Class("ScriptHelper", {
 		if (typeof(classes) == "object") {
 			c = "";
 			for (var i in classes) {
-				c += classes[i] + " "; 
+				c += classes[i] + " ";
 			}
 		} else if (typeof(classes) == "string") {
 			c = classes;
@@ -222,6 +222,15 @@ Class("ScriptHelper", {
 	_isEmptyObject : function(obj) {
 		return (Object.getOwnPropertyNames.call(this, obj).length == 0)
 	},
+
+	_getMousePosition: function(evt) {
+		var element = evt.currentTarget,
+			rect = element.getBoundingClientRect();
+	    return {
+	        x: Math.round((evt.clientX-rect.left)/(rect.right-rect.left)*element.width),
+	        y: Math.round((evt.clientY-rect.top)/(rect.bottom-rect.top)*element.height)
+	    }
+	}
 	/*
 	parseElement : function(object) {
 		var ul = app.helper.ul(""+this.counter, "object_root", "");
@@ -233,7 +242,7 @@ Class("ScriptHelper", {
 			//if (object.hasOwnProperty(prop)) {
 				var li = app.helper.li("prop_"+prop, "object_prop", "");
 				li.appendChild(app.helper.span("key", "", prop, {checkHtml : false}));
-				var value = 
+				var value =
 				li.appendChild(app.helper.span("value", "", ""+object[prop], {checkHtml : true}));
 				ul.appendChild(li);
 			//}

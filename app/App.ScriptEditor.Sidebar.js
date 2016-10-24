@@ -32,6 +32,7 @@ Class("ScriptSidebar", {
         this.contextMenu = $('#projectContainer .context-menu-container');
 
         app.scriptEditor.sidebar.folderSelector.unbind().click(function() {
+            app.scriptEditor.sidebar._closeContextMenu();
             //clicked a subfolder
             var parent = $(this).parent(),
                 path = parent.data("path");
@@ -53,6 +54,7 @@ Class("ScriptSidebar", {
         });
 
         app.scriptEditor.sidebar.fileSelector.unbind().click(function() {
+            app.scriptEditor.sidebar._closeContextMenu();
             var path = $(this).data("path");
 
             if (path) {
@@ -75,16 +77,19 @@ Class("ScriptSidebar", {
     },
 
     _closeContextMenu: function() {
-
+        if (app.scriptEditor.sidebar.contextMenu.hasClass('visible')) {
+            app.scriptEditor.sidebar.contextMenu.removeClass('visible')
+        }
     },
 
     _showContextMenu: function(event, type) {
-        var x = event.screenX,
-            y = event.screenY;
+        var x = event.clientX,
+            y = event.clientY;
+        //var pos = app.filehelper._getMousePosition(event);
 
         app.scriptEditor.sidebar.contextMenu.css({
             'left': x + 'px',
-            'top': x + 'px'
+            'top': y + 'px'
         }).addClass('visible');
 
         // primo click fuori dal context menu chiude il context menu
