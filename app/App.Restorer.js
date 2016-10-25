@@ -196,7 +196,7 @@ Class("Restorer", {
             model.castShadow = true;
             model.receiveShadow = true;
             //changing model name
-            model.name = name ? name : "Model_"+app.modm.modelsCount;
+            //model.name = name ? name : "Model_"+app.modm.modelsCount;
             model.group = "World";
             model.flag = "model";
             //store new model in our map
