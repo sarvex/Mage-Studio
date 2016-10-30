@@ -1,14 +1,17 @@
 Class("ScriptTab", {
 
-	ScriptTab : function(id, name, type, savename) {
+	ScriptTab : function(id, name, type, savename, path) {
 		this.text = [];
 		this.name = name;
 		this.type = type;
 		this.savename = savename;
+		this.path = path;
 		this.errors = [];
 		this.tooltips = [];
 		this.compiled = "";
 		this.keyListener = new keypress.Listener();
+		this.textId = id;
+		this.id = parseInt(id.split('_')[1])
 		console.log(id);
 		//creating code mirror object
 		this.codeMirror = CodeMirror(document.getElementById(id), {

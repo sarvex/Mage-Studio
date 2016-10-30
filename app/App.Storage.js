@@ -41,8 +41,11 @@ Class("Storage", {
         return sceneDir ? sceneDir + '/app/scripts' : false;
     },
 
-    getStorageKey(key) {
-        return app.storage.currentProject + "_" + app.storage.currentScene + "_" + key;
+    getStorageKey(value) {
+        return {
+            key: app.storage.currentProject + "_" + app.storage.currentScene + "_" + value,
+            value: value,
+        }
     },
 
     //listenning for autosave toggle

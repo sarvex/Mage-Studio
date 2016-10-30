@@ -380,15 +380,16 @@ iframe.scenePlayer {
 }
 
 #rootFolder {
-    padding-top: 11px;
+    padding-top: 7px;
     padding-left: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
+    line-height: 20px;
     font-size: 18px;
     margin-bottom: 10px;
     width: 100%;
-    color: white;
+    color: #4FC1E9;
     /* border-top: 2px solid #111; */
-    background: #222;
+    background: #333;
     border-left: 5px solid #4FC1E9;
     /* border-bottom: 1px solid #4FC1E9; */
 }

@@ -336,11 +336,11 @@ Class("MeshListener", {
     },
 
     changeScript: function(path, name) {
-        var key = app.storage.getStorageKey(path),
+        var key = app.storage.getStorageKey(path).key,
             userData = {
                 'script': key,
                 'script_name': name,
-                'script_key': app.storage.getStorageKey('')
+                'script_key': app.storage.getStorageKey('').key
             };
         if (app.sm.typeClicked == 'mesh') {
             app.mm.map.get(app.sm.uuid).userData = userData;

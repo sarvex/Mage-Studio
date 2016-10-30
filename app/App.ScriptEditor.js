@@ -122,22 +122,36 @@ Class("ScriptEditor", {
 		*/
 	},
 
+	_isAlreadyOpen: function(name, path) {
+		for (var i in app.scriptEditor.editors) {
+			var e = app.scriptEditor.editors[i];
+			if ((e.name == name) && (e.path == path)) return e.id;
+		}
+		return false;
+	},
+
 	openFile: function(name, path) {
 		if (app.scriptEditor.zeroState) {
 			app.scriptEditor.zeroState = false;
 			app.scriptEditor.zeroStateMessage.addClass('hidden');
 		}
 		//this.createEditor(this.currentTab, name, "javascript", app.storage.getStorageKey(path));
-		var fs =  require("fs");
-		fs.readFile(path, {encoding: "utf8"}, function(err, data) {
+		var id = app.scriptEditor._isAlreadyOpen(name, path);
+		if (isNaN(parseInt(id))) {
+			var fs =  require("fs");
+			fs.readFile(path, {encoding: "utf8"}, function(err, data) {
+				var storage = app.storage.getStorageKey(path);
+				app.scriptEditor.addNewTab(name.trim(), 'javascript', storage);
+				// setting tab value
+				app.scriptEditor.editors[app.scriptEditor.currentTab].codeMirror.setValue(data);
+				//we need to store data
+				//app.storage.set(app.storage.currentProject+"_", data);
+				app.scriptEditor._refreshTab(app.scriptEditor.currentTab);
+			});
+		} else {
+			app.scriptEditor.selectTab(id);
+		}
 
-			app.scriptEditor.addNewTab(name.trim(), 'javascript', app.storage.getStorageKey(path));
-			// setting tab value
-			app.scriptEditor.editors[app.scriptEditor.currentTab].codeMirror.setValue(data);
-			//we need to store data
-			//app.storage.set(app.storage.currentProject+"_", data);
-			app.scriptEditor._refreshTab(app.scriptEditor.currentTab);
-		});
 	},
 
 	setListeners: function() {
@@ -250,7 +264,7 @@ Class("ScriptEditor", {
 		}
 	},
 
-	addNewTab : function(name, type, id) {
+	addNewTab : function(name, type, storage) {
 		var previous = this.currentTab;
 		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
 
@@ -273,20 +287,23 @@ Class("ScriptEditor", {
 			_name = filename;
 			_type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
 			_id = app.storage.currentProject+"_"+app.storage.currentScene+"_"+filename;
+			_path = filename;
 		} else {
 			_name = name;
 			_type = type;
-			_id = id ? id : app.storage.getStorageKey(name);
+			//var storage = app.storage.getStorageKey(name);
+			_id = storage.key;
+			_path = storage.value;
 		}
 		app.scriptEditor.tabs.append(app.scriptEditor.helper.li("tab_"+(app.scriptEditor.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+_name+"</span>", {checkHtml : false}));
 		$('#editor_'+app.scriptEditor.currentTab).after(app.scriptEditor.helper.div("editor_"+(app.scriptEditor.numTab-1), "editor invisible", "", {checkHtml : false}));
 		this.setTabListener();
-		this.createEditor((app.scriptEditor.numTab -1), _name, _type, _id);
+		this.createEditor((app.scriptEditor.numTab -1), _name, _type, _id, _path);
 		this.selectTab((app.scriptEditor.numTab -1));
 	},
 
-	createEditor : function(tab, name, type, id) {
-		this.editors[tab] = new ScriptTab("editor_"+tab, name, type, id);
+	createEditor : function(tab, name, type, id, path) {
+		this.editors[tab] = new ScriptTab("editor_"+tab, name, type, id, path);
 	},
 
 	selectTab : function(tab) {
