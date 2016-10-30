@@ -75,7 +75,7 @@ Class("FileHelper", {
             map.push({
                 name: content[i],
                 type: app.filehelper.fs.statSync(app.filehelper.path.join(path, content[i])).isDirectory() ?
-                        'directory' :
+                        'folder' :
                         'file',
                 path: path
             });

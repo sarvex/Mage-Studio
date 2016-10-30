@@ -380,12 +380,23 @@ iframe.scenePlayer {
 }
 
 #rootFolder {
-    margin-top: 20px;
-    margin-left: 15px;
+    padding-top: 11px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 100%;
+    color: white;
+    /* border-top: 2px solid #111; */
+    background: #222;
+    border-left: 5px solid #4FC1E9;
+    /* border-bottom: 1px solid #4FC1E9; */
 }
 
 #rootFolder span {
+    color: white;
     font-family: "Source Sans";
+    margin-left: 8px;
 }
 
 ul#project {
@@ -425,11 +436,11 @@ ul#project li.file:hover i::before {
     font-weight: bold;
 }
 
-ul#project i.fa-folder-o:hover {
+ul#project i.foldername:hover {
     cursor: pointer;
     /* border: 1px solid #2a9fd6; */
 }
-ul#project i.fa-folder-o:hover::before {
+ul#project i.foldername:hover::before {
     color: #2a9fd6;
     font-weight: bold;
 }

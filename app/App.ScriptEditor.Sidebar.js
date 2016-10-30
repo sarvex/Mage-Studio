@@ -27,50 +27,57 @@ Class("ScriptSidebar", {
 
     setListeners: function() {
 
-        this.folderSelector = $('ul#project li.directory i.directoryName');
+        this.folderSelector = $('ul#project li.folder i.foldername');
         this.fileSelector = $('ul#project li.file');
         this.contextMenu = $('#projectContainer .context-menu-container');
 
-        app.scriptEditor.sidebar.folderSelector.unbind().click(function() {
+        app.scriptEditor.sidebar.folderSelector.unbind().click(app.util.bind(function(event) {
             app.scriptEditor.sidebar._closeContextMenu();
-            //clicked a subfolder
-            var parent = $(this).parent(),
+            var parent = $(event.currentTarget).parent(),
                 path = parent.data("path");
-            if (parent.hasClass("directory") && path) {
+            if (parent.hasClass("folder") && path) {
                 if (!parent.find('.subfolder').hasClass('hidden')) {
-                    // subfolder è gia presente
-                    parent.find('.subfolder').addClass('hidden');
-                    parent.find('.subfolder').empty();
+                    this._closeFolder($(event.currentTarget));
                 } else {
-                    // subfolder non presente
-                    app.scriptEditor.sidebar.expandSubDirectory(parent, path);
-                    parent.find('.subfolder').removeClass('hidden');
+                    this._openFolder($(event.currentTarget), path);
                 }
             }
-        }).on('contextmenu', function(evt) {
+        }, this)).on('contextmenu', app.util.bind(function(evt) {
             evt.preventDefault();
             app.scriptEditor.sidebar._showContextMenu(event, 'folder');
             return false;
-        });
+        }, this));
 
-        app.scriptEditor.sidebar.fileSelector.unbind().click(function() {
+        app.scriptEditor.sidebar.fileSelector.unbind().click(app.util.bind(function(event) {
             app.scriptEditor.sidebar._closeContextMenu();
-            var path = $(this).data("path");
+            var path = $(event.currentTarget).data("path");
 
             if (path) {
-                app.scriptEditor.sidebar.openFile($(this).text(), path)
+                app.scriptEditor.sidebar.openFile($(event.currentTarget).text(), path)
             }
-        }).on('contextmenu', function(evt) {
+        }, this)).on('contextmenu', app.util.bind(function(evt) {
             evt.preventDefault();
             app.scriptEditor.sidebar._showContextMenu(event, 'file');
             return false;
-        });
+        }, this));
+    },
+
+    _openFolder: function(element, path) {
+        var parent = element.parent();
+        element.removeClass('fa-folder-o').addClass('fa-folder-open-o')
+        app.scriptEditor.sidebar.expandSubDirectory(parent, path);
+        parent.find('.subfolder').removeClass('hidden');
+    },
+
+    _closeFolder: function(element) {
+        var parent = element.parent();
+        element.removeClass('fa-folder-open-o').addClass('fa-folder-o') ;
+        parent.find('.subfolder').addClass('hidden');
+        parent.find('.subfolder').empty();
     },
 
     setSidebar: function() {
-        $(app.scriptEditor.sidebar.rootFolder).text(' '+
-            app.storage.currentScene +
-            '/app/');
+        $(app.scriptEditor.sidebar.rootFolder).text(app.storage.currentScene);
         // retrieve scene script folder content
         $(app.scriptEditor.sidebar.projectList).html('');
         app.scriptEditor.sidebar._createFileTree(app.storage.getScriptsDir(), $(app.scriptEditor.sidebar.projectList));
@@ -103,8 +110,8 @@ Class("ScriptSidebar", {
             var li = document.createElement('li');
             $(li).addClass(el.type);
             $(li).data('path', el.path + "/" + el.name);
-            if (el.type == 'directory') {
-                $(li).append('<i class="fa fa-folder-o directoryName"><span class="name">' + el.name + '</span></i>')
+            if (el.type == 'folder') {
+                $(li).append('<i class="fa fa-folder-o foldername"><span class="name">' + el.name + '</span></i>')
                 $(li).append('<ul class="subfolder hidden"></ul>');
             } else {
                 $(li).addClass('js');
