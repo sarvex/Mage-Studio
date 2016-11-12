@@ -95,7 +95,7 @@ Class("MyGame", {
             //setting helpers ecc
             if (l.light.object.type == "DirectionalLight") {
 				l = new DirectionalLight(o.light.color, o.light.intensity, o.light.distance, o.light.position, o.target);
-                /*var size = 50;
+                var size = 50;
                 l.light.castShadow = true;
                 //l.light.shadowCameraVisible = true;
                 l.light.shadowMaSizeWidth = 512;
@@ -105,7 +105,7 @@ Class("MyGame", {
                 l.light.shadowCameraRight = d;
                 l.light.shadowCameraTop = d;
                 l.light.shadowCameraBottom = -d;
-                l.light.shadowCameraFar = 1000;*/
+                l.light.shadowCameraFar = 1000;
                 //l.light.shadowDarkness = 0.2;
             } else if (l.light.object.type == "AmbientLight") {
                 l = new AmbientLight(l.light.color, l.light.intensity, l.light.position);
