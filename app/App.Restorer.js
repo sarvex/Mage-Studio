@@ -84,7 +84,7 @@ Class("Restorer", {
                 o.light.shadow.camera.left = -d;
                 o.light.shadow.camera.right = d;
                 o.light.shadow.camera.top = d;
-                o.light.shadow.camera.botom = -d;
+                o.light.shadow.camera.bottom = -d;
                 // #TODO be able to change shadow camera far
                 o.light.shadow.camera.far = 1000;
                 //o.light.shadowDarkness = 0.2;
@@ -101,7 +101,7 @@ Class("Restorer", {
                 o.light.shadow.camera.left = -d;
                 o.light.shadow.camera.right = d;
                 o.light.shadow.camera.top = d;
-                o.light.shadow.camera.botom = -d;
+                o.light.shadow.camera.bottom = -d;
                 // #TODO be able to change shadow camera far
                 o.light.shadow.camera.far = 1000;
                 //o.light.shadowDarkness = 0.2;
