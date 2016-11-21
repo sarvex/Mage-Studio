@@ -110,8 +110,8 @@ Class("MyGame", {
 				*/
 				l.light.castShadow = true;
                 //l.light.shadowCameraVisible = true;
-                l.light.shadow.mapSize.Width = 512;
-                l.light.shadow.mapSize.Height = 512;
+                l.light.shadow.mapSize.width = 512;
+                l.light.shadow.mapSize.height = 512;
                 var d = 200;
                 l.light.shadow.camera.left = -d;
                 l.light.shadow.camera.right = d;
