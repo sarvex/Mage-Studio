@@ -1,4 +1,4 @@
-/*! wage version: 0.0.37, 07-06-2016 */
+/*! wage version: 0.0.37, 01-12-2016 */
 function ParticleTween(a, b) {
     this.times = a || [], this.values = b || [];
 }
@@ -192,7 +192,7 @@ function HashMap() {
     this.keys = new Array())), this.map = {};
 }
 
-var license = "Copyright (c) 2015 by Marco Stagni < http://marcostagni.com mrc.stagni@gmail.com > and contributors.\n\nSome rights reserved. Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n* Redistributions of source code must retain the above copyright\n  notice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above\n  copyright notice, this list of conditions and the following\n  disclaimer in the documentation and/or other materials provided\n  with the distribution.\n\n* The names of the contributors may not be used to endorse or\n  promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nWage contains third party software in the 'app/vendor' directory: each\nfile/module in this directory is distributed under its original license.\n\n";
+var license = "Copyright (c) 2015 by Marco Stagni < http://marcostagni.com mrc.stagni@gmail.com > and contributors.\n\nSome rights reserved. Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n* Redistributions of source code must retain the above copyright\n  notice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above\n  copyright notice, this list of conditions and the following\n  disclaimer in the documentation and/or other materials provided\n  with the distribution.\n\n* The names of the contributors may not be used to endorse or\n  promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nMage contains third party software in the 'app/vendor' directory: each\nfile/module in this directory is distributed under its original license.\n\n";
 
 !function(a, b) {
     "object" == typeof module && "object" == typeof module.exports ? module.exports = a.document ? b(a, !0) : function(a) {
@@ -19766,7 +19766,7 @@ __class__ = function(a, b) {
 })._extends("Entity"), Class("Mesh", {
     Mesh: function(a, b, c) {
         if (Entity.call(this), this.geometry = a, this.material = b, this.script = {}, this.hasScript = !1, 
-        this.mesh = new THREE.Mesh(a, b), config.cast_shadow && (this.mesh.castShadow = !0, 
+        this.mesh = new THREE.Mesh(a, b), app.util.cast_shadow && (this.mesh.castShadow = !0, 
         this.mesh.receiveShadow = !0), app.add(this.mesh, this), c) for (var d in c) this[d] = c[d], 
         "script" == d && (this.hasScript = !0, this.addScript(c[d], c.dir));
     }
@@ -19935,8 +19935,8 @@ __class__ = function(a, b) {
 })._extends("Light"), Class("DirectionalLight", {
     DirectionalLight: function(a, b, c, d, e) {
         Light.call(this, a, b, d), this.light = new THREE.DirectionalLight(a, b), e && this.light.target.position.copy(e.position), 
-        this.light.position.set(d.x, d.y, d.z), this.light.castShadow = !0, this.light.shadow.mapSize.width = 1024, 
-        this.light.shadow.mapSize.height = 1024;
+        this.light.position.set(d.x, d.y, d.z), this.light.castShadow = !0, this.light.shadow.mapSize.width = 512, 
+        this.light.shadow.mapSize.height = 512;
         var f = 300;
         this.light.shadow.camera.left = -f, this.light.shadow.camera.right = f, this.light.shadow.camera.top = f, 
         this.light.shadow.camera.bottom = -f, this.light.shadow.camera.far = 1e3, app.add(this.light, this);
@@ -20659,7 +20659,7 @@ Gui = {
             return ImagesEngine.map.get(a) || !1;
         },
         loadSingleFile: function(a, b) {
-            ImagesEngine.loader.load(b, {}, function(b) {
+            ImagesEngine.loader.load(b, function(b) {
                 ImagesEngine.map.put(a, b), ImagesEngine.imagesLoaded++, ImagesEngine.checkLoad();
             });
         },
@@ -20736,7 +20736,7 @@ Util.start = function() {
     }();
 }, Util.check = {
     start: function(a, b) {
-        var c = config.tests || Util.tests;
+        var c = app.util.tests || Util.tests;
         -1 == c.indexOf("webgl") && c.push("webgl");
         for (var d in c) {
             if (-1 == Util.tests.indexOf(c[d])) return b("No Such Test", c[d]), !1;
@@ -20777,7 +20777,7 @@ Util.start = function() {
             e: "error",
             w: "warn",
             i: "info"
-        }, this.util = {
+        }, this.util = _.extend({
             h: window.innerHeight,
             w: window.innerWidth,
             ratio: window.innerWidth / window.innerHeight,
@@ -20787,7 +20787,7 @@ Util.start = function() {
                 near: .1,
                 far: 100
             }
-        }, this.threeLib = void 0, this.camera = void 0, this.user = void 0, this.scene = void 0, 
+        }, config), this.threeLib = void 0, this.camera = void 0, this.user = void 0, this.scene = void 0, 
         this.renderer = void 0, this.clearColor = 0, Object.defineProperty(this, "clearColor", {
             set: function(a) {
                 try {
@@ -20824,7 +20824,7 @@ Util.start = function() {
         Universe.update(), Control.update(), app.camera.update && app.camera.update(app.clock.getDelta()), 
         app.renderer.autoClear = !1, app.renderer.clear(app.clearColor), app._render(), 
         app.renderer.render(app.scene, app.camera.object), setTimeout(function() {
-            config.physics_enabled && Physijs._isLoaded && app.scene.simulate(), config.tween_enabled && TWEEN.update(), 
+            app.util.physics_enabled && Physijs._isLoaded && app.scene.simulate(), app.util.tween_enabled && TWEEN.update(), 
             requestAnimFrame(app.render);
         }, 1e3 / app.util.frameRate);
     },
@@ -20838,7 +20838,7 @@ Util.start = function() {
         app.three = THREE;
         var a = app.util.camera, b = app.util;
         if (window.keypress && (app._keylistener = new window.keypress.Listener()), config) if (app.log("config loaded"), 
-        config.physics_enabled) {
+        app.util.physics_enabled) {
             app.log("physics enabled.");
             try {
                 Physijs.scripts.worker = "workers/physijs_worker.js", Physijs.scripts.ammo = "ammo.js", 
@@ -20855,13 +20855,15 @@ Util.start = function() {
             near: a.near,
             far: a.far
         };
-        config && config.camera && (d.fov = config.camera.fov ? config.camera.fov : d.fov, 
-        d.ratio = config.camera.ratio ? config.camera.ratio : d.ratio, d.near = config.camera.near ? config.camera.near : d.near, 
-        d.far = config.camera.far ? config.camera.far : d.far), app.camera = new Camera(d);
+        config && app.util.camera && (d.fov = app.util.camera.fov ? app.util.camera.fov : d.fov, 
+        d.ratio = app.util.camera.ratio ? app.util.camera.ratio : d.ratio, d.near = app.util.camera.near ? app.util.camera.near : d.near, 
+        d.far = app.util.camera.far ? app.util.camera.far : d.far), app.camera = new Camera(d);
         var e = !1;
-        config.alpha && (e = !0), app.renderer = new app.three.WebGLRenderer({
-            alpha: e
-        }), config && 1 == config.cast_shadow && (app.renderer.shadowMap.enabled = !0, app.renderer.shadowMap.type = THREE.PCFSoftShadowMap), 
+        app.util.alpha && (e = !0), app.renderer = new app.three.WebGLRenderer({
+            alpha: e,
+            antialias: !0
+        }), app.util.cast_shadow && (app.renderer.shadowMap.enabled = !0, app.renderer.shadowMap.type = THREE.PCFSoftShadowMap, 
+        app.renderer.sortObjects = !1), app.renderer.setPixelRatio(window.devicePixelRatio), 
         app.renderer.setSize(b.w, b.h), document.getElementById("gameContainer").appendChild(app.renderer.domElement), 
         User.handleUserInput(), Game.update(), Universe.update(), Control.init(), app.render(), 
         app.onCreate instanceof Function ? app.onCreate() : console.log("Something wrong in your onCreate method");
