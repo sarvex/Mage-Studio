@@ -28,6 +28,9 @@
     "url": "https://github.com/marco-ponds/WageEditor/issues"
   },
   "homepage": "https://github.com/marco-pondst/WageEditor#readme",
+  "dependencies": {
+      "mage-engine": "marco-ponds/mage"
+  },
   "devDependencies": {
     "bower": "*",
     "connect": "*",
