@@ -168,15 +168,18 @@ Class("Storage", {
             app.dialog.error("Missing Project", "Please, create a new Project using File>New option");
             return false;
         }
-        var ncp = require("ncp").ncp;
-        var fs = require("fs");
+        var fs = require('fs'),
+            mage = require('mage-engine');
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
-        ncp("scaffold", dir, function(err) {
-            console.log(err);
-            if (err) app.dialog.error("Error!", "Error while creating project");
-            else app.dialog.success("Done", "Your project is good to go");
+
+        mage.builder.create(dir, function(success) {
+            if (success) {
+                app.dialog.success("Done", "Your project is good to go");
+            } else {
+                app.dialog.error("Error!", "Error while creating project");
+            }
         });
         return true;
     },
