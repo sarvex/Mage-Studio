@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marco-ponds/WageEditor"
+    "url": "git+https://github.com/marco-ponds/Mage-Studio"
   },
   "keywords": [
     "Mage",
@@ -28,9 +28,6 @@
     "url": "https://github.com/marco-ponds/WageEditor/issues"
   },
   "homepage": "https://github.com/marco-pondst/WageEditor#readme",
-  "dependencies": {
-      "mage-engine": "marco-ponds/mage"
-  },
   "devDependencies": {
     "bower": "*",
     "connect": "*",
@@ -39,5 +36,8 @@
     "ncp": "*",
     "remote": "*",
     "serve-static": "*"
+  },
+  "dependencies": {
+    "mage-engine": "0.0.40"
   }
 }
