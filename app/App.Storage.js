@@ -10,8 +10,8 @@ Class("Storage", {
         this.autoSaveId = undefined;
         this.autoSaveTimer = 10000; //saving every 10 seconds
         this.workspace = (localStorage.getItem("workspace")) ? localStorage.getItem("workspace") : null;
-        this.currentProject = (localStorage.getItem("currentProject")) ? localStorage.getItem("currentProject") : "BaseProject"; //reference to current project
-        this.currentScene = (localStorage.getItem("currentScene")) ? localStorage.getItem("currentScene") : "BaseScene";
+        this.currentProject = (localStorage.getItem("currentProject")) ? localStorage.getItem("currentProject") : STORAGE.base.project; //reference to current project
+        this.currentScene = (localStorage.getItem("currentScene")) ? localStorage.getItem("currentScene") : STORAGE.base.scene;
         this.exporter = new THREE.SceneExporter();
         this.filehelper = new FileHelper();
     },
@@ -74,14 +74,15 @@ Class("Storage", {
 
     //save elements
     save: function() {
-        var dir = app.storage.workspace + "/" + app.storage.currentProject;
+        var dir = app.storage.workspace + "/" + app.storage.currentProject,
+            promise = new $.Deferred();
 
         if (!app.filehelper.checkDirectory(dir)) {
             app.dialog.error(STRINGS.NO_DIRECTORY.title, STRINGS.NO_DIRECTORY.message);
             return false;
         }
 
-        if (app.storage.currentScene == "BaseScene") {
+        if (app.storage.isBaseScene()) {
             app.dialog.warn(STRINGS.MISSING_SCENE_NAME.title, STRINGS.MISSING_SCENE_NAME.message, function() {
                 app.dialog.prompt(STRINGS.CHOOSE_SCENE.title, STRINGS.CHOOSE_SCENE.message, function(name) {
                     var basedir = dir + "/scenes/";
@@ -146,7 +147,11 @@ Class("Storage", {
     },
 
     isDefaultProject: function() {
-        return this.currentProject === STRINGS.defaultProject;
+        return this.currentProject === STORAGE.base.project;
+    },
+
+    isDefaultScene: function() {
+        return this.currentScene === STORAGE.base.scene;
     },
 
     // create project folder, and copy scaffold in it
