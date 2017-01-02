@@ -25,9 +25,9 @@
   "author": "Marco Stagni <marcostagni.com>",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/marco-ponds/WageEditor/issues"
+    "url": "https://github.com/marco-ponds/Mage-Studio/issues"
   },
-  "homepage": "https://github.com/marco-pondst/WageEditor#readme",
+  "homepage": "https://github.com/marco-pondst/Mage-Studio#readme",
   "devDependencies": {
     "bower": "*",
     "connect": "*",

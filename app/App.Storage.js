@@ -82,7 +82,7 @@ Class("Storage", {
             return false;
         }
 
-        if (app.storage.isBaseScene()) {
+        if (app.storage.isDefaultScene()) {
             app.dialog.warn(STRINGS.MISSING_SCENE_NAME.title, STRINGS.MISSING_SCENE_NAME.message, function() {
                 app.dialog.prompt(STRINGS.CHOOSE_SCENE.title, STRINGS.CHOOSE_SCENE.message, function(name) {
                     var basedir = dir + "/scenes/";

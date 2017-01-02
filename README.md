@@ -1,1 +1,1 @@
-#Mage Studio (alpha)
+# Mage Studio

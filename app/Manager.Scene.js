@@ -48,7 +48,7 @@ Class("SceneManager", {
     },
 
     init: function() {
-        this.camera = new THREE.PerspectiveCamera( 70, $(this.container).width() / $(this.container).height(), 1, 5000 );
+        this.camera = new THREE.PerspectiveCamera( 70, $(this.container).width() / $(this.container).height(), 1, 50000 );
         this.camera.position.set( 1000, 500, 1000 );
         this.camera.lookAt( new THREE.Vector3( 0, 200, 0 ) );
 
