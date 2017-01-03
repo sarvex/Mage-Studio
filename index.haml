@@ -54,6 +54,7 @@
         %link{:rel=>"stylesheet", :href=>"css/font-awesome/css/font-awesome.min.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/colorpicker.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/app.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/colors.css"}
 
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/topcoat-desktop-dark.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/main.css"}
@@ -328,40 +329,42 @@
                         .panel.panel-default
                             .panel-heading
                                 .panel-title
-                                    %i.fa.fa-cubes
-                                    %span
-                                        Meshes
-                            .panel-body.container
+                                    %i.fa.fa-cubes.text-blue
+                                    %span Meshes
+                            .panel-body.container-fluid
+                                .row
+                                    .col-md-4
+                                        %span
+                                            total
+                                        %span
+                                            0
+                                    .col-md-8.container
+                                        #sceneVertices.row
+                                            Vertices: 0
+                                        #sceneFaces.row
+                                            Faces: 0
                                 .row
                                     .col-md-12
                                         %ul#sceneHierarchy.hierarchy
-                                .row
-                                    #sceneVertices.col-md-12.panel-content-title
-                                        Vertices: 0
-                                .row
-                                    #sceneFaces.col-md-12.panel-content-title
-                                        Faces: 0
                         / fourth lights
                         .panel.panel-default
                             .panel-heading
                                 .panel-title
-                                    %i.fa.fa-lightbulb-o
-                                    %span
-                                        Lights
-                            .panel-body.container
-                                .row
-                                    .col-md-12
-                                        %ul#lightHierarchy.hierarchy
+                                    %i.fa.fa-lightbulb-o.text-yellow
+                                    %span Lights
+                            .panel-body.container-fluid
                                 .row
                                     #lightsCount.col-md-12.panel-content-title
                                         Light: 0
+                                .row
+                                    .col-md-12
+                                        %ul#lightHierarchy.hierarchy
                         / fifth sounds
                         .panel.panel-default.panel-column
                             .panel-heading
                                 .panel-title
-                                    %i.fa.fa-bell-o
-                                    %span
-                                        Sounds
+                                    %i.fa.fa-bell-o.text-green
+                                    %span Sounds
                             .panel-body.container
                                 .row
                                     .col-md-12
