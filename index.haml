@@ -325,30 +325,48 @@
                                     #controlsSpaceValue.col-md-12.panel-content-title
                                         Control Space: Local
                         / third scene hierarchy
-                        .panel.panel-default.panel-column
-                            .panel-body{:style=>"padding:0;"}
-                                .panel-content{:style=>"padding: 0;"}
-                                    %ul#sceneHierarchy.hierarchy
-                                .row.panel-content
+                        .panel.panel-default
+                            .panel-heading
+                                .panel-title
+                                    %i.fa.fa-cubes
+                                    %span
+                                        Meshes
+                            .panel-body.container
+                                .row
+                                    .col-md-12
+                                        %ul#sceneHierarchy.hierarchy
+                                .row
                                     #sceneVertices.col-md-12.panel-content-title
                                         Vertices: 0
-                                .row.panel-content
+                                .row
                                     #sceneFaces.col-md-12.panel-content-title
                                         Faces: 0
                         / fourth lights
-                        .panel.panel-default.panel-column
-                            .panel-body{:style=>"padding:0;"}
-                                .panel-content{:style=>"padding: 0;"}
-                                    %ul#lightHierarchy.hierarchy
-                                .row.panel-content
+                        .panel.panel-default
+                            .panel-heading
+                                .panel-title
+                                    %i.fa.fa-lightbulb-o
+                                    %span
+                                        Lights
+                            .panel-body.container
+                                .row
+                                    .col-md-12
+                                        %ul#lightHierarchy.hierarchy
+                                .row
                                     #lightsCount.col-md-12.panel-content-title
                                         Light: 0
                         / fifth sounds
                         .panel.panel-default.panel-column
-                            .panel-body{:style=>"padding:0;"}
-                                .panel-content{:style=>"padding: 0;"}
-                                    %ul#soundsHierarchy.hierarchy
-                                .row.panel-content
+                            .panel-heading
+                                .panel-title
+                                    %i.fa.fa-bell-o
+                                    %span
+                                        Sounds
+                            .panel-body.container
+                                .row
+                                    .col-md-12
+                                        %ul#soundsHierarchy.hierarchy
+                                .row
                                     #soundsCount.col-md-12.panel-content-title
                                         Sounds: 0
                         %h1
