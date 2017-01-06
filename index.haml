@@ -59,6 +59,10 @@
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/topcoat-desktop-dark.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/main.css"}
 
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/left_sidebar.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/right_sidebar.css"}
+
+
         %script{:type=>"text/javascript", :src=>"app/App.main.js"}
     %body
         / navbar
@@ -326,52 +330,62 @@
                                     #controlsSpaceValue.col-md-12.panel-content-title
                                         Control Space: Local
                         / third scene hierarchy
-                        .panel.panel-default
+                        .panel.panel-default.scene-panel
                             .panel-heading
                                 .panel-title
                                     %i.fa.fa-cubes.text-blue
                                     %span Meshes
-                            .panel-body.container-fluid
+                            .panel-body.container-fluid.meshes
                                 .row
                                     .col-md-4
-                                        %span
+                                        %span.total.total-label
                                             total
-                                        %span
+                                        %span.total.total-count
                                             0
-                                    .col-md-8.container
-                                        #sceneVertices.row
-                                            Vertices: 0
-                                        #sceneFaces.row
-                                            Faces: 0
+                                    .col-md-8.container-fluid
+                                        .row
+                                            %span.meshes-info
+                                                Vertices:
+                                            %span#sceneVertices.meshes-info.meshes-count
+                                                0
+                                        .row
+                                            %span.meshes-info
+                                                Faces:
+                                            %span#sceneFaces.meshes-info.meshes-count
+                                                0
                                 .row
                                     .col-md-12
-                                        %ul#sceneHierarchy.hierarchy
+                                        %ul#sceneHierarchy.hierarchy.empty
                         / fourth lights
-                        .panel.panel-default
+                        .panel.panel-default.scene-panel
                             .panel-heading
                                 .panel-title
                                     %i.fa.fa-lightbulb-o.text-yellow
                                     %span Lights
-                            .panel-body.container-fluid
+                            .panel-body.container-fluid.lights
                                 .row
-                                    #lightsCount.col-md-12.panel-content-title
-                                        Light: 0
-                                .row
-                                    .col-md-12
-                                        %ul#lightHierarchy.hierarchy
+                                    .col-md-4
+                                        %span.total.total-label
+                                            total
+                                        %span#lightsCount.total.total-count
+                                            0
+                                    .col-md-8
+                                        %ul#lightHierarchy.hierarchy.empty
                         / fifth sounds
-                        .panel.panel-default.panel-column
+                        .panel.panel-default.scene-panel
                             .panel-heading
                                 .panel-title
                                     %i.fa.fa-bell-o.text-green
                                     %span Sounds
-                            .panel-body.container
+                            .panel-body.container-fluid.sounds
                                 .row
-                                    .col-md-12
-                                        %ul#soundsHierarchy.hierarchy
-                                .row
-                                    #soundsCount.col-md-12.panel-content-title
-                                        Sounds: 0
+                                    .col-md-4
+                                        %span.total.total-label
+                                            total
+                                        %span#soundsCount.total.total-count
+                                            0
+                                    .col-md-8
+                                        %ul#soundsHierarchy.hierarchy.empty
                         %h1
                             .mage-player.topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
                                 .topcoat-button-bar__item

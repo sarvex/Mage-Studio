@@ -90,8 +90,8 @@ Class("LeftSidebar", {
             if (object.flag == "mesh") {
                 faces += object.geometry.faces.length;
                 vertices += object.geometry.vertices.length;
-                $('#sceneVertices').text('Vertices: '+vertices);
-                $('#sceneFaces').text('Faces: '+faces);
+                $('#sceneVertices').text(vertices);
+                $('#sceneFaces').text(faces);
             }
             $('#sceneHierarchy').append('<li id="'+object.uuid+'" data-flag="'+object.flag+'"data-uuid="'+object.uuid+'" class="'+c+' '+f+'" style="margin-left:'+margin+'px;">'+object.name+'</li>');
         });
@@ -146,7 +146,7 @@ Class("LeftSidebar", {
         $('#lightHierarchy').html("");
         var keys_list = app.lm.map.keys.concat();
         //writing lights count
-        $('#lightsCount').text("Lights: " + keys_list.length);
+        $('#lightsCount').text(keys_list.length);
         if (keys_list.length != 0) {
             var start = +new Date();
             do {

@@ -55,6 +55,8 @@
     <link href='css/colors.css' rel='stylesheet' type='text/css'>
     <link href='css/topcoat-desktop-dark.css' rel='stylesheet' type='text/css'>
     <link href='css/main.css' rel='stylesheet' type='text/css'>
+    <link href='css/left_sidebar.css' rel='stylesheet' type='text/css'>
+    <link href='css/right_sidebar.css' rel='stylesheet' type='text/css'>
     <script src='app/App.main.js' type='text/javascript'></script>
   </head>
   <body>
@@ -461,77 +463,93 @@
               </div>
             </div>
             <!-- third scene hierarchy -->
-            <div class='panel panel-default'>
+            <div class='panel panel-default scene-panel'>
               <div class='panel-heading'>
                 <div class='panel-title'>
                   <i class='fa fa-cubes text-blue'></i>
                   <span>Meshes</span>
                 </div>
               </div>
-              <div class='panel-body container-fluid'>
+              <div class='panel-body container-fluid meshes'>
                 <div class='row'>
                   <div class='col-md-4'>
-                    <span>
+                    <span class='total total-label'>
                       total
                     </span>
-                    <span>
+                    <span class='total total-count'>
                       0
                     </span>
                   </div>
-                  <div class='col-md-8 container'>
-                    <div class='row' id='sceneVertices'>
-                      Vertices: 0
+                  <div class='col-md-8 container-fluid'>
+                    <div class='row'>
+                      <span class='meshes-info'>
+                        Vertices:
+                      </span>
+                      <span class='meshes-info meshes-count' id='sceneVertices'>
+                        0
+                      </span>
                     </div>
-                    <div class='row' id='sceneFaces'>
-                      Faces: 0
+                    <div class='row'>
+                      <span class='meshes-info'>
+                        Faces:
+                      </span>
+                      <span class='meshes-info meshes-count' id='sceneFaces'>
+                        0
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div class='row'>
                   <div class='col-md-12'>
-                    <ul class='hierarchy' id='sceneHierarchy'></ul>
+                    <ul class='hierarchy empty' id='sceneHierarchy'></ul>
                   </div>
                 </div>
               </div>
             </div>
             <!-- fourth lights -->
-            <div class='panel panel-default'>
+            <div class='panel panel-default scene-panel'>
               <div class='panel-heading'>
                 <div class='panel-title'>
                   <i class='fa fa-lightbulb-o text-yellow'></i>
                   <span>Lights</span>
                 </div>
               </div>
-              <div class='panel-body container-fluid'>
+              <div class='panel-body container-fluid lights'>
                 <div class='row'>
-                  <div class='col-md-12 panel-content-title' id='lightsCount'>
-                    Light: 0
+                  <div class='col-md-4'>
+                    <span class='total total-label'>
+                      total
+                    </span>
+                    <span class='total total-count' id='lightsCount'>
+                      0
+                    </span>
                   </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-12'>
-                    <ul class='hierarchy' id='lightHierarchy'></ul>
+                  <div class='col-md-8'>
+                    <ul class='hierarchy empty' id='lightHierarchy'></ul>
                   </div>
                 </div>
               </div>
             </div>
             <!-- fifth sounds -->
-            <div class='panel panel-default panel-column'>
+            <div class='panel panel-default scene-panel'>
               <div class='panel-heading'>
                 <div class='panel-title'>
                   <i class='fa fa-bell-o text-green'></i>
                   <span>Sounds</span>
                 </div>
               </div>
-              <div class='panel-body container'>
+              <div class='panel-body container-fluid sounds'>
                 <div class='row'>
-                  <div class='col-md-12'>
-                    <ul class='hierarchy' id='soundsHierarchy'></ul>
+                  <div class='col-md-4'>
+                    <span class='total total-label'>
+                      total
+                    </span>
+                    <span class='total total-count' id='soundsCount'>
+                      0
+                    </span>
                   </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-12 panel-content-title' id='soundsCount'>
-                    Sounds: 0
+                  <div class='col-md-8'>
+                    <ul class='hierarchy empty' id='soundsHierarchy'></ul>
                   </div>
                 </div>
               </div>
