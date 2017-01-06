@@ -252,42 +252,43 @@
         #maincontainer.container-fluid
             #innercontainer.row
                 #left-column.column
-                    %h6.title
-                        Scene Settings
-                    #accordion.panel-group{"role"=>"tablist", "aria-multiselectable"=>"true"}
-                        / first expandable
-                        .panel.panel-default
-                            .panel-body{:style=>"padding:0;"}
-                                .row.panel-content
-                                    .col-md-4.panel-content-title
+                    .panel.panel-default
+                        .panel-heading
+                            .panel-title
+                                %i.fa.fa-cog
+                                %span Scene Settings
+                        %ul.list-group
+                            %li.list-group-item.container-fluid
+                                .row
+                                    .col-md-4
                                         Enabled
                                     .col-md-8
                                         %label.topcoat-switch
                                             %input#fogToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"fog"}
                                             .topcoat-switch__toggle
-                                .row.panel-content
-                                    .col-md-4.panel-content-title
+                                .row
+                                    .col-md-4
                                         Color
                                     .col-md-8
-                                        %input#fogColor.color{:style=>"width: 80px; margin-top: 4px;", "data-toggle"=>"fog"}
-                                .row.panel-content
-                                    .col-md-4.panel-content-title
+                                        %input#fogColor.color{"data-toggle"=>"fog"}
+                                .row
+                                    .col-md-4
                                         Density
                                     .col-md-8
-                                        %input#fogDensity.topcoat-range{:style=>"width: 80px; margin-top: 13px;", :type=>"range", "data-toggle"=>"fog", :min=>"0", :max=>"1", :step=>"0.1", :value=>"0.5"}
-                        / shadow expandable
-                        .panel.panel-default{:style=>"margin-top: -2px !important;"}
-                            .panel-body{:style=>"padding:0;padding-bottom: 10px;"}
-                                .row.panel-content
-                                    .col-md-4.panel-content-title
+                                        %input#fogDensity.topcoat-range{:type=>"range", "data-toggle"=>"fog", :min=>"0", :max=>"1", :step=>"0.1", :value=>"0.5"}
+                            %li.list-group-item.container-fluid
+                                .row
+                                    .col-md-4
                                         Enabled
                                     .col-md-8
                                         %label.topcoat-switch
                                             %input#shadowToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"shadow"}
                                             .topcoat-switch__toggle
-                                %h6.panel-title-medium{:style=>"margin-left: 27px;"}
-                                    type:
-                                .row.panel-content
+                                .row
+                                    .col-md-12
+                                        %span
+                                            type:
+                                .row
                                     .dropdown
                                         #changeMaterial.topcoat-button--large--cta.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown", "aria-expanded"=>"true", :style=>"margin-left: 13px;height: 20px;line-height: 20px;"}
                                             Change Shadow Type
@@ -302,15 +303,14 @@
                                             %li{:role=>"presentation"}
                                                 %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('PCFSoftShadowMap');"}
                                                     PCFSoftShadowMap
-                        .row
-                            .col-md-12
-                                %button#updateShadows.topcoat-button--large--cta{:style=>"width:100%;"}
-                                    Update Scene
-                        / here second expandable
-                        .panel.panel-default.panel-column
-                            .panel-body{:style=>"padding:0;"}
-                                .panel-content{:style=>"padding: 0;"}
-                                    .topcoat-button-bar{:style=>"margin-left: auto; margin-right: auto;"}
+                            %li.list-group-item.container-fluid
+                                .row
+                                    .col-md-12
+                                        %button#updateShadows.topcoat-button--large--cta
+                                            Update Scene
+                            %li.list-group-item.container-fluid
+                                .row
+                                    .topcoat-button-bar
                                         .topcoat-button-bar__item
                                             %button#controlsTranslate.topcoat-button-bar__button--large.settingButton
                                                 Translate
@@ -323,89 +323,89 @@
                                         .topcoat-button-bar__item
                                             %button#controlsSpace.topcoat-button-bar__button--large.settingButton
                                                 Space
-                                .row.panel-content
+                                .row
                                     #controlsMode.col-md-12.panel-content-title
                                         Control Mode: Translate
-                                .row.panel-content
+                                .row
                                     #controlsSpaceValue.col-md-12.panel-content-title
                                         Control Space: Local
-                        / third scene hierarchy
-                        .panel.panel-default.scene-panel
-                            .panel-heading
-                                .panel-title
-                                    %i.fa.fa-cubes.text-blue
-                                    %span Meshes
-                            .panel-body.container-fluid.meshes
-                                .row
-                                    .col-md-4
-                                        %span.total.total-label
-                                            total
-                                        %span.total.total-count
+                    / third scene hierarchy
+                    .panel.panel-default.scene-panel
+                        .panel-heading
+                            .panel-title
+                                %i.fa.fa-cubes.text-blue
+                                %span Meshes
+                        .panel-body.container-fluid.meshes
+                            .row
+                                .col-md-4
+                                    %span.total.total-label
+                                        total
+                                    %span.total.total-count
+                                        0
+                                .col-md-8.container-fluid
+                                    .row
+                                        %span.meshes-info
+                                            Vertices:
+                                        %span#sceneVertices.meshes-info.meshes-count
                                             0
-                                    .col-md-8.container-fluid
-                                        .row
-                                            %span.meshes-info
-                                                Vertices:
-                                            %span#sceneVertices.meshes-info.meshes-count
-                                                0
-                                        .row
-                                            %span.meshes-info
-                                                Faces:
-                                            %span#sceneFaces.meshes-info.meshes-count
-                                                0
-                                .row
-                                    .col-md-12
-                                        %ul#sceneHierarchy.hierarchy.empty
-                                            %li.empty-hierarchy-message
-                                                no elements
-                        / fourth lights
-                        .panel.panel-default.scene-panel
-                            .panel-heading
-                                .panel-title
-                                    %i.fa.fa-lightbulb-o.text-yellow
-                                    %span Lights
-                            .panel-body.container-fluid.lights
-                                .row
-                                    .col-md-4
-                                        %span.total.total-label
-                                            total
-                                        %span#lightsCount.total.total-count
+                                    .row
+                                        %span.meshes-info
+                                            Faces:
+                                        %span#sceneFaces.meshes-info.meshes-count
                                             0
-                                    .col-md-8
-                                        %ul#lightHierarchy.hierarchy.empty
-                                            %li.empty-hierarchy-message
-                                                no elements
-                        / fifth sounds
-                        .panel.panel-default.scene-panel
-                            .panel-heading
-                                .panel-title
-                                    %i.fa.fa-bell-o.text-green
-                                    %span Sounds
-                            .panel-body.container-fluid.sounds
-                                .row
-                                    .col-md-4
-                                        %span.total.total-label
-                                            total
-                                        %span#soundsCount.total.total-count
-                                            0
-                                    .col-md-8
-                                        %ul#soundsHierarchy.hierarchy.empty
-                                            %li.empty-hierarchy-message
-                                                no elements
-                        %h1
-                            .mage-player.topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
-                                .topcoat-button-bar__item
-                                    %button.play_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.play();"}
-                                        %i.fa.fa-play
-                                        %span
-                                            PLAY
-                                .topcoat-button-bar__item
-                                    %button.pause_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.pause();"}
-                                        %i.fa.fa-pause
-                                        %span
-                                            PAUSE
-                        / #playSceneContainer.row
-                        /    %img{:src=>"img/play.png"}
+                            .row
+                                .col-md-12
+                                    %ul#sceneHierarchy.hierarchy.empty
+                                        %li.empty-hierarchy-message
+                                            no elements
+                    / fourth lights
+                    .panel.panel-default.scene-panel
+                        .panel-heading
+                            .panel-title
+                                %i.fa.fa-lightbulb-o.text-yellow
+                                %span Lights
+                        .panel-body.container-fluid.lights
+                            .row
+                                .col-md-4
+                                    %span.total.total-label
+                                        total
+                                    %span#lightsCount.total.total-count
+                                        0
+                                .col-md-8
+                                    %ul#lightHierarchy.hierarchy.empty
+                                        %li.empty-hierarchy-message
+                                            no elements
+                    / fifth sounds
+                    .panel.panel-default.scene-panel
+                        .panel-heading
+                            .panel-title
+                                %i.fa.fa-bell-o.text-green
+                                %span Sounds
+                        .panel-body.container-fluid.sounds
+                            .row
+                                .col-md-4
+                                    %span.total.total-label
+                                        total
+                                    %span#soundsCount.total.total-count
+                                        0
+                                .col-md-8
+                                    %ul#soundsHierarchy.hierarchy.empty
+                                        %li.empty-hierarchy-message
+                                            no elements
+                    %h1
+                        .mage-player.topcoat-button-bar{:style=>"margin-right:auto; margin-left:auto; "}
+                            .topcoat-button-bar__item
+                                %button.play_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.play();"}
+                                    %i.fa.fa-play
+                                    %span
+                                        PLAY
+                            .topcoat-button-bar__item
+                                %button.pause_button.topcoat-button-bar__button--large{:onclick=>"javascript:app.player.pause();"}
+                                    %i.fa.fa-pause
+                                    %span
+                                        PAUSE
+                    / #playSceneContainer.row
+                    /    %img{:src=>"img/play.png"}
                 #center.column
                     #scenecontainer
                 #right-column.column

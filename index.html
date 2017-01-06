@@ -336,15 +336,17 @@
     <div class='container-fluid' id='maincontainer'>
       <div class='row' id='innercontainer'>
         <div class='column' id='left-column'>
-          <h6 class='title'>
-            Scene Settings
-          </h6>
-          <div aria-multiselectable='true' class='panel-group' id='accordion' role='tablist'>
-            <!-- first expandable -->
-            <div class='panel panel-default'>
-              <div class='panel-body' style='padding:0;'>
-                <div class='row panel-content'>
-                  <div class='col-md-4 panel-content-title'>
+          <div class='panel panel-default'>
+            <div class='panel-heading'>
+              <div class='panel-title'>
+                <i class='fa fa-cog'></i>
+                <span>Scene Settings</span>
+              </div>
+            </div>
+            <ul class='list-group'>
+              <li class='list-group-item container-fluid'>
+                <div class='row'>
+                  <div class='col-md-4'>
                     Enabled
                   </div>
                   <div class='col-md-8'>
@@ -354,29 +356,26 @@
                     </label>
                   </div>
                 </div>
-                <div class='row panel-content'>
-                  <div class='col-md-4 panel-content-title'>
+                <div class='row'>
+                  <div class='col-md-4'>
                     Color
                   </div>
                   <div class='col-md-8'>
-                    <input class='color' data-toggle='fog' id='fogColor' style='width: 80px; margin-top: 4px;'>
+                    <input class='color' data-toggle='fog' id='fogColor'>
                   </div>
                 </div>
-                <div class='row panel-content'>
-                  <div class='col-md-4 panel-content-title'>
+                <div class='row'>
+                  <div class='col-md-4'>
                     Density
                   </div>
                   <div class='col-md-8'>
-                    <input class='topcoat-range' data-toggle='fog' id='fogDensity' max='1' min='0' step='0.1' style='width: 80px; margin-top: 13px;' type='range' value='0.5'>
+                    <input class='topcoat-range' data-toggle='fog' id='fogDensity' max='1' min='0' step='0.1' type='range' value='0.5'>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- shadow expandable -->
-            <div class='panel panel-default' style='margin-top: -2px !important;'>
-              <div class='panel-body' style='padding:0;padding-bottom: 10px;'>
-                <div class='row panel-content'>
-                  <div class='col-md-4 panel-content-title'>
+              </li>
+              <li class='list-group-item container-fluid'>
+                <div class='row'>
+                  <div class='col-md-4'>
                     Enabled
                   </div>
                   <div class='col-md-8'>
@@ -386,10 +385,14 @@
                     </label>
                   </div>
                 </div>
-                <h6 class='panel-title-medium' style='margin-left: 27px;'>
-                  type:
-                </h6>
-                <div class='row panel-content'>
+                <div class='row'>
+                  <div class='col-md-12'>
+                    <span>
+                      type:
+                    </span>
+                  </div>
+                </div>
+                <div class='row'>
                   <div class='dropdown'>
                     <div aria-expanded='true' class='topcoat-button--large--cta dropdown-toggle' data-toggle='dropdown' id='changeMaterial' style='margin-left: 13px;height: 20px;line-height: 20px;' type='button'>
                       Change Shadow Type
@@ -414,20 +417,19 @@
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class='row'>
-              <div class='col-md-12'>
-                <button class='topcoat-button--large--cta' id='updateShadows' style='width:100%;'>
-                  Update Scene
-                </button>
-              </div>
-            </div>
-            <!-- here second expandable -->
-            <div class='panel panel-default panel-column'>
-              <div class='panel-body' style='padding:0;'>
-                <div class='panel-content' style='padding: 0;'>
-                  <div class='topcoat-button-bar' style='margin-left: auto; margin-right: auto;'>
+              </li>
+              <li class='list-group-item container-fluid'>
+                <div class='row'>
+                  <div class='col-md-12'>
+                    <button class='topcoat-button--large--cta' id='updateShadows'>
+                      Update Scene
+                    </button>
+                  </div>
+                </div>
+              </li>
+              <li class='list-group-item container-fluid'>
+                <div class='row'>
+                  <div class='topcoat-button-bar'>
                     <div class='topcoat-button-bar__item'>
                       <button class='topcoat-button-bar__button--large settingButton' id='controlsTranslate'>
                         Translate
@@ -450,145 +452,145 @@
                     </div>
                   </div>
                 </div>
-                <div class='row panel-content'>
+                <div class='row'>
                   <div class='col-md-12 panel-content-title' id='controlsMode'>
                     Control Mode: Translate
                   </div>
                 </div>
-                <div class='row panel-content'>
+                <div class='row'>
                   <div class='col-md-12 panel-content-title' id='controlsSpaceValue'>
                     Control Space: Local
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- third scene hierarchy -->
-            <div class='panel panel-default scene-panel'>
-              <div class='panel-heading'>
-                <div class='panel-title'>
-                  <i class='fa fa-cubes text-blue'></i>
-                  <span>Meshes</span>
-                </div>
-              </div>
-              <div class='panel-body container-fluid meshes'>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    <span class='total total-label'>
-                      total
-                    </span>
-                    <span class='total total-count'>
-                      0
-                    </span>
-                  </div>
-                  <div class='col-md-8 container-fluid'>
-                    <div class='row'>
-                      <span class='meshes-info'>
-                        Vertices:
-                      </span>
-                      <span class='meshes-info meshes-count' id='sceneVertices'>
-                        0
-                      </span>
-                    </div>
-                    <div class='row'>
-                      <span class='meshes-info'>
-                        Faces:
-                      </span>
-                      <span class='meshes-info meshes-count' id='sceneFaces'>
-                        0
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-12'>
-                    <ul class='hierarchy empty' id='sceneHierarchy'>
-                      <li class='empty-hierarchy-message'>
-                        no elements
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- fourth lights -->
-            <div class='panel panel-default scene-panel'>
-              <div class='panel-heading'>
-                <div class='panel-title'>
-                  <i class='fa fa-lightbulb-o text-yellow'></i>
-                  <span>Lights</span>
-                </div>
-              </div>
-              <div class='panel-body container-fluid lights'>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    <span class='total total-label'>
-                      total
-                    </span>
-                    <span class='total total-count' id='lightsCount'>
-                      0
-                    </span>
-                  </div>
-                  <div class='col-md-8'>
-                    <ul class='hierarchy empty' id='lightHierarchy'>
-                      <li class='empty-hierarchy-message'>
-                        no elements
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- fifth sounds -->
-            <div class='panel panel-default scene-panel'>
-              <div class='panel-heading'>
-                <div class='panel-title'>
-                  <i class='fa fa-bell-o text-green'></i>
-                  <span>Sounds</span>
-                </div>
-              </div>
-              <div class='panel-body container-fluid sounds'>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    <span class='total total-label'>
-                      total
-                    </span>
-                    <span class='total total-count' id='soundsCount'>
-                      0
-                    </span>
-                  </div>
-                  <div class='col-md-8'>
-                    <ul class='hierarchy empty' id='soundsHierarchy'>
-                      <li class='empty-hierarchy-message'>
-                        no elements
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <h1>
-              <div class='mage-player topcoat-button-bar' style='margin-right:auto; margin-left:auto; '>
-                <div class='topcoat-button-bar__item'>
-                  <button class='play_button topcoat-button-bar__button--large' onclick='javascript:app.player.play();'>
-                    <i class='fa fa-play'></i>
-                    <span>
-                      PLAY
-                    </span>
-                  </button>
-                </div>
-                <div class='topcoat-button-bar__item'>
-                  <button class='pause_button topcoat-button-bar__button--large' onclick='javascript:app.player.pause();'>
-                    <i class='fa fa-pause'></i>
-                    <span>
-                      PAUSE
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </h1>
-            <!-- #playSceneContainer.row -->
-            <!-- %img{:src=>"img/play.png"} -->
+              </li>
+            </ul>
           </div>
+          <!-- third scene hierarchy -->
+          <div class='panel panel-default scene-panel'>
+            <div class='panel-heading'>
+              <div class='panel-title'>
+                <i class='fa fa-cubes text-blue'></i>
+                <span>Meshes</span>
+              </div>
+            </div>
+            <div class='panel-body container-fluid meshes'>
+              <div class='row'>
+                <div class='col-md-4'>
+                  <span class='total total-label'>
+                    total
+                  </span>
+                  <span class='total total-count'>
+                    0
+                  </span>
+                </div>
+                <div class='col-md-8 container-fluid'>
+                  <div class='row'>
+                    <span class='meshes-info'>
+                      Vertices:
+                    </span>
+                    <span class='meshes-info meshes-count' id='sceneVertices'>
+                      0
+                    </span>
+                  </div>
+                  <div class='row'>
+                    <span class='meshes-info'>
+                      Faces:
+                    </span>
+                    <span class='meshes-info meshes-count' id='sceneFaces'>
+                      0
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='col-md-12'>
+                  <ul class='hierarchy empty' id='sceneHierarchy'>
+                    <li class='empty-hierarchy-message'>
+                      no elements
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fourth lights -->
+          <div class='panel panel-default scene-panel'>
+            <div class='panel-heading'>
+              <div class='panel-title'>
+                <i class='fa fa-lightbulb-o text-yellow'></i>
+                <span>Lights</span>
+              </div>
+            </div>
+            <div class='panel-body container-fluid lights'>
+              <div class='row'>
+                <div class='col-md-4'>
+                  <span class='total total-label'>
+                    total
+                  </span>
+                  <span class='total total-count' id='lightsCount'>
+                    0
+                  </span>
+                </div>
+                <div class='col-md-8'>
+                  <ul class='hierarchy empty' id='lightHierarchy'>
+                    <li class='empty-hierarchy-message'>
+                      no elements
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fifth sounds -->
+          <div class='panel panel-default scene-panel'>
+            <div class='panel-heading'>
+              <div class='panel-title'>
+                <i class='fa fa-bell-o text-green'></i>
+                <span>Sounds</span>
+              </div>
+            </div>
+            <div class='panel-body container-fluid sounds'>
+              <div class='row'>
+                <div class='col-md-4'>
+                  <span class='total total-label'>
+                    total
+                  </span>
+                  <span class='total total-count' id='soundsCount'>
+                    0
+                  </span>
+                </div>
+                <div class='col-md-8'>
+                  <ul class='hierarchy empty' id='soundsHierarchy'>
+                    <li class='empty-hierarchy-message'>
+                      no elements
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1>
+            <div class='mage-player topcoat-button-bar' style='margin-right:auto; margin-left:auto; '>
+              <div class='topcoat-button-bar__item'>
+                <button class='play_button topcoat-button-bar__button--large' onclick='javascript:app.player.play();'>
+                  <i class='fa fa-play'></i>
+                  <span>
+                    PLAY
+                  </span>
+                </button>
+              </div>
+              <div class='topcoat-button-bar__item'>
+                <button class='pause_button topcoat-button-bar__button--large' onclick='javascript:app.player.pause();'>
+                  <i class='fa fa-pause'></i>
+                  <span>
+                    PAUSE
+                  </span>
+                </button>
+              </div>
+            </div>
+          </h1>
+          <!-- #playSceneContainer.row -->
+          <!-- %img{:src=>"img/play.png"} -->
         </div>
         <div class='column' id='center'>
           <div id='scenecontainer'></div>

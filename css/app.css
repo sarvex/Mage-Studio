@@ -53,12 +53,14 @@ a {
     margin-left: 3.80rem;
 }
 
+/*
 .list-group-item:hover {
     background: #4FC1E9;
     color: black;
     cursor: pointer;
     font-weight: bold;
 }
+*/
 
 #maincontainer, #scriptcontainer {
     height: calc(100% - 28px);
