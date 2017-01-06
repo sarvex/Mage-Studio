@@ -31,11 +31,24 @@
     overflow: auto;
     max-width: 100%;
     max-height: 200px;
+    margin: 0;
     display: block;
+    padding: 0;
 }
 
-.hierarchy.empty {
+.hierarchy .empty-hierarchy-message {
   display: none;
+}
+
+.hierarchy.empty .empty-hierarchy-message {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #333;
+  margin-top: 10px;
+  color: white;
+  line-height: 40px;
+  height: 40px;
 }
 
 .hierarchy .parent, .son {
