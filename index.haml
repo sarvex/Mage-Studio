@@ -54,7 +54,7 @@
         %link{:rel=>"stylesheet", :href=>"css/font-awesome/css/font-awesome.min.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/colorpicker.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/app.css"}
-        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/colors.css"}
+        %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/text.css"}
 
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/topcoat-desktop-dark.css"}
         %link{:rel=>"stylesheet", :type=>"text/css", :href=>"css/main.css"}
@@ -259,50 +259,51 @@
                                 %span Scene Settings
                         %ul.list-group
                             %li.list-group-item.container-fluid
-                                .row
-                                    .col-md-4
-                                        Enabled
-                                    .col-md-8
-                                        %label.topcoat-switch
-                                            %input#fogToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"fog"}
-                                            .topcoat-switch__toggle
-                                .row
-                                    .col-md-4
-                                        Color
-                                    .col-md-8
-                                        %input#fogColor.color{"data-toggle"=>"fog"}
-                                .row
-                                    .col-md-4
-                                        Density
-                                    .col-md-8
-                                        %input#fogDensity.topcoat-range{:type=>"range", "data-toggle"=>"fog", :min=>"0", :max=>"1", :step=>"0.1", :value=>"0.5"}
-                            %li.list-group-item.container-fluid
-                                .row
-                                    .col-md-4
-                                        Enabled
-                                    .col-md-8
-                                        %label.topcoat-switch
-                                            %input#shadowToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"shadow"}
-                                            .topcoat-switch__toggle
-                                .row
-                                    .col-md-12
-                                        %span
-                                            type:
-                                .row
-                                    .dropdown
-                                        #changeMaterial.topcoat-button--large--cta.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown", "aria-expanded"=>"true", :style=>"margin-left: 13px;height: 20px;line-height: 20px;"}
-                                            Change Shadow Type
-                                            %span.caret
-                                        %ul.dropdown-menu{:role=>"menu", "aria-labelledby"=>"changeMaterial"}
-                                            %li{:role=>"presentation"}
-                                                %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('BasicShadowMap');"}
-                                                    BasicShadowMap
-                                            %li{:role=>"presentation"}
-                                                %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('PCFShadowMap');"}
-                                                    PCFShadowMap
-                                            %li{:role=>"presentation"}
-                                                %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('PCFSoftShadowMap');"}
-                                                    PCFSoftShadowMap
+                                .scene-settings-panel
+                                    .row
+                                        .col-md-3
+                                            %input#fogColor.color.input-color{"data-toggle"=>"fog"}
+                                        .col-md-3
+                                            fog
+                                        .col-md-6
+                                            /%label.topcoat-switch
+                                            %i.fa.fa-eye.text-16
+                                                /%input#fogToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"fog"}
+                                                /.topcoat-switch__toggle
+                                    .row
+                                        .col-md-4
+                                            Density
+                                        .col-md-8
+                                            %input#fogDensity.topcoat-range{:type=>"range", "data-toggle"=>"fog", :min=>"0", :max=>"1", :step=>"0.1", :value=>"0.5"}
+
+
+                                .scene-settings-panel
+                                    .row
+                                        .col-md-4
+                                            shadow
+                                        .col-md-8
+                                            %label.topcoat-switch
+                                                %input#shadowToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"shadow"}
+                                                .topcoat-switch__toggle
+                                    .row
+                                        .col-md-12
+                                            %span
+                                                type:
+                                    .row
+                                        .dropdown
+                                            #changeMaterial.topcoat-button--large--cta.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown", "aria-expanded"=>"true", :style=>"margin-left: 13px;height: 20px;line-height: 20px;"}
+                                                Change Shadow Type
+                                                %span.caret
+                                            %ul.dropdown-menu{:role=>"menu", "aria-labelledby"=>"changeMaterial"}
+                                                %li{:role=>"presentation"}
+                                                    %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('BasicShadowMap');"}
+                                                        BasicShadowMap
+                                                %li{:role=>"presentation"}
+                                                    %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('PCFShadowMap');"}
+                                                        PCFShadowMap
+                                                %li{:role=>"presentation"}
+                                                    %a{:role=>"menuitem", :tabindex=>"-1", :href=>"javascript:app.sm.changeShadow('PCFSoftShadowMap');"}
+                                                        PCFSoftShadowMap
                             %li.list-group-item.container-fluid
                                 .row
                                     .col-md-12
@@ -333,7 +334,7 @@
                     .panel.panel-default.scene-panel
                         .panel-heading
                             .panel-title
-                                %i.fa.fa-cubes.text-blue
+                                %i.fa.fa-cubes.text-blue.text-14
                                 %span Meshes
                         .panel-body.container-fluid.meshes
                             .row
@@ -362,7 +363,7 @@
                     .panel.panel-default.scene-panel
                         .panel-heading
                             .panel-title
-                                %i.fa.fa-lightbulb-o.text-yellow
+                                %i.fa.fa-lightbulb-o.text-yellow.text-14
                                 %span Lights
                         .panel-body.container-fluid.lights
                             .row
@@ -379,7 +380,7 @@
                     .panel.panel-default.scene-panel
                         .panel-heading
                             .panel-title
-                                %i.fa.fa-bell-o.text-green
+                                %i.fa.fa-bell-o.text-green.text-14
                                 %span Sounds
                         .panel-body.container-fluid.sounds
                             .row

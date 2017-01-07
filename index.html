@@ -52,7 +52,7 @@
     <link href='css/font-awesome/css/font-awesome.min.css' rel='stylesheet'>
     <link href='css/colorpicker.css' rel='stylesheet' type='text/css'>
     <link href='css/app.css' rel='stylesheet' type='text/css'>
-    <link href='css/colors.css' rel='stylesheet' type='text/css'>
+    <link href='css/text.css' rel='stylesheet' type='text/css'>
     <link href='css/topcoat-desktop-dark.css' rel='stylesheet' type='text/css'>
     <link href='css/main.css' rel='stylesheet' type='text/css'>
     <link href='css/left_sidebar.css' rel='stylesheet' type='text/css'>
@@ -345,76 +345,74 @@
             </div>
             <ul class='list-group'>
               <li class='list-group-item container-fluid'>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    Enabled
-                  </div>
-                  <div class='col-md-8'>
-                    <label class='topcoat-switch'>
-                      <input class='topcoat-switch__input' data-flag='fog' id='fogToggle' type='checkbox'>
-                      <div class='topcoat-switch__toggle'></div>
-                    </label>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    Color
-                  </div>
-                  <div class='col-md-8'>
-                    <input class='color' data-toggle='fog' id='fogColor'>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    Density
-                  </div>
-                  <div class='col-md-8'>
-                    <input class='topcoat-range' data-toggle='fog' id='fogDensity' max='1' min='0' step='0.1' type='range' value='0.5'>
-                  </div>
-                </div>
-              </li>
-              <li class='list-group-item container-fluid'>
-                <div class='row'>
-                  <div class='col-md-4'>
-                    Enabled
-                  </div>
-                  <div class='col-md-8'>
-                    <label class='topcoat-switch'>
-                      <input class='topcoat-switch__input' data-flag='shadow' id='shadowToggle' type='checkbox'>
-                      <div class='topcoat-switch__toggle'></div>
-                    </label>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='col-md-12'>
-                    <span>
-                      type:
-                    </span>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='dropdown'>
-                    <div aria-expanded='true' class='topcoat-button--large--cta dropdown-toggle' data-toggle='dropdown' id='changeMaterial' style='margin-left: 13px;height: 20px;line-height: 20px;' type='button'>
-                      Change Shadow Type
-                      <span class='caret'></span>
+                <div class='scene-settings-panel'>
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <input class='color input-color' data-toggle='fog' id='fogColor'>
                     </div>
-                    <ul aria-labelledby='changeMaterial' class='dropdown-menu' role='menu'>
-                      <li role='presentation'>
-                        <a href="javascript:app.sm.changeShadow('BasicShadowMap');" role='menuitem' tabindex='-1'>
-                          BasicShadowMap
-                        </a>
-                      </li>
-                      <li role='presentation'>
-                        <a href="javascript:app.sm.changeShadow('PCFShadowMap');" role='menuitem' tabindex='-1'>
-                          PCFShadowMap
-                        </a>
-                      </li>
-                      <li role='presentation'>
-                        <a href="javascript:app.sm.changeShadow('PCFSoftShadowMap');" role='menuitem' tabindex='-1'>
-                          PCFSoftShadowMap
-                        </a>
-                      </li>
-                    </ul>
+                    <div class='col-md-3'>
+                      fog
+                    </div>
+                    <div class='col-md-6'>
+                      <!-- %label.topcoat-switch -->
+                      <i class='fa fa-eye text-16'>
+                        <!-- %input#fogToggle.topcoat-switch__input{:type=>"checkbox", "data-flag"=>"fog"} -->
+                        <!-- .topcoat-switch__toggle -->
+                      </i>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='col-md-4'>
+                      Density
+                    </div>
+                    <div class='col-md-8'>
+                      <input class='topcoat-range' data-toggle='fog' id='fogDensity' max='1' min='0' step='0.1' type='range' value='0.5'>
+                    </div>
+                  </div>
+                </div>
+                <div class='scene-settings-panel'>
+                  <div class='row'>
+                    <div class='col-md-4'>
+                      shadow
+                    </div>
+                    <div class='col-md-8'>
+                      <label class='topcoat-switch'>
+                        <input class='topcoat-switch__input' data-flag='shadow' id='shadowToggle' type='checkbox'>
+                        <div class='topcoat-switch__toggle'></div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <span>
+                        type:
+                      </span>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='dropdown'>
+                      <div aria-expanded='true' class='topcoat-button--large--cta dropdown-toggle' data-toggle='dropdown' id='changeMaterial' style='margin-left: 13px;height: 20px;line-height: 20px;' type='button'>
+                        Change Shadow Type
+                        <span class='caret'></span>
+                      </div>
+                      <ul aria-labelledby='changeMaterial' class='dropdown-menu' role='menu'>
+                        <li role='presentation'>
+                          <a href="javascript:app.sm.changeShadow('BasicShadowMap');" role='menuitem' tabindex='-1'>
+                            BasicShadowMap
+                          </a>
+                        </li>
+                        <li role='presentation'>
+                          <a href="javascript:app.sm.changeShadow('PCFShadowMap');" role='menuitem' tabindex='-1'>
+                            PCFShadowMap
+                          </a>
+                        </li>
+                        <li role='presentation'>
+                          <a href="javascript:app.sm.changeShadow('PCFSoftShadowMap');" role='menuitem' tabindex='-1'>
+                            PCFSoftShadowMap
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -469,7 +467,7 @@
           <div class='panel panel-default scene-panel'>
             <div class='panel-heading'>
               <div class='panel-title'>
-                <i class='fa fa-cubes text-blue'></i>
+                <i class='fa fa-cubes text-blue text-14'></i>
                 <span>Meshes</span>
               </div>
             </div>
@@ -517,7 +515,7 @@
           <div class='panel panel-default scene-panel'>
             <div class='panel-heading'>
               <div class='panel-title'>
-                <i class='fa fa-lightbulb-o text-yellow'></i>
+                <i class='fa fa-lightbulb-o text-yellow text-14'></i>
                 <span>Lights</span>
               </div>
             </div>
@@ -545,7 +543,7 @@
           <div class='panel panel-default scene-panel'>
             <div class='panel-heading'>
               <div class='panel-title'>
-                <i class='fa fa-bell-o text-green'></i>
+                <i class='fa fa-bell-o text-green text-14'></i>
                 <span>Sounds</span>
               </div>
             </div>
