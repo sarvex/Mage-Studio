@@ -97,8 +97,9 @@ a {
 
 .panel-heading {
     background: #1d1d1d !important;
-    border-bottom: 0.07em solid #333 !important;
-    border-top: 0.07em solid #333 !important;
+    /* border-bottom: 0.07em solid #333 !important; */
+    /* border-top: 0.07em solid #333 !important; */
+    /* font-size: 8px !important; */
 }
 
 .panel-content {
@@ -122,8 +123,8 @@ a {
 }
 
 .panel-body{
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    /* padding-top: 20px !important; */
+    /* padding-bottom: 20px !important; */
 }
 
 .settingButton {
