@@ -59,10 +59,14 @@ Class("RightSidebar", {
         var views = ["meshHeader"];
         views.push(o.material.type);
         views.push("scriptSelector");
+        views.push("shaderSelector");
+        views.push("shaderOptions");
         //loading views
         app.interface.loader.loadArray(views, function() {
 
             app.interface.rightSidebar._setScriptSelector();
+            app.interface.rightSidebar._setShaderSelector();
+            app.interface.rightSidebar._setShaderOptions();
             //resetting interface input listeners
             app.interface.setInputEvents("#meshColor");
             //we are now sure views have been inflated
@@ -152,6 +156,10 @@ Class("RightSidebar", {
             if (o.userData['script_name']) {
                 $('#changeScript').text(o.userData['script_name']);
             }
+
+            if (o.userData['shader_name']) {
+                $('#changeShader').text(o.userData['shader_name']);
+            }
         });
     },
 
@@ -171,6 +179,26 @@ Class("RightSidebar", {
             a.innerText = scripts[i].name;
             li.appendChild(a);
             $('#scriptSelector').append(li);
+        }
+    },
+
+    _setShaderSelector: function() {
+        var engine = require('mage-engine').engine,
+            shaders = engine.fx.shadersEngine.SHADERS;
+        
+        for (var i in shaders) {
+            var li = document.createElement('li');
+            li.role = 'presentation';
+            var a = document.createElement('a');
+            a.role = 'menuitem';
+            a.tabindex = '-1';
+            a.dataset['name'] = shaders[i];
+            a.onclick = function() {
+                app.interface.rightSidebar.meshListener.changeShader(this.dataset['name']);
+            }
+            a.innerText = shaders[i];
+            li.appendChild(a);
+            $('#shaderSelector').append(li);
         }
     },
 

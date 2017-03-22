@@ -1,0 +1,13 @@
+.panel.panel-default
+    .panel-heading
+        %a{:role=>"button", "data-toggle"=>"collapse", "data-parent"=>"#rightContainer", :href=>"#shaderCollapse", "aria-expanded"=>"true", "aria-controls"=>"shaderCollapse"}
+            %h3.panel-title
+                Shader
+    #shaderCollapse.panel-collapse.collapse{:role=>"tabpanel", "aria-labelledby"=>"shaderCollapse"}
+        .panel-body
+            .row.panel-content{:style=>"padding-left:0; margin-top: 10px;"}
+                .dropdown{:style=>"margin-bottom:10px;"}
+                    #changeShader.topcoat-button--large--cta.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown", "aria-expanded"=>"true", :style=>"margin-left: 13px;height: 20px;line-height: 20px;"}
+                        Change Shader
+                        %span.caret
+                    %ul.dropdown-menu#shaderSelector{:role=>"menu", "aria-labelledby"=>"changeShader"}

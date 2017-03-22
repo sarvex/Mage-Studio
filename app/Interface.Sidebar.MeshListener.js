@@ -343,11 +343,27 @@ Class("MeshListener", {
                 'script_key': app.storage.getStorageKey('').key
             };
         if (app.sm.typeClicked == 'mesh') {
-            app.mm.map.get(app.sm.uuid).userData = userData;
+            Object.assign(app.mm.map.get(app.sm.uuid).userData, userData);
         } else {
-            app.modm.map.get(app.sm.uuid).userData = userData;
+            Object.assign(app.modm.map.get(app.sm.uuid).userData, userData);
         }
         $('#changeScript').text(name);
+    },
+
+    changeShader: function(name) {
+        var key = app.storage.getStorageKey(name).key,
+            userData = {
+                'shader': key,
+                'shader_name': name,
+                'shader_key': app.storage.getStorageKey('').key
+            };
+        // @todo user data should be extended and not overridden
+        if (app.sm.typeClicked == 'mesh') {
+            Object.assign(app.mm.map.get(app.sm.uuid).userData, userData);
+        } else {
+            Object.assign(app.modm.map.get(app.sm.uuid).userData, userData);
+        }
+        $('#changeShader').text(name);
     },
 
     //receive shadow change event listener

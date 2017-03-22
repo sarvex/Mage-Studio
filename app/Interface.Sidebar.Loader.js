@@ -7,6 +7,8 @@ Class("SidebarLoader", {
         this.views = {
             //scripts
             "scriptSelector": "scriptSelector.html",
+            "shaderSelector": "shaderSelector.html",
+            "shaderOptions": "shaderOptions.html",
             //materials
             "meshHeader": "meshheader.html",
             "MeshBasicMaterial": "MeshBasicMaterial.html",
