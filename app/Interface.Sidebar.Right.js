@@ -66,7 +66,6 @@ Class("RightSidebar", {
 
             app.interface.rightSidebar._setScriptSelector();
             app.interface.rightSidebar._setShaderSelector();
-            app.interface.rightSidebar._setShaderOptions();
             //resetting interface input listeners
             app.interface.setInputEvents("#meshColor");
             //we are now sure views have been inflated
@@ -159,6 +158,7 @@ Class("RightSidebar", {
 
             if (o.userData['shader_name']) {
                 $('#changeShader').text(o.userData['shader_name']);
+                app.interface.rightSidebar._setShaderOptions(o.userData['shader_name']);
             }
         });
     },
@@ -195,10 +195,28 @@ Class("RightSidebar", {
             a.dataset['name'] = shaders[i];
             a.onclick = function() {
                 app.interface.rightSidebar.meshListener.changeShader(this.dataset['name']);
+                app.interface.rightSidebar._setShaderOptions(this.dataset['name']);
             }
             a.innerText = shaders[i];
             li.appendChild(a);
             $('#shaderSelector').append(li);
+        }
+    },
+
+    _setShaderOptions: function(shaderName) {
+        var options = require('mage-engine').engine.fx.shadersEngine.get(shaderName).options,
+            container = document.querySelector('#shaderOptions');
+
+        if (options) {
+            // now creating form for shader option
+            for (var k in options) {
+                var input = app.interface.sidebarHelper.createFormInput(k, options[k]);
+                container.appendChild(input);
+            }
+
+            container.appendChild(app.interface.sidebarHelper.createButton('update', app.interface.rightSidebar.meshListener.changeShaderOption))
+        } else {
+            console.warn('Selected shader doesn\'t have options.');
         }
     },
 

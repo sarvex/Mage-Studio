@@ -38,6 +38,6 @@
     "serve-static": "*"
   },
   "dependencies": {
-    "mage-engine": "0.0.47"
+    "mage-engine": "0.0.53"
   }
 }

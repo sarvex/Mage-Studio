@@ -366,6 +366,29 @@ Class("MeshListener", {
         $('#changeShader').text(name);
     },
 
+    changeShaderOption: function() {
+        var container = document.querySelector('#shaderOptions'),
+            inputs = $('#shaderOptions').find('input'),
+            options = [];
+
+        inputs.each(function(index, element) {
+            var option = {};
+            option[$(element).data('key')]= $(element).attr('type') === 'number' ? parseInt($(element).val()) : $(element).val();
+            options.push(option);
+        });
+        
+        var userData = {
+            'shader_options': JSON.stringify(options)
+        };
+
+        if (app.sm.typeClicked == 'mesh') {
+            Object.assign(app.mm.map.get(app.sm.uuid).userData, userData);
+        } else {
+            Object.assign(app.modm.map.get(app.sm.uuid).userData, userData);
+        }
+
+    },
+
     //receive shadow change event listener
     onMeshReceiveShadowChange: function(flag) {
         if ((app.sm.typeClicked != "mesh") + (app.sm.typeClicked != "model") > 1) return;

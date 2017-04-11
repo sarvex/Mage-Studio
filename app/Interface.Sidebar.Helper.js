@@ -55,5 +55,50 @@ Class("HelperSidebar", {
         } else {
             $('#'+toHide).addClass("hidden");
         }
+    },
+
+    createFormInput: function(data, option) {
+        var formGroup = document.createElement('div'),
+            formLabel = document.createElement('label'),
+            formInput = document.createElement('input');
+
+        var types = {
+            'number': 'number',
+            'string': 'text',
+            'color': 'number'
+        };
+
+        var id = app.util.uuid();
+
+        formLabel.innerText = option.name;
+        formLabel.for = id;
+        
+        formInput.dataset['key'] = data;
+        formInput.id = id;
+        type = types[option.type];
+        formInput.type = type;
+        formInput.value = type === 'number' ? parseInt(option.default) : option.default;
+        formInput.className = 'form-control';
+
+        formGroup.appendChild(formLabel);
+        formGroup.appendChild(formInput);
+
+        return formGroup;
+    },
+
+    createButton(label, callback) {
+        var btn = document.createElement('button');
+
+        //btn.type = 'submit';
+        btn.className = 'btn btn-default';
+
+        btn.innerText = label;
+
+        btn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            callback();
+        }
+        return btn;
     }
 });
