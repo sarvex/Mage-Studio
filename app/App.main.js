@@ -17,6 +17,7 @@ window.onload = function() {
         "app/Interface",
         "app/Manager.Scene",
         "app/Manager.Mesh",
+        "app/Manager.Effects",
         "app/Manager.Model",
         "app/Manager.Light",
         "app/Manager.Model",
@@ -48,6 +49,8 @@ function start() {
             this.sm = new SceneManager();
             //mesh manager
             this.mm = new MeshManager();
+            // effects manager
+            this.em = new EffectsManager();
             //light manager
             this.lm = new LightManager();
             // model manager

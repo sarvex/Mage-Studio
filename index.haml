@@ -122,6 +122,10 @@
                                         %li
                                             %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#addSoundModal"}
                                                 Sound
+                                        %li.divider
+                                        %li
+                                            %a{:href=>"#", "data-toggle"=>"modal", "data-target"=>"#addEffectsModal"}
+                                                FX
                                 %li.dropdown
                                     %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown", :role=>"button", "aria-expanded"=>"false"}
                                         View
@@ -524,6 +528,22 @@
                         %ul.list-group
                             %li.list-group-item{:onclick=>"app.modm.addModel('json');"}
                                 Load JSON
+                    .modal-footer
+                        %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
+                            Close
+        / add effects modal
+        #addEffectsModal.wagemodal.modal.fade.bs-example-modal-sm{:tabindex=>"-1", :role=>"dialog", "aria-labelledby"=>"myModalLabel", "aria-hidden"=>"true"}
+            .modal-dialog{:style=>"z-index:99999;"}
+                .modal-content
+                    .modal-header
+                        %h4#addEffectsModalTitle.modal-title
+                            Add > Effects
+                    .modal-body
+                        %ul.list-group
+                            %li.list-group-item{:onclick=>"app.em.addEffect('skybox');$('#addEffectsModal').modal('hide');"}
+                                Skybox
+                            %li.list-group-item{:onclick=>"app.em.addEffect('water');$('#addEffectsModal').modal('hide');"}
+                                Water
                     .modal-footer
                         %button.topcoat-button--large--cta{:type=>"button", "data-dismiss"=>"modal"}
                             Close

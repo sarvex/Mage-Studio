@@ -147,6 +147,12 @@
                         Sound
                       </a>
                     </li>
+                    <li class='divider'></li>
+                    <li>
+                      <a data-target='#addEffectsModal' data-toggle='modal' href='#'>
+                        FX
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <li class='dropdown'>
@@ -785,6 +791,33 @@
             <ul class='list-group'>
               <li class='list-group-item' onclick="app.modm.addModel('json');">
                 Load JSON
+              </li>
+            </ul>
+          </div>
+          <div class='modal-footer'>
+            <button class='topcoat-button--large--cta' data-dismiss='modal' type='button'>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add effects modal -->
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='wagemodal modal fade bs-example-modal-sm' id='addEffectsModal' role='dialog' tabindex='-1'>
+      <div class='modal-dialog' style='z-index:99999;'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title' id='addEffectsModalTitle'>
+              Add > Effects
+            </h4>
+          </div>
+          <div class='modal-body'>
+            <ul class='list-group'>
+              <li class='list-group-item' onclick="app.em.addEffect('skybox');$('#addEffectsModal').modal('hide');">
+                Skybox
+              </li>
+              <li class='list-group-item' onclick="app.em.addEffect('water');$('#addEffectsModal').modal('hide');">
+                Water
               </li>
             </ul>
           </div>

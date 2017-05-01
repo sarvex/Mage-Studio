@@ -36,6 +36,11 @@ Class("Storage", {
         return false;
     },
 
+    getAssetsDir: function() {
+        var sceneDir = app.storage.getSceneDir();
+        return sceneDir ? sceneDir + '/assets' : false;
+    },
+
     getScriptsDir: function() {
         var sceneDir = app.storage.getSceneDir();
         return sceneDir ? sceneDir + '/app/scripts' : false;
