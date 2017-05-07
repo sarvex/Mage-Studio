@@ -24,6 +24,8 @@ Class("SceneManager", {
             app.sm.controls.update();
             app.sm.transformControl.update();
 
+            // updating effects effects manager
+            app.em.update();
             //updating mesh manager
             app.mm.update();
             //updating light manager
