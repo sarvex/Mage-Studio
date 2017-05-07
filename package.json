@@ -1,6 +1,6 @@
 {
   "name": "MageStudio",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mage Studio",
   "main": "main.js",
   "scripts": {
