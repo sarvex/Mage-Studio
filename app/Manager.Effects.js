@@ -10,7 +10,8 @@ Class("EffectsManager", {
         // allowed effects
         this.allowedEffects = [
             "skybox",
-            "water"
+            "water",
+            "ocean"
         ];
         //effects count
         this.effectCount = 0;
@@ -32,15 +33,16 @@ Class("EffectsManager", {
             do {
                 var o = this.map.get(keys_list.shift());
                 o.render && o.render();
+                o.update && o.update();
             } while (keys_list.length > 0 && (+new Date() - start < 50));
         }
     },
 
     addEffect: function(type) {
         if (this.allowedEffects.indexOf(type) > -1) {
-            this["_add"+__upperCaseFirstLetter__(type)](app.util.bind(function(effect) {
+            this["_add"+__upperCaseFirstLetter__(type)](app.util.bind(function(effect, parent) {
                 app.mm.store(effect.uuid, effect);
-                app.em.store(effect.uuid, effect);
+                app.em.store(effect.uuid, parent || effect);
                 app.sm.scene.add(app.mm.map.get(effect.uuid));
 
                 app.sm.update();
@@ -53,7 +55,7 @@ Class("EffectsManager", {
                 app.em.effectCount++;
 
                 //attach new effect to transform control
-                //app.sm.transformControl.attach(effect);
+                app.sm.transformControl.attach(effect);
                 //creating a callback for our effect
                 app.interface.meshEvents.bind(app.mm.map.get(effect.uuid), "click", function(event) {
                     //now only adding this mesh to the transform control
@@ -84,5 +86,14 @@ Class("EffectsManager", {
 
             callback(water);
         }), this);
-    }
+    },
+
+    _addOcean: function(callback) {
+        var ocean = app.em.M.engine.fx.shadersEngine.get('Ocean').instance(app.sm.renderer, app.sm.camera, app.sm.scene);
+        callback(ocean.oceanMesh, ocean);
+    },
+
+    _addRain: function(callback) {
+        
+    } 
 });
