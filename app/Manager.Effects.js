@@ -11,7 +11,9 @@ Class("EffectsManager", {
         this.allowedEffects = [
             "skybox",
             "water",
-            "ocean"
+            "ocean",
+            "rain",
+            'fountain'
         ];
         //effects count
         this.effectCount = 0;
@@ -93,7 +95,43 @@ Class("EffectsManager", {
         callback(ocean.oceanMesh, ocean);
     },
 
+    _addFountain: function(callback) {
+        app.em.textureLoader.load(app.storage.getAssetsDir() + '/images/smokeparticle.png', app.util.bind(function(texture) {
+            var options = {
+                texture: texture,
+                szie: 100,
+                positionValue: new THREE.Vector3(0, 0, 0),
+                velocityValue: new THREE.Vector3(0, 100, 0),
+                accelerationValue: new THREE.Vector3(0, -15, 0),
+                accelerationSpread: new THREE.Vector3(20, 0, 20),
+                maxAge: 10
+            };
+            
+            var rain = app.em.M.engine.fx.particlesEngine.get('Rain').instance(options);
+
+            callback(rain.mesh, rain);
+        }), this);
+    },
+
     _addRain: function(callback) {
-        
-    } 
+        app.em.textureLoader.load(app.storage.getAssetsDir() + '/images/rainparticle.png', app.util.bind(function(texture) {
+            var options = {
+                texture: texture,
+                size: 100,
+                positionValue: new THREE.Vector3(0, 400, 0),
+                positionSpread: new THREE.Vector3(1000, 0, 1000),
+                accelerationValue: new THREE.Vector3(0, -100, 0),
+                accelerationSpread: new THREE.Vector3(0, 0, 0),
+                velocityValue: new THREE.Vector3(0, -15, 0),
+                velocitySpread: new THREE.Vector3(0, 1, 0),
+                colors: [new THREE.Color('white')],
+                maxAge: 6,
+                particleCount: 10000
+            };
+
+            var rain = app.em.M.engine.fx.particlesEngine.get('Rain').instance(options);
+
+            callback(rain.mesh, rain);
+        }), this);
+    }
 });
