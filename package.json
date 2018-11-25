@@ -4,11 +4,9 @@
   "description": "Mage Studio",
   "main": "main.js",
   "scripts": {
-    "dev": "npm run build && npm run dev:serve",
-    "build": "webpack --config webpack.config.js",
-    "dev:serve": "webpack-dev-server --open --hot",
-    "eject": "react-scripts eject",
-    "test": "react-scripts test --env=node"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -53,13 +51,17 @@
     "postcss-loader": "2.1.6"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "antd": "^3.10.8",
     "autoprefixer": "^9.3.1",
+    "next": "^7.0.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-hot-loader": "^4.3.12",
     "react-redux": "^5.0.7",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-thunk": "^2.3.0"
   }
 }
