@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react';
-import { Menu, Dropdown, Icon, message, Col, Row } from 'antd';
+import { Menu, Dropdown, Icon, message, Col, Row, Divider } from 'antd';
 import './header.scss';
 
 const style = {
@@ -12,9 +12,10 @@ const onClick = ({ key }) => {
 };
 
 const menu = (
-    <Menu onClick={onClick}>
+    <Menu onClick={onClick} theme={"dark"}>
         <Menu.Item key="1">1st menu item</Menu.Item>
         <Menu.Item key="2">2nd memu item</Menu.Item>
+        <Divider/>
         <Menu.Item key="3">3rd menu item</Menu.Item>
     </Menu>
 );

@@ -6,7 +6,6 @@
     padding: $base-unit;
 
     & .main-menu-item {
-        margin-right: 15px;
-        color: $white;
+        margin-right: $base-unit * 2;
     }
 }
