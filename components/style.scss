@@ -1,0 +1,20 @@
+@import './constants.scss';
+@import './theme.scss';
+
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    background-color: $app-background;
+    color: $white;
+}
+
+.footer {
+    height: 30px;
+}
+
+
+.main {
+    flex: 1;
+}

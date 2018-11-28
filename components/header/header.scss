@@ -1,0 +1,12 @@
+@import '../constants.scss';
+
+.header {
+    height: 30px;
+    line-height: 0.6rem;
+    padding: $base-unit;
+
+    & .main-menu-item {
+        margin-right: 15px;
+        color: $white;
+    }
+}

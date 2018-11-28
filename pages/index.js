@@ -8,7 +8,7 @@ const Index = () => (
   <div>
     <Layout>
         <h1>ad</h1>
-        <p>Current antd version: {version}</p>
+        <p>Current antd version: {version} </p>
         <Button type="primary">Hello</Button>
     </Layout>
   </div>

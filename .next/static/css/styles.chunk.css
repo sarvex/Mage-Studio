@@ -1,3 +1,24 @@
+.header {
+  height: 30px;
+  line-height: 0.6rem;
+  padding: 8px; }
+  .header .main-menu-item {
+    margin-right: 15px;
+    color: #fff; }
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #3A3D49;
+  color: #fff; }
+
+.footer {
+  height: 30px; }
+
+.main {
+  flex: 1; }
+
 /*!
  * 
  * antd v3.10.8
