@@ -10,6 +10,9 @@
     .logo {
         color: $yellow;
         margin-right: $base-unit * 4;
+        font-size: $base-unit * 2;
+        font-style: italic;
+        font-family: LeckerliOne;
     }
 
     & .options {

@@ -1,6 +1,12 @@
 @import './constants.scss';
 @import './theme.scss';
 
+@font-face {
+    font-family: 'LeckerliOne';
+    src: url('/static/fonts/LeckerliOne-Regular.otf') /* ... */;
+}
+
+
 .app {
     height: 100vh;
     display: flex;

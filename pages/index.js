@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../components/Layout';
+import Layout from '../app/Layout';
 import { version, Button } from 'antd';
 import "antd/dist/antd.min.css";
 

@@ -93,10 +93,10 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/Layout.js":
-/*!******************************!*\
-  !*** ./components/Layout.js ***!
-  \******************************/
+/***/ "./app/Layout.js":
+/*!***********************!*\
+  !*** ./app/Layout.js ***!
+  \***********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,11 +106,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/Header */ "./components/header/Header.js");
-/* harmony import */ var _footer_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./footer/Footer */ "./components/footer/Footer.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./components/style.scss");
+/* harmony import */ var _header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/Header */ "./app/header/Header.js");
+/* harmony import */ var _footer_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./footer/Footer */ "./app/footer/Footer.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./app/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_4__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/Layout.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/Layout.js";
 
  //const { Header, Footer, Sider, Content } = Layout;
 
@@ -163,10 +163,10 @@ var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/compon
 
 /***/ }),
 
-/***/ "./components/footer/Footer.js":
-/*!*************************************!*\
-  !*** ./components/footer/Footer.js ***!
-  \*************************************/
+/***/ "./app/footer/Footer.js":
+/*!******************************!*\
+  !*** ./app/footer/Footer.js ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -178,9 +178,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _footer_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./footer.scss */ "./components/footer/footer.scss");
+/* harmony import */ var _footer_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./footer.scss */ "./app/footer/footer.scss");
 /* harmony import */ var _footer_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_footer_scss__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/footer/Footer.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/footer/Footer.js";
 
 
 
@@ -208,10 +208,10 @@ var Footer = function Footer() {
 
 /***/ }),
 
-/***/ "./components/footer/footer.scss":
-/*!***************************************!*\
-  !*** ./components/footer/footer.scss ***!
-  \***************************************/
+/***/ "./app/footer/footer.scss":
+/*!********************************!*\
+  !*** ./app/footer/footer.scss ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -219,10 +219,10 @@ var Footer = function Footer() {
 
 /***/ }),
 
-/***/ "./components/header/Header.js":
-/*!*************************************!*\
-  !*** ./components/header/Header.js ***!
-  \*************************************/
+/***/ "./app/header/Header.js":
+/*!******************************!*\
+  !*** ./app/header/Header.js ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -234,12 +234,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _menu_ProjectMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./menu/ProjectMenu */ "./components/header/menu/ProjectMenu.js");
-/* harmony import */ var _menu_SceneMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu/SceneMenu */ "./components/header/menu/SceneMenu.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Logo */ "./components/header/Logo.js");
-/* harmony import */ var _header_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header.scss */ "./components/header/header.scss");
+/* harmony import */ var _menu_ProjectMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./menu/ProjectMenu */ "./app/header/menu/ProjectMenu.js");
+/* harmony import */ var _menu_SceneMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu/SceneMenu */ "./app/header/menu/SceneMenu.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Logo */ "./app/header/Logo.js");
+/* harmony import */ var _header_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header.scss */ "./app/header/header.scss");
 /* harmony import */ var _header_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_header_scss__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/header/Header.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/header/Header.js";
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -361,10 +361,10 @@ var Header = function Header() {
 
 /***/ }),
 
-/***/ "./components/header/Logo.js":
-/*!***********************************!*\
-  !*** ./components/header/Logo.js ***!
-  \***********************************/
+/***/ "./app/header/Logo.js":
+/*!****************************!*\
+  !*** ./app/header/Logo.js ***!
+  \****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -372,7 +372,7 @@ var Header = function Header() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/header/Logo.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/header/Logo.js";
 
 
 var Logo = function Logo() {
@@ -383,17 +383,17 @@ var Logo = function Logo() {
       lineNumber: 4
     },
     __self: this
-  }, "mage");
+  }, "Mage");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Logo);
 
 /***/ }),
 
-/***/ "./components/header/header.scss":
-/*!***************************************!*\
-  !*** ./components/header/header.scss ***!
-  \***************************************/
+/***/ "./app/header/header.scss":
+/*!********************************!*\
+  !*** ./app/header/header.scss ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -401,10 +401,10 @@ var Logo = function Logo() {
 
 /***/ }),
 
-/***/ "./components/header/menu/ProjectMenu.js":
-/*!***********************************************!*\
-  !*** ./components/header/menu/ProjectMenu.js ***!
-  \***********************************************/
+/***/ "./app/header/menu/ProjectMenu.js":
+/*!****************************************!*\
+  !*** ./app/header/menu/ProjectMenu.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -415,7 +415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/header/menu/ProjectMenu.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/header/menu/ProjectMenu.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -532,10 +532,10 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/header/menu/SceneMenu.js":
-/*!*********************************************!*\
-  !*** ./components/header/menu/SceneMenu.js ***!
-  \*********************************************/
+/***/ "./app/header/menu/SceneMenu.js":
+/*!**************************************!*\
+  !*** ./app/header/menu/SceneMenu.js ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -546,7 +546,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/components/header/menu/SceneMenu.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/app/header/menu/SceneMenu.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -671,10 +671,10 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/style.scss":
-/*!*******************************!*\
-  !*** ./components/style.scss ***!
-  \*******************************/
+/***/ "./app/style.scss":
+/*!************************!*\
+  !*** ./app/style.scss ***!
+  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -704,12 +704,12 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.js");
+/* harmony import */ var _app_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/Layout */ "./app/Layout.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var antd_dist_antd_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/dist/antd.min.css */ "./node_modules/antd/dist/antd.min.css");
 /* harmony import */ var antd_dist_antd_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd_dist_antd_min_css__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/pages/index.js";
+var _jsxFileName = "/Users/stagnim/dev/personal/Mage-Studio/pages/index.js";
 
 
 
@@ -722,7 +722,7 @@ var Index = function Index() {
       lineNumber: 8
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9

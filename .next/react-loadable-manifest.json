@@ -9,8 +9,8 @@
   ],
   "./header.scss": [
     {
-      "id": "./components/header/header.scss",
-      "name": "./components/header/header.scss",
+      "id": "./app/header/header.scss",
+      "name": "./app/header/header.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -43,16 +43,16 @@
   ],
   "./footer.scss": [
     {
-      "id": "./components/footer/footer.scss",
-      "name": "./components/footer/footer.scss",
+      "id": "./app/footer/footer.scss",
+      "name": "./app/footer/footer.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
   ],
   "./style.scss": [
     {
-      "id": "./components/style.scss",
-      "name": "./components/style.scss",
+      "id": "./app/style.scss",
+      "name": "./app/style.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
