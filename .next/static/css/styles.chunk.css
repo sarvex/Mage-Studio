@@ -1,23 +1,37 @@
 .header {
   height: 30px;
   line-height: 0.6rem;
-  padding: 8px; }
+  padding: 8px;
+  background: #3A3D49;
+  border-bottom: 1px solid #575A67; }
+  .header .logo {
+    color: #ffce54;
+    margin-right: 32px; }
+  .header .options {
+    background-color: #3F3A49; }
   .header .main-menu-item {
-    margin-right: 15px;
-    color: #fff; }
+    color: #fff;
+    margin-right: 16px; }
+
+.footer {
+  height: 30px;
+  line-height: 0.6rem;
+  padding: 8px;
+  background: #3A3D49;
+  border-top: 1px solid #575A67; }
 
 .app {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #3A3D49;
   color: #fff; }
 
 .footer {
   height: 30px; }
 
 .main {
-  flex: 1; }
+  flex: 1;
+  background-color: #000; }
 
 /*!
  * 

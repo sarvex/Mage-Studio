@@ -88,43 +88,56 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/next/dist/pages/_error.js":
-/*!************************************************!*\
-  !*** ./node_modules/next/dist/pages/_error.js ***!
-  \************************************************/
+/***/ "./pages/_error.js":
+/*!*************************!*\
+  !*** ./pages/_error.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/pages/_error.js";
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4
+    },
+    __self: this
+  }, "Oh crap");
+});
+
+/***/ }),
+
+/***/ 0:
+/*!*******************************!*\
+  !*** multi ./pages/_error.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next/error */ "next/error")
+module.exports = __webpack_require__(/*! ./pages/_error.js */"./pages/_error.js");
 
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************************!*\
-  !*** multi ./node_modules/next/dist/pages/_error.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! /Users/marcostagni/Documents/dev/personal/Mage-Studio/node_modules/next/dist/pages/_error.js */"./node_modules/next/dist/pages/_error.js");
-
-
-/***/ }),
-
-/***/ "next/error":
-/*!*****************************!*\
-  !*** external "next/error" ***!
-  \*****************************/
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+module.exports = require("react");
 
 /***/ })
 

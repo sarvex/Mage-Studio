@@ -4,8 +4,20 @@
     height: 30px;
     line-height: 0.6rem;
     padding: $base-unit;
+    background: $deep-purple-100;
+    border-bottom: 1px solid $deep-purple-70;
+
+    .logo {
+        color: $yellow;
+        margin-right: $base-unit * 4;
+    }
+
+    & .options {
+        background-color: $deep-purple-80;
+    }
 
     & .main-menu-item {
+        color: $white;
         margin-right: $base-unit * 2;
     }
 }

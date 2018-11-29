@@ -1,38 +1,32 @@
 import Link from 'next/link'
 import React from 'react';
 import { Menu, Dropdown, Icon, message, Col, Row, Divider } from 'antd';
-import './header.scss';
 
-const style = {
-    marginRight: 24
-};
+import ProjectMenu from './menu/ProjectMenu';
+import SceneMenu from './menu/SceneMenu';
+
+import Logo from './Logo';
+import './header.scss';
 
 const onClick = ({ key }) => {
     message.info(`Click on item ${key}`);
 };
 
 const menu = (
-    <Menu onClick={onClick} theme={"dark"}>
-        <Menu.Item key="1">1st menu item</Menu.Item>
-        <Menu.Item key="2">2nd memu item</Menu.Item>
+    <Menu onClick={onClick}>
+        <Menu.Item className="option" key="1">1st menu item</Menu.Item>
+        <Menu.Item className="option" key="2">2nd memu item</Menu.Item>
         <Divider/>
-        <Menu.Item key="3">3rd menu item</Menu.Item>
+        <Menu.Item className="option" key="3">3rd menu item</Menu.Item>
     </Menu>
 );
 
 const Header = () => (
     <Row className="header">
         <Col span={12}>
-            <Dropdown overlay={menu}>
-                <a className="ant-dropdown-link" className="main-menu-item" href="#">
-                    Project
-                </a>
-            </Dropdown>
-            <Dropdown overlay={menu}>
-                <a className="ant-dropdown-link" className="main-menu-item" href="#">
-                    Scene
-                </a>
-            </Dropdown>
+            <Logo />
+            <ProjectMenu />
+            <SceneMenu />
             <Dropdown overlay={menu}>
                 <a className="ant-dropdown-link" className="main-menu-item" href="#">
                     View

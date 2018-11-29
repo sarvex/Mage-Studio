@@ -5,8 +5,6 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-
-    background-color: $app-background;
     color: $white;
 }
 
@@ -14,7 +12,7 @@
     height: 30px;
 }
 
-
 .main {
     flex: 1;
+    background-color: $black;
 }
