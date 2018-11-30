@@ -6,19 +6,19 @@
     src: url('/static/fonts/LeckerliOne-Regular.otf') /* ... */;
 }
 
-
 .app {
     height: 100vh;
     display: flex;
     flex-direction: column;
     color: $white;
+    font-size: 0.7rem;
 }
 
 .footer {
     height: 30px;
 }
 
-.main {
+.main-container {
     flex: 1;
     background-color: $black;
 }
