@@ -737,7 +737,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AssetsTree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AssetsTree */ "./app/sidebar/assets/AssetsTree.js");
 var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/AssetsBox.js";
+
 
 
 
@@ -746,14 +748,14 @@ var SceneSettings = function SceneSettings() {
     className: "box",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 6
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "title",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 7
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
@@ -761,26 +763,312 @@ var SceneSettings = function SceneSettings() {
     type: "hdd",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 8
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 9
     },
     __self: this
   }, "Assets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 11
     },
     __self: this
-  }));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AssetsTree__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: this
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SceneSettings);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/AssetsTree.js":
+/*!******************************************!*\
+  !*** ./app/sidebar/assets/AssetsTree.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/AssetsTree.js";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var TreeNode = antd__WEBPACK_IMPORTED_MODULE_1__["Tree"].TreeNode;
+var Search = antd__WEBPACK_IMPORTED_MODULE_1__["Input"].Search;
+var x = 3;
+var y = 2;
+var z = 1;
+var gData = [];
+
+var generateData = function generateData(_level, _preKey, _tns) {
+  var preKey = _preKey || '0';
+  var tns = _tns || gData;
+  var children = [];
+
+  for (var i = 0; i < x; i++) {
+    var key = "".concat(preKey, "-").concat(i);
+    tns.push({
+      title: key,
+      key: key
+    });
+
+    if (i < y) {
+      children.push(key);
+    }
+  }
+
+  if (_level < 0) {
+    return tns;
+  }
+
+  var level = _level - 1;
+  children.forEach(function (key, index) {
+    tns[index].children = [];
+    return generateData(level, key, tns[index].children);
+  });
+};
+
+generateData(z);
+var dataList = [];
+
+var generateList = function generateList(data) {
+  for (var i = 0; i < data.length; i++) {
+    var node = data[i];
+    var key = node.key;
+    dataList.push({
+      key: key,
+      title: key
+    });
+
+    if (node.children) {
+      generateList(node.children, node.key);
+    }
+  }
+};
+
+generateList(gData);
+
+var getParentKey = function getParentKey(key, tree) {
+  var parentKey;
+
+  for (var i = 0; i < tree.length; i++) {
+    var node = tree[i];
+
+    if (node.children) {
+      if (node.children.some(function (item) {
+        return item.key === key;
+      })) {
+        parentKey = node.key;
+      } else if (getParentKey(key, node.children)) {
+        parentKey = getParentKey(key, node.children);
+      }
+    }
+  }
+
+  return parentKey;
+};
+
+var AssetsTree =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(AssetsTree, _React$Component);
+
+  function AssetsTree() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, AssetsTree);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AssetsTree)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      expandedKeys: [],
+      searchValue: '',
+      autoExpandParent: true
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onExpand", function (expandedKeys) {
+      _this.setState({
+        expandedKeys: expandedKeys,
+        autoExpandParent: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChange", function (e) {
+      var value = e.target.value;
+      var expandedKeys = dataList.map(function (item) {
+        if (item.title.indexOf(value) > -1) {
+          return getParentKey(item.key, gData);
+        }
+
+        return null;
+      }).filter(function (item, i, self) {
+        return item && self.indexOf(item) === i;
+      });
+
+      _this.setState({
+        expandedKeys: expandedKeys,
+        searchValue: value,
+        autoExpandParent: true
+      });
+    });
+
+    return _this;
+  }
+
+  _createClass(AssetsTree, [{
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          searchValue = _this$state.searchValue,
+          expandedKeys = _this$state.expandedKeys,
+          autoExpandParent = _this$state.autoExpandParent;
+
+      var loop = function loop(data) {
+        return data.map(function (item) {
+          var index = item.title.indexOf(searchValue);
+          var beforeStr = item.title.substr(0, index);
+          var afterStr = item.title.substr(index + searchValue.length);
+          var title = index > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 99
+            },
+            __self: this
+          }, beforeStr, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            style: {
+              color: '#f50'
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 101
+            },
+            __self: this
+          }, searchValue), afterStr) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 104
+            },
+            __self: this
+          }, item.title);
+
+          if (item.children) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TreeNode, {
+              icon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+                type: "hdd",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 107
+                },
+                __self: this
+              }),
+              key: item.key,
+              title: title,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 107
+              },
+              __self: this
+            }, loop(item.children));
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TreeNode, {
+            icon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+              type: "hdd",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 112
+              },
+              __self: this
+            }),
+            key: item.key,
+            title: title,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 112
+            },
+            __self: this
+          });
+        });
+      };
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 117
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Search, {
+        style: {
+          marginBottom: 8
+        },
+        placeholder: "Search",
+        onChange: this.onChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 118
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tree"], {
+        showLine: true,
+        showIcon: true,
+        onExpand: this.onExpand,
+        expandedKeys: expandedKeys,
+        autoExpandParent: autoExpandParent,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 119
+        },
+        __self: this
+      }, loop(gData)));
+    }
+  }]);
+
+  return AssetsTree;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (AssetsTree);
 
 /***/ }),
 

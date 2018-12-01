@@ -5,4 +5,4 @@ Thumbs.db
 views/*.html
 *.nw
 app/bower_components
-.next
+.next/

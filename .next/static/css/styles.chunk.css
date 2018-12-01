@@ -33,7 +33,9 @@
     flex-direction: column; }
     .sidebar .box .content {
       padding: 8px;
-      flex: 1 1 auto; }
+      flex: 1 1 auto;
+      height: calc(50% - 50px);
+      overflow: auto; }
     .sidebar .box:first-child {
       border-bottom: 1px solid #5A6668; }
   .sidebar .title {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
+import AssetsTree from './AssetsTree';
 
 const SceneSettings = () => (
     <div className="box">
@@ -8,7 +9,7 @@ const SceneSettings = () => (
             <span>Assets</span>
         </p>
         <div className="content">
-
+            <AssetsTree />
         </div>
     </div>
 );
