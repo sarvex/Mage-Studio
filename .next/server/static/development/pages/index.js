@@ -724,6 +724,46 @@ var Sidebar = function Sidebar() {
 
 /***/ }),
 
+/***/ "./app/sidebar/assets/AddButton.js":
+/*!*****************************************!*\
+  !*** ./app/sidebar/assets/AddButton.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/AddButton.js";
+
+
+
+var AddButton = function AddButton() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    title: "tooltip",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    className: "assets-action",
+    type: "plus-square",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AddButton);
+
+/***/ }),
+
 /***/ "./app/sidebar/assets/AssetsBox.js":
 /*!*****************************************!*\
   !*** ./app/sidebar/assets/AssetsBox.js ***!
@@ -738,24 +778,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _AssetsTree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AssetsTree */ "./app/sidebar/assets/AssetsTree.js");
+/* harmony import */ var _CopyButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CopyButton */ "./app/sidebar/assets/CopyButton.js");
+/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DeleteButton */ "./app/sidebar/assets/DeleteButton.js");
+/* harmony import */ var _AddButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddButton */ "./app/sidebar/assets/AddButton.js");
+/* harmony import */ var _SearchButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SearchButton */ "./app/sidebar/assets/SearchButton.js");
+/* harmony import */ var _elements_Folder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./elements/Folder */ "./app/sidebar/assets/elements/Folder.js");
 var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/AssetsBox.js";
 
 
 
+
+
+
+
+
+var folders = ['marco', 'test', 'folder', 'table'];
 
 var SceneSettings = function SceneSettings() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "box",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 19
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "title",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 20
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
@@ -763,28 +814,55 @@ var SceneSettings = function SceneSettings() {
     type: "hdd",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 21
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 22
     },
     __self: this
-  }, "Assets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Assets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CopyButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: this
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11
+      lineNumber: 28
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AssetsTree__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: this
+  }, folders.map(function (name) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elements_Folder__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      name: name,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    });
   })));
 };
 
@@ -1069,6 +1147,177 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (AssetsTree);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/CopyButton.js":
+/*!******************************************!*\
+  !*** ./app/sidebar/assets/CopyButton.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/CopyButton.js";
+
+
+
+var CopyButton = function CopyButton() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    title: "tooltip",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    className: "assets-action",
+    type: "copy",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CopyButton);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/DeleteButton.js":
+/*!********************************************!*\
+  !*** ./app/sidebar/assets/DeleteButton.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/DeleteButton.js";
+
+
+
+var DeleteButton = function DeleteButton() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    title: "tooltip",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    className: "assets-action",
+    type: "delete",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DeleteButton);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/SearchButton.js":
+/*!********************************************!*\
+  !*** ./app/sidebar/assets/SearchButton.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/SearchButton.js";
+
+
+
+var SearchButton = function SearchButton() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    title: "tooltip",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    className: "assets-action",
+    type: "search",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchButton);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/elements/Folder.js":
+/*!***********************************************!*\
+  !*** ./app/sidebar/assets/elements/Folder.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets.scss */ "./app/sidebar/assets/elements/assets.scss");
+/* harmony import */ var _assets_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var Folder = function Folder(_ref) {
+  var name = _ref.name;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    title: name,
+    placement: "bottom"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "asset-item folder"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    theme: "twoTone",
+    twoToneColor: "#3A3D49",
+    className: "icon",
+    type: "folder"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "name"
+  }, name))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Folder);
+
+/***/ }),
+
+/***/ "./app/sidebar/assets/elements/assets.scss":
+/*!*************************************************!*\
+  !*** ./app/sidebar/assets/elements/assets.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

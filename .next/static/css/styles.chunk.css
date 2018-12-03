@@ -23,6 +23,23 @@
   background: #3A3D49;
   border-top: 1px solid #575A67; }
 
+.asset-item {
+  position: relative;
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin: 2px; }
+  .asset-item .icon {
+    font-size: 40px;
+    color: #5A6668;
+    height: 32px;
+    width: 32px; }
+  .asset-item .name {
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    font-size: 8px; }
+
 .sidebar {
   height: 100%;
   min-width: 200px;
@@ -47,6 +64,10 @@
     font-size: 0.65rem; }
     .sidebar .title .icon {
       color: #ffce54; }
+    .sidebar .title .assets-action {
+      float: right;
+      margin-top: 2px;
+      margin-right: 8px; }
     .sidebar .title span {
       margin-left: 8px; }
 

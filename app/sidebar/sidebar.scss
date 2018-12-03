@@ -35,6 +35,12 @@
             color: $yellow;
         }
 
+        & .assets-action {
+            float: right;
+            margin-top: $base-unit / 4;
+            margin-right: $base-unit;
+        }
+
         & span {
             margin-left: $base-unit;
         }

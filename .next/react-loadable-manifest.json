@@ -45,20 +45,18 @@
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "./footer.scss": [
+    },
     {
-      "id": "./app/footer/footer.scss",
-      "name": "./app/footer/footer.scss",
+      "id": 9,
+      "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
   ],
-  "./sidebar.scss": [
+  "./assets.scss": [
     {
-      "id": "./app/sidebar/sidebar.scss",
-      "name": "./app/sidebar/sidebar.scss",
+      "id": "./app/sidebar/assets/elements/assets.scss",
+      "name": "./app/sidebar/assets/elements/assets.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -71,10 +69,26 @@
       "publicPath": "static/chunks/styles.js"
     }
   ],
+  "./footer.scss": [
+    {
+      "id": "./app/footer/footer.scss",
+      "name": "./app/footer/footer.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
   "antd/dist/antd.min.css": [
     {
       "id": "./node_modules/antd/dist/antd.min.css",
       "name": "./node_modules/antd/dist/antd.min.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./sidebar.scss": [
+    {
+      "id": "./app/sidebar/sidebar.scss",
+      "name": "./app/sidebar/sidebar.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

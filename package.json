@@ -4,9 +4,9 @@
   "description": "Mage Studio",
   "main": "main.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+      "dev": "node server.js",
+      "build": "next build",
+      "start": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "mage-engine": "0.3.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "antd": "^3.10.8",
