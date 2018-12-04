@@ -783,7 +783,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddButton */ "./app/sidebar/assets/AddButton.js");
 /* harmony import */ var _SearchButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SearchButton */ "./app/sidebar/assets/SearchButton.js");
 /* harmony import */ var _elements_Folder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./elements/Folder */ "./app/sidebar/assets/elements/Folder.js");
-var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/app/sidebar/assets/AssetsBox.js";
 
 
 
@@ -796,72 +795,18 @@ var folders = ['marco', 'test', 'folder', 'table'];
 
 var SceneSettings = function SceneSettings() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: this
+    className: "box"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "title",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: this
+    className: "title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
     className: "icon",
-    type: "hdd",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: this
-  }, "Assets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CopyButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: this
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: this
-  }, folders.map(function (name) {
+    type: "hdd"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Assets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CopyButton__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddButton__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchButton__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "content"
+  }, folders.map(function (name, i) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elements_Folder__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      name: name,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 29
-      },
-      __self: this
+      key: i,
+      name: name
     });
   })));
 };

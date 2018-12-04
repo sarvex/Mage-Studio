@@ -26,7 +26,7 @@ const SceneSettings = () => (
             <SearchButton />
         </p>
         <div className="content">
-            { folders.map((name) => ( <Folder name={name}/>)) }
+            { folders.map((name, i) => ( <Folder key={i} name={name}/>)) }
         </div>
     </div>
 );
