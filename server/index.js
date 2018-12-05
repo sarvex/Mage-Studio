@@ -16,15 +16,19 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 // API routes
-app.prepare().then(function() {
+electron
+    .setup()
+    .then(function() {
+        app.prepare().then(function() {
 
-    server.use('/api/scenes', sceneRouter);
+            server.use('/api/scenes', sceneRouter);
 
-    server.get('*', (req, res) => (handle(req, res, req.url)));
+            server.get('*', (req, res) => (handle(req, res, req.url)));
 
-    // Running the server
-    server.listen(PORT, function() {
-    	console.log(`> Ready on http://localhost:${PORT}`);
-        //electron(PORT);
-    });
-});
+            // Running the server
+            server.listen(PORT, function() {
+            	console.log(`> Ready on http://localhost:${PORT}`);
+                electron.start(PORT);
+            });
+        });
+    })
