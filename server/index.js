@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const next = require('next');
 const sceneRouter = require('./routes/sceneRouter');
+const electron = require('./electron');
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -23,6 +24,7 @@ app.prepare().then(function() {
 
     // Running the server
     server.listen(PORT, function() {
-    	console.log(`> Ready on http://localhost:${PORT}`)
+    	console.log(`> Ready on http://localhost:${PORT}`);
+        //electron(PORT);
     });
 });
