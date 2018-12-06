@@ -1,10 +1,11 @@
 const express = require('express');
-const sceneRouter = express.Router();
+const electron = require('../electron');
+const router = express.Router();
 
-sceneRouter.route('/')
+router.route('/')
     .get((req, res) => {
         // here we get the list of scenes
-        res.status(200).json({message: 'OK'});
+        res.json({message: 'OK', isDesktop: electron.isDesktop()});
     })
     .post((req, res) => {
         // here we create a new scene
@@ -12,17 +13,17 @@ sceneRouter.route('/')
     })
 
 // Middleware
-sceneRouter.use('/:id', (req, res, next)=>{
+router.use('/:id', (req, res, next)=>{
     // this is a middleware, we should get whatever using the id:
     // and set it in the request using req.scene = sceneWeFetched;
     next();
 });
 
 
-sceneRouter.route('/:id')
+router.route('/:id')
     .get(function (req, res) {
         // the scene we want is in req.scene
-        res.json({message: 'OK'});
+        res.json({message: 'NO', name: "stagni", isDesktop: ""+electron.isDesktop()});
     })
     .put(function(req,res) {
         // updating the scene inside req.scene
@@ -37,4 +38,7 @@ sceneRouter.route('/:id')
         res.status(204).json({message: 'OK'});
     });
 
-module.exports = sceneRouter;
+module.exports = {
+    router: router,
+    endpoint: '/api/scenes'
+};

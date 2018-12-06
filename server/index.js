@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const next = require('next');
-const sceneRouter = require('./routes/sceneRouter');
+const scenes = require('./routes/scenes');
 const electron = require('./electron');
 
 const server = express();
@@ -15,20 +15,28 @@ const handle = app.getRequestHandler();
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
+const onListenComplete = function() {
+    console.log(`> Ready on http://localhost:${PORT}`);
+    electron.start(PORT);
+}
+
+const onWildcard = function(req, res) {
+    return handle(req, res, req.url);
+}
+
+const setupServer = function() {
+    server.use(scenes.endpoint, scenes.router);
+    // add other endpoints here
+    server.get('*', onWildcard);
+
+    // Running the server
+    server.listen(PORT, onListenComplete);
+}
+
 // API routes
 electron
     .setup()
     .then(function() {
-        app.prepare().then(function() {
-
-            server.use('/api/scenes', sceneRouter);
-
-            server.get('*', (req, res) => (handle(req, res, req.url)));
-
-            // Running the server
-            server.listen(PORT, function() {
-            	console.log(`> Ready on http://localhost:${PORT}`);
-                electron.start(PORT);
-            });
+        app.prepare()
+            .then(setupServer);
         });
-    })

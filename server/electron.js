@@ -4,16 +4,20 @@ const {BrowserWindow} = electron;
 
 let electronWindow;
 
-const isElectronAvailable = function() {
+const isAvailable = function() {
     return app && BrowserWindow;
 }
 
+const isDesktop = function() {
+    return !!process.env.IS_DESKTOP;
+}
+
 const start = function(PORT) {
-    if (!isElectronAvailable()) {
+    if (!isAvailable()) {
         return;
     }
 
-    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+    const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
 
     console.log('> window size: ', width, height);
 
@@ -28,7 +32,7 @@ const start = function(PORT) {
 
 const setup = function() {
     return new Promise(function(resolve, reject) {
-        if (!isElectronAvailable()) {
+        if (!isAvailable()) {
             resolve();
         } else {
             app.on('ready', resolve);
@@ -50,45 +54,7 @@ const setup = function() {
 
 module.exports = {
     setup: setup,
-    start: start
+    start: start,
+    isAvailable: isAvailable,
+    isDesktop: isDesktop
 };
-
-// module.exports = function(PORT) {
-//     return new Promise(function(resolve, reject) {
-//         if (!app && !BrowserWindow) {
-//             resolve();
-//         } else {
-//             console.log('> creating Electron');
-//             function createWindow() {
-//                 const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-//
-//                 console.log('> window size: ', width, height);
-//
-//                 electronWindow = new BrowserWindow({width, height})
-//
-//                 electronWindow.loadURL(`http://google.com`);
-//
-//                 console.log('> window size: ', width, height);
-//
-//                 electronWindow.on('closed', () => {
-//                     electronWindow = null;
-//                 });
-//             }
-//
-//             app.on('ready', resolve);
-//
-//             // Quit when all windows are closed.
-//             app.on('window-all-closed', () => {
-//                 if (process.platform !== 'darwin') {
-//                     app.quit();
-//                 }
-//             });
-//
-//             app.on('activate', () => {
-//                 if (electronWindow === null) {
-//                     createWindow();
-//                 }
-//             });
-//         }
-//     });
-// };
