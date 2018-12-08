@@ -90,7 +90,7 @@ var _jsxFileName = "/Users/marcostagni/Documents/dev/personal/Mage-Studio/pages/
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!*******************************!*\
   !*** multi ./pages/_error.js ***!
   \*******************************/
@@ -115,5 +115,5 @@ module.exports = dll_2abc30bedbbb25aba5d4;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]));;
+},[[2,"static/runtime/webpack.js"]]]));;
 //# sourceMappingURL=_error.js.map

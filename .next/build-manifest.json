@@ -1,41 +1,27 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_51ef349df31b8bf3decb.js"
+  ],
   "pages": {
-    "/_error": [
-      "static/runtime/webpack-89179faa512dd01fbb62.js",
-      "static/css/commons.61acfde9.chunk.css",
-      "static/chunks/commons.cd0f63f001237bae88fe.js",
-      "static/runtime/main-56754f4bd9662de2207c.js"
+    "/_app": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
-    "/about": [
-      "static/runtime/webpack-89179faa512dd01fbb62.js",
-      "static/css/commons.61acfde9.chunk.css",
-      "static/chunks/commons.cd0f63f001237bae88fe.js",
-      "static/css/styles.52f1d484.chunk.css",
-      "static/chunks/styles.9f9e59c58677d5e07f5a.js",
-      "static/runtime/main-56754f4bd9662de2207c.js"
+    "/_error": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/index": [
-      "static/runtime/webpack-89179faa512dd01fbb62.js",
-      "static/css/commons.61acfde9.chunk.css",
-      "static/chunks/commons.cd0f63f001237bae88fe.js",
-      "static/css/styles.52f1d484.chunk.css",
-      "static/chunks/styles.9f9e59c58677d5e07f5a.js",
-      "static/runtime/main-56754f4bd9662de2207c.js"
-    ],
-    "/_app": [
-      "static/runtime/webpack-89179faa512dd01fbb62.js",
-      "static/css/commons.61acfde9.chunk.css",
-      "static/chunks/commons.cd0f63f001237bae88fe.js",
-      "static/runtime/main-56754f4bd9662de2207c.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ],
     "/": [
-      "static/runtime/webpack-89179faa512dd01fbb62.js",
-      "static/css/commons.61acfde9.chunk.css",
-      "static/chunks/commons.cd0f63f001237bae88fe.js",
-      "static/css/styles.52f1d484.chunk.css",
-      "static/chunks/styles.9f9e59c58677d5e07f5a.js",
-      "static/runtime/main-56754f4bd9662de2207c.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ]
   }
 }
