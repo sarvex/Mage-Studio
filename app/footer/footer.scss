@@ -1,0 +1,9 @@
+@import '../constants.scss';
+
+.footer {
+    height: 30px;
+    line-height: 0.6rem;
+    padding: $base-unit;
+    background: $deep-purple-100;
+    border-top: 1px solid $deep-purple-70;
+}

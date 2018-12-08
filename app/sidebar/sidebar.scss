@@ -1,0 +1,48 @@
+@import '../constants.scss';
+@import '../theme.scss';
+
+.sidebar {
+    height: 100%;
+    min-width: 200px;
+    background-color: $sidebar-background;
+
+    .box {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+
+        & .content {
+            padding: $base-unit;
+            flex: 1 1 auto;
+            height: calc(50% - 50px);
+            overflow: auto;
+        }
+
+        &:first-child {
+            border-bottom: 1px solid $grey;
+        }
+    }
+
+    .title {
+        background: $deep-purple-80;
+        padding: $base-unit;
+        max-height: $base-unit * 5;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.65rem;
+
+        & .icon {
+            color: $yellow;
+        }
+
+        & .assets-action {
+            float: right;
+            margin-top: $base-unit / 4;
+            margin-right: $base-unit;
+        }
+
+        & span {
+            margin-left: $base-unit;
+        }
+    }
+}
