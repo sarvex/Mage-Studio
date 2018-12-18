@@ -7,17 +7,47 @@
       "publicPath": "static/chunks/0.js"
     }
   ],
-  "./header.scss": [
+  "mage-engine": [
     {
-      "id": "./app/header/header.scss",
-      "name": "./app/header/header.scss",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
+      "id": "../Mage/dist/mage.js",
+      "name": "../Mage/dist/mage.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "../Mage/dist/mage.js",
+      "name": "../Mage/dist/mage.js",
+      "file": "static/chunks/2.js",
+      "publicPath": "static/chunks/2.js"
+    }
+  ],
+  "./App": [
+    {
+      "id": "./app/scene/BaseScene/App.js",
+      "name": "./app/scene/BaseScene/App.js",
+      "file": "static/chunks/2.js",
+      "publicPath": "static/chunks/2.js"
+    }
+  ],
+  "./BaseScene": [
+    {
+      "id": "./app/scene/BaseScene/index.js",
+      "name": "./app/scene/BaseScene/index.js",
+      "file": "static/chunks/2.js",
+      "publicPath": "static/chunks/2.js"
+    }
+  ],
+  "./config": [
+    {
+      "id": "./app/scene/config.js",
+      "name": "./app/scene/config.js",
+      "file": "static/chunks/2.js",
+      "publicPath": "static/chunks/2.js"
     }
   ],
   "undefined": [
     {
-      "id": 4,
+      "id": 7,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
@@ -29,19 +59,25 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
+      "id": 8,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
       "id": 6,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 7,
+      "id": 10,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 8,
+      "id": 4,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
@@ -49,22 +85,6 @@
     {
       "id": 9,
       "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "./assets.scss": [
-    {
-      "id": "./app/sidebar/assets/elements/assets.scss",
-      "name": "./app/sidebar/assets/elements/assets.scss",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "./style.scss": [
-    {
-      "id": "./app/style.scss",
-      "name": "./app/style.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -77,10 +97,26 @@
       "publicPath": "static/chunks/styles.js"
     }
   ],
-  "antd/dist/antd.min.css": [
+  "./header.scss": [
     {
-      "id": "./node_modules/antd/dist/antd.min.css",
-      "name": "./node_modules/antd/dist/antd.min.css",
+      "id": "./app/header/header.scss",
+      "name": "./app/header/header.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./scene.scss": [
+    {
+      "id": "./app/scene/scene.scss",
+      "name": "./app/scene/scene.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./assets.scss": [
+    {
+      "id": "./app/sidebar/assets/elements/assets.scss",
+      "name": "./app/sidebar/assets/elements/assets.scss",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -89,6 +125,22 @@
     {
       "id": "./app/sidebar/sidebar.scss",
       "name": "./app/sidebar/sidebar.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./style.scss": [
+    {
+      "id": "./app/style.scss",
+      "name": "./app/style.scss",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "antd/dist/antd.min.css": [
+    {
+      "id": "./node_modules/antd/dist/antd.min.css",
+      "name": "./node_modules/antd/dist/antd.min.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

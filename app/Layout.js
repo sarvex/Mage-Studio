@@ -4,6 +4,7 @@ import { Row, Col, Layout } from 'antd';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import Sidebar from './sidebar/Sidebar';
+import Scene from './scene/Scene';
 
 import './style.scss';
 
@@ -12,7 +13,9 @@ export default (props) => (
         <Header />
         <Row className="main-container">
             <Sidebar />
-            <Col span={20}>{props.children}</Col>
+            <div className="ant-col-19 canvas-container">
+                <Scene />
+            </div>
         </Row>
         <Footer />
     </div>

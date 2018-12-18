@@ -21,4 +21,8 @@
 .main-container {
     flex: 1;
     background-color: $black;
+
+    & .canva-container {
+        display: flex;
+    }
 }
