@@ -13,7 +13,7 @@ export default (props) => (
         <Header />
         <Row className="main-container">
             <Sidebar />
-            <div className="ant-col-19 canvas-container">
+            <div className="canvas-container">
                 <Scene />
             </div>
         </Row>
