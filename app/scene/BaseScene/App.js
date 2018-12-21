@@ -34,6 +34,8 @@ export default class FirstScene extends App {
 
 		const cube = new Mesh(geometry, material);
         cube.loadScript('cube');
+
+        return cube;
     }
 
     onCreate() {
@@ -43,9 +45,13 @@ export default class FirstScene extends App {
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 
-        this.sampleCube();
+        const cube = this.sampleCube();
 
         ControlsManager.setOrbitControl();
+        ControlsManager.setTransformControl();
+        const transform = ControlsManager.getControl('transform');
+
+        transform.attach(cube.mesh);
 
         this.sceneHelper.addGrid(200, 10);
 
