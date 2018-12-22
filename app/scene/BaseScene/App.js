@@ -15,6 +15,10 @@ import {
     AudioEngine
 } from 'mage-engine';
 
+import {
+    dispatch
+} from 'redux';
+
 import { script } from './cube';
 
 export default class FirstScene extends App {
@@ -80,20 +84,34 @@ export default class FirstScene extends App {
 		}
     }
 
+    setTranformControls(cube) {
+        ControlsManager.setOrbitControl();
+        ControlsManager.setTransformControl();
+        this.transform = ControlsManager.getControl('transform');
+        this.transform.attach(cube.mesh);
+
+        this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
+    }
+
+    dispatchMeshChange = () => {
+        const { position, rotation, scale } = this.transform.object;
+
+        this.dispatchEvent({
+            type: 'meshChanged',
+            position: { x: position.x, y: position.y, z: position.z },
+            rotation: { x: rotation.x, y: rotation.y, z: rotation.z },
+            scale: { x: scale.x, y: scale.y, z: scale.z }
+        });
+    }
+
     onCreate() {
-
         ScriptManager.create('cube', script);
-
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 
         const cube = this.sampleCube();
 
-        ControlsManager.setOrbitControl();
-        ControlsManager.setTransformControl();
-        this.transform = ControlsManager.getControl('transform');
-
-        this.transform.attach(cube.mesh);
+        this.setTranformControls(cube);
 
         this.enableInput();
 
