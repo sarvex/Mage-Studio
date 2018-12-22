@@ -8,9 +8,8 @@ export const script = {
 
    update: function() {
        //this.mesh.position.y = -1.5 + (Math.cos(this.angle));
-       this.mesh.rotation.z = 0.05 * Math.sin(this.angle);
-       this.mesh.rotation.x = 0.03 * Math.sin(this.angle);
-       this.angle += 0.003;//0.07;
+       this.mesh.rotation.y = this.angle;
+       this.angle += 0.005;//0.07;
    }
 
 };

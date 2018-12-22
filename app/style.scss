@@ -22,7 +22,9 @@
     flex: 1;
     background-color: $black;
 
-    & .canva-container {
+    & .canvas-container {
         display: flex;
+        height: 100%;
+        width: 81% !important;
     }
 }

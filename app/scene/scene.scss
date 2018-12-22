@@ -2,7 +2,6 @@
     flex: 1 1 auto;
     min-height: 600px;
     min-width: 800px;
-
-    max-width: calc(100% - 17%);
+    z-index: 0;
     display: block;
 }
