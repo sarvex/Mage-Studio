@@ -1,1 +1,4 @@
 export const TEST_ACTION_TYPE = 'TEST_ACTION_TYPE';
+
+export const MESH_CHANGED = 'MESH_CHANGED';
+export const MESH_SELECTED = 'MESH_SELECTED';
