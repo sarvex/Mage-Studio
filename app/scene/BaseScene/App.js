@@ -33,7 +33,7 @@ export default class FirstScene extends App {
         const geometry = new THREE.CubeGeometry(20, 20, 20);
 		const material = new THREE.MeshBasicMaterial({
 			color: 0x00ff00,
-			wireframe : true
+			wireframe : false
 		});
 
 		const cube = new Mesh(geometry, material);
