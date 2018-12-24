@@ -9,14 +9,14 @@
   ],
   "mage-engine": [
     {
-      "id": "../Mage/dist/mage.js",
-      "name": "../Mage/dist/mage.js",
+      "id": "./node_modules/mage-engine/dist/mage.js",
+      "name": "./node_modules/mage-engine/dist/mage.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
     },
     {
-      "id": "../Mage/dist/mage.js",
-      "name": "../Mage/dist/mage.js",
+      "id": "./node_modules/mage-engine/dist/mage.js",
+      "name": "./node_modules/mage-engine/dist/mage.js",
       "file": "static/chunks/2.js",
       "publicPath": "static/chunks/2.js"
     }

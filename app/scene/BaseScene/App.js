@@ -42,6 +42,10 @@ export default class FirstScene extends App {
         return cube;
     }
 
+    onMeshClick = ({ meshes }) => {
+        this.transform.attach(meshes[0]);
+    }
+
     onKeyPress = ({ event }) => {
         console.log('app keypress', event, this.transform);
         switch (event.key) {
@@ -88,12 +92,13 @@ export default class FirstScene extends App {
         ControlsManager.setOrbitControl();
         ControlsManager.setTransformControl();
         this.transform = ControlsManager.getControl('transform');
-        this.transform.attach(cube.mesh);
+        //this.transform.attach(cube.mesh);
 
         this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
     }
 
     dispatchMeshChange = () => {
+        if (!this.transform.object) return;
         const { position, rotation, scale } = this.transform.object;
 
         this.dispatchEvent({
