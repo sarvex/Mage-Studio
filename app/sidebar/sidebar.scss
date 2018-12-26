@@ -94,4 +94,37 @@
             }
         }
     }
+
+
+    .scene-setting {
+
+        display: flex;
+        padding: $base-unit;
+
+        .setting-input {
+            font-size: .55rem;
+            font-weight: 700;
+            /* align-self: center; */
+            float: right;
+            display: inline-block;
+            width: $base-unit * 21;
+
+            border: 1px solid $deep-blue-15;
+            border-radius: 6px;
+
+            & > * {
+                background: $deep-blue-13;
+                border: none;
+                color: white;
+            }
+        }
+
+        .setting-label {
+            line-height: $base-unit * 2.75;
+        }
+
+        .setting-row {
+            width: 100%;
+        }
+    }
 }
