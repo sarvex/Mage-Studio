@@ -12,7 +12,7 @@
         flex-direction: column;
 
         & .content {
-            padding: $base-unit;
+            //padding: $base-unit;
             flex: 1 1 auto;
             height: calc(50% - 50px);
             overflow: auto;
@@ -24,7 +24,7 @@
     }
 
     .title {
-        background: $deep-purple-80;
+        background: $small-header-background;
         padding: $base-unit;
         max-height: $base-unit * 5;
         text-transform: uppercase;
@@ -43,6 +43,55 @@
 
         & span {
             margin-left: $base-unit;
+        }
+    }
+
+    .scene-property {
+
+        width: 100%;
+        line-height: 1rem;
+        display: flex;
+        padding: $base-unit/4 $base-unit/4 $base-unit/4 $base-unit;
+        background-color: $deep-blue-13;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .label {
+
+            .label-text {
+                font-weight: 700;
+                font-size: 0.55rem;
+                margin-right: $base-unit;
+                flex: 1 1 auto;
+            }
+
+            .label-icon {
+                margin-right: $base-unit;
+            }
+        }
+
+        .enabled-toggle {
+            float: right;
+            margin-right: $base-unit/2;
+
+            & span {
+                font-size: 0.5rem;
+                margin-right: $base-unit;
+            }
+        }
+
+        button.ant-switch-small {
+
+            height: 13px;
+
+            &::after {
+                height: 10px;
+                width: 10px;
+            }
+
+            &.ant-switch-checked {
+                background-color: $green !important;
+            }
         }
     }
 }

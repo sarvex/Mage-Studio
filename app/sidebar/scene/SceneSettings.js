@@ -3,6 +3,28 @@ import {
     connect
 } from 'react-redux';
 import { Icon } from 'antd';
+import Fog from './Fog';
+import Shadows from './Shadows';
+import Controls from './Controls';
+import Space from './Space';
+/*
+    Fog:
+        enabled/disabled
+        if (enabled)
+            color
+            density
+
+    Shadows:
+        enabled/disabled
+        if (enabled)
+            Basic/PCFShadow/PCFSoftShadow
+
+    Controls:
+        Rotate/Scale/Traslate
+
+    Space:
+        Local/Global
+*/
 
 const SceneSettings = ({ position, }) => (
     <div className="box">
@@ -11,11 +33,10 @@ const SceneSettings = ({ position, }) => (
             <span>Scene settings</span>
         </p>
         <div className="content">
-            {position.x}
-            <br/>
-            {position.y}
-            <br/>
-            {position.z}
+            <Fog />
+            <Shadows />
+            <Controls />
+            <Space />
         </div>
     </div>
 );
