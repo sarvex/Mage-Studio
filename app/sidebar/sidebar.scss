@@ -97,25 +97,27 @@
 
 
     .scene-setting {
-
-        display: flex;
         padding: $base-unit;
 
         .setting-input {
-            font-size: .55rem;
-            font-weight: 700;
             /* align-self: center; */
             float: right;
             display: inline-block;
-            width: $base-unit * 21;
+            width: $base-unit * 18;
+
 
             border: 1px solid $deep-blue-15;
-            border-radius: 6px;
+            //border-radius: 6px;
 
             & > * {
-                background: $deep-blue-13;
+                font-family: 'Roboto Mono', sans-serif;
+                font-size: .55rem;
+                font-weight: 700;
+                background: $deep-blue-12;
                 border: none;
                 color: white;
+                border-radius: 0px;
+                width: 100% !important;
             }
         }
 
@@ -124,7 +126,14 @@
         }
 
         .setting-row {
+            float: left;
+            display: inline-block;
             width: 100%;
+            margin-bottom: $base-unit / 2;
+
+            &:last-child {
+                margin-bottom: $base-unit;
+            }
         }
     }
 }

@@ -18,9 +18,9 @@ const Fog = (props) => (
                     className='setting-input'
                     size={'small'}
                     defaultValue='traslate'>
-                    <Select.Option key='0'>TRASLATE</Select.Option>
-                    <Select.Option key='1'>ROTATE</Select.Option>
-                    <Select.Option key='2'>SCALE</Select.Option>
+                    <Select.Option key='0'>traslate</Select.Option>
+                    <Select.Option key='1'>rotate</Select.Option>
+                    <Select.Option key='2'>scale</Select.Option>
                 </Select>
             </div>
         </div>

@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
 @import './constants.scss';
 @import './theme.scss';
 
 @font-face {
     font-family: 'LeckerliOne';
-    src: url('/static/fonts/LeckerliOne-Regular.otf') /* ... */;
+    src: url('/static/fonts/LeckerliOne-Regular.otf');
 }
 
 .app {
@@ -12,7 +13,9 @@
     flex-direction: column;
     color: $deep-blue-1;
     font-size: 0.7rem;
-    letter-spacing: -0.01rem;
+    font-weight: 400;
+    //letter-spacing: -0.01rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 .footer {
