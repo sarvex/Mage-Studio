@@ -1,5 +1,6 @@
 import {
-    SCENE_CONTROLS_CHANGED
+    SCENE_CONTROLS_CHANGED,
+    SCENE_SHADOWS_CHANGED
 } from './types';
 
 export const controlsChanged = (control) => ({

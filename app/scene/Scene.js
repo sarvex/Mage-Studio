@@ -25,11 +25,18 @@ export class Scene extends React.Component {
         this.app.addEventListener('meshChanged', onMeshChanged);
     }
 
-    componentDidUpdate() {
-        if (this.app) {
-            const { control } = this.props;
+    isReceivingSameProps = (prevProps) => {
+        return Object.keys(prevProps).filter(k => (
+            prevProps[k] !== this.props[k]
+        )) === 0;
+    }
 
-            this.app.changeTransformControl(control);
+    componentDidUpdate(prevProps) {
+        if (this.app && !this.isReceivingSameProps(prevProps)) {
+            const { controls, fog } = this.props;
+
+            this.app.changeTransformControl(controls);
+            this.app.changeFog(fog);
         }
     }
 
@@ -39,14 +46,11 @@ export class Scene extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
-    const { scenesettings = {} } = state;
-    console.log(scenesettings);
-
-    const { control } = scenesettings;
+    const { controls = {}, fog = {} } = state;
 
     return {
-        control
+        controls,
+        fog
     };
 }
 const mapDispatchToProps = (dispatch) => ({

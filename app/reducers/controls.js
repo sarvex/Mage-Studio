@@ -1,30 +1,25 @@
 import {
+    SCENE_CONTROLS_CHANGED,
     SCENE_FOG_ENABLED,
     SCENE_FOG_COLOR_CHANGED,
     SCENE_FOG_DENSITY_CHANGED,
+    SCENE_SHADOWS_CHANGED
 } from '../actions/types';
 
 export default function reducer(state = {}, action = {}) {
     switch(action.type) {
-        case SCENE_FOG_ENABLED:
-            const { enabled } = action;
+        case SCENE_CONTROLS_CHANGED:
             return {
                 ...state,
-                enabled
+                control: action.control || 'translate'
             };
             break;
-        case SCENE_FOG_COLOR_CHANGED:
-            const { color } = action;
+        case SCENE_SHADOWS_CHANGED:
+            const { shadowEnabled, shadowType } = action;
             return {
                 ...state,
-                color
-            };
-            break;
-        case SCENE_FOG_DENSITY_CHANGED:
-            const { density } = action;
-            return {
-                ...state,
-                density
+                shadowEnabled,
+                shadowType
             };
             break;
         default:

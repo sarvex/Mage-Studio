@@ -8,7 +8,15 @@ import Shadows from './Shadows';
 import Controls from './Controls';
 import Space from './Space';
 
-import { controlsChanged } from '../../actions/scenesettings';
+import {
+    controlsChanged
+} from '../../actions/controls';
+
+import {
+    fogColorChanged,
+    fogDensityChanged,
+    fogEnabled
+} from '../../actions/fog';
 
 class SceneSettings extends React.Component {
     constructor(props) {
@@ -21,6 +29,24 @@ class SceneSettings extends React.Component {
         onControlsChange(event);
     }
 
+    handleFogDensityChange = (density) => {
+        const { onFogDensityChange } = this.props;
+
+        onFogDensityChange(density);
+    }
+
+    handleFogColorChange = (color) => {
+        const { onFogColorChange } = this.props;
+
+        onFogColorChange(color);
+    }
+
+    handleFogEnabledChange = (flag) => {
+        const { onFogEnabledChange } = this.props;
+
+        onFogEnabledChange(flag);
+    }
+
     render() {
         return (
             <div className="box">
@@ -29,7 +55,14 @@ class SceneSettings extends React.Component {
                     <span>Scene settings</span>
                 </p>
                 <div className="content">
-                    <Fog />
+                    <Fog
+                        color={this.props.fogColor}
+                        density={this.props.fogDensity}
+                        enabled={this.props.fogEnabled}
+                        onFogEnabledChange={this.handleFogEnabledChange}
+                        onFogColorChange={this.handleFogColorChange}
+                        onFogDensityChange={this.handleFogDensityChange}
+                    />
                     <Shadows />
                     <Controls
                         value='translate'
@@ -43,21 +76,24 @@ class SceneSettings extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    const { currentMesh = {} } = state;
+    const { fog = {} } = state;
     const {
-        position = {x: 0, y: 0, z: 0},
-        rotation = {x: 0, y: 0, z: 0},
-        scale = {x: 0, y: 0, z: 0} } = currentMesh;
+        density = 0,
+        enabled = true,
+        color = '#000' } = fog;
 
     return {
-        position,
-        rotation,
-        scale
+        fogColor: color,
+        fogDensity: density,
+        fogEnabled: enabled
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onFogColorChange: (color) => dispatch(fogColorChanged(color)),
+        onFogEnabledChange: (flag) => dispatch(fogEnabled(flag)),
+        onFogDensityChange: (density) => dispatch(fogDensityChanged(density)),
         onControlsChange: (control) => dispatch(controlsChanged(control))
     };
 }

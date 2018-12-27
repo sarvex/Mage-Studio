@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import reducer from './reducer';
 import currentMesh from './currentMesh';
-import scenesettings from './scenesettings';
+import controls from './controls';
+import shadows from './shadows';
+import fog from './fog';
 
 export default combineReducers({
     currentMesh,
-    reducer,
-    scenesettings
+    fog,
+    shadows,
+    controls
 });

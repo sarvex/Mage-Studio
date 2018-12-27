@@ -4,7 +4,7 @@
 /*!******************************!*\
   !*** ./app/actions/types.js ***!
   \******************************/
-/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED, SCENE_CONTROLS_CHANGED */
+/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED, SCENE_CONTROLS_CHANGED, SCENE_FOG_ENABLED, SCENE_FOG_COLOR_CHANGED, SCENE_FOG_DENSITY_CHANGED, SCENE_SHADOWS_CHANGED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13,10 +13,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_CHANGED", function() { return MESH_CHANGED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_SELECTED", function() { return MESH_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_CONTROLS_CHANGED", function() { return SCENE_CONTROLS_CHANGED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_FOG_ENABLED", function() { return SCENE_FOG_ENABLED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_FOG_COLOR_CHANGED", function() { return SCENE_FOG_COLOR_CHANGED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_FOG_DENSITY_CHANGED", function() { return SCENE_FOG_DENSITY_CHANGED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_SHADOWS_CHANGED", function() { return SCENE_SHADOWS_CHANGED; });
 var TEST_ACTION_TYPE = 'TEST_ACTION_TYPE';
 var MESH_CHANGED = 'MESH_CHANGED';
 var MESH_SELECTED = 'MESH_SELECTED';
 var SCENE_CONTROLS_CHANGED = 'SCENE_CONTROLS_CHANGED';
+var SCENE_FOG_ENABLED = 'SCENE_FOG_ENABLED';
+var SCENE_FOG_COLOR_CHANGED = 'SCENE_FOG_COLOR_CHANGED';
+var SCENE_FOG_DENSITY_CHANGED = 'SCENE_FOG_DENSITY_CHANGED';
+var SCENE_SHADOWS_CHANGED = 'SCENE_SHADOWS_CHANGED';
+
+/***/ }),
+
+/***/ "./app/reducers/controls.js":
+/*!**********************************!*\
+  !*** ./app/reducers/controls.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./app/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_CONTROLS_CHANGED"]:
+      return _objectSpread({}, state, {
+        control: action.control || 'translate'
+      });
+      break;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_SHADOWS_CHANGED"]:
+      var shadowEnabled = action.shadowEnabled,
+          shadowType = action.shadowType;
+      return _objectSpread({}, state, {
+        shadowEnabled: shadowEnabled,
+        shadowType: shadowType
+      });
+      break;
+
+    default:
+      return state;
+      break;
+  }
+}
 
 /***/ }),
 
@@ -58,61 +110,10 @@ function reducer() {
 
 /***/ }),
 
-/***/ "./app/reducers/index.js":
-/*!*******************************!*\
-  !*** ./app/reducers/index.js ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/lib/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./app/reducers/reducer.js");
-/* harmony import */ var _currentMesh__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./currentMesh */ "./app/reducers/currentMesh.js");
-/* harmony import */ var _scenesettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scenesettings */ "./app/reducers/scenesettings.js");
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  currentMesh: _currentMesh__WEBPACK_IMPORTED_MODULE_2__["default"],
-  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  scenesettings: _scenesettings__WEBPACK_IMPORTED_MODULE_3__["default"]
-}));
-
-/***/ }),
-
-/***/ "./app/reducers/reducer.js":
-/*!*********************************!*\
-  !*** ./app/reducers/reducer.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./app/actions/types.js");
-
-function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  switch (action.type) {
-    default:
-      return state;
-      break;
-  }
-}
-
-/***/ }),
-
-/***/ "./app/reducers/scenesettings.js":
-/*!***************************************!*\
-  !*** ./app/reducers/scenesettings.js ***!
-  \***************************************/
+/***/ "./app/reducers/fog.js":
+/*!*****************************!*\
+  !*** ./app/reducers/fog.js ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -130,9 +131,91 @@ function reducer() {
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_CONTROLS_CHANGED"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_FOG_ENABLED"]:
+      var enabled = action.enabled;
       return _objectSpread({}, state, {
-        control: action.control || 'translate'
+        enabled: enabled
+      });
+      break;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_FOG_COLOR_CHANGED"]:
+      var color = action.color;
+      return _objectSpread({}, state, {
+        color: color
+      });
+      break;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_FOG_DENSITY_CHANGED"]:
+      var density = action.density;
+      return _objectSpread({}, state, {
+        density: density
+      });
+      break;
+
+    default:
+      return state;
+      break;
+  }
+}
+
+/***/ }),
+
+/***/ "./app/reducers/index.js":
+/*!*******************************!*\
+  !*** ./app/reducers/index.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/lib/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _currentMesh__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./currentMesh */ "./app/reducers/currentMesh.js");
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controls */ "./app/reducers/controls.js");
+/* harmony import */ var _shadows__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shadows */ "./app/reducers/shadows.js");
+/* harmony import */ var _fog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fog */ "./app/reducers/fog.js");
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  currentMesh: _currentMesh__WEBPACK_IMPORTED_MODULE_1__["default"],
+  fog: _fog__WEBPACK_IMPORTED_MODULE_4__["default"],
+  shadows: _shadows__WEBPACK_IMPORTED_MODULE_3__["default"],
+  controls: _controls__WEBPACK_IMPORTED_MODULE_2__["default"]
+}));
+
+/***/ }),
+
+/***/ "./app/reducers/shadows.js":
+/*!*********************************!*\
+  !*** ./app/reducers/shadows.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./app/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_SHADOWS_CHANGED"]:
+      var shadowEnabled = action.shadowEnabled,
+          shadowType = action.shadowType;
+      return _objectSpread({}, state, {
+        shadowEnabled: shadowEnabled,
+        shadowType: shadowType
       });
       break;
 

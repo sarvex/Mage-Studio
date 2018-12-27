@@ -118,6 +118,11 @@
                 border-radius: 0px;
                 width: 100% !important;
             }
+
+            &.disabled > * {
+                color: $deep-blue-1;
+                opacity: .2;
+            }
         }
 
         .setting-label {

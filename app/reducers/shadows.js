@@ -1,13 +1,15 @@
 import {
-    SCENE_CONTROLS_CHANGED
+    SCENE_SHADOWS_CHANGED
 } from '../actions/types';
 
 export default function reducer(state = {}, action = {}) {
     switch(action.type) {
-        case SCENE_CONTROLS_CHANGED:
+        case SCENE_SHADOWS_CHANGED:
+            const { shadowEnabled, shadowType } = action;
             return {
                 ...state,
-                control: action.control || 'translate'
+                shadowEnabled,
+                shadowType
             };
             break;
         default:
