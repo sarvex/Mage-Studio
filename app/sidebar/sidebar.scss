@@ -7,15 +7,14 @@
     background-color: $sidebar-background;
 
     .box {
-        height: 50%;
         display: flex;
         flex-direction: column;
 
         & .content {
-            padding: $base-unit;
+            //padding: $base-unit;
             flex: 1 1 auto;
-            height: calc(50% - 50px);
             overflow: auto;
+            min-height: 300px;
         }
 
         &:first-child {
@@ -24,7 +23,7 @@
     }
 
     .title {
-        background: $deep-purple-80;
+        background: $small-header-background;
         padding: $base-unit;
         max-height: $base-unit * 5;
         text-transform: uppercase;
@@ -43,6 +42,131 @@
 
         & span {
             margin-left: $base-unit;
+        }
+    }
+
+    .scene-property {
+
+        width: 100%;
+        line-height: 1rem;
+        display: flex;
+        padding: $base-unit/4 $base-unit/4 $base-unit/4 $base-unit;
+        background-color: $deep-blue-13;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .label {
+
+            .label-text {
+                font-weight: 700;
+                font-size: 0.55rem;
+                margin-right: $base-unit;
+                flex: 1 1 auto;
+            }
+
+            .label-icon {
+                margin-right: $base-unit;
+            }
+        }
+
+        .enabled-toggle {
+            float: right;
+            margin-right: $base-unit/2;
+
+            & span {
+                font-size: 0.5rem;
+                margin-right: $base-unit;
+            }
+        }
+
+        button.ant-switch-small {
+
+            height: 14px;
+
+            &::after {
+                height: 10px;
+                width: 10px;
+            }
+
+            &.ant-switch-checked {
+                background-color: $green !important;
+            }
+        }
+    }
+
+
+    .scene-setting {
+        padding: $base-unit;
+
+        .setting-input {
+            /* align-self: center; */
+            float: right;
+            display: inline-block;
+            width: $base-unit * 18;
+
+
+            border: 1px solid $deep-blue-15;
+            //border-radius: 6px;
+
+            & > * {
+                font-family: 'Roboto Mono', sans-serif;
+                font-size: .55rem;
+                font-weight: 700;
+                background: $deep-blue-12;
+                border: none;
+                color: white;
+                border-radius: 0px;
+                width: 100% !important;
+            }
+
+            &.disabled > * {
+                color: $deep-blue-1;
+                opacity: .2;
+            }
+        }
+
+        .setting-label {
+            line-height: $base-unit * 2.75;
+        }
+
+        .setting-row {
+            float: left;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: $base-unit / 2;
+
+            &:last-child {
+                margin-bottom: $base-unit;
+            }
+        }
+    }
+}
+
+.ant-select-dropdown {
+    background-color: $deep-blue-13 !important;
+    border: 1px solid $deep-blue-15;
+    border-radius: 0px !important;
+
+    & .ant-select-dropdown-menu {
+        border-radius: 0px;
+    }
+
+    & .ant-select-dropdown-menu-item {
+        color: $white !important;
+        font-family: 'Roboto Mono', sans-serif;
+        font-size: .55rem;
+
+        &.ant-select-dropdown-menu-item-active,
+        &.ant-select-dropdown-menu-item-selected {
+            background-color: $deep-blue-10 !important;
+        }
+
+        &:hover {
+            background-color: $deep-blue-11 !important;
+        }
+
+        .ant-select-arrow {
+            color: $deep-blue-15;
         }
     }
 }

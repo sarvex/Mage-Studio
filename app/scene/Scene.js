@@ -25,12 +25,34 @@ export class Scene extends React.Component {
         this.app.addEventListener('meshChanged', onMeshChanged);
     }
 
+    isReceivingSameProps = (prevProps) => {
+        return Object.keys(prevProps).filter(k => (
+            prevProps[k] !== this.props[k]
+        )) === 0;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.app && !this.isReceivingSameProps(prevProps)) {
+            const { controls, fog } = this.props;
+
+            this.app.changeTransformControl(controls);
+            this.app.changeFog(fog);
+        }
+    }
+
     render() {
         return <div id="gameContainer" tabIndex={0}></div>
     }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => {
+    const { controls = {}, fog = {} } = state;
+
+    return {
+        controls,
+        fog
+    };
+}
 const mapDispatchToProps = (dispatch) => ({
     onMeshChanged: ({position, rotation, scale}) => dispatch(meshChanged(position, rotation, scale))
 });

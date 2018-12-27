@@ -43,11 +43,16 @@ export default class FirstScene extends App {
     }
 
     onMeshClick = ({ meshes }) => {
-        this.transform.attach(meshes[0]);
+        const mesh = meshes[0];
+        this.transform.attach(mesh);
+        this.dispatchEvent({ type: 'meshAttached', mesh });
+    }
+
+    onMeshDeselect = () => {
+        this.transform.detach();
     }
 
     onKeyPress = ({ event }) => {
-        console.log('app keypress', event, this.transform);
         switch (event.key) {
 			case "q": // Q
 				this.transform.setSpace(this.transform.space === "local" ? "world" : "local");
@@ -91,10 +96,22 @@ export default class FirstScene extends App {
     setTranformControls(cube) {
         ControlsManager.setOrbitControl();
         ControlsManager.setTransformControl();
-        this.transform = ControlsManager.getControl('transform');
-        //this.transform.attach(cube.mesh);
 
+        this.transform = ControlsManager.getControl('transform');
         this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
+    }
+
+    changeTransformControl = (controls) => {
+        if (this.transform) {
+            if (controls.control) this.transform.setMode(controls.control);
+            if (controls.space) this.transform.setSpace(controls.space);
+        }
+    }
+
+    changeFog = (fog) => {
+        if (fog.color && fog.density && fog.enabled) {
+            SceneManager.fog(fog.color, fog.density/1000);
+        }
     }
 
     dispatchMeshChange = () => {
