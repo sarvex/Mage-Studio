@@ -7,39 +7,39 @@ import Fog from './Fog';
 import Shadows from './Shadows';
 import Controls from './Controls';
 import Space from './Space';
-/*
-    Fog:
-        enabled/disabled
-        if (enabled)
-            color
-            density
 
-    Shadows:
-        enabled/disabled
-        if (enabled)
-            Basic/PCFShadow/PCFSoftShadow
+import { controlsChanged } from '../../actions/scenesettings';
 
-    Controls:
-        Rotate/Scale/Traslate
+class SceneSettings extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    Space:
-        Local/Global
-*/
+    handleControlsChange = (event) => {
+        const { onControlsChange } = this.props;
 
-const SceneSettings = ({ position, }) => (
-    <div className="box">
-        <p className="title">
-            <Icon className="icon" type="setting" />
-            <span>Scene settings</span>
-        </p>
-        <div className="content">
-            <Fog />
-            <Shadows />
-            <Controls />
-            <Space />
-        </div>
-    </div>
-);
+        onControlsChange(event);
+    }
+
+    render() {
+        return (
+            <div className="box">
+                <p className="title">
+                    <Icon className="icon" type="setting" />
+                    <span>Scene settings</span>
+                </p>
+                <div className="content">
+                    <Fog />
+                    <Shadows />
+                    <Controls
+                        value='translate'
+                        onControlsChange={this.handleControlsChange}/>
+                    <Space />
+                </div>
+            </div>
+        );
+    }
+}
 
 const mapStateToProps = (state) => {
 
@@ -56,4 +56,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(SceneSettings);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onControlsChange: (control) => dispatch(controlsChanged(control))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SceneSettings);

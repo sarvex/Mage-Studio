@@ -97,6 +97,13 @@ export default class FirstScene extends App {
         this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
     }
 
+    changeTransformControl = (control) => {
+        console.log(control);
+        if (this.transform) {
+            this.transform.setMode(control);
+        }
+    }
+
     dispatchMeshChange = () => {
         if (!this.transform.object) return;
         const { position, rotation, scale } = this.transform.object;

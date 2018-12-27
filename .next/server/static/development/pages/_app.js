@@ -97,7 +97,7 @@ module.exports =
 /*!******************************!*\
   !*** ./app/actions/types.js ***!
   \******************************/
-/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED */
+/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED, SCENE_CONTROLS_CHANGED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,9 +105,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_ACTION_TYPE", function() { return TEST_ACTION_TYPE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_CHANGED", function() { return MESH_CHANGED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_SELECTED", function() { return MESH_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_CONTROLS_CHANGED", function() { return SCENE_CONTROLS_CHANGED; });
 var TEST_ACTION_TYPE = 'TEST_ACTION_TYPE';
 var MESH_CHANGED = 'MESH_CHANGED';
 var MESH_SELECTED = 'MESH_SELECTED';
+var SCENE_CONTROLS_CHANGED = 'SCENE_CONTROLS_CHANGED';
 
 /***/ }),
 
@@ -162,12 +164,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./app/reducers/reducer.js");
 /* harmony import */ var _currentMesh__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./currentMesh */ "./app/reducers/currentMesh.js");
+/* harmony import */ var _scenesettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scenesettings */ "./app/reducers/scenesettings.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   currentMesh: _currentMesh__WEBPACK_IMPORTED_MODULE_2__["default"],
-  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  scenesettings: _scenesettings__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -189,6 +194,41 @@ function reducer() {
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   switch (action.type) {
+    default:
+      return state;
+      break;
+  }
+}
+
+/***/ }),
+
+/***/ "./app/reducers/scenesettings.js":
+/*!***************************************!*\
+  !*** ./app/reducers/scenesettings.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./app/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SCENE_CONTROLS_CHANGED"]:
+      return _objectSpread({}, state, {
+        control: action.control || 'translate'
+      });
+      break;
+
     default:
       return state;
       break;

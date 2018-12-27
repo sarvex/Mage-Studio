@@ -25,12 +25,30 @@ export class Scene extends React.Component {
         this.app.addEventListener('meshChanged', onMeshChanged);
     }
 
+    componentDidUpdate() {
+        if (this.app) {
+            const { control } = this.props;
+
+            this.app.changeTransformControl(control);
+        }
+    }
+
     render() {
         return <div id="gameContainer" tabIndex={0}></div>
     }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => {
+    console.log(state);
+    const { scenesettings = {} } = state;
+    console.log(scenesettings);
+
+    const { control } = scenesettings;
+
+    return {
+        control
+    };
+}
 const mapDispatchToProps = (dispatch) => ({
     onMeshChanged: ({position, rotation, scale}) => dispatch(meshChanged(position, rotation, scale))
 });
