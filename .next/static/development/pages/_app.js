@@ -4,7 +4,7 @@
 /*!******************************!*\
   !*** ./app/actions/types.js ***!
   \******************************/
-/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED, SCENE_CONTROLS_CHANGED, SCENE_FOG_ENABLED, SCENE_FOG_COLOR_CHANGED, SCENE_FOG_DENSITY_CHANGED, SCENE_SHADOWS_CHANGED */
+/*! exports provided: TEST_ACTION_TYPE, MESH_CHANGED, MESH_SELECTED, MESH_ATTACHED, MESH_DETACHED, SCENE_CONTROLS_CHANGED, SCENE_FOG_ENABLED, SCENE_FOG_COLOR_CHANGED, SCENE_FOG_DENSITY_CHANGED, SCENE_SHADOWS_CHANGED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_ACTION_TYPE", function() { return TEST_ACTION_TYPE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_CHANGED", function() { return MESH_CHANGED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_SELECTED", function() { return MESH_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_ATTACHED", function() { return MESH_ATTACHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MESH_DETACHED", function() { return MESH_DETACHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_CONTROLS_CHANGED", function() { return SCENE_CONTROLS_CHANGED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_FOG_ENABLED", function() { return SCENE_FOG_ENABLED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCENE_FOG_COLOR_CHANGED", function() { return SCENE_FOG_COLOR_CHANGED; });
@@ -20,6 +22,8 @@ __webpack_require__.r(__webpack_exports__);
 var TEST_ACTION_TYPE = 'TEST_ACTION_TYPE';
 var MESH_CHANGED = 'MESH_CHANGED';
 var MESH_SELECTED = 'MESH_SELECTED';
+var MESH_ATTACHED = 'MESH_ATTACHED';
+var MESH_DETACHED = 'MESH_DETACHED';
 var SCENE_CONTROLS_CHANGED = 'SCENE_CONTROLS_CHANGED';
 var SCENE_FOG_ENABLED = 'SCENE_FOG_ENABLED';
 var SCENE_FOG_COLOR_CHANGED = 'SCENE_FOG_COLOR_CHANGED';
@@ -175,6 +179,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controls */ "./app/reducers/controls.js");
 /* harmony import */ var _shadows__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shadows */ "./app/reducers/shadows.js");
 /* harmony import */ var _fog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fog */ "./app/reducers/fog.js");
+/* harmony import */ var _rightsidebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rightsidebar */ "./app/reducers/rightsidebar.js");
+
 
 
 
@@ -184,8 +190,51 @@ __webpack_require__.r(__webpack_exports__);
   currentMesh: _currentMesh__WEBPACK_IMPORTED_MODULE_1__["default"],
   fog: _fog__WEBPACK_IMPORTED_MODULE_4__["default"],
   shadows: _shadows__WEBPACK_IMPORTED_MODULE_3__["default"],
-  controls: _controls__WEBPACK_IMPORTED_MODULE_2__["default"]
+  controls: _controls__WEBPACK_IMPORTED_MODULE_2__["default"],
+  rightsidebar: _rightsidebar__WEBPACK_IMPORTED_MODULE_5__["default"]
 }));
+
+/***/ }),
+
+/***/ "./app/reducers/rightsidebar.js":
+/*!**************************************!*\
+  !*** ./app/reducers/rightsidebar.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./app/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["MESH_ATTACHED"]:
+      return _objectSpread({}, state, {
+        empty: false,
+        element: action.element
+      });
+      break;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["MESH_DETACHED"]:
+      return _objectSpread({}, state, {
+        empty: true
+      });
+      break;
+
+    default:
+      return state;
+      break;
+  }
+}
 
 /***/ }),
 

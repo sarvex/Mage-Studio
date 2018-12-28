@@ -45,11 +45,13 @@ export default class FirstScene extends App {
     onMeshClick = ({ meshes }) => {
         const mesh = meshes[0];
         this.transform.attach(mesh);
-        this.dispatchEvent({ type: 'meshAttached', mesh });
+        console.log(mesh);
+        this.dispatchEvent({ type: 'meshAttached', element: mesh });
     }
 
     onMeshDeselect = () => {
         this.transform.detach();
+        this.dispatchEvent({ type: 'meshDetached' });
     }
 
     onKeyPress = ({ event }) => {
@@ -90,6 +92,9 @@ export default class FirstScene extends App {
 			case 32: // Spacebar
 				this.transform.enabled = ! this.transform.enabled;
 				break;
+            case 'escape':
+                this.transform.detach()
+                break;
 		}
     }
 

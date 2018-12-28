@@ -29,6 +29,7 @@
     & .canvas-container {
         display: flex;
         height: 100%;
-        width: 81% !important;
+        float: left;
+        width: 66.66% !important;
     }
 }
