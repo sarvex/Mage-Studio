@@ -16,7 +16,7 @@ const Controls = ({ onControlsChange = f => f, value }) => (
                 </label>
                 <Select
                     onChange={onControlsChange}
-                    className='setting-input'
+                    className='setting-input right'
                     size={'small'}
                     defaultValue={value}>
                     <Select.Option key='translate'>translate</Select.Option>

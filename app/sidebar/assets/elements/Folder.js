@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, Icon } from 'antd';
 
-import './assets.scss';
+import '../assets.scss';
 
 const Folder = ({ name }) => (
     <div>

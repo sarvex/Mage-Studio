@@ -19,7 +19,7 @@ class Fog extends React.Component {
 
         const { enabled } =  this.state;
         const enabledClassName = enabled ? 'enabled' : 'disabled';
-        const selectClassName = `setting-input ${enabledClassName}`;
+        const selectClassName = `setting-input right ${enabledClassName}`;
 
         return (
             <div>

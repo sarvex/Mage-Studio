@@ -15,7 +15,7 @@ const Fog = (props) => (
                     Type
                 </label>
                 <Select
-                    className='setting-input'
+                    className='setting-input right'
                     size={'small'}
                     defaultValue='global'>
                     <Select.Option key='0'>global</Select.Option>

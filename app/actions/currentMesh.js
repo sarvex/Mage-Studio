@@ -11,13 +11,10 @@ export const meshChanged = (position, rotation, scale) => ({
     scale
 });
 
-export const meshAttached = (mesh) => {
-    console.log(mesh);
-    return {
-        type: MESH_ATTACHED,
-        element: mesh
-    }
-};
+export const meshAttached = (mesh) => ({
+    type: MESH_ATTACHED,
+    element: mesh
+});
 
 export const meshDetached = () => ({
     type: MESH_DETACHED

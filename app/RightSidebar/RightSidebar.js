@@ -2,18 +2,46 @@ import React from 'react';
 import {
     connect
 } from 'react-redux';
-import { Col } from 'antd';
+import { Col, Icon } from 'antd';
 
-const RightSidebar = ({empty, x, y, z}) => (
+import CopyButton from '../common/CopyButton';
+import DeleteButton from '../common/DeleteButton';
+import AddButton from '../common/AddButton';
+import SearchButton from '../common/SearchButton';
+
+import Hierarchy from './Hierarchy';
+import Inspector from './Inspector';
+
+const RightSidebar = ({empty, element}) => (
     <Col
         span={4}
         className='sidebar'>
-        { empty ? 'No Content' :
-            <ul>
-                <li>{x}</li>
-                <li>{y}</li>
-                <li>{z}</li>
-            </ul> }
+
+        <div className="box">
+            <p className="title">
+                <Icon className="icon" type="bars" />
+                <span>Hierarchy</span>
+                <DeleteButton />
+                <CopyButton />
+                <AddButton />
+                <SearchButton />
+            </p>
+            <div className="content">
+                <Hierarchy />
+            </div>
+        </div>
+        <div className='box'>
+            <p className="title">
+                <Icon className="icon" type="tool" />
+                <span>Inspector</span>
+            </p>
+            <div className="content">
+                <Inspector
+                    empty={empty}
+                    element={element}
+                />
+            </div>
+        </div>
     </Col>
 );
 
@@ -21,12 +49,9 @@ const mapStateToProps = (state) => {
     const { rightsidebar } = state;
     const { empty, element } = rightsidebar;
 
-    console.log(element);
-    const position = (element && element.position()) || { x: 0, y: 0, z: 0 };
-
     return {
         empty,
-        ...position
+        element
     }
 }
 

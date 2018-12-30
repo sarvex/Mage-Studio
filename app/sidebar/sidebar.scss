@@ -9,12 +9,13 @@
     .box {
         display: flex;
         flex-direction: column;
+        min-height: 200px;
 
         & .content {
             //padding: $base-unit;
             flex: 1 1 auto;
             overflow: auto;
-            min-height: 300px;
+            //min-height: 300px;
         }
 
         &:first-child {
@@ -29,6 +30,7 @@
         text-transform: uppercase;
         font-weight: 700;
         font-size: 0.65rem;
+        margin-bottom: $base-unit / 2;
 
         & .icon {
             color: $yellow;
@@ -100,15 +102,19 @@
 
         .setting-input {
             /* align-self: center; */
-            float: right;
             display: inline-block;
-            width: $base-unit * 18;
-
-
+            width: 100%;
             border: 1px solid $deep-blue-15;
             //border-radius: 6px;
 
-            & > * {
+            &.right {
+                float: right;
+                width: $base-unit * 18;
+            }
+
+            & > *,
+            & input {
+                height: $base-unit * 3;
                 font-family: 'Roboto Mono', sans-serif;
                 font-size: .55rem;
                 font-weight: 700;
