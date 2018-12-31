@@ -98,11 +98,8 @@ function reducer() {
 
   switch (action.type) {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["MESH_CHANGED"]:
-    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["MESH_SELECTED"]:
       return _objectSpread({}, state, {
-        position: action.position,
-        rotation: action.rotation,
-        scale: action.scale
+        element: action.element
       });
       break;
 
@@ -226,7 +223,8 @@ function reducer() {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["MESH_DETACHED"]:
       return _objectSpread({}, state, {
-        empty: true
+        empty: true,
+        element: undefined
       });
       break;
 

@@ -61,7 +61,7 @@ const mapStateToProps = (state) => {
     };
 }
 const mapDispatchToProps = (dispatch) => ({
-    onMeshChanged: ({position, rotation, scale}) => dispatch(meshChanged(position, rotation, scale)),
+    onMeshChanged: (element) => dispatch(meshChanged(element)),
     onMeshAttached: ({element}) => dispatch(meshAttached(element)),
     onMeshDetached: () => dispatch(meshDetached())
 });

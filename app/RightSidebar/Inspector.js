@@ -1,6 +1,6 @@
 import React from 'react';
-
 import EmptyInspector from './elements/EmptyInspector';
+import MeshInspector from './elements/MeshInspector';
 
 class Inspector extends React.Component {
 
@@ -8,12 +8,28 @@ class Inspector extends React.Component {
         super(props);
     }
 
-    render() {
-        const { empty, element } = this.props;
+    getContent() {
+        const { empty, element = {} } = this.props;
 
-        //if (empty) {
-            return <EmptyInspector />;
-        //}
+        if (element.isMesh && element.isMesh()) {
+            return (
+                <MeshInspector
+                    position={element.position()}
+                    rotation={element.rotation()}
+                    scale={element.scale()}
+                />
+            );
+        }
+
+        return <EmptyInspector />;
+    }
+
+    render() {
+        return (
+            <div className='scene-setting'>
+                { this.getContent() }
+            </div>
+        );
     }
 }
 

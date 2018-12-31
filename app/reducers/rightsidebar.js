@@ -15,7 +15,8 @@ export default function reducer(state = {}, action = {}) {
         case MESH_DETACHED:
             return {
                 ...state,
-                empty: true
+                empty: true,
+                element: undefined,
             };
             break;
         default:

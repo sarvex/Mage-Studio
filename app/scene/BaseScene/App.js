@@ -12,7 +12,8 @@ import {
     Mesh,
     PostProcessingEngine,
     BackgroundSound,
-    AudioEngine
+    AudioEngine,
+    Universe
 } from 'mage-engine';
 
 import {
@@ -121,13 +122,11 @@ export default class FirstScene extends App {
 
     dispatchMeshChange = () => {
         if (!this.transform.object) return;
-        const { position, rotation, scale } = this.transform.object;
+        const element = Universe.get(this.transform.object.uuid);
 
         this.dispatchEvent({
             type: 'meshChanged',
-            position: { x: position.x, y: position.y, z: position.z },
-            rotation: { x: rotation.x, y: rotation.y, z: rotation.z },
-            scale: { x: scale.x, y: scale.y, z: scale.z }
+            element
         });
     }
 
