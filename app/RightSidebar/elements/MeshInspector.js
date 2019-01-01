@@ -1,12 +1,8 @@
 import React from 'react';
-import {
-    InputNumber
-} from 'antd';
 
-import Position from './Position';
-import Rotation from './Rotation';
-import Scale from './Scale';
-import Name from './Name';
+import BaseMeshProperties from './mesh/BaseMeshProperties';
+import Material from './mesh/Material';
+import Script from './mesh/Script';
 
 class MeshInspector extends React.Component {
 
@@ -19,22 +15,12 @@ class MeshInspector extends React.Component {
 
         return (
             <div>
-                <Name />
-                <Position
-                    x={position.x}
-                    y={position.y}
-                    z={position.z}
-                />
-                <Rotation
-                    x={rotation.x}
-                    y={rotation.y}
-                    z={rotation.z}
-                />
-                <Scale
-                    x={scale.x}
-                    y={scale.y}
-                    z={scale.z}
-                />
+                <BaseMeshProperties
+                    position={position}
+                    rotation={rotation}
+                    scale={scale} />
+                <Material />
+                <Script />
             </div>
         );
     }

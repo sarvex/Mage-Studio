@@ -26,7 +26,7 @@ class Inspector extends React.Component {
 
     render() {
         return (
-            <div className='scene-setting'>
+            <div>
                 { this.getContent() }
             </div>
         );
