@@ -5,7 +5,7 @@ const Script = ({ onScriptSwitchChange = f => f }) => (
     <div>
         <div className='scene-property'>
             <div className='label'>
-                <Icon type='pushpin' theme='outlined' height='8px' width='8px' className='label-icon'/>
+                <Icon type='code' theme='outlined' height='8px' width='8px' className='label-icon'/>
                 <span className='label-text'>SCRIPT</span>
             </div>
             <div className='enabled-toggle'>
@@ -19,14 +19,11 @@ const Script = ({ onScriptSwitchChange = f => f }) => (
         <div className='scene-setting'>
             <div className='setting-row'>
                 <label className='setting-label'>
-                    Type
+                    Name
                 </label>
                 <Select
                     className='setting-input right'
-                    size={'small'}
-                    defaultValue='global'>
-                    <Select.Option key='0'>global</Select.Option>
-                    <Select.Option key='1'>local</Select.Option>
+                    size={'small'}>
                 </Select>
             </div>
         </div>

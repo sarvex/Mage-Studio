@@ -1,11 +1,16 @@
 import React from 'react';
-import { Icon, Select } from 'antd';
+import {
+    Icon,
+    Select,
+    Switch,
+    Input
+} from 'antd';
 
 const Material = () => (
     <div>
         <div className='scene-property'>
             <div className='label'>
-                <Icon type='pushpin' theme='outlined' height='8px' width='8px' className='label-icon'/>
+                <Icon type='picture' theme='outlined' height='8px' width='8px' className='label-icon'/>
                 <span className='label-text'>MATERIAL</span>
             </div>
         </div>
@@ -20,6 +25,44 @@ const Material = () => (
                     defaultValue='global'>
                     <Select.Option key='0'>global</Select.Option>
                     <Select.Option key='1'>local</Select.Option>
+                </Select>
+            </div>
+            <div className='setting-row'>
+                <label className='setting-label'>
+                    Wireframe
+                </label>
+                <div className='enabled-toggle'>
+                    <span>active</span>
+                    <Switch
+                        size={"small"} />
+                </div>
+            </div>
+            <div className='setting-row'>
+                <label className='setting-label'>
+                    Color
+                </label>
+                <div className="setting-input right">
+                    <Input
+                        size="small"
+                        placeholder="#ffffff" />
+                </div>
+            </div>
+            <div className='setting-row'>
+                <label className='setting-label'>
+                    Texture
+                </label>
+                <Select
+                    className='setting-input right'
+                    size={'small'}>
+                </Select>
+            </div>
+            <div className='setting-row'>
+                <label className='setting-label'>
+                    Normal
+                </label>
+                <Select
+                    className='setting-input right'
+                    size={'small'}>
                 </Select>
             </div>
         </div>

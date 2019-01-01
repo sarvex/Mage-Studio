@@ -14,7 +14,7 @@ const BaseMeshProperties = ({ position, rotation, scale }) => (
     <div>
         <div className="scene-property">
             <div className='label'>
-                <Icon type='cloud' theme='outlined' height='8px' width='8px' className='label-icon'/>
+                <Icon type='code-sandbox' theme='outlined' height='8px' width='8px' className='label-icon'/>
                 <span className='label-text'>MESH</span>
             </div>
         </div>
