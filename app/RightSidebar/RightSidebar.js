@@ -32,7 +32,7 @@ const RightSidebar = ({empty, element}) => (
         </div>
         <div className='box'>
             <p className="title">
-                <Icon className="icon" type="tool" />
+                <Icon className="icon" type="search" />
                 <span>Inspector</span>
             </p>
             <div className="content">
