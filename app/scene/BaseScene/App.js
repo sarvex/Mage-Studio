@@ -45,8 +45,9 @@ export default class FirstScene extends App {
 
     onMeshClick = ({ meshes }) => {
         const mesh = meshes[0];
+        this.currentMesh = mesh;
         this.transform.attach(mesh);
-        console.log(mesh);
+
         this.dispatchEvent({ type: 'meshAttached', element: mesh });
     }
 
@@ -104,7 +105,7 @@ export default class FirstScene extends App {
         ControlsManager.setTransformControl();
 
         this.transform = ControlsManager.getControl('transform');
-        this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
+        this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
     }
 
     changeTransformControl = (controls) => {
@@ -121,12 +122,12 @@ export default class FirstScene extends App {
     }
 
     dispatchMeshChange = () => {
-        if (!this.transform.object) return;
-        const element = Universe.get(this.transform.object.uuid);
+        if (!this.transform.object || !this.currentMesh) return;
+        //const element = Universe.get(this.transform.object.uuid);
 
         this.dispatchEvent({
             type: 'meshChanged',
-            element
+            element: this.currentMesh
         });
     }
 

@@ -4,15 +4,15 @@ import {
 } from 'react-redux';
 import { Col, Icon } from 'antd';
 
-import CopyButton from '../common/CopyButton';
-import DeleteButton from '../common/DeleteButton';
-import AddButton from '../common/AddButton';
-import SearchButton from '../common/SearchButton';
+import CopyButton from '../../common/CopyButton';
+import DeleteButton from '../../common/DeleteButton';
+import AddButton from '../../common/AddButton';
+import SearchButton from '../../common/SearchButton';
 
 import Hierarchy from './Hierarchy';
 import Inspector from './Inspector';
 
-const RightSidebar = ({empty, element}) => (
+const RightSidebar = ({ empty, element, position, rotation, scale }) => (
     <Col
         span={4}
         className='sidebar'>
@@ -39,6 +39,9 @@ const RightSidebar = ({empty, element}) => (
                 <Inspector
                     empty={empty}
                     element={element}
+                    position={position}
+                    rotation={rotation}
+                    scale={scale}
                 />
             </div>
         </div>
@@ -47,11 +50,16 @@ const RightSidebar = ({empty, element}) => (
 
 const mapStateToProps = (state) => {
     const { rightsidebar } = state;
-    const { empty, element } = rightsidebar;
+    const { empty, element, position, rotation, scale } = rightsidebar;
+
+    // console.log(rightsidebar, new Date());
 
     return {
         empty,
-        element
+        element,
+        position,
+        rotation,
+        scale
     }
 }
 

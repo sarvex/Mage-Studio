@@ -9,14 +9,15 @@ class Inspector extends React.Component {
     }
 
     getContent() {
-        const { empty, element = {} } = this.props;
+        const { empty, element, position, rotation, scale } = this.props;
 
-        if (element.isMesh && element.isMesh()) {
+        if (element && element.isMesh && element.isMesh()) {
             return (
                 <MeshInspector
-                    position={element.position()}
-                    rotation={element.rotation()}
-                    scale={element.scale()}
+                    uuid={element.uuid()}
+                    position={position}
+                    rotation={rotation}
+                    scale={scale}
                 />
             );
         }

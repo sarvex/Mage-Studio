@@ -1,7 +1,9 @@
 import React from 'react';
 import { InputNumber } from 'antd';
 
-export default ({x = 0, y = 0, z = 0}) => (
+import { MIN, MAX } from './constants';
+
+export default ({x, y, z}) => (
     <div className='setting-row'>
         <label className='setting-label'>
             Position
@@ -10,29 +12,29 @@ export default ({x = 0, y = 0, z = 0}) => (
             <div className={"setting-input small"}>
                 <InputNumber
                     size="small"
-                    min={0}
-                    max={100}
-                    defaultValue={x}
+                    min={MIN}
+                    max={MAX}
                     step={0.1}
-                    placeholder="0" />
+                    placeholder="0"
+                    value={x} />
             </div>
             <div className={"setting-input small"}>
                 <InputNumber
                     size="small"
-                    min={0}
-                    max={100}
-                    defaultValue={y}
+                    min={MIN}
+                    max={MAX}
                     step={0.1}
-                    placeholder="0" />
+                    placeholder="0"
+                    value={y} />
             </div>
             <div className={"setting-input small last"}>
                 <InputNumber
                     size="small"
-                    min={0}
-                    max={100}
-                    defaultValue={z}
+                    min={MIN}
+                    max={MAX}
                     step={0.1}
-                    placeholder="0" />
+                    placeholder="0"
+                    value={z} />
             </div>
         </div>
     </div>

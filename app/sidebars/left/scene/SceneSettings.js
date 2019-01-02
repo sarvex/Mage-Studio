@@ -10,13 +10,13 @@ import Space from './Space';
 
 import {
     controlsChanged
-} from '../../actions/controls';
+} from '../../../actions/controls';
 
 import {
     fogColorChanged,
     fogDensityChanged,
     fogEnabled
-} from '../../actions/fog';
+} from '../../../actions/fog';
 
 class SceneSettings extends React.Component {
     constructor(props) {

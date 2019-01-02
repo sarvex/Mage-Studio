@@ -9,6 +9,8 @@ import {
     meshDetached
 } from '../actions/currentMesh';
 
+import debounce from '../lib/debounce';
+
 import './scene.scss';
 
 export class Scene extends React.Component {
@@ -27,7 +29,7 @@ export class Scene extends React.Component {
 
         this.app = Router.start(config.default, '#gameContainer');
 
-        this.app.addEventListener('meshChanged', onMeshChanged);
+        this.app.addEventListener('meshChanged', debounce(onMeshChanged, 15));
         this.app.addEventListener('meshAttached', onMeshAttached);
         this.app.addEventListener('meshDetached', onMeshDetached);
     }
@@ -61,7 +63,7 @@ const mapStateToProps = (state) => {
     };
 }
 const mapDispatchToProps = (dispatch) => ({
-    onMeshChanged: (element) => dispatch(meshChanged(element)),
+    onMeshChanged: ({element}) => dispatch(meshChanged(element)),
     onMeshAttached: ({element}) => dispatch(meshAttached(element)),
     onMeshDetached: () => dispatch(meshDetached())
 });
