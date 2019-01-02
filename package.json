@@ -61,7 +61,7 @@
     "electron-next": "3.1.5",
     "electron-rebuild": "1.8.2",
     "express": "4.16.4",
-    "mage-engine": "0.7.2",
+    "mage-engine": "0.7.3",
     "next": "7.0.2",
     "prop-types": "15.6.1",
     "react": "16.3.1",
