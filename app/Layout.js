@@ -6,6 +6,8 @@ import Footer from './footer/Footer';
 import Sidebar from './sidebar/Sidebar';
 import Scene from './scene/Scene';
 
+import RightSidebar from './RightSidebar/RightSidebar';
+
 import './style.scss';
 
 export default (props) => (
@@ -16,6 +18,7 @@ export default (props) => (
             <div className="canvas-container">
                 <Scene />
             </div>
+            <RightSidebar />
         </Row>
         <Footer />
     </div>

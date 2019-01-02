@@ -3,7 +3,11 @@ import {
     connect
 } from 'react-redux';
 
-import { meshChanged } from '../actions/currentMesh';
+import {
+    meshChanged,
+    meshAttached,
+    meshDetached
+} from '../actions/currentMesh';
 
 import './scene.scss';
 
@@ -19,10 +23,13 @@ export class Scene extends React.Component {
         const { Router } = await import('mage-engine');
         const config = await import('./config');
 
-        const { onMeshChanged } = this.props;
+        const { onMeshChanged, onMeshAttached, onMeshDetached } = this.props;
 
         this.app = Router.start(config.default, '#gameContainer');
+
         this.app.addEventListener('meshChanged', onMeshChanged);
+        this.app.addEventListener('meshAttached', onMeshAttached);
+        this.app.addEventListener('meshDetached', onMeshDetached);
     }
 
     isReceivingSameProps = (prevProps) => {
@@ -54,7 +61,9 @@ const mapStateToProps = (state) => {
     };
 }
 const mapDispatchToProps = (dispatch) => ({
-    onMeshChanged: ({position, rotation, scale}) => dispatch(meshChanged(position, rotation, scale))
+    onMeshChanged: (element) => dispatch(meshChanged(element)),
+    onMeshAttached: ({element}) => dispatch(meshAttached(element)),
+    onMeshDetached: () => dispatch(meshDetached())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scene);

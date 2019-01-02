@@ -25,3 +25,8 @@ export default class ProjectMenu extends React.Component {
         );
     }
 }
+
+// add -> Cube, Sphere, .... , Model
+// lights -> directional, pointlight, ambient
+// sounds -> same as before
+// postprocessing

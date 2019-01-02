@@ -9,12 +9,13 @@
     .box {
         display: flex;
         flex-direction: column;
+        min-height: 200px;
 
         & .content {
             //padding: $base-unit;
             flex: 1 1 auto;
             overflow: auto;
-            min-height: 300px;
+            //min-height: 300px;
         }
 
         &:first-child {
@@ -29,6 +30,7 @@
         text-transform: uppercase;
         font-weight: 700;
         font-size: 0.65rem;
+        margin-bottom: $base-unit / 2;
 
         & .icon {
             color: $yellow;
@@ -68,47 +70,44 @@
                 margin-right: $base-unit;
             }
         }
-
-        .enabled-toggle {
-            float: right;
-            margin-right: $base-unit/2;
-
-            & span {
-                font-size: 0.5rem;
-                margin-right: $base-unit;
-            }
-        }
-
-        button.ant-switch-small {
-
-            height: 14px;
-
-            &::after {
-                height: 10px;
-                width: 10px;
-            }
-
-            &.ant-switch-checked {
-                background-color: $green !important;
-            }
-        }
     }
 
 
     .scene-setting {
         padding: $base-unit;
 
+
+        .setting-input-group {
+            float: right;
+            width: $base-unit * 20;
+            display: flex;
+            flex-direction: row;
+
+            & .small {
+                flex: 1 1 auto;
+                margin-right: $base-unit / 2;
+
+                &.last {
+                    margin-right: 0;
+                }
+            }
+        }
+
         .setting-input {
             /* align-self: center; */
-            float: right;
             display: inline-block;
-            width: $base-unit * 18;
-
-
+            width: 100%;
             border: 1px solid $deep-blue-15;
             //border-radius: 6px;
 
-            & > * {
+            &.right {
+                float: right;
+                width: $base-unit * 20;
+            }
+
+            & > *,
+            & input {
+                height: $base-unit * 3;
                 font-family: 'Roboto Mono', sans-serif;
                 font-size: .55rem;
                 font-weight: 700;
@@ -168,5 +167,30 @@
         .ant-select-arrow {
             color: $deep-blue-15;
         }
+    }
+}
+
+.enabled-toggle {
+    float: right;
+    margin-right: $base-unit/2;
+    line-height: $base-unit * 2.75;
+
+    & span {
+        font-size: 0.5rem;
+        margin-right: $base-unit;
+    }
+}
+
+button.ant-switch-small {
+
+    height: 14px;
+
+    &::after {
+        height: 10px;
+        width: 10px;
+    }
+
+    &.ant-switch-checked {
+        background-color: $green !important;
     }
 }

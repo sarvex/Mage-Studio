@@ -34,7 +34,7 @@ class Fog extends React.Component {
 
         const { onFogColorChange, onFogDensityChange, enabled } = this.props;
         const enabledClassName = enabled ? 'enabled' : 'disabled';
-        const inputClassName = `setting-input ${enabledClassName}`;
+        const inputClassName = `setting-input right ${enabledClassName}`;
 
         return (
             <div>

@@ -7,15 +7,20 @@
     src: url('/static/fonts/LeckerliOne-Regular.otf');
 }
 
+body {
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
 .app {
     height: 100vh;
     display: flex;
     flex-direction: column;
     color: $deep-blue-1;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 400;
     //letter-spacing: -0.01rem;
-    font-family: 'Roboto', sans-serif;
+
 }
 
 .footer {
@@ -29,6 +34,7 @@
     & .canvas-container {
         display: flex;
         height: 100%;
-        width: 81% !important;
+        float: left;
+        width: 66.66% !important;
     }
 }
