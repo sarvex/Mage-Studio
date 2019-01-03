@@ -1,5 +1,5 @@
-@import '../constants.scss';
-@import '../theme.scss';
+@import '../../constants.scss';
+@import '../../theme.scss';
 
 .hierarchy {
 
@@ -45,4 +45,8 @@
 .inspector-empty-icon {
     color: $deep-blue-0;
     font-size: 2rem;
+}
+
+.setting-value-action {
+    margin-left: $base-unit;
 }

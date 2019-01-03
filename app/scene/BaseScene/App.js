@@ -20,6 +20,10 @@ import {
     dispatch
 } from 'redux';
 
+import {
+    arraysEqual
+} from '../../lib/util';
+
 import { script } from './cube';
 
 export default class FirstScene extends App {
@@ -34,7 +38,7 @@ export default class FirstScene extends App {
         const geometry = new THREE.CubeGeometry(20, 20, 20);
 		const material = new THREE.MeshBasicMaterial({
 			color: 0x00ff00,
-			wireframe : false
+			wireframe : true
 		});
 
 		const cube = new Mesh(geometry, material);
@@ -43,10 +47,39 @@ export default class FirstScene extends App {
         return cube;
     }
 
+    isMeshChanging = (mesh, position, rotation, scale) => {
+        const toCheck = [
+            position.x, position.y, position.z,
+            rotation.x, rotation.y, rotation.z,
+            scale.x, scale.y, scale.z
+        ];
+        const current = [
+            mesh.position().x, mesh.position().y, mesh.position().z,
+            mesh.rotation().x, mesh.rotation().y, mesh.rotation().z,
+            mesh.scale().x, mesh.scale().y, mesh.scale().z
+        ];
+
+        return !arraysEqual(toCheck, current);
+    }
+
+    updateCurrentMesh = (mesh, position, rotation, scale) => {
+        if (mesh && position && rotation && scale && this.isMeshChanging(mesh, position, rotation, scale)) {
+            mesh.position(position);
+            mesh.rotation(rotation);
+            mesh.scale(scale);
+
+            this.dispatchEvent({
+                type: 'meshChanged',
+                element: mesh
+            });
+        }
+    }
+
     onMeshClick = ({ meshes }) => {
         const mesh = meshes[0];
+        this.currentMesh = mesh;
         this.transform.attach(mesh);
-        console.log(mesh);
+
         this.dispatchEvent({ type: 'meshAttached', element: mesh });
     }
 
@@ -104,7 +137,7 @@ export default class FirstScene extends App {
         ControlsManager.setTransformControl();
 
         this.transform = ControlsManager.getControl('transform');
-        this.transform.addEventListener('dragging-changed', this.dispatchMeshChange.bind(this));
+        this.transform.addEventListener('change', this.dispatchMeshChange.bind(this));
     }
 
     changeTransformControl = (controls) => {
@@ -121,12 +154,12 @@ export default class FirstScene extends App {
     }
 
     dispatchMeshChange = () => {
-        if (!this.transform.object) return;
-        const element = Universe.get(this.transform.object.uuid);
+        if (!this.transform.object || !this.currentMesh) return;
+        //const element = Universe.get(this.transform.object.uuid);
 
         this.dispatchEvent({
             type: 'meshChanged',
-            element
+            element: this.currentMesh
         });
     }
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { Col } from 'antd';
 import SceneSettings from './scene/SceneSettings';
 import AssetsBox from './assets/AssetsBox';
-import './sidebar.scss';
+import '../sidebar.scss';
 
-const Sidebar = () => (
+const LeftSidebar = () => (
     <Col
         span={4}
         className="sidebar">
@@ -13,4 +13,4 @@ const Sidebar = () => (
     </Col>
 )
 
-export default Sidebar;
+export default LeftSidebar;

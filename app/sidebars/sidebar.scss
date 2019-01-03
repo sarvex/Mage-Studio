@@ -72,10 +72,8 @@
         }
     }
 
-
     .scene-setting {
         padding: $base-unit;
-
 
         .setting-input-group {
             float: right;
@@ -91,6 +89,15 @@
                     margin-right: 0;
                 }
             }
+        }
+
+        .setting-static-value {
+            display: inline-block;
+            float: right;
+            font-family: 'Roboto Mono', sans-serif;
+            font-size: .55rem;
+            font-weight: 700;
+            width: $base-unit * 20;
         }
 
         .setting-input {

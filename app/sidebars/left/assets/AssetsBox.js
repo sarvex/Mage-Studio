@@ -1,9 +1,9 @@
 import React from 'react';
 import { Icon } from 'antd';
-import CopyButton from '../../common/CopyButton';
-import DeleteButton from '../../common/DeleteButton';
-import AddButton from '../../common/AddButton';
-import SearchButton from '../../common/SearchButton';
+import CopyButton from '../../../common/CopyButton';
+import DeleteButton from '../../../common/DeleteButton';
+import AddButton from '../../../common/AddButton';
+import SearchButton from '../../../common/SearchButton';
 
 import Folder from './elements/Folder';
 
