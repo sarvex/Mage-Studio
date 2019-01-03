@@ -3,7 +3,7 @@ import { InputNumber } from 'antd';
 
 import { MIN, MAX } from './constants';
 
-export default ({x, y, z}) => (
+export default ({x, y, z, onRotationChange}) => (
     <div className='setting-row'>
         <label className='setting-label'>
             Rotation
@@ -11,6 +11,7 @@ export default ({x, y, z}) => (
         <div className="setting-input-group">
             <div className={"setting-input small"}>
                 <InputNumber
+                    onChange={onRotationChange('x')}
                     size="small"
                     min={MIN}
                     max={MAX}
@@ -21,6 +22,7 @@ export default ({x, y, z}) => (
             </div>
             <div className={"setting-input small"}>
                 <InputNumber
+                    onChange={onRotationChange('y')}
                     size="small"
                     min={MIN}
                     max={MAX}
@@ -31,6 +33,7 @@ export default ({x, y, z}) => (
             </div>
             <div className={"setting-input small last"}>
                 <InputNumber
+                    onChange={onRotationChange('z')}
                     size="small"
                     min={MIN}
                     max={MAX}

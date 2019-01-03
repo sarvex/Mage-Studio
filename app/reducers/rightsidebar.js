@@ -12,9 +12,9 @@ export default function reducer(state = {}, action = {}) {
                 ...state,
                 empty: false,
                 element: action.element,
-                position: action.element.position(),
-                rotation: action.element.rotation(),
-                scale: action.element.scale()
+                position: action.position,
+                rotation: action.rotation,
+                scale: action.scale
             };
             break;
         case MESH_DETACHED:

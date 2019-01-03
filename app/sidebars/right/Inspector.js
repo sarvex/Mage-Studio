@@ -9,11 +9,23 @@ class Inspector extends React.Component {
     }
 
     getContent() {
-        const { empty, element, position, rotation, scale } = this.props;
+        const {
+            empty,
+            element,
+            position,
+            rotation,
+            scale,
+            onPositionChange,
+            onRotationChange,
+            onScaleChange
+        } = this.props;
 
         if (element && element.isMesh && element.isMesh()) {
             return (
                 <MeshInspector
+                    onPositionChange={onPositionChange}
+                    onRotationChange={onRotationChange}
+                    onScaleChange={onScaleChange}
                     uuid={element.uuid()}
                     position={position}
                     rotation={rotation}

@@ -12,47 +12,100 @@ import SearchButton from '../../common/SearchButton';
 import Hierarchy from './Hierarchy';
 import Inspector from './Inspector';
 
-const RightSidebar = ({ empty, element, position, rotation, scale }) => (
-    <Col
-        span={4}
-        className='sidebar'>
+import {
+    meshChanged
+} from '../../actions/currentMesh';
 
-        <div className="box">
-            <p className="title">
-                <Icon className="icon" type="bars" />
-                <span>Hierarchy</span>
-                <DeleteButton />
-                <CopyButton />
-                <AddButton />
-                <SearchButton />
-            </p>
-            <div className="content">
-                <Hierarchy />
-            </div>
-        </div>
-        <div className='box'>
-            <p className="title">
-                <Icon className="icon" type="search" />
-                <span>Inspector</span>
-            </p>
-            <div className="content">
-                <Inspector
-                    empty={empty}
-                    element={element}
-                    position={position}
-                    rotation={rotation}
-                    scale={scale}
-                />
-            </div>
-        </div>
-    </Col>
-);
+class RightSidebar extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    onPositionChange = (axis) => (value) => {
+        const { onPositionChange, element } = this.props;
+        const position = {
+            ...element.position(),
+            [axis]: value
+        };
+        const rotation = element.rotation();
+        const scale = element.scale();
+
+        onPositionChange(element, position, rotation, scale);
+    }
+
+    onRotationChange = (axis) => (value) => {
+        const { onRotationChange, element } = this.props;
+        const rotation = {
+            ...element.rotation(),
+            [axis]: value
+        };
+        const position = element.position();
+        const scale = element.scale();
+
+        onRotationChange(element, position, rotation, scale);
+    }
+
+    onScaleChange = (axis) => (value) => {
+        const { onScaleChange, element } = this.props;
+        const scale = {
+            ...element.scale(),
+            [axis]: value
+        };
+        const position = element.position();
+        const rotation = element.rotation();
+
+        onScaleChange(element, position, rotation, scale);
+    }
+
+    render() {
+        const { empty, element, position, rotation, scale } = this.props;
+
+        return (
+            <Col
+                span={4}
+                className='sidebar'>
+
+                <div className="box">
+                    <p className="title">
+                        <Icon className="icon" type="bars" />
+                        <span>Hierarchy</span>
+                        <DeleteButton />
+                        <CopyButton />
+                        <AddButton />
+                        <SearchButton />
+                    </p>
+                    <div className="content">
+                        <Hierarchy />
+                    </div>
+                </div>
+                <div className='box'>
+                    <p className="title">
+                        <Icon className="icon" type="search" />
+                        <span>Inspector</span>
+                    </p>
+                    <div className="content">
+                        <Inspector
+                            onPositionChange={this.onPositionChange}
+                            onRotationChange={this.onRotationChange}
+                            onScaleChange={this.onScaleChange}
+                            empty={empty}
+                            element={element}
+                            position={position}
+                            rotation={rotation}
+                            scale={scale}
+                        />
+                    </div>
+                </div>
+            </Col>
+        );
+    }
+}
+
 
 const mapStateToProps = (state) => {
     const { rightsidebar } = state;
     const { empty, element, position, rotation, scale } = rightsidebar;
-
-    // console.log(rightsidebar, new Date());
 
     return {
         empty,
@@ -63,4 +116,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(RightSidebar);
+const mapDispatchToProps = (dispatch) => ({
+    onPositionChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
+    onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
+    onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RightSidebar);

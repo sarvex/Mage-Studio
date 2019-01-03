@@ -42,10 +42,21 @@ export class Scene extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.app && !this.isReceivingSameProps(prevProps)) {
-            const { controls, fog } = this.props;
+            const {
+                controls,
+                fog,
+                element,
+                position,
+                rotation,
+                scale
+            } = this.props;
 
             this.app.changeTransformControl(controls);
             this.app.changeFog(fog);
+            //if (element && position && rotation && scale) {
+                console.log('[marco] updating currentMesh');
+                this.app.updateCurrentMesh(element, position, rotation, scale);
+            //}
         }
     }
 
@@ -55,16 +66,32 @@ export class Scene extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { controls = {}, fog = {} } = state;
-
+    const { controls = {}, fog = {}, rightsidebar } = state;
+    const { element, position, rotation, scale } = rightsidebar;
     return {
         controls,
-        fog
+        fog,
+        element,
+        position,
+        rotation,
+        scale
     };
 }
 const mapDispatchToProps = (dispatch) => ({
-    onMeshChanged: ({element}) => dispatch(meshChanged(element)),
-    onMeshAttached: ({element}) => dispatch(meshAttached(element)),
+    onMeshChanged: ({element}) => {
+        const position = element.position();
+        const rotation = element.rotation();
+        const scale = element.scale();
+
+        return dispatch(meshChanged(element, position, rotation, scale))
+    },
+    onMeshAttached: ({element}) => {
+        const position = element.position();
+        const rotation = element.rotation();
+        const scale = element.scale();
+
+        return dispatch(meshAttached(element, position, rotation, scale))
+    },
     onMeshDetached: () => dispatch(meshDetached())
 });
 

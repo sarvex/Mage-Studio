@@ -11,8 +11,18 @@ import Scale from './Scale';
 import Name from './Name';
 import UUID from './UUID';
 
-const BaseMeshProperties = ({ position = {}, rotation = {}, scale = {}, uuid }) => {
-        // console.log('basemesh', position, rotation, scale);
+const BaseMeshProperties = (props) => {
+
+        const {
+            position = {},
+            rotation = {},
+            scale = {},
+            uuid,
+            onPositionChange,
+            onRotationChange,
+            onScaleChange
+        } = props;
+
         return (
             <div>
                 <div className="scene-property">
@@ -24,16 +34,19 @@ const BaseMeshProperties = ({ position = {}, rotation = {}, scale = {}, uuid }) 
                 <div className="scene-setting">
                     <Name />
                     <Position
+                        onPositionChange={onPositionChange}
                         x={position.x}
                         y={position.y}
                         z={position.z}
                     />
                     <Rotation
+                        onRotationChange={onRotationChange}
                         x={rotation.x}
                         y={rotation.y}
                         z={rotation.z}
                     />
                     <Scale
+                        onScaleChange={onScaleChange}
                         x={scale.x}
                         y={scale.y}
                         z={scale.z}

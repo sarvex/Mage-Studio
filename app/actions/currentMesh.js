@@ -4,14 +4,20 @@ import {
     MESH_DETACHED
 } from './types';
 
-export const meshChanged = (mesh) => ({
+export const meshChanged = (mesh, position, rotation, scale) => ({
     type: MESH_CHANGED,
-    element: mesh
+    element: mesh,
+    position,
+    rotation,
+    scale
 });
 
-export const meshAttached = (mesh) => ({
+export const meshAttached = (mesh, position, rotation, scale) => ({
     type: MESH_ATTACHED,
-    element: mesh
+    element: mesh,
+    position,
+    rotation,
+    scale
 });
 
 export const meshDetached = () => ({
