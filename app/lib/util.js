@@ -8,3 +8,7 @@ export const arraysEqual = (arr1, arr2) => {
 
     return true;
 }
+
+export const addLocation = (url) => {
+
+}
