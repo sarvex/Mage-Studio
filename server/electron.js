@@ -21,7 +21,7 @@ const start = function(PORT) {
 
     console.log('> window size: ', width, height);
 
-    electronWindow = new BrowserWindow({width, height})
+    electronWindow = new BrowserWindow({ width, height })
     electronWindow.loadURL(`http://localhost:${PORT}`);
     console.log('> window size: ', width, height);
 

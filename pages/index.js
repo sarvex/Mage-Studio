@@ -1,13 +1,25 @@
 import React from 'react';
 import Layout from '../app/Layout';
 import { version, Button } from 'antd';
+import axios from 'axios';
+
 import "antd/dist/antd.min.css";
 
+class Index extends React.Component {
 
-const Index = () => (
-  <div>
-    <Layout />
-  </div>
-);
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div>
+                <Layout
+                    { ...this.props }
+                />
+            </div>
+        )
+    }
+}
 
 export default Index;

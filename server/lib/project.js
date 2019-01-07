@@ -1,0 +1,21 @@
+const ncp = require('ncp').ncp;
+const path = require('path');
+
+const create = (destination) => {
+    return new Promise(function(resolve, reject) {
+        const source = path.resolve('server/.template/');
+
+        ncp(source, destination, function(err) {
+            if (err) {
+                throw err;
+            } else {
+                return resolve();
+            }
+        });
+    });
+};
+
+
+module.exports = {
+    create: create
+};

@@ -54,7 +54,6 @@ export class Scene extends React.Component {
             this.app.changeTransformControl(controls);
             this.app.changeFog(fog);
             //if (element && position && rotation && scale) {
-                console.log('[marco] updating currentMesh');
                 this.app.updateCurrentMesh(element, position, rotation, scale);
             //}
         }

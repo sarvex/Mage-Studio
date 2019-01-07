@@ -29,7 +29,7 @@ export default (App) => {
 
             let appProps = {}
             if (typeof App.getInitialProps === 'function') {
-                appProps = await App.getInitialProps(appContext);
+                appProps = await App.getInitialProps(appContext.ctx);
             }
 
             return {
