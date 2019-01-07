@@ -12,7 +12,6 @@ import RightSidebar from './sidebars/right/RightSidebar';
 import './style.scss';
 
 export default (props) => {
-    console.log(props);
     return (
         <div className="app">
             <Header />

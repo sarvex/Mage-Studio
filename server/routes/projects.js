@@ -14,7 +14,6 @@ router.route('/')
     })
     .post((req, res) => {
         // we need project Name
-        console.log(req.body);
         const name = req.body.name;
 
         if (!name || typeof name !== 'string') {

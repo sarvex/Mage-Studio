@@ -7,10 +7,8 @@ const create = (destination) => {
 
         ncp(source, destination, function(err) {
             if (err) {
-                console.log('error', err);
                 throw err;
             } else {
-                console.log('done');
                 return resolve();
             }
         });

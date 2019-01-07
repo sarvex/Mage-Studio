@@ -2,6 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
+const getDefaultLocalConfig = () => ({
+    workspace: '',
+    project: '',
+    scene: 'BaseScene'
+});
+
 const getLocalConfig = () => {
     try {
         const file = fs.readFileSync(path.resolve('.config.yml'), 'utf8');
@@ -16,10 +22,10 @@ const getLocalConfig = () => {
 
 const updateLocalConfig = (config) => {
     try {
-        console.log(config);
         if (config && Object.keys(config).length > 0) {
-            const content = getLocalConfig();
-            const newConfig = Object.assign(content, config);
+            const defaultconfig = getDefaultLocalConfig();
+            const localconfig = getLocalConfig();
+            const newConfig = Object.assign(defaultconfig, localconfig, config);
 
             const yamlContent = yaml.safeDump(newConfig);
             fs.writeFileSync(path.resolve('.config.yml'), yamlContent);

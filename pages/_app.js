@@ -23,14 +23,12 @@ class MageStudio extends App {
                 projectConfig = _project.data;
             }
 
-            console.log(userconfig.data, projectConfig);
-
             return {
                 ...userconfig.data,
                 projectConfig
             };
         }
-        console.log('returning nothing');
+        
         return {};
     }
 

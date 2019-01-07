@@ -8,7 +8,6 @@ router.route('/')
     .get((req, res) => {
         // return config for this user
         // this path is still missing authentication
-        console.log('inside server side config');
         if (electron.isDesktop()) {
             // we're using electron, loading config from yml file
             const localconfig = config.getLocalConfig();
