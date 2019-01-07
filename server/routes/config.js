@@ -1,8 +1,8 @@
 const express = require('express');
 const electron = require('../electron');
 const router = express.Router();
-const yaml = require('js-yaml');
-const fs = require('fs');
+const config = require('../lib/config');
+const messages = require('../lib/messages');
 
 router.route('/')
     .get((req, res) => {
@@ -11,8 +11,16 @@ router.route('/')
         console.log('inside server side config');
         if (electron.isDesktop()) {
             // we're using electron, loading config from yml file
-            const content = yaml.safeLoad(fs.readFileSync('.config.yml', 'utf8'));
-            res.json(content);
+            const localconfig = config.getLocalConfig();
+            if (!localconfig) {
+                res
+                    .status(messages.CONFIG_MISSING.code)
+                    .json({ message: messages.CONFIG_MISSING.text });
+            } else {
+                res
+                    .status(messages.CONFIG_AVAILABLE.code)
+                    .json(localconfig);
+            }
         } else {
             // web path, config should be fetched from db
             res.json({message: 'OK', isDesktop: electron.isDesktop()});

@@ -14,29 +14,32 @@ class MageStudio extends App {
     static async getInitialProps({ req }) {
         if (req) {
             const baseUrl = req.headers.host;
-            const userconfig = await axios(buildUrl(baseUrl, CONFIG_URL)); // this call will have the auth cookie inside
-            let project = {};
+            const userconfig = await axios(buildUrl(baseUrl, CONFIG_URL));  // this call will have the auth cookie inside
+            let projectConfig = {};
 
-            if (userconfig.project) {
+            if (userconfig.data.project) {
                 const url = buildUrl(baseUrl, `${PROJECTS_URL}/${userconfig.project}`);
-                project = await axios(url).data;
+                const _project = await axios(url);
+                projectConfig = _project.data;
             }
+
+            console.log(userconfig.data, projectConfig);
 
             return {
                 ...userconfig.data,
-                project
+                projectConfig
             };
         }
-
+        console.log('returning nothing');
         return {};
     }
 
     render () {
-        const { Component, pageProps, reduxStore } = this.props;
+        const { Component, pageProps, reduxStore, ...rest} = this.props;
         return (
             <Container>
                 <Provider store={reduxStore}>
-                    <Component {...pageProps} />
+                    <Component {...pageProps} {...rest} />
                 </Provider>
             </Container>
         )
