@@ -147,6 +147,16 @@ export default class FirstScene extends App {
         }
     }
 
+    changeTransformSnap = ({ snapValue = 100, snapEnabled = false}) => {
+        if (snapEnabled) {
+            this.transform.setTranslationSnap(snapValue);
+            this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+        } else {
+            this.transform.setTranslationSnap(null);
+            this.transform.setRotationSnap(null);
+        }
+    }
+
     changeFog = (fog) => {
         if (fog.color && fog.density && fog.enabled) {
             SceneManager.fog(fog.color, fog.density/1000);

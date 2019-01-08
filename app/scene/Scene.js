@@ -48,13 +48,16 @@ export class Scene extends React.Component {
                 element,
                 position,
                 rotation,
-                scale
+                scale,
+                snap
             } = this.props;
 
             this.app.changeTransformControl(controls);
             this.app.changeFog(fog);
             //if (element && position && rotation && scale) {
                 this.app.updateCurrentMesh(element, position, rotation, scale);
+
+                this.app.changeTransformSnap(snap);
             //}
         }
     }
@@ -65,9 +68,10 @@ export class Scene extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { controls = {}, fog = {}, rightsidebar } = state;
+    const { controls = {}, fog = {}, snap = {}, rightsidebar } = state;
     const { element, position, rotation, scale } = rightsidebar;
     return {
+        snap,
         controls,
         fog,
         element,
