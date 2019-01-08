@@ -18,9 +18,9 @@ export default class ProjectMenu extends React.Component {
     render() {
         return (
             <Dropdown overlay={this.getMenuContent()}>
-                <a className="ant-dropdown-link" className="main-menu-item" href="#">
+                <span className="main-menu-item" href="#">
                     Scene
-                </a>
+                </span>
             </Dropdown>
         );
     }
