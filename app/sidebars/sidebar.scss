@@ -11,6 +11,10 @@
         flex-direction: column;
         min-height: 200px;
 
+        &.fixed-height {
+            max-height: 350px;
+        }
+
         & .content {
             //padding: $base-unit;
             flex: 1 1 auto;
@@ -132,7 +136,7 @@
         }
 
         .setting-label {
-            line-height: $base-unit * 2.75;
+            line-height: $base-unit * 3;
         }
 
         .setting-row {

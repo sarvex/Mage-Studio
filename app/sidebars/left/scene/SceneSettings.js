@@ -7,9 +7,12 @@ import Fog from './Fog';
 import Shadows from './Shadows';
 import Controls from './Controls';
 import Space from './Space';
+import Snap from './Snap';
 
 import {
-    controlsChanged
+    controlsChanged,
+    snapValueChange,
+    snapEnabledChange
 } from '../../../actions/controls';
 
 import {
@@ -47,9 +50,21 @@ class SceneSettings extends React.Component {
         onFogEnabledChange(flag);
     }
 
+    handleSnapValueChange = (value) => {
+        const { onSnapValueChange } = this.props;
+
+        onSnapValueChange(value);
+    }
+
+    handleSnapEnabledChange = (flag) => {
+        const { onSnapEnabledChange } = this.props;
+
+        onSnapEnabledChange(flag);
+    }
+
     render() {
         return (
-            <div className="box">
+            <div className="box fixed-height">
                 <p className="title">
                     <Icon className="icon" type="setting" />
                     <span>Scene settings</span>
@@ -68,6 +83,11 @@ class SceneSettings extends React.Component {
                         value='translate'
                         onControlsChange={this.handleControlsChange}/>
                     <Space />
+                    <Snap
+                        value={this.props.snapValue}
+                        enabled={this.props.snapEnabled}
+                        onSnapEnabledChange={this.handleSnapEnabledChange}
+                        onSnapValueChange={this.handleSnapValueChange} />
                 </div>
             </div>
         );
@@ -76,16 +96,20 @@ class SceneSettings extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    const { fog = {} } = state;
+    const { fog = {}, snap = {} } = state;
     const {
         density = 0,
         enabled = true,
         color = '#000' } = fog;
 
+    const { snapValue = 100, snapEnabled = false } = snap;
+
     return {
         fogColor: color,
         fogDensity: density,
-        fogEnabled: enabled
+        fogEnabled: enabled,
+        snapValue,
+        snapEnabled
     };
 };
 
@@ -94,7 +118,9 @@ const mapDispatchToProps = (dispatch) => {
         onFogColorChange: (color) => dispatch(fogColorChanged(color)),
         onFogEnabledChange: (flag) => dispatch(fogEnabled(flag)),
         onFogDensityChange: (density) => dispatch(fogDensityChanged(density)),
-        onControlsChange: (control) => dispatch(controlsChanged(control))
+        onControlsChange: (control) => dispatch(controlsChanged(control)),
+        onSnapValueChange: (value) => dispatch(snapValueChange(value)),
+        onSnapEnabledChange: (flag) => dispatch(snapEnabledChange(flag))
     };
 }
 
