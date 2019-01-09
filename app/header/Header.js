@@ -22,23 +22,21 @@ const menu = (
 );
 
 const Header = () => (
-    <Row className="header">
-        <Col span={12}>
-            <Logo />
-            <ProjectMenu />
-            <SceneMenu />
-            <Dropdown overlay={menu}>
-                <a className="ant-dropdown-link" className="main-menu-item" href="#">
-                    View
-                </a>
-            </Dropdown>
-            <Dropdown overlay={menu}>
-                <a className="ant-dropdown-link" className="main-menu-item" href="#">
-                    Help
-                </a>
-            </Dropdown>
-        </Col>
-    </Row>
+    <div className="header">
+        <Logo />
+        <ProjectMenu />
+        <SceneMenu />
+        <Dropdown overlay={menu}>
+            <span className="main-menu-item" href="#">
+                View
+            </span>
+        </Dropdown>
+        <Dropdown overlay={menu}>
+            <span className="main-menu-item" href="#">
+                Help
+            </span>
+        </Dropdown>
+    </div>
 );
 
 export default Header;
