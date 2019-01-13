@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Input } from 'antd';
+import { Modal, Input, Steps, Button } from 'antd';
 
 import { createNewProject } from '../actions/projectModal';
 
-import Footer from './footer';
+import FooterSteps from './FooterSteps';
 
 import './modals.scss';
 
@@ -14,8 +14,11 @@ class ProjectModal extends React.Component {
         super(props);
 
         this.state = {
-            value: ''
+            value: '',
+            current: 0
         };
+
+        this.titles = ['Project', 'Scene', 'almost done'];
     }
 
     onChange = (e) => {
@@ -31,14 +34,63 @@ class ProjectModal extends React.Component {
     }
 
     getFooter = () => (
-        <Footer
+        <FooterSteps
             loading={this.props.loading}
+            current={this.state.current}
+            length={this.titles.length}
+            onNext={this.next}
+            onPrevious={this.prev}
             onCancel={this.props.onCancel}
             onConfirm={this.onConfirm} />
     )
 
-    render() {
+    next = () => {
+        const current = this.state.current + 1;
+        this.setState({ current });
+    }
+
+    prev = () => {
+        const current = this.state.current - 1;
+        this.setState({ current });
+    }
+
+    getStep() {
         const { value } = this.state;
+
+        return (
+            <div className='scene-setting'>
+                <div className='setting-row'>
+                    <label className='setting-label'>
+                        Project Name
+                    </label>
+                    <div className='setting-input right'>
+                        <Input
+                            onChange={this.onChange}
+                            value={value}
+                            size="small"
+                            placeholder="" />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    getContent = () => {
+        const { current } = this.state;
+
+        return (
+            <div>
+                <Steps current={current} size='small'>
+                    {this.titles.map(title => <Steps.Step key={title} title={title} />)}
+                </Steps>
+                <div className="current-step">
+                    { this.getStep() }
+                </div>
+            </div>
+        );
+    }
+
+    render() {
         const { loading, error, visible, project = false } = this.props;
         let isVisible = visible;
 
@@ -46,28 +98,16 @@ class ProjectModal extends React.Component {
             isVisible = !project || String(project).length === 0;
         }
 
+
         return (
             <Modal
                 className='modal'
-                title="New Project"
+                title="Project setup"
                 visible={isVisible}
                 footer={this.getFooter()}>
                 <div className='box'>
                     <div className='content'>
-                        <div className='scene-setting'>
-                            <div className='setting-row'>
-                                <label className='setting-label'>
-                                    Project Name
-                                </label>
-                                <div className='setting-input right'>
-                                    <Input
-                                        onChange={this.onChange}
-                                        value={value}
-                                        size="small"
-                                        placeholder="" />
-                                </div>
-                            </div>
-                        </div>
+                        { this.getContent() }
                     </div>
                 </div>
             </Modal>

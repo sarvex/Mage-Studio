@@ -17,7 +17,57 @@ $max-input-size: $base-unit * 20;
         }
     }
 
-    .scene-setting {
+    & .ant-steps {
+
+        & .ant-steps-item {
+
+            & .ant-steps-item-title {
+                font-size: .7rem;
+                color: $deep-blue-3;
+
+                &::after {
+                    background: $deep-blue-10;
+                    background-color: $deep-blue-10;
+                }
+            }
+
+            &.ant-steps-item-wait {
+
+                & .ant-steps-item-title {
+                    color: $deep-blue-14 !important;
+                }
+
+                & .ant-steps-item-icon {
+                    border-color: $deep-blue-14;
+                }
+            }
+
+
+            & .ant-steps-item-icon {
+                width: $base-unit * 2;
+                height: $base-unit * 2;
+                line-height: $base-unit * 2;
+                border-radius: $base-unit * 2;
+                font-size: $base-unit;
+                margin-top: $base-unit / 2;
+                background: $deep-blue-12;
+                border-color: $yellow;
+
+                & .ant-steps-finish-icon {
+                    color: $yellow;
+                }
+            }
+        }
+
+    }
+
+    & .current-step {
+        margin-top: $base-unit * 4;
+    }
+
+    & .scene-setting {
+
+        height: auto;
 
         .setting-input-group {
             float: right;
