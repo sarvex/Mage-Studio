@@ -14,23 +14,23 @@ class ProjectModal extends React.Component {
         super(props);
 
         this.state = {
-            value: '',
             current: 0
         };
 
         this.titles = ['Project', 'Scene', 'almost done'];
     }
 
-    onChange = (e) => {
+    onChange = (target) => (e) => {
         this.setState({
-            value: e.target.value
-        })
+            [target]: e.target.value
+        });
     }
 
     onConfirm = () => {
         const { onConfirm } = this.props;
+        const { project, scene } = this.state;
 
-        onConfirm(this.state.value);
+        onConfirm(project, scene);
     }
 
     getFooter = () => (
@@ -55,24 +55,47 @@ class ProjectModal extends React.Component {
     }
 
     getStep() {
-        const { value } = this.state;
+        const { project, scene, current } = this.state;
 
-        return (
-            <div className='scene-setting'>
-                <div className='setting-row'>
-                    <label className='setting-label'>
-                        Project Name
-                    </label>
-                    <div className='setting-input right'>
-                        <Input
-                            onChange={this.onChange}
-                            value={value}
-                            size="small"
-                            placeholder="" />
+        if (current === 0) {
+            return (
+                <div className='scene-setting'>
+                    <div className='setting-row'>
+                        <label className='setting-label'>
+                            Project Name
+                        </label>
+                        <div className='setting-input right'>
+                            <Input
+                                onChange={this.onChange('project')}
+                                value={project}
+                                size="small"
+                                placeholder="" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else if (current === 1) {
+            return (
+                <div className='scene-setting'>
+                    <div className='setting-row'>
+                        <label className='setting-label'>
+                            Scene Name
+                        </label>
+                        <div className='setting-input right'>
+                            <Input
+                                onChange={this.onChange('scene')}
+                                value={scene}
+                                size="small"
+                                placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        return <span>LOADING</span>
+
+
     }
 
     getContent = () => {
@@ -127,7 +150,7 @@ const mapStateToProps = (state = {}) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onConfirm: (name) => dispatch(createNewProject(name))
+    onConfirm: (project, scene) => dispatch(createNewProject(project, scene))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectModal);

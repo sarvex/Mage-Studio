@@ -54,7 +54,7 @@
     .scene-property {
 
         width: 100%;
-        line-height: 1rem;
+        line-height: $base-unit * 2.75;
         display: flex;
         padding: $base-unit/4 $base-unit/4 $base-unit/4 $base-unit;
         background-color: $deep-blue-13;

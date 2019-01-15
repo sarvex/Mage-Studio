@@ -3,7 +3,9 @@ const path = require('path');
 const electron = require('../electron');
 const router = express.Router();
 const config = require('../lib/config');
+
 const project = require('../lib/project');
+const scene = require('../lib/scene');
 const messages = require('../lib/messages');
 
 router.route('/')
@@ -14,40 +16,49 @@ router.route('/')
     })
     .post((req, res) => {
         // we need project Name
-        const name = req.body.name;
+        const projectName = req.body.project;
+        const sceneName = req.body.scene;
 
-        if (!name || typeof name !== 'string') {
-            res
+        if (!sceneName || typeof sceneName !== 'string') {
+            return res
+                .status(messages.SCENE_NAME_MISSING.code)
+                .json({ message: messages.SCENE_NAME_MISSING.text });
+        }
+
+        if (!projectName || typeof projectName !== 'string') {
+            return res
                 .status(messages.PROJECT_NAME_MISSING.code)
                 .json({ message: messages.PROJECT_NAME_MISSING.text });
-        } else {
-            if (electron.isDesktop()) {
-                // copy template folder to project folder
-                const localconfig = config.getLocalConfig();
-                if (!localconfig) {
-                    res
-                        .status(messages.CONFIG_MISSING.code)
-                        .json({ message: messages.CONFIG_MISSING.text });
-                } else {
-                    const destination = path.join(localconfig.workspace, name);
-                    project
-                        .create(destination)
-                        .then(function() {
-                            res
-                                .status(messages.PROJECT_CREATED.code)
-                                .json({ message: messages.PROJECT_CREATED.text });
-                        })
-                        .catch(function(err) {
-                            res
-                                .status(messages.PROJECT_NOT_CREATED.code)
-                                .json({ message: messages.PROJECT_NOT_CREATED.text });
-                        })
-                }
-            }
-            // use api to create projects ( sync desktop with be )
-            // when is done update config
-            config.updateLocalConfig({ project: name });
         }
+
+        if (electron.isDesktop()) {
+            // copy template folder to project folder
+            const localconfig = config.getLocalConfig();
+            if (!localconfig) {
+                res
+                    .status(messages.CONFIG_MISSING.code)
+                    .json({ message: messages.CONFIG_MISSING.text });
+            } else {
+                const destination = path.join(localconfig.workspace, projectName);
+                Promise.all([
+                    project.create(destination),
+                    scene.create(destination, sceneName)
+                ])
+                    .then(function() {
+                        res
+                            .status(messages.PROJECT_CREATED.code)
+                            .json({ message: messages.PROJECT_CREATED.text });
+                    })
+                    .catch(function(err) {
+                        res
+                            .status(messages.PROJECT_NOT_CREATED.code)
+                            .json({ message: messages.PROJECT_NOT_CREATED.text });
+                    })
+            }
+        }
+        // use api to create projects ( sync desktop with be )
+        // when is done update config
+        config.updateLocalConfig({ project: projectName, scene: sceneName });
     });
 
 // Middleware
