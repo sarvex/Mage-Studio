@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Input } from 'antd';
+import { Modal, Input, Steps, Button } from 'antd';
 
 import { createNewProject } from '../actions/projectModal';
 
-import Footer from './footer';
+import FooterSteps from './FooterSteps';
 
 import './modals.scss';
 
@@ -14,31 +14,106 @@ class ProjectModal extends React.Component {
         super(props);
 
         this.state = {
-            value: ''
+            current: 0
         };
+
+        this.titles = ['Project', 'Scene', 'almost done'];
     }
 
-    onChange = (e) => {
+    onChange = (target) => (e) => {
         this.setState({
-            value: e.target.value
-        })
+            [target]: e.target.value
+        });
     }
 
     onConfirm = () => {
         const { onConfirm } = this.props;
+        const { project, scene } = this.state;
 
-        onConfirm(this.state.value);
+        onConfirm(project, scene);
     }
 
     getFooter = () => (
-        <Footer
+        <FooterSteps
             loading={this.props.loading}
+            current={this.state.current}
+            length={this.titles.length}
+            onNext={this.next}
+            onPrevious={this.prev}
             onCancel={this.props.onCancel}
             onConfirm={this.onConfirm} />
     )
 
+    next = () => {
+        const current = this.state.current + 1;
+        this.setState({ current });
+    }
+
+    prev = () => {
+        const current = this.state.current - 1;
+        this.setState({ current });
+    }
+
+    getStep() {
+        const { project, scene, current } = this.state;
+
+        if (current === 0) {
+            return (
+                <div className='scene-setting'>
+                    <div className='setting-row'>
+                        <label className='setting-label'>
+                            Project Name
+                        </label>
+                        <div className='setting-input right'>
+                            <Input
+                                onChange={this.onChange('project')}
+                                value={project}
+                                size="small"
+                                placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            )
+        } else if (current === 1) {
+            return (
+                <div className='scene-setting'>
+                    <div className='setting-row'>
+                        <label className='setting-label'>
+                            Scene Name
+                        </label>
+                        <div className='setting-input right'>
+                            <Input
+                                onChange={this.onChange('scene')}
+                                value={scene}
+                                size="small"
+                                placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        return <span>LOADING</span>
+
+
+    }
+
+    getContent = () => {
+        const { current } = this.state;
+
+        return (
+            <div>
+                <Steps current={current} size='small'>
+                    {this.titles.map(title => <Steps.Step key={title} title={title} />)}
+                </Steps>
+                <div className="current-step">
+                    { this.getStep() }
+                </div>
+            </div>
+        );
+    }
+
     render() {
-        const { value } = this.state;
         const { loading, error, visible, project = false } = this.props;
         let isVisible = visible;
 
@@ -46,28 +121,16 @@ class ProjectModal extends React.Component {
             isVisible = !project || String(project).length === 0;
         }
 
+
         return (
             <Modal
                 className='modal'
-                title="New Project"
+                title="Project setup"
                 visible={isVisible}
                 footer={this.getFooter()}>
                 <div className='box'>
                     <div className='content'>
-                        <div className='scene-setting'>
-                            <div className='setting-row'>
-                                <label className='setting-label'>
-                                    Project Name
-                                </label>
-                                <div className='setting-input right'>
-                                    <Input
-                                        onChange={this.onChange}
-                                        value={value}
-                                        size="small"
-                                        placeholder="" />
-                                </div>
-                            </div>
-                        </div>
+                        { this.getContent() }
                     </div>
                 </div>
             </Modal>
@@ -87,7 +150,7 @@ const mapStateToProps = (state = {}) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onConfirm: (name) => dispatch(createNewProject(name))
+    onConfirm: (project, scene) => dispatch(createNewProject(project, scene))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectModal);

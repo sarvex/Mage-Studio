@@ -25,11 +25,11 @@ export const newProjectCompleted = () => ({
     type: NEW_PROJECT_COMPLETED
 });
 
-export const createNewProject = (name) => (dispatch) => {
+export const createNewProject = (project, scene) => (dispatch) => {
     dispatch(newProjectSaving());
 
     axios
-        .post(PROJECTS_URL, { name })
+        .post(PROJECTS_URL, { project, scene })
         .then(() => {
             dispatch(newProjectSaved());
             setTimeout(() => {
