@@ -4,24 +4,40 @@ import {
     MESH_DETACHED
 } from '../actions/types';
 
-export default function reducer(state = {}, action = {}) {
+const DEFAULT = {
+    empty: true,
+    element: undefined,
+    type: '',
+    position: {},
+    rotation: {},
+    scale: {}
+}
+
+export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case MESH_ATTACHED:
         case MESH_CHANGED:
+            console.log('reducing', action.type);
             return {
                 ...state,
                 empty: false,
+                type: 'mesh',
                 element: action.element,
-                position: action.position,
-                rotation: action.rotation,
-                scale: action.scale
+                position: { ...action.position },
+                rotation: { ...action.rotation },
+                scale: { ...action.scale }
             };
             break;
         case MESH_DETACHED:
+            console.log('reducing mesh detached');
             return {
                 ...state,
                 empty: true,
+                type: '',
                 element: undefined,
+                position: {},
+                rotation: {},
+                scale: {}
             };
             break;
         default:

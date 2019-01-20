@@ -5,7 +5,7 @@ import ProjectModal from './modals/ProjectModal';
 
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import Scene from './scene/Scene';
+import SceneContainer from './scene/SceneContainer';
 import LeftSidebar from './sidebars/left/LeftSidebar';
 import RightSidebar from './sidebars/right/RightSidebar';
 
@@ -18,13 +18,12 @@ export default (props) => {
             <Row className="main-container">
                 <LeftSidebar />
                 <div className="canvas-container">
-                    <Scene />
+                    <SceneContainer />
                 </div>
                 <RightSidebar />
             </Row>
             <Footer />
             <ProjectModal project={props.project}/>
-
         </div>
     );
 };
