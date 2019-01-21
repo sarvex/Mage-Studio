@@ -28,7 +28,7 @@ class MageStudio extends App {
                 projectConfig
             };
         }
-        
+
         return {};
     }
 
@@ -37,7 +37,7 @@ class MageStudio extends App {
         return (
             <Container>
                 <Provider store={reduxStore}>
-                    <Component {...pageProps} {...rest} />
+                    <Component {...pageProps} {...rest} store={reduxStore}/>
                 </Provider>
             </Container>
         )

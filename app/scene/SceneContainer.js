@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    connect,
-    ReactReduxContext
+    connect
 } from 'react-redux';
 
 import {
@@ -14,38 +13,35 @@ import debounce from '../lib/debounce';
 import Scene from './Scene';
 import './scene.scss';
 
-const { Consumer } = ReactReduxContext;
+class SceneContainer extends React.Component {
 
-export const SceneContainer = (props) => (
-    <Consumer>
-        { ({store}) => (
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
             <Scene
-                store={store}
-                onMeshChanged={props.onMeshChanged}
-                onMeshAttached={props.onMeshAttached}
-                onMeshDetached={props.onMeshDetached}
+                store={this.props.store}
+                onMeshChanged={this.props.onMeshChanged}
+                onMeshAttached={this.props.onMeshAttached}
+                onMeshDetached={this.props.onMeshDetached}
             />
-        )}
-    </Consumer>
-)
+        );
+    }
+}
 
 const mapDispatchToProps = (dispatch) => ({
 
-    onMeshChanged: ({element}) => {
-        const position = element.position();
-        const rotation = element.rotation();
-        const scale = element.scale();
-
+    onMeshChanged: ({element, position, rotation, scale}) => {
         return dispatch(meshChanged(element, position, rotation, scale))
     },
 
     onMeshAttached: ({element, position, rotation, scale}) => {
-        console.log(element)
-
         return dispatch(meshAttached(element, position, rotation, scale))
     },
 
     onMeshDetached: () => dispatch(meshDetached())
 });
 
-export default connect(() => ({}), mapDispatchToProps)(SceneContainer);
+export default connect(state => state, mapDispatchToProps)(SceneContainer);

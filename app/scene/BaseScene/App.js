@@ -21,8 +21,8 @@ import {
 } from 'lodash';
 
 import {
-    arraysEqual
-} from '../../lib/util';
+    observeStore
+} from './reduxStore';
 
 import { script } from './cube';
 
@@ -47,34 +47,20 @@ export default class FirstScene extends App {
         return cube;
     }
 
-    isMeshChanging = (position, rotation, scale) => {
-        const toCheck = [
-            position.x, position.y, position.z,
-            rotation.x, rotation.y, rotation.z,
-            scale.x, scale.y, scale.z
-        ];
-        const current = [
-            this.currentMesh.position().x, this.currentMesh.position().y, this.currentMesh.position().z,
-            this.currentMesh.rotation().x, this.currentMesh.rotation().y, this.currentMesh.rotation().z,
-            this.currentMesh.scale().x, this.currentMesh.scale().y, this.currentMesh.scale().z
-        ];
-
-        return !arraysEqual(toCheck, current);
-    }
-
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {
-        if (isEqual(uuid, this.currentMesh.uuid()) && (
-            !isEqual(position, this.currentMesh.position()) ||
-            !isEqual(rotation, this.currentMesh.rotation()) ||
-            !isEqual(scale, this.currentMesh.scale()))) {
+        const mesh = Universe.get(uuid);
 
-            this.currentMesh.position(position);
-            this.currentMesh.rotation(rotation);
-            this.currentMesh.scale(scale);
+        if (mesh) {
+            mesh.position(position);
+            mesh.rotation(rotation);
+            mesh.scale(scale);
 
             this.dispatchEvent({
                 type: 'meshChanged',
-                element: this.currentMesh.uuid()
+                element: mesh.uuid(),
+                position,
+                rotation,
+                scale
             });
         }
     }
@@ -175,45 +161,22 @@ export default class FirstScene extends App {
 
     dispatchMeshChange = () => {
         if (!this.transform.object || !this.currentMesh) return;
-        //const element = Universe.get(this.transform.object.uuid);
-/*
+
         this.dispatchEvent({
             type: 'meshChanged',
-            element: this.currentMesh
+            element: this.currentMesh.uuid(),
+            rotation: this.currentMesh.rotation(),
+            scale: this.currentMesh.scale(),
+            position: this.currentMesh.position()
         });
-        */
     }
 
     setStore(store) {
         this.store = store;
-        this.unsubscribe = this.store.subscribe(this.handleStoreChange);
-
-        this.currentValues = this.mapStoreState();
+        this.unsubscribe = observeStore(store, this.handleStoreChange);
     }
 
-    isReceivingSameValues = (values) => {
-        return Object.keys(values).filter(k => (
-            values[k] !== this.currentValues[k]
-        )) === 0;
-    }
-
-    mapStoreState = () => {
-        const state = this.store.getState();
-        const { controls = {}, fog = {}, snap = {}, rightsidebar } = state;
-        const { element, position, rotation, scale } = rightsidebar;
-        return {
-            snap,
-            controls,
-            fog,
-            element,
-            position,
-            rotation,
-            scale
-        };
-    }
-
-    handleStoreChange = () => {
-        const state = this.mapStoreState();
+    handleStoreChange = (state) => {
         console.log(state);
         this.changeTransformControl(state.controls);
 

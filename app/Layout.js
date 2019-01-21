@@ -18,7 +18,7 @@ export default (props) => {
             <Row className="main-container">
                 <LeftSidebar />
                 <div className="canvas-container">
-                    <SceneContainer />
+                    <SceneContainer store={props.store}/>
                 </div>
                 <RightSidebar />
             </Row>
