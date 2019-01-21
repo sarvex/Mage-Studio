@@ -17,7 +17,6 @@ export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case MESH_ATTACHED:
         case MESH_CHANGED:
-            console.log('reducing', action.type);
             return {
                 ...state,
                 empty: false,
@@ -29,15 +28,9 @@ export default function reducer(state = DEFAULT, action = {}) {
             };
             break;
         case MESH_DETACHED:
-            console.log('reducing mesh detached');
             return {
                 ...state,
-                empty: true,
-                type: '',
-                element: undefined,
-                position: {},
-                rotation: {},
-                scale: {}
+                ...DEFAULT
             };
             break;
         default:

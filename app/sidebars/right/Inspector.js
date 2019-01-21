@@ -21,8 +21,6 @@ class Inspector extends React.Component {
             onScaleChange
         } = this.props;
 
-        console.log('inside inspector', element);
-
         if (element && type === 'mesh') {
             return (
                 <MeshInspector

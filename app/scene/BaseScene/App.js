@@ -133,7 +133,7 @@ export default class FirstScene extends App {
         ControlsManager.setTransformControl();
 
         this.transform = ControlsManager.getControl('transform');
-        this.transform.addEventListener('change', this.dispatchMeshChange.bind(this));
+        this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
     }
 
     changeTransformControl = (controls) => {
@@ -144,12 +144,14 @@ export default class FirstScene extends App {
     }
 
     changeTransformSnap = ({ snapValue = 100, snapEnabled = false}) => {
-        if (snapEnabled) {
-            this.transform.setTranslationSnap(snapValue);
-            this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
-        } else {
-            this.transform.setTranslationSnap(null);
-            this.transform.setRotationSnap(null);
+        if (this.transform) {
+            if (snapEnabled) {
+                this.transform.setTranslationSnap(snapValue);
+                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+            } else {
+                this.transform.setTranslationSnap(null);
+                this.transform.setRotationSnap(null);
+            }
         }
     }
 
@@ -177,7 +179,6 @@ export default class FirstScene extends App {
     }
 
     handleStoreChange = (state) => {
-        console.log(state);
         this.changeTransformControl(state.controls);
 
         this.updateCurrentMesh(
@@ -186,13 +187,9 @@ export default class FirstScene extends App {
             state.rotation,
             state.scale);
 
-        /*
-        const values = this.mapStoreState();
+        this.changeFog(state.fog);
 
-        this.changeFog(this.currentValues.fog);
-
-        this.changeTransformSnap(this.currentValues.snap);
-        */
+        this.changeTransformSnap(state.snap);
     }
 
     onCreate() {
@@ -207,6 +204,8 @@ export default class FirstScene extends App {
         this.enableInput();
 
         this.sceneHelper.addGrid(200, 10);
+
+        console.log(JSON.stringify(this.toJSON()));
 
     }
 }

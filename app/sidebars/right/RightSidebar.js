@@ -20,8 +20,6 @@ class RightSidebar extends React.Component {
 
     constructor(props) {
         super(props);
-
-        console.log('RightSidebar props', props);
     }
 
     onPositionChange = (axis) => (value) => {
@@ -62,7 +60,7 @@ class RightSidebar extends React.Component {
 
     render() {
         const { empty, element, position, rotation, scale, type } = this.props;
-        console.log('rightsidebar render', this.props);
+
         return (
             <Col
                 span={4}
@@ -109,8 +107,6 @@ class RightSidebar extends React.Component {
 const mapStateToProps = (state) => {
     const { rightsidebar } = state;
     const { empty = true, element = '', type = '', position = {}, rotation = {}, scale= {} } = rightsidebar;
-
-    console.log('rightsidebar statetoprops', rightsidebar);
 
     return {
         empty,

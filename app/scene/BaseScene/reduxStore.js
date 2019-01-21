@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 export const observeStore = (store, onChange) => {
-    let currentState;
+    let currentState = {};
 
     function handleChange() {
         let nextState = select(store.getState());
