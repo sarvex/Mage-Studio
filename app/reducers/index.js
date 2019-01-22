@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import controls from './controls';
 import shadows from './shadows';
-import fog from './Fog';
+import fog from './fog';
 import snap from './snap';
 import rightsidebar from './rightsidebar';
 import projectModal from './projectModal';
