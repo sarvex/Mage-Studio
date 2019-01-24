@@ -1,17 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Dropdown, Menu, Divider } from 'antd';
 
-export default class ProjectMenu extends React.Component {
+import { requestSceneJson } from '../../actions/scene';
 
-    onClick = (e) => {}
+const NEW = 'new';
+const SAVE = 'save';
+const OPEN = 'open';
+const IMPORT = 'import';
+const EXPORT = 'export';
+
+export class SceneMenu extends React.Component {
+
+    onClick = ({ key }) => {
+        const { requestSceneJson } = this.props;
+        switch(key) {
+            case SAVE:
+                requestSceneJson();
+                break;
+            default:
+                break;
+
+        }
+    }
 
     getMenuContent = () => (
         <Menu onClick={this.onClick}>
-            <Menu.Item className="option" key="1">New</Menu.Item>
-            <Menu.Item className="option" key="2">Open</Menu.Item>
+            <Menu.Item className="option" key={NEW}>New</Menu.Item>
+            <Menu.Item className="option" key={SAVE}>Save</Menu.Item>
+            <Menu.Item className="option" key={OPEN}>Open</Menu.Item>
             <Divider/>
-            <Menu.Item className="option" key="3">Import..</Menu.Item>
-            <Menu.Item className="option" key="4">Export..</Menu.Item>
+            <Menu.Item className="option" key={IMPORT}>Import..</Menu.Item>
+            <Menu.Item className="option" key={EXPORT}>Export..</Menu.Item>
         </Menu>
     )
 
@@ -25,6 +45,12 @@ export default class ProjectMenu extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    requestSceneJson: () => dispatch(requestSceneJson())
+});
+
+export default connect(null, mapDispatchToProps)(SceneMenu);
 
 // add -> Cube, Sphere, .... , Model
 // lights -> directional, pointlight, ambient

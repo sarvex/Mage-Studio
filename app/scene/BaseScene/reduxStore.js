@@ -17,7 +17,7 @@ export const observeStore = (store, onChange) => {
 }
 
 export const select = (state) => {
-    const { controls = {}, fog = {}, snap = {}, rightsidebar } = state;
+    const { controls = {}, fog = {}, snap = {}, rightsidebar, scene } = state;
     const { element, position, rotation, scale } = rightsidebar;
 
     return {
@@ -27,6 +27,7 @@ export const select = (state) => {
         element,
         position,
         rotation,
-        scale
+        scale,
+        scene
     };
 }

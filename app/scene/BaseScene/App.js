@@ -190,6 +190,17 @@ export default class FirstScene extends App {
         this.changeFog(state.fog);
 
         this.changeTransformSnap(state.snap);
+
+        this.handleSceneChange(state.scene);
+    }
+
+    handleSceneChange = (state) => {
+        if (state.requested) {
+            this.dispatchEvent({
+                type: 'sceneExported',
+                data: this.toJSON()
+            });
+        }
     }
 
     onCreate() {
@@ -204,8 +215,5 @@ export default class FirstScene extends App {
         this.enableInput();
 
         this.sceneHelper.addGrid(200, 10);
-
-        console.log(JSON.stringify(this.toJSON()));
-
     }
 }

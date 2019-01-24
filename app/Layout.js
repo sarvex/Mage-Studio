@@ -23,7 +23,7 @@ export default (props) => {
                 <RightSidebar />
             </Row>
             <Footer />
-            <ProjectModal project={props.project}/>
+            <ProjectModal/>
         </div>
     );
 };

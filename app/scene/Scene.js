@@ -12,17 +12,18 @@ export class Scene extends React.Component {
 
     async componentDidMount() {
         const { Router } = await import('mage-engine');
-        const config = await import('./config');
+        const appConfig = await import('./config');
 
-        const { store, onMeshChanged, onMeshAttached, onMeshDetached } = this.props;
+        const { store, onMeshChanged, onMeshAttached, onMeshDetached, onSceneExported, config } = this.props;
 
-        this.app = Router.start(config.default, '#gameContainer');
+        this.app = Router.start(appConfig.default, '#gameContainer');
 
         this.app.setStore(store);
 
         this.app.addEventListener('meshChanged', debounce(onMeshChanged, 15));
         this.app.addEventListener('meshAttached', onMeshAttached);
         this.app.addEventListener('meshDetached', onMeshDetached);
+        this.app.addEventListener('sceneExported', onSceneExported(config.scene));
     }
 
     render() {
