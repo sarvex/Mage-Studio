@@ -1,46 +1,45 @@
 import {
-    NEW_PROJECT_COMPLETED,
-    NEW_PROJECT_SAVED,
-    NEW_PROJECT_ERROR,
-    NEW_PROJECT_SAVING
+    SCENE_SAVE_REQUEST,
+    SCENE_SAVE_LOADING,
+    SCENE_SAVE_SUCCESS,
+    SCENE_SAVE_FAILURE
 } from '../actions/types';
 
 const DEFAULT = {
-    loading: false,
+    requested: false,
+    saving: false,
     error: false,
-    visible: false
+    saved: false
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
-        case NEW_PROJECT_SAVING:
+        case SCENE_SAVE_REQUEST:
             return {
                 ...state,
                 ...DEFAULT,
-                loading: true,
-                visible: true
+                requested: true
             };
             break;
-        case NEW_PROJECT_ERROR:
+        case SCENE_SAVE_LOADING:
             return {
                 ...state,
                 ...DEFAULT,
-                error: true,
-                visible: true
+                saving: true
             };
             break;
-        case NEW_PROJECT_SAVED:
+        case SCENE_SAVE_SUCCESS:
             return {
                 ...state,
                 ...DEFAULT,
-                loading: true,
-                visible: true
+                saved: true
             };
             break;
-        case NEW_PROJECT_COMPLETED:
+        case SCENE_SAVE_FAILURE:
             return {
                 ...state,
-                ...DEFAULT
+                ...DEFAULT,
+                error: true
             };
             break;
         default:

@@ -4,7 +4,13 @@ import {
     SCENE_FOG_DENSITY_CHANGED,
 } from '../actions/types';
 
-export default function reducer(state = {}, action = {}) {
+const DEFAULT = {
+    enabled: false,
+    color: '#ffffff',
+    density: 0.05
+};
+
+export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case SCENE_FOG_ENABLED:
             const { enabled } = action;

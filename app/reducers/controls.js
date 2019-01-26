@@ -6,7 +6,11 @@ import {
     SCENE_SHADOWS_CHANGED
 } from '../actions/types';
 
-export default function reducer(state = {}, action = {}) {
+const DEFAULT = {
+    control: 'translate'
+};
+
+export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case SCENE_CONTROLS_CHANGED:
             return {

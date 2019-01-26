@@ -139,13 +139,16 @@ class ProjectModal extends React.Component {
 }
 
 const mapStateToProps = (state = {}) => {
-    const { projectModal } = state;
+    const { projectModal, config } = state;
+    const { project, scene } = config;
     const { visible, loading = false, error = false } = projectModal;
 
     return {
         visible,
         loading,
-        error
+        error,
+        project,
+        scene
     }
 }
 

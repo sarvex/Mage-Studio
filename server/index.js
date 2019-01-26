@@ -43,4 +43,4 @@ electron
     .then(function() {
         app.prepare()
             .then(setupServer);
-        });
+    });

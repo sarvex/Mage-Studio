@@ -17,12 +17,12 @@ import {
 } from 'mage-engine';
 
 import {
-    dispatch
-} from 'redux';
+    isEqual
+} from 'lodash';
 
 import {
-    arraysEqual
-} from '../../lib/util';
+    observeStore
+} from './reduxStore';
 
 import { script } from './cube';
 
@@ -47,30 +47,20 @@ export default class FirstScene extends App {
         return cube;
     }
 
-    isMeshChanging = (mesh, position, rotation, scale) => {
-        const toCheck = [
-            position.x, position.y, position.z,
-            rotation.x, rotation.y, rotation.z,
-            scale.x, scale.y, scale.z
-        ];
-        const current = [
-            mesh.position().x, mesh.position().y, mesh.position().z,
-            mesh.rotation().x, mesh.rotation().y, mesh.rotation().z,
-            mesh.scale().x, mesh.scale().y, mesh.scale().z
-        ];
+    updateCurrentMesh = (uuid = '', position, rotation, scale) => {
+        const mesh = Universe.get(uuid);
 
-        return !arraysEqual(toCheck, current);
-    }
-
-    updateCurrentMesh = (mesh, position, rotation, scale) => {
-        if (mesh && position && rotation && scale && this.isMeshChanging(mesh, position, rotation, scale)) {
+        if (mesh) {
             mesh.position(position);
             mesh.rotation(rotation);
             mesh.scale(scale);
 
             this.dispatchEvent({
                 type: 'meshChanged',
-                element: mesh
+                element: mesh.uuid(),
+                position,
+                rotation,
+                scale
             });
         }
     }
@@ -80,7 +70,13 @@ export default class FirstScene extends App {
         this.currentMesh = mesh;
         this.transform.attach(mesh);
 
-        this.dispatchEvent({ type: 'meshAttached', element: mesh });
+        this.dispatchEvent({
+            type: 'meshAttached',
+            element: mesh.uuid(),
+            rotation: mesh.rotation(),
+            scale: mesh.scale(),
+            position: mesh.position()
+        });
     }
 
     onMeshDeselect = () => {
@@ -137,7 +133,7 @@ export default class FirstScene extends App {
         ControlsManager.setTransformControl();
 
         this.transform = ControlsManager.getControl('transform');
-        this.transform.addEventListener('change', this.dispatchMeshChange.bind(this));
+        this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
     }
 
     changeTransformControl = (controls) => {
@@ -148,12 +144,14 @@ export default class FirstScene extends App {
     }
 
     changeTransformSnap = ({ snapValue = 100, snapEnabled = false}) => {
-        if (snapEnabled) {
-            this.transform.setTranslationSnap(snapValue);
-            this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
-        } else {
-            this.transform.setTranslationSnap(null);
-            this.transform.setRotationSnap(null);
+        if (this.transform) {
+            if (snapEnabled) {
+                this.transform.setTranslationSnap(snapValue);
+                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+            } else {
+                this.transform.setTranslationSnap(null);
+                this.transform.setRotationSnap(null);
+            }
         }
     }
 
@@ -165,12 +163,44 @@ export default class FirstScene extends App {
 
     dispatchMeshChange = () => {
         if (!this.transform.object || !this.currentMesh) return;
-        //const element = Universe.get(this.transform.object.uuid);
 
         this.dispatchEvent({
             type: 'meshChanged',
-            element: this.currentMesh
+            element: this.currentMesh.uuid(),
+            rotation: this.currentMesh.rotation(),
+            scale: this.currentMesh.scale(),
+            position: this.currentMesh.position()
         });
+    }
+
+    setStore(store) {
+        this.store = store;
+        this.unsubscribe = observeStore(store, this.handleStoreChange);
+    }
+
+    handleStoreChange = (state) => {
+        this.changeTransformControl(state.controls);
+
+        this.updateCurrentMesh(
+            state.element,
+            state.position,
+            state.rotation,
+            state.scale);
+
+        this.changeFog(state.fog);
+
+        this.changeTransformSnap(state.snap);
+
+        this.handleSceneChange(state.scene);
+    }
+
+    handleSceneChange = (state) => {
+        if (state.requested) {
+            this.dispatchEvent({
+                type: 'sceneExported',
+                data: this.toJSON()
+            });
+        }
     }
 
     onCreate() {
@@ -185,6 +215,5 @@ export default class FirstScene extends App {
         this.enableInput();
 
         this.sceneHelper.addGrid(200, 10);
-
     }
 }
