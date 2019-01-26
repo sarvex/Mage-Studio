@@ -5,20 +5,26 @@ import {
     NEW_PROJECT_SAVING
 } from '../actions/types';
 
-export default function reducer(state = {}, action = {}) {
+const DEFAULT = {
+    loading: false,
+    error: false,
+    visible: false
+};
+
+export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case NEW_PROJECT_SAVING:
             return {
                 ...state,
+                ...DEFAULT,
                 loading: true,
-                error: false,
                 visible: true
             };
             break;
         case NEW_PROJECT_ERROR:
             return {
                 ...state,
-                loading: false,
+                ...DEFAULT,
                 error: true,
                 visible: true
             };
@@ -26,18 +32,17 @@ export default function reducer(state = {}, action = {}) {
         case NEW_PROJECT_SAVED:
             return {
                 ...state,
+                ...DEFAULT,
                 loading: true,
-                error: false,
                 visible: true
             };
             break;
         case NEW_PROJECT_COMPLETED:
             return {
                 ...state,
-                loading: false,
-                error: false,
-                visible: false
-            }
+                ...DEFAULT
+            };
+            break;
         default:
             return state;
             break;

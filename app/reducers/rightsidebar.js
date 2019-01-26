@@ -8,9 +8,9 @@ const DEFAULT = {
     empty: true,
     element: undefined,
     type: '',
-    position: {},
-    rotation: {},
-    scale: {}
+    position: { x: 0, y: 0, z: 0 },
+    rotation: { x: 0, y: 0, z: 0 },
+    scale: { x: 0, y: 0, z: 0 }
 }
 
 export default function reducer(state = DEFAULT, action = {}) {

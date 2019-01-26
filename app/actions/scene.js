@@ -4,8 +4,9 @@ import {
     SCENE_SAVE_SUCCESS,
     SCENE_SAVE_FAILURE
 } from './types';
-
 import { SCENES_URL } from '../lib/constants';
+
+import axios from 'axios';
 
 export const requestSceneJson = () => ({
     type: SCENE_SAVE_REQUEST,
@@ -24,11 +25,10 @@ export const sceneSaveFailure = () => ({
 });
 
 export const saveScene = (name, scene) => (dispatch) => {
-    console.log(name, scene);
     dispatch(sceneSaveLoading());
 
     axios
-        .post(`${SCENES_URL}/${name}`, { scene })
+        .post(`${SCENES_URL}/${name}`, { scene: JSON.stringify(scene) })
         .then(() => {
             dispatch(sceneSaveSuccess());
         })

@@ -44,4 +44,3 @@ electron
         app.prepare()
             .then(setupServer);
     });
-z
