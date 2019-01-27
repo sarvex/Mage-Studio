@@ -35,16 +35,36 @@ export default class FirstScene extends App {
     }
 
     sampleCube() {
-        const geometry = new THREE.CubeGeometry(20, 20, 20);
-		const material = new THREE.MeshBasicMaterial({
-			color: 0x00ff00,
-			wireframe : true
-		});
-
-		const cube = new Mesh(geometry, material);
-        //cube.loadScript('cube');
+        const cube = this.sceneHelper.addCube(20, 0x00ff00, { wireframe: true });
+        cube.position({
+            x: (Math.random() * 200) - 100,
+            y: (Math.random() * 200) - 100,
+            z: (Math.random() * 200) - 100
+        });
 
         return cube;
+    }
+
+    sampleSphere() {
+        const sphere = this.sceneHelper.addSphere(20, 0xffff00, { wireframe: true });
+        sphere.position({
+            x: (Math.random() * 200) - 100,
+            y: (Math.random() * 200) - 100,
+            z: (Math.random() * 200) - 100
+        });
+
+        return sphere;
+    }
+
+    sampleCylinder() {
+        const cylinder = this.sceneHelper.addCylinder(10, 10, 30, 0x0fff00, { wireframe: true });
+        cylinder.position({
+            x: (Math.random() * 200) - 100,
+            y: (Math.random() * 200) - 100,
+            z: (Math.random() * 200) - 100
+        });
+
+        return cylinder;
     }
 
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {
@@ -128,7 +148,7 @@ export default class FirstScene extends App {
 		}
     }
 
-    setTranformControls(cube) {
+    setTranformControls() {
         ControlsManager.setOrbitControl();
         ControlsManager.setTransformControl();
 
@@ -208,10 +228,11 @@ export default class FirstScene extends App {
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 
-        const cube = this.sampleCube();
+        const cubes = new Array(5).fill().map(this.sampleCube.bind(this));
+        const spheres = new Array(5).fill().map(this.sampleSphere.bind(this));
+        const cylinders = new Array(5).fill().map(this.sampleCylinder.bind(this));
 
-        this.setTranformControls(cube);
-
+        this.setTranformControls();
         this.enableInput();
 
         this.sceneHelper.addGrid(200, 10);

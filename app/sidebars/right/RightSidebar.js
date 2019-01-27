@@ -23,39 +23,33 @@ class RightSidebar extends React.Component {
     }
 
     onPositionChange = (axis) => (value) => {
-        const { onPositionChange, element } = this.props;
-        const position = {
-            ...element.position(),
+        const { onPositionChange, element, position, rotation, scale } = this.props;
+        const newPosition = {
+            ...position,
             [axis]: value
         };
-        const rotation = element.rotation();
-        const scale = element.scale();
 
-        onPositionChange(element, position, rotation, scale);
+        onPositionChange(element, newPosition, rotation, scale);
     }
 
     onRotationChange = (axis) => (value) => {
-        const { onRotationChange, element } = this.props;
-        const rotation = {
-            ...element.rotation(),
+        const { onRotationChange, element, position, rotation, scale } = this.props;
+        const newRotation = {
+            ...rotation,
             [axis]: value
         };
-        const position = element.position();
-        const scale = element.scale();
 
-        onRotationChange(element, position, rotation, scale);
+        onRotationChange(element, position, newRotation, scale);
     }
 
     onScaleChange = (axis) => (value) => {
-        const { onScaleChange, element } = this.props;
-        const scale = {
-            ...element.scale(),
+        const { onScaleChange, element, position, rotation, scale } = this.props;
+        const newScale = {
+            ...scale,
             [axis]: value
         };
-        const position = element.position();
-        const rotation = element.rotation();
 
-        onScaleChange(element, position, rotation, scale);
+        onScaleChange(element, position, rotation, newScale);
     }
 
     render() {
