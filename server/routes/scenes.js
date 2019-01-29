@@ -1,9 +1,12 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const electron = require('../electron');
 const router = express.Router();
 
 const messages = require('../lib/messages');
-const scene = require('../lib/scene');
+const SceneHelper = require('../lib/SceneHelper');
+const FileHelper = require('../lib/files/FileHelper');
 
 router.route('/')
     .get((req, res) => {
@@ -90,6 +93,21 @@ router.route('/:id')
     .delete(function(req,res) {
         // removing the scene inside req.scene
         res.status(204).json({message: 'OK'});
+    });
+
+
+router.route('/:id/models')
+    .post(function(req, res) {
+        const files = req.files;
+        const data = files.data;
+        const buffer = data.data;
+
+        if (FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer)) {
+            res.json({message: 'ok'});
+        } else {
+            res.json({message: 'bad'});
+        }
+
     });
 
 module.exports = {

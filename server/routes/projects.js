@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 const electron = require('../electron');
 const router = express.Router();
-const config = require('../lib/config');
+const Config = require('../lib/Config');
 
-const project = require('../lib/project');
-const scene = require('../lib/scene');
+const ProjectHelper = require('../lib/ProjectHelper');
+const SceneHelper = require('../lib/SceneHelper');
 const messages = require('../lib/messages');
 
 router.route('/')
@@ -33,7 +33,7 @@ router.route('/')
 
         if (electron.isDesktop()) {
             // copy template folder to project folder
-            const localconfig = config.getLocalConfig();
+            const localconfig = Config.getLocalConfig();
             if (!localconfig) {
                 res
                     .status(messages.CONFIG_MISSING.code)
@@ -41,8 +41,8 @@ router.route('/')
             } else {
                 const destination = path.join(localconfig.workspace, projectName);
                 Promise.all([
-                    project.create(destination),
-                    scene.create(destination, sceneName)
+                    ProjectHelper.create(destination),
+                    SceneHelper.create(destination, sceneName)
                 ])
                     .then(function() {
                         res
@@ -58,7 +58,7 @@ router.route('/')
         }
         // use api to create projects ( sync desktop with be )
         // when is done update config
-        config.updateLocalConfig({ project: projectName, scene: sceneName });
+        Config.updateLocalConfig({ project: projectName, scene: sceneName });
     });
 
 // Middleware

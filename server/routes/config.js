@@ -1,7 +1,7 @@
 const express = require('express');
 const electron = require('../electron');
 const router = express.Router();
-const config = require('../lib/config');
+const Config = require('../lib/Config');
 const messages = require('../lib/messages');
 
 router.route('/')
@@ -10,7 +10,7 @@ router.route('/')
         // this path is still missing authentication
         if (electron.isDesktop()) {
             // we're using electron, loading config from yml file
-            const localconfig = config.getLocalConfig();
+            const localconfig = Config.getLocalConfig();
             if (!localconfig) {
                 res
                     .status(messages.CONFIG_MISSING.code)
