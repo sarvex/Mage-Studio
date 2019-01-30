@@ -14,7 +14,10 @@ import {
 } from '../actions/scene';
 
 import debounce from '../lib/debounce';
+
 import Scene from './Scene';
+import SceneToolbar from './SceneToolbar';
+
 import './scene.scss';
 
 class SceneContainer extends React.Component {
@@ -25,14 +28,17 @@ class SceneContainer extends React.Component {
 
     render() {
         return (
-            <Scene
-                config={this.props.config}
-                store={this.props.store}
-                onMeshChanged={this.props.onMeshChanged}
-                onMeshAttached={this.props.onMeshAttached}
-                onMeshDetached={this.props.onMeshDetached}
-                onSceneExported={this.props.onSceneExported}
-            />
+            <div>
+                <Scene
+                    config={this.props.config}
+                    store={this.props.store}
+                    onMeshChanged={this.props.onMeshChanged}
+                    onMeshAttached={this.props.onMeshAttached}
+                    onMeshDetached={this.props.onMeshDetached}
+                    onSceneExported={this.props.onSceneExported}
+                />
+                <SceneToolbar />
+            </div>
         );
     }
 }

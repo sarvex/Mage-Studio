@@ -1,7 +1,33 @@
+@import '../constants.scss';
+@import '../theme.scss';
+
 #gameContainer {
     flex: 1 1 auto;
     min-height: 600px;
     min-width: 800px;
     z-index: 0;
     display: block;
+}
+
+.scene-toolbar {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 160px);
+    /* float: right; */
+    /* margin-left: auto; */
+    width: 160px;
+    /* margin: auto; */
+    /* display: inline-block; */
+
+    .scene-toolbar-action {
+        width: $base-unit * 4;
+        height: $base-unit * 4;
+        line-height: $base-unit * 4;
+        text-align: center;
+        margin: $base-unit/2 $base-unit;
+        color: $white;
+        font-size: 14px;
+        background: $deep-blue-13;
+        float: left;
+    }
 }
