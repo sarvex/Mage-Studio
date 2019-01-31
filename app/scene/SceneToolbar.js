@@ -29,20 +29,14 @@ export class SceneToolbar extends React.Component {
             <div className='scene-toolbar'>
                 <Dropdown overlay={this.getMenu()} trigger={['click']} placement={'topLeft'}>
                     <p className="scene-toolbar-action">
-                        <a href="#">
-                            <Icon type="plus-square" />
-                        </a>
+                        add <Icon type="down" /> 
                     </p>
                 </Dropdown>
                 <p className="scene-toolbar-action">
-                    <a className="scene-toolbar-action" href="#">
-                        <Icon type="caret-right" />
-                    </a>
+                    <Icon type="caret-right" />
                 </p>
                 <p className="scene-toolbar-action">
-                    <a className="scene-toolbar-action" href="#">
-                        <Icon type="fullscreen" />
-                    </a>
+                    <Icon type="fullscreen" />
                 </p>
             </div>
         )

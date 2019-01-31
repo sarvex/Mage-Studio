@@ -28,7 +28,7 @@ class SceneContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='scene-container'>
                 <Scene
                     config={this.props.config}
                     store={this.props.store}
