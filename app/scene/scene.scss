@@ -31,7 +31,7 @@
         .scene-toolbar-action {
             /* width: 24px; */
             padding: $base-unit;
-            min-width: $base-unit * 4;
+            min-width: $base-unit * 5;
             height: $base-unit * 4;
             line-height: $base-unit * 2;
             text-align: center;
@@ -40,11 +40,23 @@
             /* font-size: 14px; */
             background: $deep-blue-13;
             float: left;
-            border-right: 1px solid $deep-blue-11;
+            border-right: 1px solid $deep-blue-10;
 
             &:last-child {
                 border: none;
             }
+
+            &.active {
+                border-bottom: 1px solid $deep-blue-5;
+                background: $deep-blue-15;
+            }
+
+            &:hover {
+                background: $deep-blue-15;
+                cursor: pointer;
+            }
         }
+
+
     }
 }

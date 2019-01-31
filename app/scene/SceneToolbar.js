@@ -27,15 +27,23 @@ export class SceneToolbar extends React.Component {
     render() {
         return (
             <div className='scene-toolbar'>
-                <Dropdown overlay={this.getMenu()} trigger={['click']} placement={'topLeft'}>
+                <Dropdown
+                    overlay={this.getMenu()}
+                    trigger={['click']}
+                    onClick={this.handleClick('add')}
+                    placement={'topLeft'}>
                     <p className="scene-toolbar-action">
-                        add <Icon type="down" /> 
+                        add <Icon type="down" />
                     </p>
                 </Dropdown>
-                <p className="scene-toolbar-action">
+                <p
+                    className="scene-toolbar-action"
+                    onClick={this.handleClick('play')}>
                     <Icon type="caret-right" />
                 </p>
-                <p className="scene-toolbar-action">
+                <p
+                    className="scene-toolbar-action"
+                    onClick={this.handleClick('fullscreen')}>
                     <Icon type="fullscreen" />
                 </p>
             </div>
