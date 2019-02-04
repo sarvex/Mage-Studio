@@ -13,6 +13,9 @@ const SCENE_DATA_MISSING = { code: 400, text: 'Scene data is missing.' };
 const SCENE_JSON_NOT_CREATED = { code: 204, text: 'Something went wrong when creating the scene.json' };
 const SCENE_JSON_CREATED = { code: 201, text: ''};
 
+const FILE_WRITE_SUCCESS = { code: 201 };
+const FILE_WRITE_FAILURE = { code: 204, text: 'Could not write file'};
+
 
 module.exports = {
     PROJECT_NAME_MISSING: PROJECT_NAME_MISSING,
@@ -24,5 +27,7 @@ module.exports = {
     SCENE_NOT_FOUND: SCENE_NOT_FOUND,
     SCENE_DATA_MISSING: SCENE_DATA_MISSING,
     SCENE_JSON_NOT_CREATED: SCENE_JSON_NOT_CREATED,
-    SCENE_JSON_CREATED: SCENE_JSON_CREATED
+    SCENE_JSON_CREATED: SCENE_JSON_CREATED,
+    FILE_WRITE_SUCCESS: FILE_WRITE_SUCCESS,
+    FILE_WRITE_FAILURE: FILE_WRITE_FAILURE
 };

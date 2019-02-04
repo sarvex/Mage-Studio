@@ -11,6 +11,7 @@ class ProjectHelper {
 
             ncp(source, destination, function(err) {
                 if (err) {
+                    console.log('cannot create project', err);
                     throw err;
                 } else {
                     return resolve();

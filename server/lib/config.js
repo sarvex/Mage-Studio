@@ -54,14 +54,10 @@ class Config {
 
 
     static getAssetsPath() {
-        const local = Config.getLocalConfig();
-
         return path.join(Config.getProjectPath(), 'assets');
     }
 
     static getScenePath(sceneName) {
-        const local = Config.getLocalConfig();
-
         return path.join(
             Config.getProjectPath(),
             'src',

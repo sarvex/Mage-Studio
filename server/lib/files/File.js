@@ -9,17 +9,34 @@ class File {
     setPath(folder) {
         this.folder = folder;
         this.fullPath = path.join(this.folder, this.name);
+
+        this.content = undefined;
+        this.isBuffer = false;
     }
 
     exists() {
         return fs.existsSync(this.fullPath);
     }
 
-    writeBuffer(buffer) {
+    setContent(content) {
+        if (content instanceof Buffer) {
+            this.isBuffer = true;
+        }
+
+        this.content = content;
+    }
+
+    writeToFile() {
+        if (this.isBuffer) {
+            return this.writeBuffer();
+        }
+        return this.writeText();
+    }
+
+    writeBuffer() {
         try {
-            console.log(this.fullPath);
             const descriptor = fs.openSync(this.fullPath, 'w');
-            fs.writeSync(descriptor, buffer, 0, buffer.length, null);
+            fs.writeSync(descriptor, this.content, 0, this.content.length, null);
             fs.closeSync(descriptor);
 
             return true;

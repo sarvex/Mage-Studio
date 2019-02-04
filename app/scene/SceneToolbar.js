@@ -5,6 +5,8 @@ export class SceneToolbar extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {}
     }
 
     getMenu() {
@@ -22,6 +24,10 @@ export class SceneToolbar extends React.Component {
                     </Menu.SubMenu>
             </Menu>
         )
+    }
+
+    handleClick = (what) => () => {
+        this.setState()
     }
 
     render() {

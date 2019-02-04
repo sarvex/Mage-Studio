@@ -102,10 +102,20 @@ router.route('/:id/models')
         const data = files.data;
         const buffer = data.data;
 
-        if (FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer)) {
-            res.json({message: 'ok'});
+        if (electron.isDesktop()) {
+            const file = FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer);
+
+            if (file.writeToFile()) {
+                res
+                    .status(messages.FILE_WRITE_SUCCESS.code)
+                    .json({ data: JSON.stringify(file.toJSON()) })
+            } else {
+                res
+                    .status(messages.FILE_WRITE_FAILURE.code)
+                    .json({ message: messages.FILE_WRITE_FAILURE.text });
+            }
         } else {
-            res.json({message: 'bad'});
+            res.json({ message: 'ok' });
         }
 
     });

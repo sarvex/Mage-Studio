@@ -10,12 +10,8 @@ class FileHelper {
         switch(type) {
             case FileHelper.MODEL_TYPE():
                 const file = new Model(filename);
-                console.log(file);
-                if (file.writeBuffer(buffer)) {
-                    return file;
-                }
-                return false;
-
+                file.setContent(buffer);
+                return file;
                 break;
             case FileHelper.ASSET_TYPE():
             default:
