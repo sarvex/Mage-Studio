@@ -6,31 +6,56 @@ export class SceneToolbar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {}
+        this.defaultState = {
+            add: false,
+            play: false,
+            fullscreen: false
+        };
+
+        this.state = this.defaultState;
+
+        this.allowed = ['add', 'play', 'fullscreen'];
     }
 
     getMenu() {
         return (
             <Menu>
-                <Menu.Item>1st menu item</Menu.Item>
-                <Menu.Item>2nd menu item</Menu.Item>
-                    <Menu.SubMenu title="sub menu">
-                        <Menu.Item>3rd menu item</Menu.Item>
-                        <Menu.Item>4th menu item</Menu.Item>
-                        </Menu.SubMenu>
-                    <Menu.SubMenu title="disabled sub menu" disabled>
-                        <Menu.Item>5d menu item</Menu.Item>
-                        <Menu.Item>6th menu item</Menu.Item>
+                <Menu.Item>model</Menu.Item>
+                    <Menu.SubMenu title="mesh">
+                        <Menu.Item onClick={this.handleMenuClick('cube')}>cube</Menu.Item>
+                        <Menu.Item onClick={this.handleMenuClick('sphere')}>sphere</Menu.Item>
+                        <Menu.Item onClick={this.handleMenuClick('cylinder')}>cylinder</Menu.Item>
                     </Menu.SubMenu>
+                    <Menu.SubMenu title="sound">
+                        <Menu.Item>sorry</Menu.Item>
+                    </Menu.SubMenu>
+                    <Menu.SubMenu title="light">
+                        <Menu.Item>sorry</Menu.Item>
+                    </Menu.SubMenu>
+
             </Menu>
         )
     }
 
-    handleClick = (what) => () => {
-        this.setState()
+    handleMenuClick = (which) => () => {
+        console.log('handling', which);
+        this.setState({ ...this.defaultState });
+    }
+
+    handleClick = (option) => () => {
+        if (this.allowed.includes(option)) {
+            this.setState({
+                ...this.defaultState,
+                [option]: true
+            });
+        }
     }
 
     render() {
+        const addClassName = `scene-toolbar-action ${this.state.add ? 'active' : '' }`;
+        const playClassName = `scene-toolbar-action ${this.state.play ? 'active' : '' }`;
+        const fullscreenClassName = `scene-toolbar-action ${this.state.fullscreen ? 'active' : '' }`;
+
         return (
             <div className='scene-toolbar'>
                 <Dropdown
@@ -38,17 +63,17 @@ export class SceneToolbar extends React.Component {
                     trigger={['click']}
                     onClick={this.handleClick('add')}
                     placement={'topLeft'}>
-                    <p className="scene-toolbar-action">
-                        add <Icon type="down" />
+                    <p className={addClassName}>
+                        <Icon type="plus" />
                     </p>
                 </Dropdown>
                 <p
-                    className="scene-toolbar-action"
+                    className={playClassName}
                     onClick={this.handleClick('play')}>
                     <Icon type="caret-right" />
                 </p>
                 <p
-                    className="scene-toolbar-action"
+                    className={fullscreenClassName}
                     onClick={this.handleClick('fullscreen')}>
                     <Icon type="fullscreen" />
                 </p>

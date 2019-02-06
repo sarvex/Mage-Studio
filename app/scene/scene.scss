@@ -19,25 +19,23 @@
     }
 
     & .scene-toolbar {
-        position: absolute;
-        top: 0;
-        left: calc(50% - 160px);
-        /* float: right; */
-        /* margin-left: auto; */
-        width: 160px;
         /* margin: auto; */
         /* display: inline-block; */
 
+        position: absolute;
+        top: 0;
+        margin-left: $base-unit / 2;
+
         .scene-toolbar-action {
             /* width: 24px; */
-            padding: $base-unit;
-            min-width: $base-unit * 5;
-            height: $base-unit * 4;
-            line-height: $base-unit * 2;
+            padding: $base-unit / 2;
+            min-width: $base-unit * 4;
+            //height: $base-unit * 4;
+            //line-height: $base-unit * 2;
             text-align: center;
             margin-top: $base-unit / 2;
             color: $white;
-            /* font-size: 14px; */
+            font-size: 10px;
             background: $deep-blue-13;
             float: left;
             border-right: 1px solid $deep-blue-10;

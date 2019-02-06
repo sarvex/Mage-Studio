@@ -45,7 +45,8 @@ $header-height: $base-unit * 4;
     }
 
 
-    & .ant-dropdown-menu-item {
+    & .ant-dropdown-menu-item,
+    & .ant-dropdown-menu-submenu > * {
         background-color: $deep-blue-13 !important;
         color: $white !important;
         font-family: 'Roboto Mono', sans-serif;
@@ -54,12 +55,22 @@ $header-height: $base-unit * 4;
         height: $base-unit * 3;
 
         &.ant-dropdown-menu-item-active,
-        &.ant-dropdown-menu-item-selected {
+        &.ant-dropdown-menu-item-selected,
+        &.ant-dropdown-menu-submenu-active,
+        &.ant-dropdown-menu-submenu-selected {
             background-color: $deep-blue-10 !important;
         }
 
         &:hover {
             background-color: $deep-blue-11 !important;
+        }
+    }
+
+    & .ant-dropdown-menu-item,
+    & .ant-dropdown-menu-submenu {
+
+        &[class$='-disabled'] {
+            background: red;
         }
     }
 }

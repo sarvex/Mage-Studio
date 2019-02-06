@@ -228,10 +228,6 @@ export default class FirstScene extends App {
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 
-        const cubes = new Array(5).fill().map(this.sampleCube.bind(this));
-        const spheres = new Array(5).fill().map(this.sampleSphere.bind(this));
-        const cylinders = new Array(5).fill().map(this.sampleCylinder.bind(this));
-
         this.setTranformControls();
         this.enableInput();
 

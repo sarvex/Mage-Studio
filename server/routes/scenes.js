@@ -108,7 +108,7 @@ router.route('/:id/models')
             if (file.writeToFile()) {
                 res
                     .status(messages.FILE_WRITE_SUCCESS.code)
-                    .json({ data: JSON.stringify(file.toJSON()) })
+                    .json({ data: file.toJSON() })
             } else {
                 res
                     .status(messages.FILE_WRITE_FAILURE.code)
@@ -117,7 +117,6 @@ router.route('/:id/models')
         } else {
             res.json({ message: 'ok' });
         }
-
     });
 
 module.exports = {
