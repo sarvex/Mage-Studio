@@ -198,6 +198,10 @@ export default class FirstScene extends App {
         this.unsubscribe = observeStore(store, this.handleStoreChange);
     }
 
+    doSomething() {
+        this.sampleCube();
+    }
+
     handleStoreChange = (state) => {
         this.changeTransformControl(state.controls);
 

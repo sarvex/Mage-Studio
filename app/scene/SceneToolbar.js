@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
+import { doSomething } from './AppProxy';
 
 export class SceneToolbar extends React.Component {
 
@@ -40,6 +41,7 @@ export class SceneToolbar extends React.Component {
     handleMenuClick = (which) => () => {
         console.log('handling', which);
         this.setState({ ...this.defaultState });
+        doSomething();
     }
 
     handleClick = (option) => () => {
