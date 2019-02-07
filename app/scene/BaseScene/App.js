@@ -34,7 +34,7 @@ export default class FirstScene extends App {
         callback();
     }
 
-    sampleCube() {
+    addCube() {
         const cube = this.sceneHelper.addCube(20, 0x00ff00, { wireframe: true });
         cube.position({
             x: (Math.random() * 200) - 100,
@@ -45,7 +45,7 @@ export default class FirstScene extends App {
         return cube;
     }
 
-    sampleSphere() {
+    addSphere() {
         const sphere = this.sceneHelper.addSphere(20, 0xffff00, { wireframe: true });
         sphere.position({
             x: (Math.random() * 200) - 100,
@@ -56,7 +56,7 @@ export default class FirstScene extends App {
         return sphere;
     }
 
-    sampleCylinder() {
+    addCylinder() {
         const cylinder = this.sceneHelper.addCylinder(10, 10, 30, 0x0fff00, { wireframe: true });
         cylinder.position({
             x: (Math.random() * 200) - 100,
@@ -196,10 +196,6 @@ export default class FirstScene extends App {
     setStore(store) {
         this.store = store;
         this.unsubscribe = observeStore(store, this.handleStoreChange);
-    }
-
-    doSomething() {
-        this.sampleCube();
     }
 
     handleStoreChange = (state) => {

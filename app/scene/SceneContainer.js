@@ -17,6 +17,7 @@ import debounce from '../lib/debounce';
 
 import Scene from './Scene';
 import SceneToolbar from './SceneToolbar';
+import ModelModal from '../modals/ModelUploadModal';
 
 import './scene.scss';
 
@@ -38,6 +39,7 @@ class SceneContainer extends React.Component {
                     onSceneExported={this.props.onSceneExported}
                 />
                 <SceneToolbar />
+                <ModelModal />
             </div>
         );
     }
