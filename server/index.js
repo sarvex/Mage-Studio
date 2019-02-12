@@ -5,7 +5,7 @@ const next = require('next');
 const scenes = require('./routes/scenes');
 const projects = require('./routes/projects');
 const config = require('./routes/config');
-const electron = require('./electron');
+const electron = require('./lib/electron');
 
 const server = express();
 const PORT = process.env.PORT || 8080;

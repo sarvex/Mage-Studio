@@ -2,8 +2,23 @@ const path = require('path');
 const fs = require('fs');
 
 class File {
+
+    static getExtension(name) {
+        return '.'.concat(name.split('.').slice(1).join('.'));
+    }
+
     constructor(name) {
         this.name = name;
+        this.extension = File.getExtension(this.name);
+    }
+
+
+    toJSON() {
+        // potwntially add more informations about the file
+        return {
+            name: this.name,
+            extension: this.extension
+        }
     }
 
     setPath(folder) {

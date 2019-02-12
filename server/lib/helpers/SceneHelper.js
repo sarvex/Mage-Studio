@@ -1,7 +1,7 @@
 const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
-const Config = require('./Config');
+const Config = require('../config');
 
 const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
 const SRC_PATH = 'src';
@@ -40,7 +40,7 @@ class SceneHelper {
         const sceneJsonPath = path.join(
             configuration.workspace,
             configuration.project,
-            SceneHelper.SRC_PATH,
+            SRC_PATH,
             sceneName,
             filename
         );
@@ -71,7 +71,7 @@ class SceneHelper {
         const folderPath = path.join(
             configuration.workspace,
             configuration.project,
-            SceneHelper.SRC_PATH,
+            SRC_PATH,
             sceneName
         );
 

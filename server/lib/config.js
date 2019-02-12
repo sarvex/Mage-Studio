@@ -46,10 +46,11 @@ class Config {
         }
     }
 
-    static getProjectPath() {
+    static getProjectPath(project) {
         const local = Config.getLocalConfig();
+        const projectName = project || local.project;
 
-        return path.join(local.workspace, local.project);
+        return path.join(local.workspace, projectName);
     }
 
 

@@ -5,6 +5,10 @@ $max-input-size: $base-unit * 20;
 
 .modal {
 
+    &.big {
+        width: $base-unit * 100 !important;
+    }
+
     .box {
         display: flex;
         flex-direction: column;
@@ -30,10 +34,16 @@ $max-input-size: $base-unit * 20;
 
     & .ant-upload {
         background: transparent !important;
+        height: $base-unit * 7;
 
         &.ant-upload-drag {
             border: 1px dashed $deep-blue-15;
-            max-width: $base-unit * 30;
+            height: $base-unit * 7;
+        }
+
+        & .ant-upload-btn {
+            padding: $base-unit 0 !important;
+            color: $deep-blue-5;
         }
     }
 

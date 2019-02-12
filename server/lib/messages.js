@@ -14,6 +14,7 @@ const SCENE_JSON_NOT_CREATED = { code: 204, text: 'Something went wrong when cr
 const SCENE_JSON_CREATED = { code: 201, text: ''};
 
 const FILE_WRITE_SUCCESS = { code: 201 };
+const FILE_MISSING = { code: 400, text: 'File is missing.'};
 const FILE_WRITE_FAILURE = { code: 204, text: 'Could not write file'};
 
 
@@ -29,5 +30,6 @@ module.exports = {
     SCENE_JSON_NOT_CREATED: SCENE_JSON_NOT_CREATED,
     SCENE_JSON_CREATED: SCENE_JSON_CREATED,
     FILE_WRITE_SUCCESS: FILE_WRITE_SUCCESS,
-    FILE_WRITE_FAILURE: FILE_WRITE_FAILURE
+    FILE_WRITE_FAILURE: FILE_WRITE_FAILURE,
+    FILE_MISSING: FILE_MISSING
 };

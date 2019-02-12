@@ -48,7 +48,6 @@ export class SceneToolbar extends React.Component {
     }
 
     handleMenuClick = (which) => () => {
-        console.log('handling', which);
         this.setState({ ...this.defaultState });
 
         addMesh(which);

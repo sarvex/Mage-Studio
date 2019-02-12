@@ -1,5 +1,5 @@
 const File = require('./File');
-const Config = require('../Config');
+const Config = require('../../config');
 
 class Model extends File {
     constructor(name) {
@@ -11,7 +11,12 @@ class Model extends File {
     toJSON() {
         try {
             const stringContent = this.content.toString('utf8');
-            return JSON.parse(stringContent);
+            return {
+                ...super.toJSON(),
+                content: {
+                    ...JSON.parse(stringContent)
+                }
+            }
         } catch (e) {
             return {};
         }
