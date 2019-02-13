@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const CONFIG_FILE_NAME = '.config.yml'
+const CONFIG_FILE_NAME = '.config.yml';
+const ASSETS = 'assets';
+const SRC = 'src';
 
 class Config {
 
@@ -55,13 +57,13 @@ class Config {
 
 
     static getAssetsPath() {
-        return path.join(Config.getProjectPath(), 'assets');
+        return path.join(Config.getProjectPath(), ASSETS);
     }
 
     static getScenePath(sceneName) {
         return path.join(
             Config.getProjectPath(),
-            'src',
+            SRC,
             sceneName
         )
     }

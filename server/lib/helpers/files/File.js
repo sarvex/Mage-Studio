@@ -41,6 +41,13 @@ class File {
         this.content = content;
     }
 
+    read() {
+        const content = fs.readFileSync(this.fullPath);
+
+        this.setContent(content);
+        return content;
+    }
+
     writeToFile() {
         if (this.isBuffer) {
             return this.writeBuffer();
