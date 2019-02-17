@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const uuid = require('uuid/v4');
 
 class File {
 
@@ -10,14 +11,15 @@ class File {
     constructor(name) {
         this.name = name;
         this.extension = File.getExtension(this.name);
+        this.uuid = uuid();
     }
-
 
     toJSON() {
         // potwntially add more informations about the file
         return {
             name: this.name,
-            extension: this.extension
+            extension: this.extension,
+            uuid: this.uuid
         }
     }
 

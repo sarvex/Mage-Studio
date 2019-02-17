@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Input, Button } from 'antd';
 
-import { uploadModel } from '../actions/modelModal';
+import {
+    uploadModel,
+    getModels,
+    hideModelUploadModal
+} from '../actions/modelModal';
 
 import Footer from './footer';
 import Divider from './content/Divider';
@@ -20,6 +24,13 @@ class ModelUploadModal extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        const { getModels = f => f, config } = this.props;
+        const { project } = config;
+
+        getModels(project);
+    }
+
     getFooter = (loading) => (
         <Footer
             loading={loading}
@@ -29,9 +40,15 @@ class ModelUploadModal extends React.Component {
         />
     )
 
-    handleCancel = () => {}
+    handleCancel = () => {
+        const { hideModelUploadModal } = this.props;
+
+        hideModelUploadModal();
+    }
 
     handleConfirm = () => {}
+
+    handleOnSelect = () => {}
 
     handleBeforeUpload = (file) => {
         const { uploadModel, config } = this.props;
@@ -43,9 +60,14 @@ class ModelUploadModal extends React.Component {
     }
 
     getContent = () => {
+        const { list, data } = this.props;
         return (
             <div className='box row'>
-                <ModelsSelector />
+                <ModelsSelector
+                    onSelect={this.handleOnSelect}
+                    uploaded={data}
+                    list={list}
+                />
                 <ModelUploader
                     onBeforeUpload={this.handleBeforeUpload}
                     name={"data"} />
@@ -61,6 +83,7 @@ class ModelUploadModal extends React.Component {
                 className='modal big'
                 title="Models"
                 visible={visible}
+                onCancel={this.handleCancel}
                 footer={this.getFooter(loading)}>
                 { this.getContent() }
             </Modal>
@@ -70,7 +93,14 @@ class ModelUploadModal extends React.Component {
 
 const mapStateToProps = (state = {}) => {
     const { modelModal, config } = state;
-    const { visible, loading = false, error = false, completed = false, data = false } = modelModal;
+    const {
+        visible,
+        loading = false,
+        error = false,
+        completed = false,
+        data = false,
+        list = []
+    } = modelModal;
 
     return {
         config,
@@ -78,12 +108,15 @@ const mapStateToProps = (state = {}) => {
         loading,
         completed,
         data,
+        list,
         error,
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    uploadModel: (project, payload) => dispatch(uploadModel(project, payload))
+    getModels: (project) => dispatch(getModels(project)),
+    uploadModel: (project, payload) => dispatch(uploadModel(project, payload)),
+    hideModelUploadModal: () => dispatch(hideModelUploadModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModelUploadModal);

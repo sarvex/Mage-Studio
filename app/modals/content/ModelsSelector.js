@@ -1,12 +1,18 @@
 import React from 'react';
-import '../../style.scss';
+import File from './File';
 
 import './modalcontent.scss';
 
-const ModelsSelector = ({ models = [] }) => {
+const ModelsSelector = ({ list = [], uploaded }) => {
+
+    const models = uploaded ? list.concat(uploaded) : list;
 
     const mapModels = () => {
-        return models.map(m => <li>test</li>)
+        return models.map(m => (
+            <li>
+                <File name={m.name}/>
+            </li>
+        ));
     }
 
     const getEmptyList = () => {

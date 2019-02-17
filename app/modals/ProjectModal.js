@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Input, Steps, Button } from 'antd';
 
-import { createNewProject } from '../actions/projectModal';
+import { createNewProject, newProjectHide } from '../actions/projectModal';
 
 import FooterSteps from './FooterSteps';
 
@@ -127,6 +127,7 @@ class ProjectModal extends React.Component {
                 className='modal'
                 title="Project setup"
                 visible={isVisible}
+                onCancel={this.props.onCancel}
                 footer={this.getFooter()}>
                 <div className='box'>
                     <div className='content'>
@@ -153,7 +154,8 @@ const mapStateToProps = (state = {}) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onConfirm: (project, scene) => dispatch(createNewProject(project, scene))
+    onConfirm: (project, scene) => dispatch(createNewProject(project, scene)),
+    onCancel: () => dispatch(newProjectHide())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectModal);

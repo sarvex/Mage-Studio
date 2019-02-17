@@ -3,7 +3,10 @@ import {
     SCENE_MODEL_MODAL_HIDE,
     SCENE_MODEL_UPLOAD_STARTED,
     SCENE_MODEL_UPLOAD_FAILED,
-    SCENE_MODEL_UPLOAD_COMPLETED
+    SCENE_MODEL_UPLOAD_COMPLETED,
+    SCENE_MODEL_FETCH_STARTED,
+    SCENE_MODEL_FETCH_FAILED,
+    SCENE_MODEL_FETCH_COMPLETED
 } from '../actions/types';
 
 const DEFAULT = {
@@ -11,7 +14,8 @@ const DEFAULT = {
     error: false,
     visible: false,
     completed: false,
-    data: null
+    data: null,
+    list: []
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
@@ -26,35 +30,46 @@ export default function reducer(state = DEFAULT, action = {}) {
         case SCENE_MODEL_MODAL_HIDE:
             return {
                 ...state,
-                ...DEFAULT,
+                ...DEFAULT, 
                 visible: false
             };
             break;
+        case SCENE_MODEL_FETCH_STARTED:
         case SCENE_MODEL_UPLOAD_STARTED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 visible: true,
                 loading: true
             };
             break;
+        case SCENE_MODEL_FETCH_FAILED:
         case SCENE_MODEL_UPLOAD_FAILED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 visible: true,
                 error: true
             };
             break;
         case SCENE_MODEL_UPLOAD_COMPLETED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
+                loading: false,
                 visible: true,
                 completed: true,
                 data: action.data
             };
             break;
+        case SCENE_MODEL_FETCH_COMPLETED:
+            return {
+                ...DEFAULT,
+                ...state,
+                list: action.list,
+                visible: true,
+                completed: true
+            }
         default:
             return state;
             break;
