@@ -83,7 +83,6 @@ export const loadSingleModel = (project, modelid) => (dispatch) => {
                     dispatch(hideModelUploadModal())
                 })
                 .catch((e) => {
-                    console.log('baaad', e);
                     dispatch(hideModelUploadModal())
                 });
         })
