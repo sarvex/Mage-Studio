@@ -24,6 +24,9 @@ router.route('/:id/models')
     .post(ModelsController.uploadModel)
     .get(ModelsController.getAllModels);
 
+router.route('/:id/models/:modelid')
+    .get(ModelsController.getSingleModel)
+
 module.exports = {
     router: router,
     endpoint: '/api/projects'

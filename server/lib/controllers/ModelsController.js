@@ -8,6 +8,21 @@ class ModelsController {
 
     static getAllModels(req, res) {
         // get models from assets
+        const id = req.params.id;
+        const currentconfig = Config.getLocalConfig();
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (id !== currentconfig.project) {
+            return res
+                .status(messages.WRONG_PROJECT_NAME.code)
+                .json({ message: messages.WRONG_PROJECT_NAME.text });
+        }
+
         if (electron.isDesktop()) {
             AssetsHelper
                 .getModels()
@@ -15,18 +30,65 @@ class ModelsController {
                     if (models.length) {
                         return res
                             .status(200)
-                            .json({ data: models });
+                            .json(models);
                     } else {
                         return res
-                            .status(404)
-                            .json({ message: 'Models not found' });
+                            .status(messages.MODELS_NOT_FOUND.code)
+                            .json({ message: messages.MODELS_NOT_FOUND.text });
                     }
                 })
                 .catch(function(err) {
                     return res
-                        .status(404)
-                        .json({ message: 'Models not found' });
+                        .status(messages.MODELS_NOT_FOUND.code)
+                        .json({ message: messages.MODELS_NOT_FOUND.text });
                 });
+
+         } else {
+            return res
+                .status(200)
+                .json({ message: 'OK' });
+        }
+    }
+
+    static getSingleModel(req, res) {
+        const id = req.params.id;
+        const currentconfig = Config.getLocalConfig();
+        const modelid = req.params.modelid;
+
+        console.log(id, currentconfig, modelid);
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (!modelid) {
+            return res
+                .status(messages.MODEL_NAME_MISSING.code)
+                .json({ message: messages.MODEL_NAME_MISSING.text });
+        }
+
+        if (id !== currentconfig.project) {
+            return res
+                .status(messages.WRONG_PROJECT_NAME.code)
+                .json({ message: messages.WRONG_PROJECT_NAME.text });
+        }
+
+        if (electron.isDesktop()) {
+            AssetsHelper
+                .getModel(modelid)
+                .then(function(json) {
+                    return res
+                        .status(200)
+                        .json(json);
+                })
+                .catch(function() {
+                    return res
+                        .status(messages.MODEL_NOT_FOUND.code)
+                        .json({ message: messages.MODEL_NOT_FOUND.text });
+                })
+
 
          } else {
             return res
@@ -52,7 +114,7 @@ class ModelsController {
                 if (file.writeToFile()) {
                     return res
                         .status(messages.FILE_WRITE_SUCCESS.code)
-                        .json({ data: file.toJSON(true) })
+                        .json(file.toJSON(true))
                 } else {
                     return res
                         .status(messages.FILE_WRITE_FAILURE.code)

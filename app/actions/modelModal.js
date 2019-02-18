@@ -10,7 +10,7 @@ import {
     SCENE_MODEL_FETCH_COMPLETED,
     SCENE_MODEL_FETCH_FAILED
 } from './types';
-
+import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 import { PROJECTS_URL } from '../lib/constants';
 
@@ -28,7 +28,7 @@ export const sceneModelUploadStarted = () => ({
 
 export const sceneModelUploadCompleted = ({ data = {} }) => ({
     type: SCENE_MODEL_UPLOAD_COMPLETED,
-    data: data
+    data
 });
 
 export const sceneModelUploadFailed = () => ({
@@ -37,6 +37,10 @@ export const sceneModelUploadFailed = () => ({
 
 export const sceneModelFetchStarted = () => ({
     type: SCENE_MODEL_FETCH_STARTED
+});
+
+export const sceneSingleModelFetchCompleted = () => ({
+    type: SCENE_SINGLE_MODEL_FETCH_COMPLETED
 });
 
 export const sceneModelFetchCompleted = ({ data = [] }) => ({
@@ -54,16 +58,36 @@ export const getModels = (project) => (dispatch) => {
     const url = `${PROJECTS_URL}/${project}/models`;
 
     axios(url)
-        .then(({ data }) => {
-            if (!data) {
+        .then((response) => {
+            if (!response) {
                 dispatch(sceneModelFetchFailed());
             } else {
-                dispatch(sceneModelFetchCompleted(data));
+                dispatch(sceneModelFetchCompleted(response));
             }
         })
         .catch(() => {
             dispatch(sceneModelFetchFailed());
         });
+}
+
+export const loadSingleModel = (project, modelid) => (dispatch) => {
+    const url = `${PROJECTS_URL}/${project}/models/${modelid}`;
+
+    dispatch(sceneModelFetchStarted());
+
+    getOrCreateApp()
+        .then((app) => {
+            axios(url)
+                .then(({ data }) => {
+                    app.loadModel(data.content);
+                    dispatch(hideModelUploadModal())
+                })
+                .catch((e) => {
+                    console.log('baaad', e);
+                    dispatch(hideModelUploadModal())
+                });
+        })
+
 }
 
 export const uploadModel = (project, file) => (dispatch) => {
@@ -75,11 +99,11 @@ export const uploadModel = (project, file) => (dispatch) => {
 
     axios
         .post(url, formData)
-        .then(({ data }) => {
-            if (!data) {
+        .then((response) => {
+            if (!response) {
                 dispatch(scemeModelUploadFailed());
             } else {
-                dispatch(sceneModelUploadCompleted(data));
+                dispatch(sceneModelUploadCompleted(response));
             }
         })
         .catch(() => {

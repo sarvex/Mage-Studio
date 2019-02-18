@@ -22,15 +22,15 @@ export default function reducer(state = DEFAULT, action = {}) {
     switch(action.type) {
         case SCENE_MODEL_MODAL_SHOW:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 visible: true
             };
             break;
         case SCENE_MODEL_MODAL_HIDE:
             return {
+                ...DEFAULT,
                 ...state,
-                ...DEFAULT, 
                 visible: false
             };
             break;
@@ -69,7 +69,8 @@ export default function reducer(state = DEFAULT, action = {}) {
                 list: action.list,
                 visible: true,
                 completed: true
-            }
+            };
+            break;
         default:
             return state;
             break;

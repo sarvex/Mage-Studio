@@ -3,14 +3,16 @@ import File from './File';
 
 import './modalcontent.scss';
 
-const ModelsSelector = ({ list = [], uploaded }) => {
+const ModelsSelector = ({ list = [], uploaded, onSelect }) => {
 
     const models = uploaded ? list.concat(uploaded) : list;
 
     const mapModels = () => {
         return models.map(m => (
             <li>
-                <File name={m.name}/>
+                <File
+                    onClick={onSelect(m.name)}
+                    name={m.name}/>
             </li>
         ));
     }

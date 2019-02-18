@@ -67,6 +67,13 @@ export default class FirstScene extends App {
         return cylinder;
     }
 
+    loadModel = (model) => {
+        console.log(model);
+        const parsed = ModelsEngine.parseModel(model);
+        parsed.scale({x: 5, y: 5, z: 5 });
+        parsed.position({x: 0, y: 0, z: 0})
+    }
+
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {
         const mesh = Universe.get(uuid);
 

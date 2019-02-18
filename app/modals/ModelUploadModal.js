@@ -5,7 +5,8 @@ import { Modal, Input, Button } from 'antd';
 import {
     uploadModel,
     getModels,
-    hideModelUploadModal
+    hideModelUploadModal,
+    loadSingleModel
 } from '../actions/modelModal';
 
 import Footer from './footer';
@@ -48,11 +49,16 @@ class ModelUploadModal extends React.Component {
 
     handleConfirm = () => {}
 
-    handleOnSelect = () => {}
+    handleOnSelect = (name) => () => {
+        const { loadSingleModel, config } = this.props;
+        const { project } = config;
+
+        loadSingleModel(project, name);
+    }
 
     handleBeforeUpload = (file) => {
         const { uploadModel, config } = this.props;
-        const { project } = config;
+
 
         uploadModel(project, file);
 
@@ -116,7 +122,8 @@ const mapStateToProps = (state = {}) => {
 const mapDispatchToProps = (dispatch) => ({
     getModels: (project) => dispatch(getModels(project)),
     uploadModel: (project, payload) => dispatch(uploadModel(project, payload)),
-    hideModelUploadModal: () => dispatch(hideModelUploadModal())
+    hideModelUploadModal: () => dispatch(hideModelUploadModal()),
+    loadSingleModel: (project, name) => dispatch(loadSingleModel(project, name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModelUploadModal);

@@ -45,6 +45,18 @@ class AssetsHelper {
         });
     }
 
+    static getModel(name) {
+        const file = FileHelper.fileFromPath(name, FileHelper.MODEL_TYPE());
+
+        const content = file.toJSON();
+
+        if (content) {
+            return Promise.resolve(content);
+        }
+
+        return Promise.reject();
+    }
+
     static getImages() {
 
     }
