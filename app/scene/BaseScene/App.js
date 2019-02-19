@@ -34,7 +34,7 @@ export default class FirstScene extends App {
         callback();
     }
 
-    sampleCube() {
+    addCube() {
         const cube = this.sceneHelper.addCube(20, 0x00ff00, { wireframe: true });
         cube.position({
             x: (Math.random() * 200) - 100,
@@ -45,7 +45,7 @@ export default class FirstScene extends App {
         return cube;
     }
 
-    sampleSphere() {
+    addSphere() {
         const sphere = this.sceneHelper.addSphere(20, 0xffff00, { wireframe: true });
         sphere.position({
             x: (Math.random() * 200) - 100,
@@ -56,7 +56,7 @@ export default class FirstScene extends App {
         return sphere;
     }
 
-    sampleCylinder() {
+    addCylinder() {
         const cylinder = this.sceneHelper.addCylinder(10, 10, 30, 0x0fff00, { wireframe: true });
         cylinder.position({
             x: (Math.random() * 200) - 100,
@@ -65,6 +65,12 @@ export default class FirstScene extends App {
         });
 
         return cylinder;
+    }
+
+    loadModel = (model) => {
+        const parsed = ModelsEngine.parseModel(model);
+        parsed.scale({x: 5, y: 5, z: 5 });
+        parsed.position({x: 0, y: 0, z: 0})
     }
 
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {
@@ -227,10 +233,6 @@ export default class FirstScene extends App {
         ScriptManager.create('cube', script);
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
-
-        const cubes = new Array(5).fill().map(this.sampleCube.bind(this));
-        const spheres = new Array(5).fill().map(this.sampleSphere.bind(this));
-        const cylinders = new Array(5).fill().map(this.sampleCylinder.bind(this));
 
         this.setTranformControls();
         this.enableInput();

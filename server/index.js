@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fileupload = require('express-fileupload');
 const next = require('next');
 const scenes = require('./routes/scenes');
 const projects = require('./routes/projects');
 const config = require('./routes/config');
-const electron = require('./electron');
+const electron = require('./lib/electron');
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -15,6 +16,9 @@ const handle = app.getRequestHandler();
 
 // setting body parser middleware
 server.use(bodyParser.json());
+server.use(fileupload({
+    limits: { fileSize: 50 * 1024 * 1024 }
+}));
 server.use(bodyParser.urlencoded({ extended: true }));
 
 const onListenComplete = function() {

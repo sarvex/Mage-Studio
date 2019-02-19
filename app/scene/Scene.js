@@ -1,6 +1,7 @@
 import React from 'react';
 import debounce from '../lib/debounce';
 import './scene.scss';
+import { getOrCreateApp } from './AppProxy';
 
 export class Scene extends React.Component {
 
@@ -11,12 +12,9 @@ export class Scene extends React.Component {
     }
 
     async componentDidMount() {
-        const { Router } = await import('mage-engine');
-        const appConfig = await import('./config');
-
         const { store, onMeshChanged, onMeshAttached, onMeshDetached, onSceneExported, config } = this.props;
 
-        this.app = Router.start(appConfig.default, '#gameContainer');
+        this.app = await getOrCreateApp();
 
         this.app.setStore(store);
 

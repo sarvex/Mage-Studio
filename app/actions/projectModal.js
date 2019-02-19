@@ -9,6 +9,14 @@ import axios from 'axios';
 
 const MODAL_DISMISSED_TIMEOUT = 1500;
 
+export const newProjectShow = () => ({
+    type: NEW_PROJECT_SHOW
+});
+
+export const newProjectHide = () => ({
+    type: NEW_PROJECT_HIDE
+});
+
 export const newProjectSaving = () => ({
     type: NEW_PROJECT_SAVING
 });

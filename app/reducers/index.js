@@ -5,6 +5,7 @@ import fog from './fog';
 import snap from './snap';
 import rightsidebar from './rightsidebar';
 import projectModal from './projectModal';
+import modelModal from './modelModal';
 import scene from './scene';
 import config from './config';
 import project from './project';
@@ -16,6 +17,7 @@ export default combineReducers({
     snap,
     rightsidebar,
     projectModal,
+    modelModal,
     scene,
     project,
     config
