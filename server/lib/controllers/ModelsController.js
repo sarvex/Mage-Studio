@@ -55,8 +55,6 @@ class ModelsController {
         const currentconfig = Config.getLocalConfig();
         const modelid = req.params.modelid;
 
-        console.log(id, currentconfig, modelid);
-
         if (!id) {
             return res
                 .status(messages.PROJECT_NAME_MISSING.code)
