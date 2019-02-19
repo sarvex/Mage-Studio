@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ProjectController = require('../lib/controllers/ProjectController');
 const ModelsController = require('../lib/controllers/ModelsController');
+const ScriptsController = require('../lib/controllers/ScriptsController');
 
 router.route('/')
     .get(ProjectController.getAllProjects)
@@ -26,6 +27,10 @@ router.route('/:id/models')
 
 router.route('/:id/models/:modelid')
     .get(ModelsController.getSingleModel)
+
+router.route('/:id/scripts')
+    .post(ScriptsController.createScript)
+    .get(ScriptsController.getAllScripts);
 
 module.exports = {
     router: router,
