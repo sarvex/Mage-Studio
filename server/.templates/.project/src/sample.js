@@ -1,12 +1,15 @@
-export const script = {
+class Sample extends Script {
 
-   start: function() {
-       this.angle = 0;
-   },
+    constructor() {
+        super('sample');
+    }
 
-   update: function() {
-       this.angle += 0.01;
-       this.setRotation({ y: this.angle });
-   }
-   
-};
+    start() {
+        this.angle = 0;
+    }
+
+    update(dt) {
+        this.angle += 0.01;
+        this.setRotation({ y: this.angle });
+    }
+}
