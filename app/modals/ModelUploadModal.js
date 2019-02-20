@@ -26,10 +26,12 @@ class ModelUploadModal extends React.Component {
     }
 
     componentDidMount() {
-        const { getModels = f => f, config } = this.props;
+        const { getModels = f => f, config, visible } = this.props;
         const { project } = config;
 
-        getModels(project);
+        if (visible) {
+            getModels(project);
+        }
     }
 
     getFooter = (loading) => (

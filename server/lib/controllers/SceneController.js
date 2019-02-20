@@ -20,7 +20,7 @@ class SceneController {
 
         } else {
             if (electron.isDesktop()) {
-                if (scene.exists(name)) {
+                if (SceneHelper.exists(name)) {
                     // check id scene data is available
                     const data = req.body.scene;
 
@@ -32,7 +32,7 @@ class SceneController {
 
                     } else {
                         // try to copy data to scene json inside workspace/project/src/scene
-                        const status = scene.updateSceneData(name, data);
+                        const status = SceneHelper.updateSceneData(name, data);
 
                         if (status) {
                             // if success, then return ok

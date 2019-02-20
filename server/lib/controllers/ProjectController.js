@@ -56,6 +56,8 @@ class ProjectController {
             } else {
                 const destination = Config.getProjectPath(projectName);
 
+                console.log('creating in destination: ', destination);
+
                 Promise.all([
                     ProjectHelper.create(destination),
                     SceneHelper.create(destination, sceneName)

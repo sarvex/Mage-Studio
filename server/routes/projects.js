@@ -16,7 +16,6 @@ router.use('/:id', (req, res, next) => {
     next();
 });
 
-
 router.route('/:id')
     .get(ProjectController.getProject)
     .delete(ProjectController.deleteProject);
@@ -31,6 +30,9 @@ router.route('/:id/models/:modelid')
 router.route('/:id/scripts')
     .post(ScriptsController.createScript)
     .get(ScriptsController.getAllScripts);
+
+router.route('/:id/scripts/:scriptid')
+    .get(ScriptsController.getScript)
 
 module.exports = {
     router: router,

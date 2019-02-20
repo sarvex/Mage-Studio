@@ -4,7 +4,7 @@ const fs = require('fs');
 const Config = require('../config');
 
 const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
-const SRC_PATH = 'src';
+const SCENES_PATH = 'scenes';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 
 class SceneHelper {
@@ -12,7 +12,7 @@ class SceneHelper {
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
             const source = path.resolve(SCENE_TEMPLATE_PATH);
-            const final_destination = path.join(destination, SRC_PATH);
+            const final_destination = path.join(destination, SCENES_PATH);
 
             ncp(source, final_destination, function(err) {
                 if (err) {
@@ -38,10 +38,7 @@ class SceneHelper {
         const filename = 'scene.json';
 
         const sceneJsonPath = path.join(
-            configuration.workspace,
-            configuration.project,
-            SRC_PATH,
-            sceneName,
+            Config.getScenePath(sceneName),
             filename
         );
 
@@ -67,15 +64,7 @@ class SceneHelper {
 
     static exists(sceneName) {
         // check if a folder called sceneName exists inside projectName
-        const configuration = Config.getLocalConfig();
-        const folderPath = path.join(
-            configuration.workspace,
-            configuration.project,
-            SRC_PATH,
-            sceneName
-        );
-
-        return fs.existsSync(folderPath);
+        return fs.existsSync(Config.getScenePath(sceneName));
     }
 }
 
