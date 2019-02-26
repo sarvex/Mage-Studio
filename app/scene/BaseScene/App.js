@@ -73,6 +73,13 @@ export default class FirstScene extends App {
         parsed.position({x: 0, y: 0, z: 0})
     }
 
+    loadScript = (scriptContent) => {
+        console.log('loading script');
+        const script = ScriptManager.createFromString(scriptContent);
+        console.log(script);
+        this.currentMesh.addScript(script.name());
+    }
+
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {
         const mesh = Universe.get(uuid);
 

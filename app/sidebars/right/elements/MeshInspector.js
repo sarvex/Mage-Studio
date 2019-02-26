@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import BaseMeshProperties from './mesh/BaseMeshProperties';
 import Material from './mesh/Material';
 import Script from './mesh/Script';
@@ -18,8 +18,13 @@ class MeshInspector extends React.Component {
             uuid,
             onPositionChange,
             onRotationChange,
-            onScaleChange
+            onScaleChange,
+            onScriptsMount,
+            onScriptChange,
+            scripts = {}
         } = this.props;
+
+        const { list } = scripts;
 
         return (
             <div>
@@ -32,7 +37,10 @@ class MeshInspector extends React.Component {
                     rotation={rotation}
                     scale={scale} />
                 <Material />
-                <Script />
+                <Script
+                    list={list}
+                    onScriptsMount={onScriptsMount}
+                    onScriptChange={onScriptChange}/>
             </div>
         );
     }

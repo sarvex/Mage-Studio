@@ -10,6 +10,6 @@ class Sample extends Script {
 
     update(dt) {
         this.angle += 0.01;
-        this.setRotation({ y: this.angle });
+        this.rotation({ y: this.angle });
     }
 }

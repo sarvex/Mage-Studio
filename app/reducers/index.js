@@ -9,6 +9,7 @@ import modelModal from './modelModal';
 import scene from './scene';
 import config from './config';
 import project from './project';
+import scripts from './scripts';
 
 export default combineReducers({
     fog,
@@ -20,5 +21,6 @@ export default combineReducers({
     modelModal,
     scene,
     project,
+    scripts,
     config
 });
