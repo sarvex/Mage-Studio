@@ -56,7 +56,6 @@ export const getSingleScript = (project, scriptid) => (dispatch) => {
         .then((app) => {
             axios(url)
                 .then(({ data }) => {
-                    // do something with the script that we received
                     dispatch(singleScriptFetchCompleted(data));
                     app.loadScript(data.content);
                 })

@@ -50,6 +50,26 @@ class SceneHelper {
         }
     }
 
+    static readSceneData(sceneName) {
+        if (SceneHelper.exists(sceneName)) {
+            const sceneJsonPath = path.join(
+                Config.getScenePath(sceneName),
+                'scene.json'
+            );
+
+            try {
+                const stringContent = fs.readFileSync(sceneJsonPath).toString('utf8');
+
+                return JSON.parse(stringContent);
+            } catch(e) {
+                console.log(e);
+                return {};
+            }
+        } else {
+            return {};
+        }
+    }
+
     static configTemplate() {
         // return string template for scene config
     }

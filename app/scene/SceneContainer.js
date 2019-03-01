@@ -10,7 +10,8 @@ import {
 } from '../actions/currentMesh';
 
 import {
-    saveScene
+    saveScene,
+    loadScene
 } from '../actions/scene';
 
 import debounce from '../lib/debounce';
@@ -33,6 +34,7 @@ class SceneContainer extends React.Component {
                 <Scene
                     config={this.props.config}
                     store={this.props.store}
+                    onSceneLoad={this.props.loadScene}
                     onMeshChanged={this.props.onMeshChanged}
                     onMeshAttached={this.props.onMeshAttached}
                     onMeshDetached={this.props.onMeshDetached}
@@ -65,7 +67,9 @@ const mapDispatchToProps = (dispatch) => ({
 
     onMeshDetached: () => dispatch(meshDetached()),
 
-    onSceneExported: (name) => ({ data }) => dispatch(saveScene(name, data))
+    onSceneExported: (name) => ({ data }) => dispatch(saveScene(name, data)),
+
+    loadScene: (name) => dispatch(loadScene(name))
 });
 
 export default connect(state => state, mapDispatchToProps)(SceneContainer);

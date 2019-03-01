@@ -6,5 +6,5 @@ views/*.html
 *.nw
 app/bower_components
 .next/*
-
+.idea
 .config.yml

@@ -11,9 +11,3 @@ export async function getOrCreateApp() {
 
     return app;
 }
-
-export const doSomething = () => {
-    if (app) {
-        app.doSomething()
-    }
-}

@@ -10,7 +10,7 @@ class AssetsHelper {
     static getAssets(type) {
         switch(type) {
             case FileHelper.MODEL_TYPE():
-                return AssetsHelper.getModels()
+                return AssetsHelper.getModels();
                 break;
             case FileHelper.IMAGE_TYPE():
                 return AssetsHelper.getImages();
