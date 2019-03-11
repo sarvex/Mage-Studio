@@ -56,6 +56,8 @@ class ProjectController {
             } else {
                 const destination = Config.getProjectPath(projectName);
 
+                console.log('creating in destination: ', destination);
+
                 Promise.all([
                     ProjectHelper.create(destination),
                     SceneHelper.create(destination, sceneName)
@@ -66,6 +68,7 @@ class ProjectController {
                             .json({ message: messages.PROJECT_CREATED.text });
                     })
                     .catch(function(err) {
+                        console.log(err);
                         return res
                             .status(messages.PROJECT_NOT_CREATED.code)
                             .json({ message: messages.PROJECT_NOT_CREATED.text });

@@ -60,3 +60,12 @@ export const saveScene = (name, scene) => (dispatch) => {
             dispatch(sceneSaveFailure());
         });
 };
+
+export const loadScene = (name) => (dispatch) => {
+    const url = `${SCENES_URL}/${name}`;
+
+    getOrCreateApp()
+        .then(app => {
+            axios(url).then(({ data }) => app.parseScene(data))
+        })
+}

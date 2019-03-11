@@ -18,7 +18,10 @@ class Inspector extends React.Component {
             scale,
             onPositionChange,
             onRotationChange,
-            onScaleChange
+            onScriptsMount,
+            onScriptChange,
+            onScaleChange,
+            scripts
         } = this.props;
 
         if (element && type === 'mesh') {
@@ -27,7 +30,10 @@ class Inspector extends React.Component {
                     onPositionChange={onPositionChange}
                     onRotationChange={onRotationChange}
                     onScaleChange={onScaleChange}
+                    onScriptsMount={onScriptsMount}
+                    onScriptChange={onScriptChange}
                     uuid={element}
+                    scripts={scripts}
                     position={position}
                     rotation={rotation}
                     scale={scale}

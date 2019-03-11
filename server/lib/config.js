@@ -4,7 +4,8 @@ const yaml = require('js-yaml');
 
 const CONFIG_FILE_NAME = '.config.yml';
 const ASSETS = 'assets';
-const SRC = 'src';
+const SCENES = 'src';
+const SCRIPTS = 'scripts';
 
 class Config {
 
@@ -55,15 +56,18 @@ class Config {
         return path.join(local.workspace, projectName);
     }
 
-
     static getAssetsPath() {
         return path.join(Config.getProjectPath(), ASSETS);
+    }
+
+    static getScriptsPath() {
+        return path.join(Config.getAssetsPath(), SCRIPTS);
     }
 
     static getScenePath(sceneName) {
         return path.join(
             Config.getProjectPath(),
-            SRC,
+            SCENES,
             sceneName
         )
     }

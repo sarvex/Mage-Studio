@@ -4,18 +4,20 @@ const fs = require('fs');
 const Config = require('../config');
 
 const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
-const SRC_PATH = 'src';
+const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 
 class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
+            console.log('copying template into ', destination);
             const source = path.resolve(SCENE_TEMPLATE_PATH);
-            const final_destination = path.join(destination, SRC_PATH);
+            const final_destination = path.join(destination, SCENES_PATH);
 
             ncp(source, final_destination, function(err) {
                 if (err) {
+                    console.log(err);
                     throw err;
                 } else {
                     SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);
@@ -38,10 +40,7 @@ class SceneHelper {
         const filename = 'scene.json';
 
         const sceneJsonPath = path.join(
-            configuration.workspace,
-            configuration.project,
-            SRC_PATH,
-            sceneName,
+            Config.getScenePath(sceneName),
             filename
         );
 
@@ -50,6 +49,26 @@ class SceneHelper {
             return true;
         } catch(e) {
             return false;
+        }
+    }
+
+    static readSceneData(sceneName) {
+        if (SceneHelper.exists(sceneName)) {
+            const sceneJsonPath = path.join(
+                Config.getScenePath(sceneName),
+                'scene.json'
+            );
+
+            try {
+                const stringContent = fs.readFileSync(sceneJsonPath).toString('utf8');
+
+                return JSON.parse(stringContent);
+            } catch(e) {
+                console.log(e);
+                return {};
+            }
+        } else {
+            return {};
         }
     }
 
@@ -67,15 +86,7 @@ class SceneHelper {
 
     static exists(sceneName) {
         // check if a folder called sceneName exists inside projectName
-        const configuration = Config.getLocalConfig();
-        const folderPath = path.join(
-            configuration.workspace,
-            configuration.project,
-            SRC_PATH,
-            sceneName
-        );
-
-        return fs.existsSync(folderPath);
+        return fs.existsSync(Config.getScenePath(sceneName));
     }
 }
 

@@ -10,7 +10,7 @@ import {
 const DEFAULT = {
     loading: false,
     error: false,
-    visible: false
+    visible: undefined
 };
 
 export default function reducer(state = DEFAULT, action = {}) {

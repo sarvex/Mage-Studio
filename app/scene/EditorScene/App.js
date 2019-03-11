@@ -17,16 +17,16 @@ import {
 } from 'mage-engine';
 
 import {
-    isEqual
-} from 'lodash';
-
-import {
     observeStore
 } from './reduxStore';
 
 import { script } from './cube';
 
-export default class FirstScene extends App {
+export class EditorScene extends App {
+
+    constructor(...props) {
+        super(...props);
+    }
 
     loadScene = () => Promise.resolve()
 
@@ -71,6 +71,11 @@ export default class FirstScene extends App {
         const parsed = ModelsEngine.parseModel(model);
         parsed.scale({x: 5, y: 5, z: 5 });
         parsed.position({x: 0, y: 0, z: 0})
+    }
+
+    loadScript = (scriptContent) => {
+        const script = ScriptManager.createFromString(scriptContent);
+        this.currentMesh.addScript(script.name());
     }
 
     updateCurrentMesh = (uuid = '', position, rotation, scale) => {

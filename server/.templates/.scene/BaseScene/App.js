@@ -1,26 +1,4 @@
-import {
-    App,
-    ModelsEngine,
-    ShadersEngine,
-    SceneManager,
-    ScriptManager,
-    ControlsManager,
-    ImagesEngine,
-    AmbientLight,
-    DirectionalLight,
-    THREE,
-    Mesh,
-    PostProcessingEngine,
-    BackgroundSound,
-    AudioEngine,
-    Universe
-} from 'mage-engine';
-
-import {
-    dispatch
-} from 'redux';
-
-import { script } from './cube';
+import { App } from 'mage-engine';
 
 export default class FirstScene extends App {
 

@@ -15,6 +15,8 @@ const SCENE_DATA_MISSING = { code: 400, text: 'Scene data is missing.' };
 const SCENE_JSON_NOT_CREATED = { code: 204, text: 'Something went wrong when creating the scene.json' };
 const SCENE_JSON_CREATED = { code: 201, text: ''};
 
+const SCENE_JSON_READ = { code: 200 };
+
 const FILE_WRITE_SUCCESS = { code: 201 };
 const FILE_MISSING = { code: 400, text: 'File is missing.'};
 const FILE_WRITE_FAILURE = { code: 204, text: 'Could not write file'};
@@ -22,6 +24,9 @@ const FILE_WRITE_FAILURE = { code: 204, text: 'Could not write file'};
 const MODELS_NOT_FOUND = { code: 404, text: 'Models not found' };
 const MODEL_NOT_FOUND = { code: 404, text: 'Model not found' };
 const MODEL_NAME_MISSING = { code: 400, text: 'Model name is missing' };
+
+const SCRIPTS_NOT_FOUND = { code: 404, text: 'Script not found' };
+const SCRIPT_NAME_MISSING = { code: 400, text: 'Script name is missing' };
 
 module.exports = {
     PROJECT_NAME_MISSING: PROJECT_NAME_MISSING,
@@ -40,5 +45,8 @@ module.exports = {
     WRONG_PROJECT_NAME: WRONG_PROJECT_NAME,
     MODELS_NOT_FOUND: MODELS_NOT_FOUND,
     MODEL_NOT_FOUND: MODEL_NOT_FOUND,
-    MODEL_NAME_MISSING: MODEL_NAME_MISSING
+    MODEL_NAME_MISSING: MODEL_NAME_MISSING,
+    SCRIPTS_NOT_FOUND: SCRIPTS_NOT_FOUND,
+    SCRIPT_NAME_MISSING: SCRIPT_NAME_MISSING,
+    SCENE_JSON_READ: SCENE_JSON_READ
 };

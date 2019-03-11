@@ -16,10 +16,29 @@ import {
     meshChanged
 } from '../../actions/currentMesh';
 
+import {
+    getScripts,
+    getSingleScript
+} from '../../actions/scripts';
+
 class RightSidebar extends React.Component {
 
     constructor(props) {
         super(props);
+    }
+
+    handleScriptMount = () => {
+        const { getScripts, config } = this.props;
+        const { project } = config;
+
+        getScripts(project);
+    }
+
+    handleScriptChange = (name) => {
+        const { getSingleScript, config } = this.props;
+        const { project } = config;
+
+        getSingleScript(project, name);
     }
 
     onPositionChange = (axis) => (value) => {
@@ -53,7 +72,15 @@ class RightSidebar extends React.Component {
     }
 
     render() {
-        const { empty, element, position, rotation, scale, type } = this.props;
+        const {
+            empty,
+            element,
+            position,
+            rotation,
+            scale,
+            type,
+            scripts
+        } = this.props;
 
         return (
             <Col
@@ -83,6 +110,9 @@ class RightSidebar extends React.Component {
                             onPositionChange={this.onPositionChange}
                             onRotationChange={this.onRotationChange}
                             onScaleChange={this.onScaleChange}
+                            onScriptsMount={this.handleScriptMount}
+                            onScriptChange={this.handleScriptChange}
+                            scripts={scripts}
                             empty={empty}
                             type={type}
                             element={element}
@@ -99,7 +129,7 @@ class RightSidebar extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    const { rightsidebar } = state;
+    const { rightsidebar, scripts = {}, config } = state;
     const { empty = true, element = '', type = '', position = {}, rotation = {}, scale= {} } = rightsidebar;
 
     return {
@@ -108,14 +138,19 @@ const mapStateToProps = (state) => {
         type,
         position,
         rotation,
-        scale
+        scale,
+        config,
+        scripts
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     onPositionChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
-    onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale))
+    onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
+
+    getScripts: (project) => dispatch(getScripts(project)),
+    getSingleScript: (project, name) => dispatch(getSingleScript(project, name))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightSidebar);

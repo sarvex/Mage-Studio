@@ -12,9 +12,11 @@ export class Scene extends React.Component {
     }
 
     async componentDidMount() {
-        const { store, onMeshChanged, onMeshAttached, onMeshDetached, onSceneExported, config } = this.props;
-
+        const { store, onMeshChanged, onMeshAttached, onMeshDetached, onSceneExported, config, onSceneLoad } = this.props;
+        const { scene } = config;
         this.app = await getOrCreateApp();
+
+        onSceneLoad(scene);
 
         this.app.setStore(store);
 
