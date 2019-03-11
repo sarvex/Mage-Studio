@@ -42,8 +42,7 @@ class ScriptsController {
                         .status(messages.SCRIPTS_NOT_FOUND.code)
                         .json({ message: messages.SCRIPTS_NOT_FOUND.text });
                 });
-
-         } else {
+        } else {
             return res
                 .status(200)
                 .json({ message: 'OK' });

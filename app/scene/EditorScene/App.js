@@ -17,16 +17,16 @@ import {
 } from 'mage-engine';
 
 import {
-    isEqual
-} from 'lodash';
-
-import {
     observeStore
 } from './reduxStore';
 
 import { script } from './cube';
 
-export default class FirstScene extends App {
+export class EditorScene extends App {
+
+    constructor(...props) {
+        super(...props);
+    }
 
     loadScene = () => Promise.resolve()
 
@@ -74,9 +74,7 @@ export default class FirstScene extends App {
     }
 
     loadScript = (scriptContent) => {
-        console.log('loading script');
         const script = ScriptManager.createFromString(scriptContent);
-        console.log(script);
         this.currentMesh.addScript(script.name());
     }
 

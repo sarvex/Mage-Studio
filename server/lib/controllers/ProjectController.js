@@ -68,6 +68,7 @@ class ProjectController {
                             .json({ message: messages.PROJECT_CREATED.text });
                     })
                     .catch(function(err) {
+                        console.log(err);
                         return res
                             .status(messages.PROJECT_NOT_CREATED.code)
                             .json({ message: messages.PROJECT_NOT_CREATED.text });

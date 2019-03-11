@@ -4,18 +4,20 @@ const fs = require('fs');
 const Config = require('../config');
 
 const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
-const SCENES_PATH = 'scenes';
+const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 
 class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
+            console.log('copying template into ', destination);
             const source = path.resolve(SCENE_TEMPLATE_PATH);
             const final_destination = path.join(destination, SCENES_PATH);
 
             ncp(source, final_destination, function(err) {
                 if (err) {
+                    console.log(err);
                     throw err;
                 } else {
                     SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);

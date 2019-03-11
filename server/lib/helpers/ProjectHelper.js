@@ -1,5 +1,6 @@
 const ncp = require('ncp').ncp;
 const path = require('path');
+const npm = require('npm');
 
 const PROJECT_TEMPLATE_PATH = 'server/.templates/.project';
 
@@ -18,6 +19,11 @@ class ProjectHelper {
                 }
             });
         });
+    }
+
+    static installDependencies(project) {
+        // get npm and install dependencies inside project
+        console.log(npm.commands.install);
     }
 
     static configTemplate() {
