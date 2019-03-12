@@ -34,6 +34,8 @@ class ProjectController {
         const projectName = req.body.project;
         const sceneName = req.body.scene;
 
+        console.log('creating project', projectName, 'and scene', sceneName);
+
         if (!sceneName || typeof sceneName !== 'string') {
             return res
                 .status(messages.SCENE_NAME_MISSING.code)
@@ -58,10 +60,9 @@ class ProjectController {
 
                 console.log('creating in destination: ', destination);
 
-                Promise.all([
-                    ProjectHelper.create(destination),
-                    SceneHelper.create(destination, sceneName)
-                ])
+                ProjectHelper.create(destination)
+                    .then(() => SceneHelper.create(destination, sceneName))
+                    //.then(() => ProjectHelper.installDependencies(projectName))
                     .then(function() {
                         return res
                             .status(messages.PROJECT_CREATED.code)

@@ -18,10 +18,11 @@ class SceneHelper {
             ncp(source, final_destination, function(err) {
                 if (err) {
                     console.log(err);
-                    throw err;
+                    reject(err);
                 } else {
+                    console.log('done creating scene, about to rename');
                     SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);
-                    return resolve();
+                    resolve();
                 }
             });
         });
@@ -31,12 +32,13 @@ class SceneHelper {
         const oldPath = path.join(location, oldName);
         const newPath = path.join(location, newName);
 
+        console.log('renamig scene', oldPath, newPath);
+
         fs.renameSync(oldPath, newPath);
     }
 
     static updateSceneData(sceneName, data) {
         // copy scene.json inside the folder
-        const configuration = Config.getLocalConfig();
         const filename = 'scene.json';
 
         const sceneJsonPath = path.join(

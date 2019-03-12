@@ -8,7 +8,7 @@ import SearchButton from '../../../common/SearchButton';
 import Folder from './elements/Folder';
 
 const folders = [
-    'marco',
+    'static',
     'test',
     'folder',
     'table'

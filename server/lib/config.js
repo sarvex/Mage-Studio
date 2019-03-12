@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const CONFIG_FILE_NAME = '.config.yml';
+const CONFIG_FILE_NAME = './.config.yml';
 const ASSETS = 'assets';
 const SCENES = 'src';
 const SCRIPTS = 'scripts';
@@ -19,7 +19,9 @@ class Config {
 
     static getLocalConfig() {
         try {
-            const file = fs.readFileSync(path.resolve(CONFIG_FILE_NAME), 'utf8');
+            const configPath = path.resolve(CONFIG_FILE_NAME);
+            console.log('configPath', configPath);
+            const file = fs.readFileSync(configPath, 'utf8');
             const content = yaml.safeLoad(file);
 
             return content;
@@ -51,7 +53,8 @@ class Config {
 
     static getProjectPath(project) {
         const local = Config.getLocalConfig();
-        const projectName = project || local.project;
+        console.log('returning prohectpath', local.workspace, project);
+        const projectName = project || local.project || '';
 
         return path.join(local.workspace, projectName);
     }
