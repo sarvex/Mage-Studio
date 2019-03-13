@@ -24,7 +24,6 @@ class Model extends File {
                 content: stringContent
             }
         } catch (e) {
-            console.log(e);
             return {};
         }
     }

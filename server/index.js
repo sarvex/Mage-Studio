@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const fileupload = require('express-fileupload');
 const next = require('next');
@@ -16,6 +17,7 @@ const handle = app.getRequestHandler();
 
 // setting body parser middleware
 server.use(bodyParser.json());
+server.use(morgan('dev'));
 server.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }));

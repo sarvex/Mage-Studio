@@ -16,7 +16,10 @@ export class Scene extends React.Component {
         const { scene } = config;
         this.app = await getOrCreateApp();
 
-        onSceneLoad(scene);
+        if (scene) {
+            onSceneLoad(scene);
+        }
+
 
         this.app.setStore(store);
 

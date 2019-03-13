@@ -1,6 +1,7 @@
 const ncp = require('ncp').ncp;
 const path = require('path');
 const npm = require('npm');
+const Config = require('../config');
 
 const PROJECT_TEMPLATE_PATH = 'server/.templates/.project';
 
@@ -12,10 +13,9 @@ class ProjectHelper {
 
             ncp(source, destination, function(err) {
                 if (err) {
-                    console.log('cannot create project', err);
-                    throw err;
+                    reject(err);
                 } else {
-                    return resolve();
+                    resolve();
                 }
             });
         });
@@ -23,7 +23,21 @@ class ProjectHelper {
 
     static installDependencies(project) {
         // get npm and install dependencies inside project
-        console.log(npm.commands.install);
+        return new Promise((resolve, reject) => {
+            const path = Config.getProjectPath(project);
+
+            npm.load({}, function (err) {
+                npm
+                    .commands
+                    .install(path, [], function(er, data) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(data);
+                        }
+                });
+            });
+        });
     }
 
     static configTemplate() {

@@ -56,19 +56,17 @@ class ProjectController {
             } else {
                 const destination = Config.getProjectPath(projectName);
 
-                console.log('creating in destination: ', destination);
+                req.setTimeout(60 * 4 * 1000);
 
-                Promise.all([
-                    ProjectHelper.create(destination),
-                    SceneHelper.create(destination, sceneName)
-                ])
+                ProjectHelper.create(destination)
+                    .then(() => SceneHelper.create(destination, sceneName))
+                    .then(() => ProjectHelper.installDependencies(projectName))
                     .then(function() {
                         return res
                             .status(messages.PROJECT_CREATED.code)
                             .json({ message: messages.PROJECT_CREATED.text });
                     })
-                    .catch(function(err) {
-                        console.log(err);
+                    .catch(function() {
                         return res
                             .status(messages.PROJECT_NOT_CREATED.code)
                             .json({ message: messages.PROJECT_NOT_CREATED.text });

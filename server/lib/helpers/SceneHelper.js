@@ -11,17 +11,15 @@ class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
-            console.log('copying template into ', destination);
             const source = path.resolve(SCENE_TEMPLATE_PATH);
             const final_destination = path.join(destination, SCENES_PATH);
 
             ncp(source, final_destination, function(err) {
                 if (err) {
-                    console.log(err);
-                    throw err;
+                    reject(err);
                 } else {
                     SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);
-                    return resolve();
+                    resolve();
                 }
             });
         });
@@ -36,7 +34,6 @@ class SceneHelper {
 
     static updateSceneData(sceneName, data) {
         // copy scene.json inside the folder
-        const configuration = Config.getLocalConfig();
         const filename = 'scene.json';
 
         const sceneJsonPath = path.join(
@@ -64,7 +61,6 @@ class SceneHelper {
 
                 return JSON.parse(stringContent);
             } catch(e) {
-                console.log(e);
                 return {};
             }
         } else {
