@@ -11,14 +11,10 @@ class ProjectHelper {
         return new Promise(function(resolve, reject) {
             const source = path.resolve(PROJECT_TEMPLATE_PATH);
 
-            console.log('about to create prohect');
-
             ncp(source, destination, function(err) {
                 if (err) {
-                    console.log('cannot create project', err);
                     reject(err);
                 } else {
-                    console.log('done creating projet');
                     resolve();
                 }
             });
@@ -30,8 +26,6 @@ class ProjectHelper {
         return new Promise((resolve, reject) => {
             const path = Config.getProjectPath(project);
 
-            console.log('about to install deps');
-
             npm.load({}, function (err) {
                 npm
                     .commands
@@ -39,7 +33,7 @@ class ProjectHelper {
                         if (err) {
                             reject(err);
                         } else {
-                            resolve(err, data);
+                            resolve(data);
                         }
                 });
             });

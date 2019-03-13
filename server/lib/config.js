@@ -20,7 +20,6 @@ class Config {
     static getLocalConfig() {
         try {
             const configPath = path.resolve(CONFIG_FILE_NAME);
-            console.log('configPath', configPath);
             const file = fs.readFileSync(configPath, 'utf8');
             const content = yaml.safeLoad(file);
 
@@ -53,7 +52,6 @@ class Config {
 
     static getProjectPath(project) {
         const local = Config.getLocalConfig();
-        console.log('returning prohectpath', local.workspace, project);
         const projectName = project || local.project || '';
 
         return path.join(local.workspace, projectName);

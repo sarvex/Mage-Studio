@@ -11,16 +11,13 @@ class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
-            console.log('copying template into ', destination);
             const source = path.resolve(SCENE_TEMPLATE_PATH);
             const final_destination = path.join(destination, SCENES_PATH);
 
             ncp(source, final_destination, function(err) {
                 if (err) {
-                    console.log(err);
                     reject(err);
                 } else {
-                    console.log('done creating scene, about to rename');
                     SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);
                     resolve();
                 }
@@ -31,8 +28,6 @@ class SceneHelper {
     static rename(location, oldName, newName) {
         const oldPath = path.join(location, oldName);
         const newPath = path.join(location, newName);
-
-        console.log('renamig scene', oldPath, newPath);
 
         fs.renameSync(oldPath, newPath);
     }
@@ -66,7 +61,6 @@ class SceneHelper {
 
                 return JSON.parse(stringContent);
             } catch(e) {
-                console.log(e);
                 return {};
             }
         } else {

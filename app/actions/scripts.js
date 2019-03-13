@@ -38,7 +38,6 @@ export const getScripts = (project) => (dispatch) => {
             if (!response) {
                 dispatch(scriptsFetchFailed());
             } else {
-                console.log(response);
                 dispatch(scriptsFetchCompleted(response));
             }
         })
@@ -60,7 +59,6 @@ export const getSingleScript = (project, scriptid) => (dispatch) => {
                     app.loadScript(data.content);
                 })
                 .catch((e) => {
-                    console.log(e);
                     dispatch(scriptsFetchFailed())
                 });
         })

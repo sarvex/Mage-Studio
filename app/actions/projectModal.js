@@ -34,10 +34,12 @@ export const newProjectCompleted = () => ({
 });
 
 export const createNewProject = (project, scene) => (dispatch) => {
+    const config = { timeout: 60 * 4 * 1000 };
+
     dispatch(newProjectSaving());
 
     axios
-        .post(PROJECTS_URL, { project, scene })
+        .post(PROJECTS_URL, { project, scene }, config)
         .then(() => {
             dispatch(newProjectSaved());
             setTimeout(() => {
