@@ -40,6 +40,10 @@ class ProjectHelper {
         });
     }
 
+    static updateIndexFile() {
+
+    }
+
     static configTemplate() {
         // return string template with configuration
     }
