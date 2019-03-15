@@ -68,8 +68,8 @@ class SceneHelper {
         }
     }
 
-    static configTemplate() {
-        // return string template for scene config
+    static getAllScenes() {
+        const root = Config.getSceneRoot();
     }
 
     static getConfig(sceneName) {

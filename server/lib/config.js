@@ -65,10 +65,16 @@ class Config {
         return path.join(Config.getAssetsPath(), SCRIPTS);
     }
 
-    static getScenePath(sceneName) {
+    static getSceneRoot() {
         return path.join(
             Config.getProjectPath(),
-            SCENES,
+            SCENES
+        );
+    }
+
+    static getScenePath(sceneName) {
+        return path.join(
+            Config.getSceneRoot(),
             sceneName
         )
     }
