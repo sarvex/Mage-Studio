@@ -2,6 +2,7 @@ const ncp = require('ncp').ncp;
 const path = require('path');
 const npm = require('npm');
 const Config = require('../config');
+const StringTemplates = require('./StringTemplates');
 
 const PROJECT_TEMPLATE_PATH = 'server/.templates/.project';
 
@@ -41,19 +42,11 @@ class ProjectHelper {
     }
 
     static updateIndexFile() {
-
-    }
-
-    static configTemplate() {
-        // return string template with configuration
-    }
-
-    static getConfig() {
-        // this returns config file inside src.
-    }
-
-    static updateConfig(config) {
-        // update existing configuration inside src
+        StringTemplates
+            .buildInitScript()
+            .then(script => {
+                // write script in index file inside src
+            });
     }
 
     static exists(name) {

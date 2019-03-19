@@ -19,8 +19,10 @@ class File {
         return {
             name: this.name,
             extension: this.extension,
-            uuid: this.uuid
-        }
+            uuid: this.uuid,
+            folder: this.folder,
+            fullPath: this.fullPath
+        };
     }
 
     setPath(folder) {

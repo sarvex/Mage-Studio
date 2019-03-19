@@ -1,26 +1,44 @@
-import SceneHelper from './SceneHelper';
+const SceneHelper = require('./SceneHelper');
+const AssetsHelper = require('./AssetsHelper');
 
-const getAssetStringTemplate = () => {
+const parseAssets = (assets) => {
+    return JSON.stringify(assets.reduce((acc, asset) => {
+        const key = asset.name.split('.')[0];
+        const path = asset.fullPath.split('assets')[1];
+        acc[key] = 'assets'.concat(path);
+
+        return acc;
+    }, {}));
+}
+
+const buildAssetStringTemplate = () => {
     // gettings assets from assets helper
-    return `
-        const assets = {
-            Audio : {},
-        
-            Video : {},
-        
-            Images : {},
-        
-            Textures: {},
-        
-            Models : {},
-        
-            General : {}
-        };
-    `;
+    return new Promise(resolve => {
+        AssetsHelper
+            .getAssets()
+            .then((assets) => {
+                console.log(assets);
+                resolve(`const assets = {
+                    Audio: ${parseAssets(assets.audio)},
+                
+                    Video: ${parseAssets(assets.video)},
+                
+                    Images: ${parseAssets(assets.images)},
+                    
+                    Scripts: ${parseAssets(assets.scripts)},
+                
+                    Textures: ${parseAssets(assets.textures)},
+                
+                    Models: ${parseAssets(assets.models)},
+                
+                    General: {}
+                };`);
+            })
+    })
 };
 
-const getConfigTeamplate = () => {
-    return `
+const buildConfigTemplate = () => {
+    return Promise.resolve(`
         const config = {
     
             screen: {
@@ -49,25 +67,54 @@ const getConfigTeamplate = () => {
                 far : 3000000
             }
         };
-    `
+    `);
 };
 
-const getImportsTemplate = () => {
-    // first get scenee
+const buildImportsTemplate = () => {
     const scenes = SceneHelper.getAllScenes();
-    // import each scene
+    const baseImport = `import { Router } from 'mage-engine';\n`;
+    const mapImports = scene => `import ${scene} from './${scene}/App';\n`;
+    const imports = scenes
+        .map(mapImports)
+        .join('');
 
-    return `
+    return Promise.resolve(` ${baseImport.concat(imports)}`);
+};
+
+const buildRouterTemplate = () => {
+    const scenes = SceneHelper.getAllScenes();
+    const getScenePath = (scene, i) => i ? `/${scene}` : '/';
+    const mapRouter = (scene, i) => `Router.on('${getScenePath(scene, i)}', ${scene}); \n`;
+
+    const routerConfig = scenes
+        .map(mapRouter)
+        .join('');
+
+    return Promise.resolve( ` window.addEventListener('load', function() {
         
-    `;
+        ${routerConfig}
+        
+        Router.start(config, assets, '#gameContainer');
+    });`);
 };
 
-const getRouterTemplate = () => {
-    // same here, get scenes
-    const scenes = SceneHelper.getAllScenes();
-    return `
-        window.addEventListener('load', function() {
-            Router.start(config, assets, '#gameContainer');
-        });
-    `
+const buildInitScript = () => {
+    return new Promise(resolve => {
+        Promise.all([
+            buildImportsTemplate(),
+            buildAssetStringTemplate(),
+            buildConfigTemplate(),
+            buildRouterTemplate()
+        ]).then(script => {
+            resolve(script.join(''));
+        })
+    })
 }
+
+module.exports = {
+    buildAssetStringTemplate: buildAssetStringTemplate,
+    buildConfigTemplate: buildConfigTemplate,
+    buildImportsTemplate: buildImportsTemplate,
+    buildRouterTemplate: buildRouterTemplate,
+    buildInitScript: buildInitScript
+};
