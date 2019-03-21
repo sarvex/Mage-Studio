@@ -1,5 +1,6 @@
 const ncp = require('ncp').ncp;
 const path = require('path');
+const fs = require('fs');
 const npm = require('npm');
 const Config = require('../config');
 const StringTemplates = require('./StringTemplates');
@@ -27,7 +28,7 @@ class ProjectHelper {
         return new Promise((resolve, reject) => {
             const path = Config.getProjectPath(project);
 
-            npm.load({}, function (err) {
+            npm.load({ logLevel: 'silent', progress: false }, function (err) {
                 npm
                     .commands
                     .install(path, [], function(er, data) {
@@ -44,8 +45,21 @@ class ProjectHelper {
     static updateIndexFile() {
         StringTemplates
             .buildInitScript()
-            .then(script => {
+            .then(data => {
                 // write script in index file inside src
+                const filename = 'index.js';
+
+                const indexPath = path.join(
+                    Config.getSrcRoot(),
+                    filename
+                );
+
+                try {
+                    fs.writeFileSync(indexPath, data);
+                    return Promise.resolve();
+                } catch(e) {
+                    return Promise.reject(e);
+                }
             });
     }
 

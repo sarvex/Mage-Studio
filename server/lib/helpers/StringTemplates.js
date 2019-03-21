@@ -17,7 +17,6 @@ const buildAssetStringTemplate = () => {
         AssetsHelper
             .getAssets()
             .then((assets) => {
-                console.log(assets);
                 resolve(`const assets = {
                     Audio: ${parseAssets(assets.audio)},
                 
@@ -107,7 +106,7 @@ const buildInitScript = () => {
             buildRouterTemplate()
         ]).then(script => {
             resolve(script.join(''));
-        })
+        });
     })
 }
 

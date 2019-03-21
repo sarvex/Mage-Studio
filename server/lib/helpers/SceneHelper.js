@@ -69,7 +69,7 @@ class SceneHelper {
     }
 
     static getAllScenes() {
-        const root = Config.getSceneRoot();
+        const root = Config.getSrcRoot();
 
         const isDirectory = source => fs.lstatSync(source).isDirectory();
         const extractRoot = source => source.replace(`${root}/`, '');
