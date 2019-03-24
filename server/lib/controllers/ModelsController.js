@@ -1,3 +1,4 @@
+const ProjectHelper = require("../helpers/ProjectHelper");
 const FileHelper = require('../helpers/files/FileHelper');
 const AssetsHelper = require('../helpers/AssetsHelper');
 const Config = require('../config');
@@ -109,15 +110,20 @@ class ModelsController {
             if (electron.isDesktop()) {
                 const file = FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer);
 
-                if (file.writeToFile()) {
+                Promise.all([
+                    Promise.resolve(file.writeToFile()),
+                    ProjectHelper.updateIndexFile()
+                ])
+                .then(() => {
                     return res
                         .status(messages.FILE_WRITE_SUCCESS.code)
                         .json(file.toJSON(true))
-                } else {
+                })
+                .catch(() => {
                     return res
                         .status(messages.FILE_WRITE_FAILURE.code)
                         .json({ message: messages.FILE_WRITE_FAILURE.text });
-                }
+                });
             } else {
                 return res.json({ message: 'ok' });
             }
