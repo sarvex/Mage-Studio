@@ -68,8 +68,16 @@ class SceneHelper {
         }
     }
 
-    static configTemplate() {
-        // return string template for scene config
+    static getAllScenes() {
+        const root = Config.getSrcRoot();
+
+        const isDirectory = source => fs.lstatSync(source).isDirectory();
+        const extractRoot = source => source.replace(`${root}/`, '');
+
+        return fs.readdirSync(root)
+                .map(name => path.join(root, name))
+                .filter(isDirectory)
+                .map(extractRoot)
     }
 
     static getConfig(sceneName) {

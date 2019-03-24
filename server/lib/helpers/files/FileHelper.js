@@ -11,35 +11,36 @@ class FileHelper {
     static SCRIPT_TYPE() { return 'texture' }
 
     static fileFromBuffer(filename, type, buffer) {
+        let file = null;
         switch(type) {
             case FileHelper.MODEL_TYPE():
-                const file = new Model(filename);
+                file = new Model(filename);
                 file.setContent(buffer);
-                return file;
                 break;
             case FileHelper.ASSET_TYPE():
             default:
                 break;
         }
+
+        return file;
     }
 
     static fileFromPath(name, type) {
+        let file = null;
         switch(type) {
             case FileHelper.MODEL_TYPE():
-                const model = new Model(name);
-                model.read();
-
-                return model;
+                file = new Model(name);
+                file.read();
                 break;
             case FileHelper.SCRIPT_TYPE():
-                const script = new Script(name);
-                script.read();
-
-                return script;
+                file = new Script(name);
+                file.read();
                 break;
             default:
                 break;
         }
+
+        return file;
     }
 
 }

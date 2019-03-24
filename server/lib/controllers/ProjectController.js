@@ -61,6 +61,7 @@ class ProjectController {
                 ProjectHelper.create(destination)
                     .then(() => SceneHelper.create(destination, sceneName))
                     .then(() => ProjectHelper.installDependencies(projectName))
+                    .then( () => ProjectHelper.updateIndexFile())
                     .then(function() {
                         return res
                             .status(messages.PROJECT_CREATED.code)

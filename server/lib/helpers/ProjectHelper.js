@@ -1,7 +1,9 @@
 const ncp = require('ncp').ncp;
 const path = require('path');
+const fs = require('fs');
 const npm = require('npm');
 const Config = require('../config');
+const StringTemplates = require('./StringTemplates');
 
 const PROJECT_TEMPLATE_PATH = 'server/.templates/.project';
 
@@ -26,7 +28,7 @@ class ProjectHelper {
         return new Promise((resolve, reject) => {
             const path = Config.getProjectPath(project);
 
-            npm.load({}, function (err) {
+            npm.load({ logLevel: 'silent', progress: false }, function (err) {
                 npm
                     .commands
                     .install(path, [], function(er, data) {
@@ -40,16 +42,25 @@ class ProjectHelper {
         });
     }
 
-    static configTemplate() {
-        // return string template with configuration
-    }
+    static updateIndexFile() {
+        StringTemplates
+            .buildInitScript()
+            .then(data => {
+                // write script in index file inside src
+                const filename = 'index.js';
 
-    static getConfig() {
-        // this returns config file inside src.
-    }
+                const indexPath = path.join(
+                    Config.getSrcRoot(),
+                    filename
+                );
 
-    static updateConfig(config) {
-        // update existing configuration inside src
+                try {
+                    fs.writeFileSync(indexPath, data);
+                    return Promise.resolve();
+                } catch(e) {
+                    return Promise.reject(e);
+                }
+            });
     }
 
     static exists(name) {
