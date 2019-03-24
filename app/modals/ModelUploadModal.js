@@ -60,7 +60,7 @@ class ModelUploadModal extends React.Component {
 
     handleBeforeUpload = (file) => {
         const { uploadModel, config } = this.props;
-
+        const { project } = config;
 
         uploadModel(project, file);
 
