@@ -119,7 +119,7 @@ const mapStateToProps = (state = {}) => {
         list,
         error,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
     getModels: (project) => dispatch(getModels(project)),

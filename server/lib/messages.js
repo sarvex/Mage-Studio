@@ -28,6 +28,8 @@ const MODEL_NAME_MISSING = { code: 400, text: 'Model name is missing' };
 const SCRIPTS_NOT_FOUND = { code: 404, text: 'Script not found' };
 const SCRIPT_NAME_MISSING = { code: 400, text: 'Script name is missing' };
 
+const ASSETS_NOT_FOUND = { code: 404, text: 'Assets not found' };
+
 module.exports = {
     PROJECT_NAME_MISSING: PROJECT_NAME_MISSING,
     SCENE_NAME_MISSING: SCENE_NAME_MISSING,
@@ -48,5 +50,6 @@ module.exports = {
     MODEL_NAME_MISSING: MODEL_NAME_MISSING,
     SCRIPTS_NOT_FOUND: SCRIPTS_NOT_FOUND,
     SCRIPT_NAME_MISSING: SCRIPT_NAME_MISSING,
-    SCENE_JSON_READ: SCENE_JSON_READ
+    SCENE_JSON_READ: SCENE_JSON_READ,
+    ASSETS_NOT_FOUND: ASSETS_NOT_FOUND
 };

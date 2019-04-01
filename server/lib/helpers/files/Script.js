@@ -2,11 +2,11 @@ const path = require('path');
 const File = require('./File');
 const Config = require('../../config');
 
-class Model extends File {
-    constructor(name) {
-        super(name);
+const SCRIPT_UUID = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
 
-        this.setPath(path.join(Config.getScriptsPath()));
+class Script extends File {
+    constructor(name) {
+        super(name, Config.getScriptsPath(), SCRIPT_UUID);
     }
 
     toJSON(skipContent) {
@@ -29,4 +29,4 @@ class Model extends File {
     }
 }
 
-module.exports = Model;
+module.exports = Script;

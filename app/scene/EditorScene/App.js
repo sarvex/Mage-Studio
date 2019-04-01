@@ -235,7 +235,6 @@ export class EditorScene extends App {
     }
 
     onCreate() {
-        ScriptManager.create('cube', script);
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 

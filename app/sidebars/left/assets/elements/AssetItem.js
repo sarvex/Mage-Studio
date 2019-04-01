@@ -3,15 +3,15 @@ import { Tooltip, Icon } from 'antd';
 
 import '../assets.scss';
 
-const Folder = ({ name }) => (
+const AssetItem = ({ name, type = 'file' }) => (
     <div>
         <Tooltip title={name} placement="bottom">
             <div className="asset-item folder">
-                <Icon theme="filled" className="icon" type="folder" />
+                <Icon theme="filled" className="icon" type={type} />
                 <span className="name">{name}</span>
             </div>
         </Tooltip>
     </div>
 );
 
-export default Folder;
+export default AssetItem;

@@ -6,78 +6,123 @@ const CONFIG_FILE_NAME = './.config.yml';
 const ASSETS = 'assets';
 const SRC = 'src';
 const SCRIPTS = 'scripts';
+const TEXTURES = 'textures';
+const IMAGES = 'images';
+const MODELS = 'models';
 
-class Config {
-
-    static getDefaultLocalConfig() {
-        return {
-            workspace: '',
-            project: '',
-            scene: 'BaseScene'
-        }
-    };
-
-    static getLocalConfig() {
-        try {
-            const configPath = path.resolve(CONFIG_FILE_NAME);
-            const file = fs.readFileSync(configPath, 'utf8');
-            const content = yaml.safeLoad(file);
-
-            return content;
-        } catch(e) {
-            console.log('[Mage] An error occured reading config file.', e);
-            return false;
-        }
-    };
-
-    static updateLocalConfig(config) {
-        try {
-            if (config && Object.keys(config).length > 0) {
-                const defaultconfig = Config.getDefaultLocalConfig();
-                const localconfig = Config.getLocalConfig();
-                const newConfig = Object.assign(defaultconfig, localconfig, config);
-
-                const yamlContent = yaml.safeDump(newConfig);
-                fs.writeFileSync(path.resolve(CONFIG_FILE_NAME), yamlContent);
-
-                return true;
-            } else {
-                console.log('[Mage] provided configuration is empty.');
-            }
-        } catch(e) {
-            console.log('[Mage] An error occured writing config file.', e);
-            return false;
-        }
-    }
-
-    static getProjectPath(project) {
-        const local = Config.getLocalConfig();
-        const projectName = project || local.project || '';
-
-        return path.join(local.workspace, projectName);
-    }
-
-    static getAssetsPath() {
-        return path.join(Config.getProjectPath(), ASSETS);
-    }
-
-    static getScriptsPath() {
-        return path.join(Config.getAssetsPath(), SCRIPTS);
-    }
-
-    static getSrcRoot() {
-        return path.join(
-            Config.getProjectPath(),
-            SRC
-        );
-    }
-
-    static getScenePath(sceneName) {
-        return path.join(
-            Config.getSrcRoot(),
-            sceneName
-        )
+function getDefaultLocalConfig() {
+    return {
+        workspace: '',
+        project: '',
+        scene: 'BaseScene'
     }
 }
 
-module.exports = Config;
+function getLocalConfig() {
+    try {
+        const configPath = path.resolve(CONFIG_FILE_NAME);
+        const file = fs.readFileSync(configPath, 'utf8');
+        const content = yaml.safeLoad(file);
+
+        return content;
+    } catch(e) {
+        console.log('[Mage] An error occured reading config file.', e);
+        return false;
+    }
+}
+
+function updateLocalConfig(config) {
+    try {
+        if (config && Object.keys(config).length > 0) {
+            const defaultconfig = getDefaultLocalConfig();
+            const localconfig = getLocalConfig();
+            const newConfig = Object.assign(defaultconfig, localconfig, config);
+
+            const yamlContent = yaml.safeDump(newConfig);
+            fs.writeFileSync(path.resolve(CONFIG_FILE_NAME), yamlContent);
+
+            return true;
+        } else {
+            console.log('[Mage] provided configuration is empty.');
+        }
+    } catch(e) {
+        console.log('[Mage] An error occured writing config file.', e);
+        return false;
+    }
+}
+
+function getProjectPath(project) {
+    const local = getLocalConfig();
+    const projectName = project || local.project || '';
+
+    return path.join(local.workspace, projectName);
+}
+
+function getAssetsPath() {
+    return path.join(getProjectPath(), ASSETS);
+}
+
+function getScriptsPath() {
+    return path.join(getAssetsPath(), SCRIPTS);
+}
+
+function getTexturesPath() {
+    return path.join(getAssetsPath(), TEXTURES);
+}
+
+function getImagesPath() {
+    return path.join(getAssetsPath(), IMAGES);
+}
+
+function getModelsPath() {
+    return path.join(getAssetsPath(), MODELS);
+}
+
+function getFolderByAssetType(type) {
+    let folder = getAssetsPath();
+
+    switch(type) {
+        case 'model':
+            folder = getModelsPath();
+            break;
+        case 'image':
+            folder = getImagesPath();
+            break;
+        case 'texture':
+            folder = getTexturesPath();
+            break;
+        default:
+            break;
+    }
+
+    return folder;
+}
+
+function getSrcRoot() {
+    return path.join(
+        getProjectPath(),
+        SRC
+    );
+}
+
+function getScenePath(sceneName) {
+    return path.join(
+        getSrcRoot(),
+        sceneName
+    )
+}
+
+module.exports = {
+    getDefaultLocalConfig: getDefaultLocalConfig,
+    getLocalConfig: getLocalConfig,
+    updateLocalConfig: updateLocalConfig,
+    getProjectPath: getProjectPath,
+    getAssetsPath: getAssetsPath,
+    getScriptsPath: getScriptsPath,
+    getTexturesPath: getTexturesPath,
+    getImagesPath: getImagesPath,
+    getModelsPath: getModelsPath,
+    getFolderByAssetType: getFolderByAssetType,
+    getSrcRoot: getSrcRoot,
+    getScenePath: getScenePath
+};

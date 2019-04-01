@@ -32,7 +32,10 @@ router.route('/:id/scripts')
     .get(ScriptsController.getAllScripts);
 
 router.route('/:id/scripts/:scriptid')
-    .get(ScriptsController.getScript)
+    .get(ScriptsController.getScript);
+
+router.route('/:id/assets')
+    .get(ProjectController.getAssets);
 
 module.exports = {
     router: router,

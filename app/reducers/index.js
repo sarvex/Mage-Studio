@@ -10,6 +10,7 @@ import scene from './scene';
 import config from './config';
 import project from './project';
 import scripts from './scripts';
+import assets from './assets';
 
 export default combineReducers({
     fog,
@@ -22,5 +23,6 @@ export default combineReducers({
     scene,
     project,
     scripts,
-    config
+    config,
+    assets
 });
