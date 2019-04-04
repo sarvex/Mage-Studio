@@ -27,6 +27,13 @@ router.route('/:id/models')
 router.route('/:id/models/:modelid')
     .get(ModelsController.getSingleModel)
 
+router.route('/:id/images')
+    .post(ImagesController.uploadImage)
+    .get(ImagesController.getAllImages);
+
+router.route('/:id/images/:textureid')
+    .get(ImagesController.getSingleImage); // we should get a type as query param
+
 router.route('/:id/scripts')
     .post(ScriptsController.createScript)
     .get(ScriptsController.getAllScripts);
