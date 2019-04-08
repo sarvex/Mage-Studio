@@ -25,6 +25,10 @@ const MODELS_NOT_FOUND = { code: 404, text: 'Models not found' };
 const MODEL_NOT_FOUND = { code: 404, text: 'Model not found' };
 const MODEL_NAME_MISSING = { code: 400, text: 'Model name is missing' };
 
+const IMAGES_NOT_FOUND = { code: 404, text: 'Images not found' };
+const IMAGE_NOT_FOUND = { code: 404, text: 'Image not found' };
+const IMAGE_NAME_MISSING = { code: 400, text: 'Image name is missing' };
+
 const SCRIPTS_NOT_FOUND = { code: 404, text: 'Script not found' };
 const SCRIPT_NAME_MISSING = { code: 400, text: 'Script name is missing' };
 
@@ -51,5 +55,8 @@ module.exports = {
     SCRIPTS_NOT_FOUND: SCRIPTS_NOT_FOUND,
     SCRIPT_NAME_MISSING: SCRIPT_NAME_MISSING,
     SCENE_JSON_READ: SCENE_JSON_READ,
-    ASSETS_NOT_FOUND: ASSETS_NOT_FOUND
+    ASSETS_NOT_FOUND: ASSETS_NOT_FOUND,
+    IMAGES_NOT_FOUND: IMAGES_NOT_FOUND,
+    IMAGE_NOT_FOUND: IMAGE_NOT_FOUND,
+    IMAGE_NAME_MISSING: IMAGE_NAME_MISSING
 };

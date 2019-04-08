@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ProjectController = require('../lib/controllers/ProjectController');
 const ModelsController = require('../lib/controllers/ModelsController');
+const ImagesController = require('../lib/controllers/ImagesController');
 const ScriptsController = require('../lib/controllers/ScriptsController');
 
 router.route('/')
@@ -31,7 +32,7 @@ router.route('/:id/images')
     .post(ImagesController.uploadImage)
     .get(ImagesController.getAllImages);
 
-router.route('/:id/images/:textureid')
+router.route('/:id/images/:imageid')
     .get(ImagesController.getSingleImage); // we should get a type as query param
 
 router.route('/:id/scripts')

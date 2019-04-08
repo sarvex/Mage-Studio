@@ -105,6 +105,17 @@ function getScript(name) {
     return Promise.reject();
 }
 
+function getImage(name) {
+    try {
+        const file = FileHelper.fileFromPath(name, FileHelper.TEXTURE_TYPE());
+
+        return Promise.resolve(file.fullPath);
+
+    } catch(e) {
+        return Promise.reject();
+    }
+}
+
 function getImages() {
     return Promise.resolve([]);
 }
@@ -149,6 +160,7 @@ module.exports = {
     getScripts: getScripts,
     getScript: getScript,
     getImages: getImages,
+    getImage: getImage,
     getTextures: getTextures,
     getAudio: getAudio,
     getVideo: getVideo,

@@ -6,6 +6,8 @@ import AddButton from '../../../common/AddButton';
 import SearchButton from '../../../common/SearchButton';
 
 import AssetItem from './elements/AssetItem';
+import AssetImage from './elements/AssetImage';
+
 import {fogColorChanged, fogDensityChanged, fogEnabled} from "../../../actions/fog";
 import {controlsChanged, snapEnabledChange, snapValueChange} from "../../../actions/controls";
 import {connect} from "react-redux";
@@ -32,7 +34,8 @@ class AssetsBox extends React.Component {
         const {
             models = [],
             images = [],
-            textures = []
+            textures = [],
+            config
         } = this.props;
 
         return (
@@ -48,7 +51,11 @@ class AssetsBox extends React.Component {
                 <div className="content">
                     { models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
                     { images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
-                    { textures.map((texture, i) => ( <AssetItem key={`texture-${i}`} name={texture.name}/>)) }
+                    { textures.map((texture, i) => ( <AssetImage
+                        key={`texture-${i}`}
+                        project={config.project}
+                        name={texture.name} />
+                    )) }
                 </div>
             </div>
         );
