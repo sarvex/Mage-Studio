@@ -34,8 +34,6 @@ class ProjectController {
         const id = req.params.id;
         const currentconfig = Config.getLocalConfig();
 
-        console.log(Config);
-
         if (!id) {
             return res
                 .status(messages.PROJECT_NAME_MISSING.code)
@@ -102,7 +100,7 @@ class ProjectController {
                 ProjectHelper.create(destination)
                     .then(() => SceneHelper.create(destination, sceneName))
                     .then(() => ProjectHelper.installDependencies(projectName))
-                    .then( () => ProjectHelper.updateIndexFile())
+                    .then(() => ProjectHelper.updateIndexFile())
                     .then(function() {
                         return res
                             .status(messages.PROJECT_CREATED.code)
