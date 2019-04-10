@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const uuid = require('uuid/v4');
+const uuid = require('uuid/v5');
 
 class File {
 
@@ -8,10 +8,13 @@ class File {
         return '.'.concat(name.split('.').slice(1).join('.'));
     }
 
-    constructor(name) {
+    constructor(name, path, uuidNamespace) {
         this.name = name;
         this.extension = File.getExtension(this.name);
-        this.uuid = uuid();
+
+        this.setPath(path);
+
+        this.uuid = uuid(this.fullPath, uuidNamespace);
     }
 
     toJSON() {

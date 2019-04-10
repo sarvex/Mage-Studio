@@ -7,7 +7,7 @@ const electron = require('../electron');
 
 class ModelsController {
 
-    static getAllModels(req, res) {
+    static getAllImages(req, res) {
         // get models from assets
         const id = req.params.id;
         const currentconfig = Config.getLocalConfig();
@@ -25,25 +25,26 @@ class ModelsController {
         }
 
         if (electron.isDesktop()) {
-            AssetsHelper
-                .getModels()
-                .then(function(models) {
-                    if (models.length) {
-                        return res
-                            .status(200)
-                            .json(models);
-                    } else {
-                        return res
-                            .status(messages.MODELS_NOT_FOUND.code)
-                            .json({ message: messages.MODELS_NOT_FOUND.text });
-                    }
-                })
-                .catch(function(err) {
+            Promise.all([
+                AssetsHelper.getTextures(),
+                AssetsHelper.getImages()
+            ])
+            .then(function(data) {
+                if (data.length) {
                     return res
-                        .status(messages.MODELS_NOT_FOUND.code)
-                        .json({ message: messages.MODELS_NOT_FOUND.text });
-                });
-
+                        .status(200)
+                        .json(data);
+                } else {
+                    return res
+                        .status(messages.IMAGES_NOT_FOUND.code)
+                        .json({ message: messages.IMAGES_NOT_FOUND.text });
+                }
+            })
+            .catch(function(err) {
+                return res
+                    .status(messages.IMAGES_NOT_FOUND.code)
+                    .json({ message: messages.IMAGES_NOT_FOUND.text });
+            });
          } else {
             return res
                 .status(200)
@@ -51,10 +52,10 @@ class ModelsController {
         }
     }
 
-    static getSingleModel(req, res) {
+    static getSingleImage(req, res) {
         const id = req.params.id;
         const currentconfig = Config.getLocalConfig();
-        const modelid = req.params.modelid;
+        const imageid = req.params.imageid;
 
         if (!id) {
             return res
@@ -62,10 +63,10 @@ class ModelsController {
                 .json({ message: messages.PROJECT_NAME_MISSING.text });
         }
 
-        if (!modelid) {
+        if (!imageid) {
             return res
-                .status(messages.MODEL_NAME_MISSING.code)
-                .json({ message: messages.MODEL_NAME_MISSING.text });
+                .status(messages.IMAGE_NAME_MISSING.code)
+                .json({ message: messages.IMAGE_NAME_MISSING.text });
         }
 
         if (id !== currentconfig.project) {
@@ -76,16 +77,14 @@ class ModelsController {
 
         if (electron.isDesktop()) {
             AssetsHelper
-                .getModel(modelid)
-                .then(function(json) {
-                    return res
-                        .status(200)
-                        .json(json);
+                .getImage(imageid)
+                .then(function(path) {
+                    return res.sendFile(path);
                 })
                 .catch(function() {
                     return res
-                        .status(messages.MODEL_NOT_FOUND.code)
-                        .json({ message: messages.MODEL_NOT_FOUND.text });
+                        .status(messages.IMAGE_NOT_FOUND.code)
+                        .json({ message: messages.IMAGE_NOT_FOUND.text });
                 })
 
 
@@ -96,7 +95,7 @@ class ModelsController {
         }
     }
 
-    static uploadModel(req, res) {
+    static uploadImage(req, res) {
         const files = req.files;
 
         if (!files) {

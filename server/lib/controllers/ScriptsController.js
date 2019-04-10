@@ -33,8 +33,8 @@ class ScriptsController {
                             .json(scripts);
                     } else {
                         return res
-                            .status(messages.SCRIPTS_NOT_FOUND.code)
-                            .json({ message: messages.SCRIPTS_NOT_FOUND.text });
+                            .status(200)
+                            .json([]);
                     }
                 })
                 .catch(function(err) {

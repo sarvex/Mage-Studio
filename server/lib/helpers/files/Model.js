@@ -2,11 +2,12 @@ const path = require('path');
 const File = require('./File');
 const Config = require('../../config');
 
-class Model extends File {
-    constructor(name) {
-        super(name);
+const MODEL_UUID = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
 
-        this.setPath(path.join(Config.getAssetsPath(), 'models'));
+class Model extends File {
+
+    constructor(name) {
+        super(name, Config.getModelsPath(), MODEL_UUID);
     }
 
     toJSON(skipContent) {

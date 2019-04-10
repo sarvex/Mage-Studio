@@ -192,6 +192,16 @@ export class EditorScene extends App {
         }
     }
 
+    changeTexture = (textureId, texturePath) => {
+        if (this.currentMesh) {
+            ImagesEngine
+                .loadSingleTexture(textureId, texturePath)
+                .then((texture) => {
+                    this.currentMesh.setTexture(textureId);
+                });
+        }
+    }
+
     dispatchMeshChange = () => {
         if (!this.transform.object || !this.currentMesh) return;
 
@@ -235,7 +245,6 @@ export class EditorScene extends App {
     }
 
     onCreate() {
-        ScriptManager.create('cube', script);
         SceneManager.camera.position({y: 70, z: 150});
         SceneManager.camera.lookAt(0, 0, 0);
 

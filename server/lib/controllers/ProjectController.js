@@ -1,4 +1,5 @@
 const Config = require('../config');
+const AssetsHelper = require('../helpers/AssetsHelper');
 const ProjectHelper = require('../helpers/ProjectHelper');
 const SceneHelper = require('../helpers/SceneHelper');
 const messages = require('../messages');
@@ -27,6 +28,44 @@ class ProjectController {
         return res
             .status(204)
             .json({message: 'OK'});
+    }
+
+    static getAssets(req, res) {
+        const id = req.params.id;
+        const currentconfig = Config.getLocalConfig();
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (id !== currentconfig.project) {
+            return res
+                .status(messages.WRONG_PROJECT_NAME.code)
+                .json({ message: messages.WRONG_PROJECT_NAME.text });
+        }
+
+        if (electron.isDesktop()) {
+            AssetsHelper
+                .getAssets()
+                .then(function(json) {
+                    return res
+                        .status(200)
+                        .json(json);
+                })
+                .catch(function(e) {
+                    return res
+                        .status(messages.ASSETS_NOT_FOUND.code)
+                        .json({ message: messages.ASSETS_NOT_FOUND.text });
+                })
+
+
+        } else {
+            return res
+                .status(200)
+                .json({ message: 'OK' });
+        }
     }
 
     static createNewProject(req, res) {
@@ -61,7 +100,7 @@ class ProjectController {
                 ProjectHelper.create(destination)
                     .then(() => SceneHelper.create(destination, sceneName))
                     .then(() => ProjectHelper.installDependencies(projectName))
-                    .then( () => ProjectHelper.updateIndexFile())
+                    .then(() => ProjectHelper.updateIndexFile())
                     .then(function() {
                         return res
                             .status(messages.PROJECT_CREATED.code)
