@@ -43,9 +43,10 @@ class RightSidebar extends React.Component {
     }
 
     handleTextureChange = (name) => {
-        const { onTextureChange = f => f } = this.props;
+        const { onTextureChange = f => f, config } = this.props;
+        const { project } = config;
 
-        onTextureChange(name);
+        onTextureChange(project, name);
     }
 
     onPositionChange = (axis) => (value) => {
@@ -120,6 +121,7 @@ class RightSidebar extends React.Component {
                             onScaleChange={this.onScaleChange}
                             onScriptsMount={this.handleScriptMount}
                             onScriptChange={this.handleScriptChange}
+                            onTextureChange={this.handleTextureChange}
                             scripts={scripts}
                             empty={empty}
                             type={type}
@@ -158,7 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
     onPositionChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
-    onTextureChange: (name) => dispatch(textureChanged(name)),
+    onTextureChange: (project, name) => dispatch(textureChanged(project, name)),
 
     getScripts: (project) => dispatch(getScripts(project)),
     getSingleScript: (project, name) => dispatch(getSingleScript(project, name))
