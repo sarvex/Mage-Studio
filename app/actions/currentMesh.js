@@ -20,6 +20,11 @@ export const meshAttached = (mesh, position, rotation, scale) => ({
     scale
 });
 
+export const textureChanged = (name) => (dispatch) => {
+
+    
+};
+
 export const meshDetached = () => ({
     type: MESH_DETACHED
 });

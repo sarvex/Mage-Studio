@@ -13,7 +13,8 @@ import Hierarchy from './Hierarchy';
 import Inspector from './Inspector';
 
 import {
-    meshChanged
+    meshChanged,
+    textureChanged
 } from '../../actions/currentMesh';
 
 import {
@@ -39,6 +40,12 @@ class RightSidebar extends React.Component {
         const { project } = config;
 
         getSingleScript(project, name);
+    }
+
+    handleTextureChange = (name) => {
+        const { onTextureChange = f => f } = this.props;
+
+        onTextureChange(name);
     }
 
     onPositionChange = (axis) => (value) => {
@@ -79,7 +86,8 @@ class RightSidebar extends React.Component {
             rotation,
             scale,
             type,
-            scripts
+            scripts,
+            assets
         } = this.props;
 
         return (
@@ -119,6 +127,7 @@ class RightSidebar extends React.Component {
                             position={position}
                             rotation={rotation}
                             scale={scale}
+                            assets={assets}
                         />
                     </div>
                 </div>
@@ -129,10 +138,11 @@ class RightSidebar extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    const { rightsidebar, scripts = {}, config } = state;
+    const { rightsidebar, scripts = {}, assets, config } = state;
     const { empty = true, element = '', type = '', position = {}, rotation = {}, scale= {} } = rightsidebar;
 
     return {
+        assets,
         empty,
         element,
         type,
@@ -148,6 +158,7 @@ const mapDispatchToProps = (dispatch) => ({
     onPositionChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
+    onTextureChange: (name) => dispatch(textureChanged(name)),
 
     getScripts: (project) => dispatch(getScripts(project)),
     getSingleScript: (project, name) => dispatch(getSingleScript(project, name))
