@@ -6,7 +6,11 @@ import {
     Input
 } from 'antd';
 
-const Material = () => (
+const mapTexturesToOption = (textures) => {
+    return textures.map(texture => <Select.Option key={texture.name}>{texture.name}</Select.Option>)
+}
+
+const Material = ({ textures = [], onTextureChange }) => (
     <div>
         <div className='scene-property'>
             <div className='label'>
@@ -52,8 +56,10 @@ const Material = () => (
                     Texture
                 </label>
                 <Select
+                    onChange={onTextureChange}
                     className='setting-input right'
                     size={'small'}>
+                    { mapTexturesToOption(textures) }
                 </Select>
             </div>
             <div className='setting-row'>

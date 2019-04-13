@@ -56,7 +56,8 @@ export default function reducer(state = DEFAULT, action = {}) {
         case NEW_PROJECT_COMPLETED:
             return {
                 ...state,
-                ...DEFAULT
+                ...DEFAULT,
+                visible: false
             };
             break;
         default:

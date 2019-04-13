@@ -21,10 +21,13 @@ class MeshInspector extends React.Component {
             onScaleChange,
             onScriptsMount,
             onScriptChange,
-            scripts = {}
+            onTextureChange,
+            scripts = {},
+            assets = {}
         } = this.props;
 
         const { list } = scripts;
+        const { textures } = assets;
 
         return (
             <div>
@@ -36,11 +39,14 @@ class MeshInspector extends React.Component {
                     position={position}
                     rotation={rotation}
                     scale={scale} />
-                <Material />
+                <Material
+                    textures={textures}
+                    onTextureChange={onTextureChange}
+                />
                 <Script
                     list={list}
                     onScriptsMount={onScriptsMount}
-                    onScriptChange={onScriptChange}/>
+                    onScriptChange={onScriptChange} />
             </div>
         );
     }

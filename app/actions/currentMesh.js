@@ -4,6 +4,9 @@ import {
     MESH_DETACHED
 } from './types';
 
+import { getOrCreateApp } from '../scene/AppProxy';
+import { getImageUrl } from '../lib/constants';
+
 export const meshChanged = (mesh, position, rotation, scale) => ({
     type: MESH_CHANGED,
     element: mesh,
@@ -19,6 +22,17 @@ export const meshAttached = (mesh, position, rotation, scale) => ({
     rotation,
     scale
 });
+
+export const textureChanged = (project, name) => (dispatch) => {
+
+    const url = getImageUrl(project, name);
+    console.log(url);
+
+    getOrCreateApp()
+        .then((app) => {
+            app.changeTexture(name, url);
+        });
+};
 
 export const meshDetached = () => ({
     type: MESH_DETACHED
