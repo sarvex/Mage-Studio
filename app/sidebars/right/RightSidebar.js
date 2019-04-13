@@ -44,7 +44,7 @@ class RightSidebar extends React.Component {
 
     handleTextureChange = (name) => {
         const { onTextureChange = f => f, config } = this.props;
-        const { project } = config;
+        const { project } = config;
 
         onTextureChange(project, name);
     }
