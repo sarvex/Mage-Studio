@@ -10,7 +10,7 @@ const mapTexturesToOption = (textures) => {
     return textures.map(texture => <Select.Option key={texture.name}>{texture.name}</Select.Option>)
 }
 
-const Material = ({ textures = [], onTextureChange }) => (
+const Material = ({ textures = [], onTextureChange, onMaterialChange }) => (
     <div>
         <div className='scene-property'>
             <div className='label'>
@@ -21,14 +21,18 @@ const Material = ({ textures = [], onTextureChange }) => (
         <div className='scene-setting'>
             <div className='setting-row'>
                 <label className='setting-label'>
-                    Type
+                    Material
                 </label>
                 <Select
+                    onChange={onMaterialChange}
                     className='setting-input right'
                     size={'small'}
-                    defaultValue='global'>
-                    <Select.Option key='0'>global</Select.Option>
-                    <Select.Option key='1'>local</Select.Option>
+                    defaultValue='Basic'>
+                    <Select.Option key='basic'>Basic</Select.Option>
+                    <Select.Option key='lambert'>Lambert</Select.Option>
+                    <Select.Option key='phong'>Phong</Select.Option>
+                    <Select.Option key='depth'>Depth</Select.Option>
+                    <Select.Option key='standard'>Standard</Select.Option>
                 </Select>
             </div>
             <div className='setting-row'>

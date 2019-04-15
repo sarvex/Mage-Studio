@@ -24,13 +24,18 @@ export const meshAttached = (mesh, position, rotation, scale) => ({
 });
 
 export const textureChanged = (project, name) => (dispatch) => {
-
     const url = getImageUrl(project, name);
-    console.log(url);
 
     getOrCreateApp()
         .then((app) => {
             app.changeTexture(name, url);
+        });
+};
+
+export const materialChanged = (name) => (dispatch) => {
+    getOrCreateApp()
+        .then(app => {
+            app.changeMaterial(name);
         });
 };
 

@@ -3,9 +3,8 @@ const AssetsHelper = require('./AssetsHelper');
 
 const parseAssets = (assets) => {
     return JSON.stringify(assets.reduce((acc, asset) => {
-        const key = asset.name.split('.')[0];
         const path = asset.fullPath.split('assets')[1];
-        acc[key] = 'assets'.concat(path);
+        acc[asset.name] = 'assets'.concat(path);
 
         return acc;
     }, {}));
@@ -19,17 +18,17 @@ const buildAssetStringTemplate = () => {
             .then((assets) => {
                 resolve(`const assets = {
                     Audio: ${parseAssets(assets.audio)},
-                
+
                     Video: ${parseAssets(assets.video)},
-                
+
                     Images: ${parseAssets(assets.images)},
-                    
+
                     Scripts: ${parseAssets(assets.scripts)},
-                
+
                     Textures: ${parseAssets(assets.textures)},
-                
+
                     Models: ${parseAssets(assets.models)},
-                
+
                     General: {}
                 };`);
             })
@@ -39,7 +38,7 @@ const buildAssetStringTemplate = () => {
 const buildConfigTemplate = () => {
     return Promise.resolve(`
         const config = {
-    
+
             screen: {
                 h : window ? window.innerHeight : 800,
                 w : window ? window.innerWidth : 600,
@@ -47,19 +46,19 @@ const buildConfigTemplate = () => {
                 frameRate : 60,
                 alpha: true
             },
-        
+
             lights: {
                 shadows: true
             },
-        
+
             physics: {
                 enabled: false
             },
-        
+
             tween: {
                 enabled: false
             },
-        
+
             camera : {
                 fov : 75,
                 near : 0.1,
@@ -90,9 +89,9 @@ const buildRouterTemplate = () => {
         .join('');
 
     return Promise.resolve( ` window.addEventListener('load', function() {
-        
+
         ${routerConfig}
-        
+
         Router.start(config, assets, '#gameContainer');
     });`);
 };

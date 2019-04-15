@@ -14,7 +14,8 @@ import Inspector from './Inspector';
 
 import {
     meshChanged,
-    textureChanged
+    textureChanged,
+    materialChanged
 } from '../../actions/currentMesh';
 
 import {
@@ -47,6 +48,12 @@ class RightSidebar extends React.Component {
         const { project } = config;
 
         onTextureChange(project, name);
+    }
+
+    handleMaterialChange = (name) => {
+        const { onMaterialChange = f => f } = this.props;
+
+        onMaterialChange(name);
     }
 
     onPositionChange = (axis) => (value) => {
@@ -122,6 +129,7 @@ class RightSidebar extends React.Component {
                             onScriptsMount={this.handleScriptMount}
                             onScriptChange={this.handleScriptChange}
                             onTextureChange={this.handleTextureChange}
+                            onMaterialChange={this.handleMaterialChange}
                             scripts={scripts}
                             empty={empty}
                             type={type}
@@ -161,7 +169,7 @@ const mapDispatchToProps = (dispatch) => ({
     onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
     onTextureChange: (project, name) => dispatch(textureChanged(project, name)),
-
+    onMaterialChange: (name) => dispatch(materialChanged(name)),
     getScripts: (project) => dispatch(getScripts(project)),
     getSingleScript: (project, name) => dispatch(getSingleScript(project, name))
 })
