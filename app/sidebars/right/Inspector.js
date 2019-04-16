@@ -22,6 +22,7 @@ class Inspector extends React.Component {
             onScriptChange,
             onScaleChange,
             onTextureChange,
+            onMaterialChange,
             scripts,
             assets
         } = this.props;
@@ -35,6 +36,7 @@ class Inspector extends React.Component {
                     onScriptsMount={onScriptsMount}
                     onScriptChange={onScriptChange}
                     onTextureChange={onTextureChange}
+                    onMaterialChange={onMaterialChange}
                     uuid={element}
                     scripts={scripts}
                     position={position}

@@ -22,6 +22,7 @@ class MeshInspector extends React.Component {
             onScriptsMount,
             onScriptChange,
             onTextureChange,
+            onMaterialChange,
             scripts = {},
             assets = {}
         } = this.props;
@@ -41,6 +42,7 @@ class MeshInspector extends React.Component {
                     scale={scale} />
                 <Material
                     textures={textures}
+                    onMaterialChange={onMaterialChange}
                     onTextureChange={onTextureChange}
                 />
                 <Script

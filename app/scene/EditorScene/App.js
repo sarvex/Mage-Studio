@@ -202,6 +202,12 @@ export class EditorScene extends App {
         }
     }
 
+    changeMaterial = (materialName) => {
+        if (this.currentMesh) {
+            this.currentMesh.setMaterialFromName(materialName);
+        }
+    }
+
     dispatchMeshChange = () => {
         if (!this.transform.object || !this.currentMesh) return;
 
