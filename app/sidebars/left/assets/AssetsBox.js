@@ -5,9 +5,11 @@ import AssetsMenu from './elements/AssetsMenu';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
 
-import { fogColorChanged, fogDensityChanged, fogEnabled } from "../../../actions/fog";
-import { controlsChanged, snapEnabledChange, snapValueChange } from "../../../actions/controls";
-import { getAllAssets } from "../../../actions/assets";
+import {
+    getAllAssets,
+    showTextureModal
+} from "../../../actions/assets";
+import AssetUploadModal from '../../../modals/AssetUploadModal';
 
 class AssetsBox extends React.Component {
 
@@ -17,6 +19,17 @@ class AssetsBox extends React.Component {
         const { project } = config;
 
         getAssets(project);
+    }
+
+    handleAssetsMenuChange = (key) => {
+        const  { showTextureModal } = this.props;
+        switch(key) {
+            case 'texture':
+                showTextureModal();
+                break;
+            default:
+                break;
+        }
     }
 
     render() {
@@ -30,7 +43,7 @@ class AssetsBox extends React.Component {
         return (
             <div className="box">
                 <div className="title">
-                    <AssetsMenu />
+                    <AssetsMenu onAssetsMenuClick={this.handleAssetsMenuChange} />
                 </div>
                 <div className="content">
                     { models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
@@ -41,6 +54,7 @@ class AssetsBox extends React.Component {
                         name={texture.name} />
                     )) }
                 </div>
+                <AssetUploadModal visible/>
             </div>
         );
     }
@@ -58,6 +72,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        showTextureModal: () => dispatch(showTextureModal()),
         getAssets: (project) => dispatch(getAllAssets(project))
     };
 };

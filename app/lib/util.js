@@ -7,8 +7,11 @@ export const arraysEqual = (arr1, arr2) => {
     }
 
     return true;
-}
+};
 
-export const addLocation = (url) => {
-
-}
+export const upperCaseFirst = (text = '') => {
+    const split = text.split('');
+    return split.length ?
+        split.shift().toUpperCase().concat(split.join('')) :
+        '';
+};

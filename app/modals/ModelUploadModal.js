@@ -12,7 +12,7 @@ import {
 import Footer from './footer';
 import Divider from './content/Divider';
 import ModelsSelector from './content/ModelsSelector';
-import ModelUploader from './content/ModelUploader';
+import FileUploaderBox from './content/FileUploaderBox';
 
 import { PROJECTS_URL } from '../lib/constants';
 
@@ -76,7 +76,8 @@ class ModelUploadModal extends React.Component {
                     uploaded={data}
                     list={list}
                 />
-                <ModelUploader
+                <FileUploaderBox
+                    className={'models'}
                     onBeforeUpload={this.handleBeforeUpload}
                     name={"data"} />
             </div>

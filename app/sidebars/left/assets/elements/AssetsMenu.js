@@ -4,30 +4,19 @@ import CopyButton from '../../../../common/CopyButton';
 import DeleteButton from '../../../../common/DeleteButton';
 import AddButton from '../../../../common/AddButton';
 import SearchButton from '../../../../common/SearchButton';
+import {ASSETS_TYPES} from '../../../../lib/constants';
 
-const getMenu = () => {
+const getMenu = (onAssetsMenuClick) => {
     return (
-        <Menu>
-            <Menu.Item>
-                Texture
-            </Menu.Item>
-            <Menu.Item>
-                Model
-            </Menu.Item>
-            <Menu.Item>
-                Audio
-            </Menu.Item>
-            <Menu.Item>
-                Video
-            </Menu.Item>
-            <Menu.Item>
-                Script
-            </Menu.Item>
+        <Menu onChange={onAssetsMenuClick}>
+            { ASSETS_TYPES.map(asset => (
+                <Menu.Item key={asset.code}>{asset.display}</Menu.Item>
+            ))}
         </Menu>
     )
-}
+};
 
-const AssetsMenu = () => (
+const AssetsMenu = ({ onAssetsMenuClick = f => f }) => (
     <div>
         <Icon className="icon" type="hdd" />
         <span>Assets</span>
@@ -35,7 +24,7 @@ const AssetsMenu = () => (
         <CopyButton />
         <Dropdown
             className='assets-action'
-            overlay={getMenu()}
+            overlay={getMenu(onAssetsMenuClick)}
             trigger={['click']}
             placement={'bottomLeft'}>
             <Icon type="plus-square" />
