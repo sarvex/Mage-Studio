@@ -1,24 +1,13 @@
 import React from 'react';
-import { Icon } from 'antd';
-import CopyButton from '../../../common/CopyButton';
-import DeleteButton from '../../../common/DeleteButton';
-import AddButton from '../../../common/AddButton';
-import SearchButton from '../../../common/SearchButton';
+import { connect } from "react-redux";
 
+import AssetsMenu from './elements/AssetsMenu';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
 
-import {fogColorChanged, fogDensityChanged, fogEnabled} from "../../../actions/fog";
-import {controlsChanged, snapEnabledChange, snapValueChange} from "../../../actions/controls";
-import {connect} from "react-redux";
-import {getAllAssets} from "../../../actions/assets";
-
-const folders = [
-    'static',
-    'test',
-    'folder',
-    'table'
-];
+import { fogColorChanged, fogDensityChanged, fogEnabled } from "../../../actions/fog";
+import { controlsChanged, snapEnabledChange, snapValueChange } from "../../../actions/controls";
+import { getAllAssets } from "../../../actions/assets";
 
 class AssetsBox extends React.Component {
 
@@ -40,14 +29,9 @@ class AssetsBox extends React.Component {
 
         return (
             <div className="box">
-                <p className="title">
-                    <Icon className="icon" type="hdd" />
-                    <span>Assets</span>
-                    <DeleteButton />
-                    <CopyButton />
-                    <AddButton />
-                    <SearchButton />
-                </p>
+                <div className="title">
+                    <AssetsMenu />
+                </div>
                 <div className="content">
                     { models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
                     { images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
