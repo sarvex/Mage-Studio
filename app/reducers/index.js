@@ -11,6 +11,7 @@ import config from './config';
 import project from './project';
 import scripts from './scripts';
 import assets from './assets';
+import textures from './textures';
 
 export default combineReducers({
     fog,
@@ -24,5 +25,6 @@ export default combineReducers({
     project,
     scripts,
     config,
-    assets
+    assets,
+    textures
 });

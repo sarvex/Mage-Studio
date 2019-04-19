@@ -107,7 +107,7 @@ class ModelsController {
             const buffer = data.data;
 
             if (electron.isDesktop()) {
-                const file = FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer);
+                const file = FileHelper.fileFromBuffer(data.name, FileHelper.TEXTURE_TYPE(), buffer);
 
                 Promise.all([
                     Promise.resolve(file.writeToFile()),
@@ -116,7 +116,7 @@ class ModelsController {
                 .then(() => {
                     return res
                         .status(messages.FILE_WRITE_SUCCESS.code)
-                        .json(file.toJSON(true))
+                        .json({ message: 'ok' });
                 })
                 .catch(() => {
                     return res

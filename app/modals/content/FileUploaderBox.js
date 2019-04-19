@@ -3,10 +3,12 @@ import { Upload, Icon } from 'antd';
 
 import './modalcontent.scss';
 
-const ModelUploader = (props) => {
-    const { action, name, onBeforeUpload } = props;
+const FileUploaderBox = (props) => {
+    const { action, name, onBeforeUpload, className = ''} = props;
+    const componentClassName = `content file-uploader-box ${className}`;
+
     return (
-        <div className='content model-uploader'>
+        <div className={componentClassName}>
             <Upload.Dragger
                 action={action}
                 name={name}
@@ -20,4 +22,4 @@ const ModelUploader = (props) => {
     );
 };
 
-export default ModelUploader;
+export default FileUploaderBox;
