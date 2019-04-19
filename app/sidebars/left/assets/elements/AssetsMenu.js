@@ -2,13 +2,12 @@ import React from 'react';
 import { Icon, Dropdown, Menu } from 'antd';
 import CopyButton from '../../../../common/CopyButton';
 import DeleteButton from '../../../../common/DeleteButton';
-import AddButton from '../../../../common/AddButton';
 import SearchButton from '../../../../common/SearchButton';
 import {ASSETS_TYPES} from '../../../../lib/constants';
 
 const getMenu = (onAssetsMenuClick) => {
     return (
-        <Menu onChange={onAssetsMenuClick}>
+        <Menu onClick={onAssetsMenuClick}>
             { ASSETS_TYPES.map(asset => (
                 <Menu.Item key={asset.code}>{asset.display}</Menu.Item>
             ))}

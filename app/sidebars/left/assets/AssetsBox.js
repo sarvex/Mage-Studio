@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import AssetsMenu from './elements/AssetsMenu';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
-
-import {
-    getAllAssets,
-    showTextureModal
-} from "../../../actions/assets";
 import AssetUploadModal from '../../../modals/AssetUploadModal';
+
+import { getAllAssets } from "../../../actions/assets";
+import {
+    showTextureModal,
+    hideTextureModal,
+    uploadTexture
+} from '../../../actions/textures';
 
 class AssetsBox extends React.Component {
 
@@ -21,8 +23,9 @@ class AssetsBox extends React.Component {
         getAssets(project);
     }
 
-    handleAssetsMenuChange = (key) => {
+    handleAssetsMenuChange = ({ key }) => {
         const  { showTextureModal } = this.props;
+        console.log('clicked key, ', key);
         switch(key) {
             case 'texture':
                 showTextureModal();
@@ -32,11 +35,37 @@ class AssetsBox extends React.Component {
         }
     }
 
+    handleUpload = (type) => (file) => {
+        const { config, uploadTexture } = this.props;
+        const { project } = config;
+        // upload stuff
+        switch(type) {
+            case 'textures':
+                console.log('uploading texture maybe');
+                uploadTexture(project, file);
+                break;
+            default:
+                console.log('nope');
+                break;
+        }
+    }
+
+    handleModalHide = (type) => () => {
+        const { hideTextureModal } = this.props;
+
+        switch(type) {
+            case 'textures':
+                hideTextureModal();
+                break;
+            default:
+                break;
+        }
+    }
+
     render() {
         const {
-            models = [],
-            images = [],
-            textures = [],
+            assets,
+            textures,
             config
         } = this.props;
 
@@ -46,15 +75,19 @@ class AssetsBox extends React.Component {
                     <AssetsMenu onAssetsMenuClick={this.handleAssetsMenuChange} />
                 </div>
                 <div className="content">
-                    { models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
-                    { images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
-                    { textures.map((texture, i) => ( <AssetImage
+                    { assets.models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
+                    { assets.images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
+                    { assets.textures.map((texture, i) => ( <AssetImage
                         key={`texture-${i}`}
                         project={config.project}
                         name={texture.name} />
                     )) }
                 </div>
-                <AssetUploadModal visible/>
+                <AssetUploadModal
+                    hideModal={this.handleModalHide('textures')}
+                    onUpload={this.handleUpload('textures')}
+                    loading={textures.textureModalLoading}
+                    visible={textures.textureModalVisible} />
             </div>
         );
     }
@@ -62,16 +95,19 @@ class AssetsBox extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    const { assets = {}, config = {} } = state;
+    const { assets = {}, config = {}, textures = {} } = state;
 
     return {
-        ...assets,
+        assets,
+        textures,
         config
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        uploadTexture: (project, file) => dispatch(uploadTexture(project, file)),
+        hideTextureModal: () => dispatch(hideTextureModal()),
         showTextureModal: () => dispatch(showTextureModal()),
         getAssets: (project) => dispatch(getAllAssets(project))
     };

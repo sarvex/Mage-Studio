@@ -100,7 +100,7 @@ export const uploadModel = (project, file) => (dispatch) => {
         .post(url, formData)
         .then((response) => {
             if (!response) {
-                dispatch(scemeModelUploadFailed());
+                dispatch(sceneModelUploadFailed());
             } else {
                 dispatch(sceneModelUploadCompleted(response));
             }

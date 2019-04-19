@@ -1,8 +1,7 @@
 import {
     ASSETS_LOADING,
     ASSETS_COMPLETED,
-    ASSETS_FAILURE,
-    ASSETS_TEXTURE_MODAL_SHOW
+    ASSETS_FAILURE
 } from './types';
 
 import axios from 'axios';
@@ -19,10 +18,6 @@ export const assetsCompleted = ({ data }) => ({
 
 export const assetsFailure = () => ({
     type: ASSETS_FAILURE
-});
-
-export const showTextureModal = () => ({
-    type: ASSETS_TEXTURE_MODAL_SHOW
 });
 
 export const getAllAssets = (project) => {

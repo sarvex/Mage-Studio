@@ -12,32 +12,38 @@ class AssetUploadModal extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            file: null
+        };
     }
 
     getFooter = (loading) => (
         <Footer
             loading={loading}
-            onCancel={this.handleCancel}
             onConfirm={this.handleConfirm}
-            canCancel
         />
     )
 
     handleCancel = () => {
-        // const { hideModelUploadModal } = this.props;
-        //
-        // hideModelUploadModal();
+        const { hideModal = f => f } = this.props;
+
+        hideModal();
     }
 
-    handleConfirm = () => {}
+    handleConfirm = () => {
+       const { file } = this.state;
+       const { onUpload } = this.props;
+
+       if (file) {
+           console.log('onUpload', file);
+           onUpload(file);
+       }
+    }
 
     handleBeforeUpload = (file) => {
-        // const { uploadModel, config } = this.props;
-        // const { project } = config;
-        //
-        // uploadModel(project, file);
-        //
-        // return false;
+        this.setState({ file });
+
+        return false;
     }
 
     render() {
@@ -60,33 +66,4 @@ class AssetUploadModal extends React.Component {
     }
 }
 
-const mapStateToProps = (state = {}) => {
-    // const { modelModal, config } = state;
-    // const {
-    //     visible,
-    //     loading = false,
-    //     error = false,
-    //     completed = false,
-    //     data = false,
-    //     list = []
-    // } = modelModal;
-    //
-    // return {
-    //     config,
-    //     visible,
-    //     loading,
-    //     completed,
-    //     data,
-    //     list,
-    //     error,
-    // }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    // getModels: (project) => dispatch(getModels(project)),
-    // uploadModel: (project, payload) => dispatch(uploadModel(project, payload)),
-    // hideModelUploadModal: () => dispatch(hideModelUploadModal()),
-    // loadSingleModel: (project, name) => dispatch(loadSingleModel(project, name))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AssetUploadModal);
+export default AssetUploadModal;

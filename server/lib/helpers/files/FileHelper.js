@@ -18,7 +18,11 @@ class FileHelper {
                 file = new Model(filename);
                 file.setContent(buffer);
                 break;
-            case FileHelper.ASSET_TYPE():
+            case FileHelper.TEXTURE_TYPE():
+            case FileHelper.IMAGE_TYPE():
+                file = new Asset(filename, type);
+                file.setContent(buffer);
+                break;
             default:
                 break;
         }
