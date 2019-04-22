@@ -1,20 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Input, Button } from 'antd';
+import { Modal } from 'antd';
 
 import {
     uploadModel,
     getModels,
     hideModelUploadModal,
     loadSingleModel
-} from '../actions/modelModal';
+} from '../actions/models';
 
 import Footer from './footer';
-import Divider from './content/Divider';
 import ModelsSelector from './content/ModelsSelector';
 import FileUploaderBox from './content/FileUploaderBox';
-
-import { PROJECTS_URL } from '../lib/constants';
 
 import './modals.scss';
 import '../style.scss';
@@ -23,15 +20,30 @@ class ModelUploadModal extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            file: false,
+            selection: false
+        };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.visible !== this.props.visible && this.props.visible) {
+            this.fetchModels();
+            this.setState({ file: false, selection: false });
+        }
+
     }
 
     componentDidMount() {
-        const { getModels = f => f, config, visible } = this.props;
+        this.fetchModels();
+    }
+
+    fetchModels = () => {
+        const { getModels = f => f, config } = this.props;
         const { project } = config;
 
-        if (visible) {
-            getModels(project);
-        }
+        getModels(project);
     }
 
     getFooter = (loading) => (
@@ -49,31 +61,37 @@ class ModelUploadModal extends React.Component {
         hideModelUploadModal();
     }
 
-    handleConfirm = () => {}
-
-    handleOnSelect = (name) => () => {
-        const { loadSingleModel, config } = this.props;
+    handleConfirm = () => {
+        const { loadSingleModel, config, uploadModel } = this.props;
+        const { selection, file } = this.state;
         const { project } = config;
 
-        loadSingleModel(project, name);
+        if (file) {
+            uploadModel(project, file);
+        } else if (selection) {
+            loadSingleModel(project, selection);
+        }
+    }
+
+    handleOnSelect = (selection) => () => {
+        this.setState({ selection });
     }
 
     handleBeforeUpload = (file) => {
-        const { uploadModel, config } = this.props;
-        const { project } = config;
-
-        uploadModel(project, file);
+        this.setState({ file });
 
         return false;
     }
 
     getContent = () => {
-        const { list, data } = this.props;
+        const { list } = this.props;
+        const { selection } = this.state;
+
         return (
             <div className='box row'>
                 <ModelsSelector
                     onSelect={this.handleOnSelect}
-                    uploaded={data}
+                    selection={selection}
                     list={list}
                 />
                 <FileUploaderBox
@@ -101,7 +119,7 @@ class ModelUploadModal extends React.Component {
 }
 
 const mapStateToProps = (state = {}) => {
-    const { modelModal, config } = state;
+    const { models, config } = state;
     const {
         visible,
         loading = false,
@@ -109,7 +127,7 @@ const mapStateToProps = (state = {}) => {
         completed = false,
         data = false,
         list = []
-    } = modelModal;
+    } = models;
 
     return {
         config,

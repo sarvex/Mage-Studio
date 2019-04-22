@@ -110,7 +110,6 @@ class ModelsController {
             if (electron.isDesktop()) {
                 const file = FileHelper.fileFromBuffer(data.name, FileHelper.MODEL_TYPE(), buffer);
 
-                console.log(file);
                 Promise.all([
                     Promise.resolve(file.writeToFile()),
                     ProjectHelper.updateIndexFile()

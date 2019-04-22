@@ -12,12 +12,20 @@
     }
 }
 
+.file-box {
+
+    &.selected > .model-item > .icon {
+        color: $yellow;
+    }
+}
+
 .model-item {
 
     position: relative;
     float: left;
     height: $base-unit * 5;
     width: $base-unit * 5;
+    padding: $base-unit;
     margin: $base-unit;
 
     & .icon {

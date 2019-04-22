@@ -26,11 +26,6 @@ export const sceneModelUploadStarted = () => ({
     type: SCENE_MODEL_UPLOAD_STARTED
 });
 
-export const sceneModelUploadCompleted = ({ data = {} }) => ({
-    type: SCENE_MODEL_UPLOAD_COMPLETED,
-    data
-});
-
 export const sceneModelUploadFailed = () => ({
     type: SCENE_MODEL_UPLOAD_FAILED
 });
@@ -53,7 +48,7 @@ export const sceneModelFetchFailed = () => ({
 });
 
 export const getModels = (project) => (dispatch) => {
-    dispatch(sceneModelFetchStarted());
+    // dispatch(sceneModelFetchStarted());
 
     const url = `${PROJECTS_URL}/${project}/models`;
 
@@ -102,7 +97,8 @@ export const uploadModel = (project, file) => (dispatch) => {
             if (!response) {
                 dispatch(sceneModelUploadFailed());
             } else {
-                dispatch(sceneModelUploadCompleted(response));
+                const { data } = response;
+                dispatch(loadSingleModel(project, data.name));
             }
         })
         .catch(() => {

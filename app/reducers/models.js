@@ -24,14 +24,16 @@ export default function reducer(state = DEFAULT, action = {}) {
             return {
                 ...DEFAULT,
                 ...state,
-                visible: true
+                visible: true,
+                loading: false
             };
             break;
         case SCENE_MODEL_MODAL_HIDE:
             return {
                 ...DEFAULT,
                 ...state,
-                visible: false
+                visible: false,
+                loading: false
             };
             break;
         case SCENE_MODEL_FETCH_STARTED:
@@ -49,25 +51,26 @@ export default function reducer(state = DEFAULT, action = {}) {
                 ...DEFAULT,
                 ...state,
                 visible: true,
+                loading: false,
                 error: true
             };
             break;
-        case SCENE_MODEL_UPLOAD_COMPLETED:
-            return {
-                ...DEFAULT,
-                ...state,
-                loading: false,
-                visible: true,
-                completed: true,
-                data: action.data
-            };
-            break;
+        // case SCENE_MODEL_UPLOAD_COMPLETED:
+        //     return {
+        //         ...DEFAULT,
+        //         ...state,
+        //         loading: false,
+        //         visible: false,
+        //         completed: true,
+        //         data: action.data
+        //     };
+        //     break;
         case SCENE_MODEL_FETCH_COMPLETED:
             return {
                 ...DEFAULT,
                 ...state,
                 list: action.list,
-                visible: true,
+                    loading: false,
                 completed: true
             };
             break;

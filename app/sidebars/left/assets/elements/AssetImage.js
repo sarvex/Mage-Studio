@@ -1,10 +1,10 @@
 import React from 'react';
-import { Tooltip, Icon } from 'antd';
+import { Tooltip } from 'antd';
 import { getImageUrl } from '../../../../lib/constants';
 
 import '../assets.scss';
 
-const AssetItem = ({ name, type = 'file', project }) => (
+const AssetImage = ({ name, type = 'file', project }) => (
     <div>
         <Tooltip title={name} placement="bottom">
             <div className="asset-item image">
@@ -15,4 +15,4 @@ const AssetItem = ({ name, type = 'file', project }) => (
     </div>
 );
 
-export default AssetItem;
+export default AssetImage;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { addMesh } from '../actions/scene';
-import { showModelUploadModal } from '../actions/modelModal';
+import { showModelUploadModal } from '../actions/models';
 
 export class SceneToolbar extends React.Component {
 

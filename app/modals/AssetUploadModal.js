@@ -35,7 +35,6 @@ class AssetUploadModal extends React.Component {
        const { onUpload } = this.props;
 
        if (file) {
-           console.log('onUpload', file);
            onUpload(file);
        }
     }
