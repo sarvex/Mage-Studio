@@ -13,11 +13,10 @@ import {
     uploadTexture
 } from '../../../actions/textures';
 
-class AssetsBox extends React.Component {
+export class AssetsBox extends React.Component {
 
     componentDidMount() {
-        // getting assets
-        const { getAssets, config } = this.props;
+        const { getAssets = f => f, config } = this.props;
         const { project } = config;
 
         getAssets(project);
@@ -25,9 +24,9 @@ class AssetsBox extends React.Component {
 
     handleAssetsMenuChange = ({ key }) => {
         const  { showTextureModal } = this.props;
-        console.log('clicked key, ', key);
+
         switch(key) {
-            case 'texture':
+            case 'textures':
                 showTextureModal();
                 break;
             default:
@@ -41,11 +40,9 @@ class AssetsBox extends React.Component {
         // upload stuff
         switch(type) {
             case 'textures':
-                console.log('uploading texture maybe');
                 uploadTexture(project, file);
                 break;
             default:
-                console.log('nope');
                 break;
         }
     }
@@ -84,6 +81,7 @@ class AssetsBox extends React.Component {
                     )) }
                 </div>
                 <AssetUploadModal
+                    type={"textures"}
                     hideModal={this.handleModalHide('textures')}
                     onUpload={this.handleUpload('textures')}
                     loading={textures.textureModalLoading}

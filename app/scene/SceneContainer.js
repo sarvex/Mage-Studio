@@ -14,8 +14,6 @@ import {
     loadScene
 } from '../actions/scene';
 
-import debounce from '../lib/debounce';
-
 import Scene from './Scene';
 import SceneToolbar from './SceneToolbar';
 import ModelModal from '../modals/ModelUploadModal';

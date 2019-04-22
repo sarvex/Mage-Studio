@@ -21,7 +21,9 @@ server.use(morgan('dev'));
 server.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }));
-server.use(bodyParser.urlencoded({ extended: true }));
+
+server.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+server.use(bodyParser.json({ limit: '100mb', extended: true }));
 
 const onListenComplete = function() {
     console.log(`> Ready on http://localhost:${PORT}`);

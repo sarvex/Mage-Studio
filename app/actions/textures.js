@@ -42,7 +42,6 @@ export const uploadTexture = (project, file) => (dispatch) => {
         .post(url, formData)
         .then((response) => {
             if (!response) {
-                console.log('failure');
                 dispatch(textureUploadFailed());
             } else {
                 dispatch(textureUploadCompleted());
@@ -52,7 +51,6 @@ export const uploadTexture = (project, file) => (dispatch) => {
             }
         })
         .catch((e) => {
-            console.log('failure', e);
             dispatch(textureUploadFailed());
         });
 };
