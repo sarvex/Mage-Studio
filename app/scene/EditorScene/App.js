@@ -111,7 +111,6 @@ export class EditorScene extends App {
     }
 
     onMeshDeselect = () => {
-        this.transform.detach();
         this.dispatchEvent({ type: 'meshDetached' });
     }
 
