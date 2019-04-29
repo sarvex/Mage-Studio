@@ -2,14 +2,16 @@ import {
     SCENE_SAVE_REQUEST,
     SCENE_SAVE_LOADING,
     SCENE_SAVE_SUCCESS,
-    SCENE_SAVE_FAILURE
+    SCENE_SAVE_FAILURE, PROJECT_PLAYER_VISIBLE, PROJECT_PLAYER_HIDDEN
 } from '../actions/types';
 
 const DEFAULT = {
     requested: false,
     saving: false,
     error: false,
-    saved: false
+    saved: false,
+    projectRunning: false,
+    projectPlayerVisible: false
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
@@ -40,6 +42,18 @@ export default function reducer(state = DEFAULT, action = {}) {
                 ...state,
                 ...DEFAULT,
                 error: true
+            };
+            break;
+        case PROJECT_PLAYER_VISIBLE:
+            return {
+                ...state,
+                projectPlayerVisible: true
+            };
+            break;
+        case PROJECT_PLAYER_HIDDEN:
+            return {
+                ...state,
+                projectPlayerVisible: false
             };
             break;
         default:

@@ -45,6 +45,12 @@ router.route('/:id/scripts/:scriptid')
 router.route('/:id/assets')
     .get(ProjectController.getAssets);
 
+router.route('/:id/start')
+    .post(ProjectController.startProject);
+
+router.route('/:id/stop')
+    .post(ProjectController.stopProject);
+
 module.exports = {
     router: router,
     endpoint: '/api/projects'

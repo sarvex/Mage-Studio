@@ -2,9 +2,13 @@ import {
     SCENE_SAVE_REQUEST,
     SCENE_SAVE_LOADING,
     SCENE_SAVE_SUCCESS,
-    SCENE_SAVE_FAILURE
+    SCENE_SAVE_FAILURE,
+    PROJECT_RUNNING,
+    PROJECT_STOPPED,
+    PROJECT_PLAYER_VISIBLE,
+    PROJECT_PLAYER_HIDDEN
 } from './types';
-import { SCENES_URL } from '../lib/constants';
+import { getProjectsUrl, getScenesUrl } from '../lib/constants';
 import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 
@@ -27,6 +31,20 @@ export const sceneSaveSuccess = () => ({
 export const sceneSaveFailure = () => ({
     type: SCENE_SAVE_FAILURE
 });
+
+export const projectRunning = () => ({
+    type: PROJECT_RUNNING
+});
+
+export const projectStopped = () => ({
+    type: PROJECT_STOPPED
+});
+
+export const projectPlayerVisible = (visible) => (dispatch) => {
+    dispatch({
+        type: visible ? PROJECT_PLAYER_VISIBLE : PROJECT_PLAYER_HIDDEN
+    })
+}
 
 export const addMesh = (type) => {
     getOrCreateApp()
@@ -52,7 +70,7 @@ export const saveScene = (name, scene) => (dispatch) => {
     dispatch(sceneSaveLoading());
 
     axios
-        .post(`${SCENES_URL}/${name}`, { scene: JSON.stringify(scene) })
+        .post(getScenesUrl(name), { scene: JSON.stringify(scene) })
         .then(() => {
             dispatch(sceneSaveSuccess());
         })
@@ -62,10 +80,32 @@ export const saveScene = (name, scene) => (dispatch) => {
 };
 
 export const loadScene = (name) => (dispatch) => {
-    const url = `${SCENES_URL}/${name}`;
+    const url = getScenesUrl(name);
+
+    // should dispatch an action here and show some loading screen when
+    // loading the scene from BE.
 
     getOrCreateApp()
         .then(app => {
-            axios(url).then(({ data }) => app.parseScene(data))
+            axios(url)
+                .then(({ data }) => app.parseScene(data))
         })
-}
+};
+
+export const startProject = project => dispatch => {
+    const url = `${getProjectsUrl(project)}/start`;
+
+    // dispatch something here about starting the app
+
+    axios
+        .post(url)
+        .then(({ data }) => {
+            // dispatch something that will cause the editor to show the iframe
+            console.log(data);
+            dispatch(projectRunning());
+            dispatch(projectPlayerVisible(true));
+        })
+        .catch(e => {
+            // handling the failure of starting the project
+        })
+};

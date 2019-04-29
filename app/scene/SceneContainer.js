@@ -11,14 +11,18 @@ import {
 
 import {
     saveScene,
-    loadScene
+    loadScene,
+    projectPlayerVisible,
+    startProject
 } from '../actions/scene';
 
 import Scene from './Scene';
 import SceneToolbar from './SceneToolbar';
+import Player from './Player';
 import ModelModal from '../modals/ModelUploadModal';
 
 import './scene.scss';
+import { showModelUploadModal } from '../actions/models';
 
 class SceneContainer extends React.Component {
 
@@ -27,47 +31,66 @@ class SceneContainer extends React.Component {
     }
 
     render() {
+        const {
+            scene,
+            store,
+            config,
+            loadScene,
+            onMeshChanged,
+            onMeshAttached,
+            onMeshDetached,
+            onSceneExported,
+            startProject,
+            showModelModal
+        } = this.props;
+
+        const { projectPlayerVisible, projectUrl } = scene;
+
         return (
             <div className='scene-container'>
                 <Scene
-                    config={this.props.config}
-                    store={this.props.store}
-                    onSceneLoad={this.props.loadScene}
-                    onMeshChanged={this.props.onMeshChanged}
-                    onMeshAttached={this.props.onMeshAttached}
-                    onMeshDetached={this.props.onMeshDetached}
-                    onSceneExported={this.props.onSceneExported}
+                    config={config}
+                    store={store}
+                    onSceneLoad={loadScene}
+                    onMeshChanged={onMeshChanged}
+                    onMeshAttached={onMeshAttached}
+                    onMeshDetached={onMeshDetached}
+                    onSceneExported={onSceneExported}
                 />
-                <SceneToolbar />
+                <Player
+                    url={projectUrl}
+                    onDismiss={}
+                    visible={projectPlayerVisible} />
+                <SceneToolbar
+                    config={config}
+                    showModelModal={showModelModal}
+                    startProject={startProject}
+                />
                 <ModelModal />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    const { config } = state;
-
-    return {
-        ...config
-    };
-}
+const mapStateToProps = ({ config, scene }) => ({
+    config,
+    scene
+});
 
 const mapDispatchToProps = (dispatch) => ({
 
+    startProject: project => dispatch(startProject(project)),
+    showModelModal: () => dispatch(showModelUploadModal()),
     onMeshChanged: ({element, position, rotation, scale}) => {
         return dispatch(meshChanged(element, position, rotation, scale))
     },
-
     onMeshAttached: ({element, position, rotation, scale}) => {
         return dispatch(meshAttached(element, position, rotation, scale))
     },
-
     onMeshDetached: () => dispatch(meshDetached()),
-
     onSceneExported: (name) => ({ data }) => dispatch(saveScene(name, data)),
-
-    loadScene: (name) => dispatch(loadScene(name))
+    loadScene: (name) => dispatch(loadScene(name)),
+    hideProjectPlayer: () => dispatch(projectPlayerVisible(false))
 });
 
-export default connect(state => state, mapDispatchToProps)(SceneContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SceneContainer);

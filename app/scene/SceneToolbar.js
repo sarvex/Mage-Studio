@@ -1,8 +1,10 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
-import { connect } from 'react-redux';
 import { addMesh } from '../actions/scene';
-import { showModelUploadModal } from '../actions/models';
+
+const PLAY_OPTION = 'play';
+const FULLSCREEN_OPTION = 'fullscreen';
+const ADD_OPTION = 'add';
 
 export class SceneToolbar extends React.Component {
 
@@ -17,7 +19,7 @@ export class SceneToolbar extends React.Component {
 
         this.state = this.defaultState;
 
-        this.allowed = ['add', 'play', 'fullscreen'];
+        this.allowed = [ADD_OPTION, PLAY_OPTION, FULLSCREEN_OPTION];
     }
 
     getMenu() {
@@ -53,12 +55,28 @@ export class SceneToolbar extends React.Component {
         addMesh(which);
     }
 
+    handleOptionClick = (option) => {
+        const { startProject = f => f,  config } = this.props;
+        const { project } = config;
+
+        switch(option) {
+            case PLAY_OPTION:
+                startProject(project);
+                break;
+            case FULLSCREEN_OPTION:
+            default:
+                break;
+        }
+    }
+
     handleClick = (option) => () => {
         if (this.allowed.includes(option)) {
             this.setState({
                 ...this.defaultState,
                 [option]: true
             });
+
+            this.handleOptionClick(option);
         }
     }
 
@@ -72,7 +90,7 @@ export class SceneToolbar extends React.Component {
                 <Dropdown
                     overlay={this.getMenu()}
                     trigger={['click']}
-                    onClick={this.handleClick('add')}
+                    onClick={this.handleClick(ADD_OPTION)}
                     placement={'topLeft'}>
                     <p className={addClassName}>
                         <Icon type="plus" />
@@ -80,12 +98,12 @@ export class SceneToolbar extends React.Component {
                 </Dropdown>
                 <p
                     className={playClassName}
-                    onClick={this.handleClick('play')}>
+                    onClick={this.handleClick(PLAY_OPTION)}>
                     <Icon type="caret-right" />
                 </p>
                 <p
                     className={fullscreenClassName}
-                    onClick={this.handleClick('fullscreen')}>
+                    onClick={this.handleClick(FULLSCREEN_OPTION)}>
                     <Icon type="fullscreen" />
                 </p>
             </div>
@@ -93,9 +111,4 @@ export class SceneToolbar extends React.Component {
     }
 }
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = (dispatch) => ({
-    showModelModal: () => dispatch(showModelUploadModal())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SceneToolbar);
+export default SceneToolbar;
