@@ -1,3 +1,4 @@
+const ProjectServer = require('./ProjectServer');
 const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
@@ -42,12 +43,9 @@ class ProjectHelper {
         return new Promise((resolve, reject) => {
             ProjectHelper
                 .exists(project)
-                .then(path => {
-                    NpmHelper
-                        .run(path)
-                        .then(resolve)
-                        .catch(reject);
-                })
+                .then(NpmHelper.build)
+                .then(ProjectServer.start)
+                .then(resolve)
                 .catch(reject);
         });
     }
@@ -56,12 +54,9 @@ class ProjectHelper {
         return new Promise((resolve, reject) => {
             ProjectHelper
                 .exists(project)
-                .then(() => {
-                    NpmHelper
-                        .stop()
-                        .then(resolve)
-                        .catch(reject);
-                })
+                .then(ProjectServer.stop)
+                .then(resolve)
+                .catch(reject);
         })
     }
 

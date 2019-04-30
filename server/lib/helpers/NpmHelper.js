@@ -1,7 +1,7 @@
 const npm = require('npm');
 const spawn = require('child_process').spawn;
 
-let instance = null;
+let buildProcess = null;
 
 const options = {
     logLevel: 'silent',
@@ -32,22 +32,22 @@ class NpmHelper {
         });
     }
 
-    static run(path) {
+    static build(path) {
         return new Promise((resolve, reject) => {
             try {
-                if (instance && !instance.killed) {
+                if (buildProcess && !buildProcess.killed) {
                     return resolve();
                 }
 
                 // we should get a random open port above 8080
                 // and pass it to npm run dev
-                const PORT = 8085;
+                // const PORT = 8085;
 
-                instance = spawn('npm', ['run', 'dev', '--prefix', `${path}`, `--`, `${PORT}`], { stdio: 'inherit' });
+                buildProcess = spawn('npm', ['run', 'build', '--prefix'], { stdio: 'inherit' });
 
-                const url = `http://localhost:${PORT}`;
+                // const url = `http://localhost:${PORT}`;
 
-                resolve(url);
+                buildProcess.on('exit', () => resolve(path));
             } catch(e) {
                 reject(e);
             }
