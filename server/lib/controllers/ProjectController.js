@@ -137,10 +137,10 @@ class ProjectController {
         if (electron.isDesktop()) {
             ProjectHelper
                 .runProject(id)
-                .then(function() {
+                .then(function(url) {
                     return res
                         .status(messages.PROJECT_STARTED.code)
-                        .json({ message: messages.PROJECT_STARTED.text });
+                        .json({ url });
                 })
                 .catch(function() {
                     return res

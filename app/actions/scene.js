@@ -32,8 +32,9 @@ export const sceneSaveFailure = () => ({
     type: SCENE_SAVE_FAILURE
 });
 
-export const projectRunning = () => ({
-    type: PROJECT_RUNNING
+export const projectRunning = (url) => ({
+    type: PROJECT_RUNNING,
+    url
 });
 
 export const projectStopped = () => ({
@@ -101,8 +102,7 @@ export const startProject = project => dispatch => {
         .post(url)
         .then(({ data }) => {
             // dispatch something that will cause the editor to show the iframe
-            console.log(data);
-            dispatch(projectRunning());
+            dispatch(projectRunning(data.url));
             dispatch(projectPlayerVisible(true));
         })
         .catch(e => {

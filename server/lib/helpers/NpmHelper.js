@@ -44,7 +44,10 @@ class NpmHelper {
                 const PORT = 8085;
 
                 instance = spawn('npm', ['run', 'dev', '--prefix', `${path}`, `--`, `${PORT}`], { stdio: 'inherit' });
-                resolve();
+
+                const url = `http://localhost:${PORT}`;
+
+                resolve(url);
             } catch(e) {
                 reject(e);
             }

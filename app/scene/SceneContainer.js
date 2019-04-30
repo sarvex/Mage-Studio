@@ -41,13 +41,20 @@ class SceneContainer extends React.Component {
             onMeshDetached,
             onSceneExported,
             startProject,
-            showModelModal
+            showModelModal,
+            hideProjectPlayer
         } = this.props;
 
         const { projectPlayerVisible, projectUrl } = scene;
 
+        console.log(projectPlayerVisible);
+
         return (
             <div className='scene-container'>
+                <Player
+                    url={projectUrl}
+                    onDismiss={hideProjectPlayer}
+                    visible={projectPlayerVisible} />
                 <Scene
                     config={config}
                     store={store}
@@ -55,17 +62,11 @@ class SceneContainer extends React.Component {
                     onMeshChanged={onMeshChanged}
                     onMeshAttached={onMeshAttached}
                     onMeshDetached={onMeshDetached}
-                    onSceneExported={onSceneExported}
-                />
-                <Player
-                    url={projectUrl}
-                    onDismiss={}
-                    visible={projectPlayerVisible} />
+                    onSceneExported={onSceneExported} />
                 <SceneToolbar
                     config={config}
                     showModelModal={showModelModal}
-                    startProject={startProject}
-                />
+                    startProject={startProject} />
                 <ModelModal />
             </div>
         );

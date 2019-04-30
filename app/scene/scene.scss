@@ -19,6 +19,14 @@
         }
     }
 
+    & #gamePlayer + #gameContainer {
+        visibility: hidden;
+    }
+
+    & #gamePlayer {
+        position: absolute;
+    }
+
     & .scene-toolbar {
         /* margin: auto; */
         /* display: inline-block; */

@@ -50,7 +50,6 @@ export default function reducer(state = DEFAULT, action = {}) {
             return {
                 ...DEFAULT,
                 ...state,
-                visible: true,
                 loading: false,
                 error: true
             };
@@ -67,10 +66,9 @@ export default function reducer(state = DEFAULT, action = {}) {
         //     break;
         case SCENE_MODEL_FETCH_COMPLETED:
             return {
-                ...DEFAULT,
                 ...state,
                 list: action.list,
-                    loading: false,
+                loading: false,
                 completed: true
             };
             break;
