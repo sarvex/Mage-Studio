@@ -12,8 +12,8 @@ import {
 import {
     saveScene,
     loadScene,
-    projectPlayerVisible,
-    startProject
+    startProject,
+    stopProject
 } from '../actions/scene';
 
 import Scene from './Scene';
@@ -42,7 +42,7 @@ class SceneContainer extends React.Component {
             onSceneExported,
             startProject,
             showModelModal,
-            hideProjectPlayer
+            stopProject
         } = this.props;
 
         const { projectPlayerVisible, projectUrl } = scene;
@@ -53,7 +53,6 @@ class SceneContainer extends React.Component {
             <div className='scene-container'>
                 <Player
                     url={projectUrl}
-                    onDismiss={hideProjectPlayer}
                     visible={projectPlayerVisible} />
                 <Scene
                     config={config}
@@ -64,6 +63,8 @@ class SceneContainer extends React.Component {
                     onMeshDetached={onMeshDetached}
                     onSceneExported={onSceneExported} />
                 <SceneToolbar
+                    playerVisible={projectPlayerVisible}
+                    stopProject={stopProject}
                     config={config}
                     showModelModal={showModelModal}
                     startProject={startProject} />
@@ -91,7 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
     onMeshDetached: () => dispatch(meshDetached()),
     onSceneExported: (name) => ({ data }) => dispatch(saveScene(name, data)),
     loadScene: (name) => dispatch(loadScene(name)),
-    hideProjectPlayer: () => dispatch(projectPlayerVisible(false))
+    stopProject: (project) => dispatch(stopProject(project))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SceneContainer);

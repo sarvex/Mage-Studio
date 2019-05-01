@@ -5,8 +5,7 @@
     width: 100%;
     height: 100%;
 
-    & #gameContainer,
-    & #gamePlayer {
+    & #gameContainer{
         flex: 1 1 auto;
         min-height: 600px;
         min-width: 800px;
@@ -24,7 +23,10 @@
     }
 
     & #gamePlayer {
-        position: absolute;
+        position: relative;
+        margin: auto;
+        height: 95.6vh;
+        width: 66.6vw;
     }
 
     & .scene-toolbar {

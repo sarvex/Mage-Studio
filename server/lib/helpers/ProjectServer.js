@@ -15,7 +15,7 @@ class ProjectServer {
 
             server.listen(8085);
 
-            resolve();
+            resolve('http://localhost:8085');
         })
         /*
         *  creates the instance of the httpserver
@@ -25,13 +25,24 @@ class ProjectServer {
     }
 
     static isRunning() {
-        return server !== null;
+        return server !== null && server.close;
     }
 
-    static stop(path) {
+    static stop() {
         /*
         * stop the current server instance
         * */
+        return new Promise((resolve, reject) => {
+            try {
+                if (ProjectServer.isRunning()) {
+                    server.close(resolve);
+                } else {
+                    resolve();
+                }
+            } catch(e) {
+                reject(e);
+            }
+        });
     }
 }
 

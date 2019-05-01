@@ -1,7 +1,7 @@
 import React from 'react';
 import './scene.scss';
 
-const Player = ({ visible, url, onDismiss }) => {
+const Player = ({ visible, url }) => {
     if (!visible) return null;
 
     return (

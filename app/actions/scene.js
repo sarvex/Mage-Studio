@@ -101,9 +101,28 @@ export const startProject = project => dispatch => {
     axios
         .post(url)
         .then(({ data }) => {
+            console.log(data.url);
             // dispatch something that will cause the editor to show the iframe
             dispatch(projectRunning(data.url));
             dispatch(projectPlayerVisible(true));
+        })
+        .catch(e => {
+            // handling the failure of starting the project
+        })
+};
+
+export const stopProject = project => dispatch => {
+    const url = `${getProjectsUrl(project)}/stop`;
+
+    // dispatch something here about starting the app
+
+    axios
+        .post(url)
+        .then(({ data }) => {
+            console.log(data.url);
+            // dispatch something that will cause the editor to show the iframe
+            dispatch(projectStopped());
+            dispatch(projectPlayerVisible(false));
         })
         .catch(e => {
             // handling the failure of starting the project

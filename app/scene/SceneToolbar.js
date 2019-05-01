@@ -56,12 +56,12 @@ export class SceneToolbar extends React.Component {
     }
 
     handleOptionClick = (option) => {
-        const { startProject = f => f,  config } = this.props;
+        const { startProject = f => f, stopProject = f => f, config, playerVisible } = this.props;
         const { project } = config;
 
         switch(option) {
             case PLAY_OPTION:
-                startProject(project);
+                playerVisible ? stopProject(project) : startProject(project);
                 break;
             case FULLSCREEN_OPTION:
             default:
@@ -80,7 +80,13 @@ export class SceneToolbar extends React.Component {
         }
     }
 
+    getPlayIcon = (playerVisible) => (
+        playerVisible ? <Icon type="pause" /> : <Icon type="caret-right" />
+    )
+
     render() {
+        const { playerVisible } = this.props;
+
         const addClassName = `scene-toolbar-action ${this.state.add ? 'active' : '' }`;
         const playClassName = `scene-toolbar-action ${this.state.play ? 'active' : '' }`;
         const fullscreenClassName = `scene-toolbar-action ${this.state.fullscreen ? 'active' : '' }`;
@@ -99,7 +105,7 @@ export class SceneToolbar extends React.Component {
                 <p
                     className={playClassName}
                     onClick={this.handleClick(PLAY_OPTION)}>
-                    <Icon type="caret-right" />
+                    { this.getPlayIcon(playerVisible)}
                 </p>
                 <p
                     className={fullscreenClassName}
