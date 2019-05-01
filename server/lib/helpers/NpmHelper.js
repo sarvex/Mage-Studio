@@ -43,7 +43,7 @@ class NpmHelper {
                 // and pass it to npm run dev
                 // const PORT = 8085;
 
-                buildProcess = spawn('npm', ['run', 'build', '--prefix'], { stdio: 'inherit' });
+                buildProcess = spawn('npm', ['run', 'build', '--prefix', `${path}`], { stdio: 'inherit' });
 
                 // const url = `http://localhost:${PORT}`;
 
