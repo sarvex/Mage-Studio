@@ -47,8 +47,6 @@ class SceneContainer extends React.Component {
 
         const { projectPlayerVisible, projectUrl } = scene;
 
-        console.log(projectPlayerVisible);
-
         return (
             <div className='scene-container'>
                 <Player

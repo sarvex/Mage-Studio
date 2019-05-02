@@ -6,22 +6,24 @@ class ProjectServer {
 
     static start(path) {
 
-        console.log('server start', path);
+        const PORT = 8085;
+        const url = `http://localhost:${PORT}`;
 
         return new Promise((resolve, reject) => {
-            server = express();
+            try {
+                if (!ProjectServer.isRunning()) {
+                    server = express();
+                    server.use(express.static(path));
+                    server.listen(PORT);
 
-            server.use(express.static(path));
-
-            server.listen(8085);
-
-            resolve('http://localhost:8085');
+                    resolve(url);
+                } else {
+                    resolve(url);
+                }
+            } catch(e) {
+                reject(e);
+            }
         })
-        /*
-        *  creates the instance of the httpserver
-        *  stores the instance of the swerver somewhere
-        *
-        * */
     }
 
     static isRunning() {
@@ -36,6 +38,7 @@ class ProjectServer {
             try {
                 if (ProjectServer.isRunning()) {
                     server.close(resolve);
+                    server = null;
                 } else {
                     resolve();
                 }

@@ -40,7 +40,6 @@ class NpmHelper {
                 // we should get a random open port above 8080
                 // and pass it to npm run dev
                 // const PORT = 8085;
-                console.log('building path ', path);
                 const buildProcess = spawn('npm', ['run', 'build', '--prefix', `${path}`], { stdio: 'inherit' });
 
                 // const url = `http://localhost:${PORT}`;

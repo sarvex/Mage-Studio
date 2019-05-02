@@ -101,7 +101,6 @@ export const startProject = project => dispatch => {
     axios
         .post(url)
         .then(({ data }) => {
-            console.log(data.url);
             // dispatch something that will cause the editor to show the iframe
             dispatch(projectRunning(data.url));
             dispatch(projectPlayerVisible(true));
@@ -119,7 +118,6 @@ export const stopProject = project => dispatch => {
     axios
         .post(url)
         .then(({ data }) => {
-            console.log(data.url);
             // dispatch something that will cause the editor to show the iframe
             dispatch(projectStopped());
             dispatch(projectPlayerVisible(false));
