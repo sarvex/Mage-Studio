@@ -1,29 +1,50 @@
 const express = require('express');
+const fs = require('fs');
+const http = require('http');
+const path = require('path');
 
 let server = null;
 
 class ProjectServer {
 
-    static start(path) {
+    static start(projectPath) {
 
         const PORT = 8085;
-        const url = `http://localhost:${PORT}`;
+        const URL = `http://localhost:${PORT}`;
 
         return new Promise((resolve, reject) => {
             try {
                 if (!ProjectServer.isRunning()) {
-                    server = express();
-                    server.use(express.static(path));
-                    server.listen(PORT, () => {
-                        resolve(url);
+                    //server = express();
+                    //server.use(express.static(path));
+                    //server.listen(PORT, () => {
+                    //    resolve(URL);
+                    //});
+
+                    server = http.createServer(function (req, res) {
+                        const isRoot = req.url === '/';
+                        const PATH = path.join(projectPath, isRoot ? 'index.html' : req.url);
+
+                        fs.readFile(PATH, function (err, data) {
+                            if (err) {
+                                res.writeHead(404);
+                                res.end(JSON.stringify(err));
+                                return;
+                            }
+                            res.writeHead(200);
+                            res.end(data);
+                        });
                     });
-                } else {
-                    resolve(url);
+
+                    console.log(server);
+
+                    server.listen(PORT);
                 }
+                resolve(URL);
             } catch(e) {
                 reject(e);
             }
-        })
+        });
     }
 
     static isRunning() {
