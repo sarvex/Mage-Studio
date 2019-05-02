@@ -14,9 +14,9 @@ class ProjectServer {
                 if (!ProjectServer.isRunning()) {
                     server = express();
                     server.use(express.static(path));
-                    server.listen(PORT);
-
-                    resolve(url);
+                    server.listen(PORT, () => {
+                        resolve(url);
+                    });
                 } else {
                     resolve(url);
                 }
@@ -37,8 +37,10 @@ class ProjectServer {
         return new Promise((resolve, reject) => {
             try {
                 if (ProjectServer.isRunning()) {
-                    server.close(resolve);
-                    server = null;
+                    server.close(() => {
+                        server = null;
+                        resolve();
+                    });
                 } else {
                     resolve();
                 }
