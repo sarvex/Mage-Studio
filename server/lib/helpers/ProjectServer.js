@@ -1,4 +1,3 @@
-const express = require('express');
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
@@ -15,12 +14,6 @@ class ProjectServer {
         return new Promise((resolve, reject) => {
             try {
                 if (!ProjectServer.isRunning()) {
-                    //server = express();
-                    //server.use(express.static(path));
-                    //server.listen(PORT, () => {
-                    //    resolve(URL);
-                    //});
-
                     server = http.createServer(function (req, res) {
                         const isRoot = req.url === '/';
                         const PATH = path.join(projectPath, isRoot ? 'index.html' : req.url);
@@ -35,8 +28,6 @@ class ProjectServer {
                             res.end(data);
                         });
                     });
-
-                    console.log(server);
 
                     server.listen(PORT);
                 }
