@@ -11,6 +11,7 @@ export const ASSETS_TYPES = [
 ];
 
 export const buildUrl = (baseUrl, url) => (`http://${baseUrl}/${url}`);
+export const getScenesUrl = (scene) => `${SCENES_URL}/${scene}`;
 export const getProjectsUrl = (project) => `${PROJECTS_URL}/${project}`;
 export const getAssetsUrl = (project) => `${getProjectsUrl(project)}/assets`;
 export const getImagesUrl = (project) => `${getProjectsUrl(project)}/images`;

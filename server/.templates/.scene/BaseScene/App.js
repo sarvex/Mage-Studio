@@ -2,12 +2,8 @@ import { App } from 'mage-engine';
 
 export default class FirstScene extends App {
 
-    loadScene = () => Promise.resolve()
+    loadScene = () => this.loadScene('src/test/scene.json')
 
-    progressAnimation(callback) {
-        callback();
-    }
-    
     onCreate() {
 
     }

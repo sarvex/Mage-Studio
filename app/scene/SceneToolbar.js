@@ -1,8 +1,10 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
-import { connect } from 'react-redux';
 import { addMesh } from '../actions/scene';
-import { showModelUploadModal } from '../actions/models';
+
+const PLAY_OPTION = 'play';
+const FULLSCREEN_OPTION = 'fullscreen';
+const ADD_OPTION = 'add';
 
 export class SceneToolbar extends React.Component {
 
@@ -17,7 +19,7 @@ export class SceneToolbar extends React.Component {
 
         this.state = this.defaultState;
 
-        this.allowed = ['add', 'play', 'fullscreen'];
+        this.allowed = [ADD_OPTION, PLAY_OPTION, FULLSCREEN_OPTION];
     }
 
     getMenu() {
@@ -53,16 +55,38 @@ export class SceneToolbar extends React.Component {
         addMesh(which);
     }
 
+    handleOptionClick = (option) => {
+        const { startProject = f => f, stopProject = f => f, config, playerVisible } = this.props;
+        const { project } = config;
+
+        switch(option) {
+            case PLAY_OPTION:
+                playerVisible ? stopProject(project) : startProject(project);
+                break;
+            case FULLSCREEN_OPTION:
+            default:
+                break;
+        }
+    }
+
     handleClick = (option) => () => {
         if (this.allowed.includes(option)) {
             this.setState({
                 ...this.defaultState,
                 [option]: true
             });
+
+            this.handleOptionClick(option);
         }
     }
 
+    getPlayIcon = (playerVisible) => (
+        playerVisible ? <Icon type="pause" /> : <Icon type="caret-right" />
+    )
+
     render() {
+        const { playerVisible } = this.props;
+
         const addClassName = `scene-toolbar-action ${this.state.add ? 'active' : '' }`;
         const playClassName = `scene-toolbar-action ${this.state.play ? 'active' : '' }`;
         const fullscreenClassName = `scene-toolbar-action ${this.state.fullscreen ? 'active' : '' }`;
@@ -72,7 +96,7 @@ export class SceneToolbar extends React.Component {
                 <Dropdown
                     overlay={this.getMenu()}
                     trigger={['click']}
-                    onClick={this.handleClick('add')}
+                    onClick={this.handleClick(ADD_OPTION)}
                     placement={'topLeft'}>
                     <p className={addClassName}>
                         <Icon type="plus" />
@@ -80,12 +104,12 @@ export class SceneToolbar extends React.Component {
                 </Dropdown>
                 <p
                     className={playClassName}
-                    onClick={this.handleClick('play')}>
-                    <Icon type="caret-right" />
+                    onClick={this.handleClick(PLAY_OPTION)}>
+                    { this.getPlayIcon(playerVisible)}
                 </p>
                 <p
                     className={fullscreenClassName}
-                    onClick={this.handleClick('fullscreen')}>
+                    onClick={this.handleClick(FULLSCREEN_OPTION)}>
                     <Icon type="fullscreen" />
                 </p>
             </div>
@@ -93,9 +117,4 @@ export class SceneToolbar extends React.Component {
     }
 }
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = (dispatch) => ({
-    showModelModal: () => dispatch(showModelUploadModal())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SceneToolbar);
+export default SceneToolbar;

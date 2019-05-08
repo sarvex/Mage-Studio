@@ -117,6 +117,78 @@ class ProjectController {
         // when is done update config
         Config.updateLocalConfig({ project: projectName, scene: sceneName });
     }
+
+    static startProject(req, res) {
+        const id = req.params.id;
+        const currentconfig = Config.getLocalConfig();
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (id !== currentconfig.project) {
+            return res
+                .status(messages.WRONG_PROJECT_NAME.code)
+                .json({ message: messages.WRONG_PROJECT_NAME.text });
+        }
+
+        if (electron.isDesktop()) {
+            ProjectHelper
+                .runProject(id)
+                .then(function(url) {
+                    return res
+                        .status(messages.PROJECT_STARTED.code)
+                        .json({ url });
+                })
+                .catch(function() {
+                    return res
+                        .status(messages.PROJECT_NOT_STARTED.code)
+                        .json({ message: messages.PROJECT_NOT_STARTED.text });
+                })
+        } else {
+            return res
+                .status(200)
+                .json({ message: 'OK' });
+        }
+    }
+
+    static stopProject(req, res) {
+        const id = req.params.id;
+        const currentconfig = Config.getLocalConfig();
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (id !== currentconfig.project) {
+            return res
+                .status(messages.WRONG_PROJECT_NAME.code)
+                .json({ message: messages.WRONG_PROJECT_NAME.text });
+        }
+
+        if (electron.isDesktop()) {
+            ProjectHelper
+                .stopProject(id)
+                .then(function() {
+                    return res
+                        .status(messages.PROJECT_STOPPED.code)
+                        .json({ message: messages.PROJECT_STOPPED.text });
+                })
+                .catch(function() {
+                    return res
+                        .status(messages.PROJECT_NOT_STOPPED.code)
+                        .json({ message: messages.PROJECT_NOT_STOPPED.text });
+                })
+        } else {
+            return res
+                .status(200)
+                .json({ message: 'OK' });
+        }
+    }
 }
 
 module.exports = ProjectController;

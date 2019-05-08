@@ -1,8 +1,10 @@
+const ProjectServer = require('./ProjectServer');
 const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
 const npm = require('npm');
 const Config = require('../config');
+const NpmHelper = require( './NpmHelper');
 const StringTemplates = require('./StringTemplates');
 
 const PROJECT_TEMPLATE_PATH = 'server/.templates/.project';
@@ -26,20 +28,36 @@ class ProjectHelper {
     static installDependencies(project) {
         // get npm and install dependencies inside project
         return new Promise((resolve, reject) => {
-            const path = Config.getProjectPath(project);
-
-            npm.load({ logLevel: 'silent', progress: false }, function (err) {
-                npm
-                    .commands
-                    .install(path, [], function(er, data) {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(data);
-                        }
-                });
-            });
+            ProjectHelper
+                .exists(project)
+                .then(path => {
+                    NpmHelper
+                        .install(path)
+                        .then(resolve);
+                })
+                .catch(reject);
         });
+    }
+
+    static runProject(project) {
+        return new Promise((resolve, reject) => {
+            ProjectHelper
+                .exists(project)
+                .then(NpmHelper.build)
+                .then(ProjectServer.start)
+                .then(resolve)
+                .catch(reject);
+        });
+    }
+
+    static stopProject(project) {
+        return new Promise((resolve, reject) => {
+            ProjectHelper
+                .exists(project)
+                .then(ProjectServer.stop)
+                .then(resolve)
+                .catch(reject);
+        })
     }
 
     static updateIndexFile() {
@@ -63,8 +81,17 @@ class ProjectHelper {
             });
     }
 
-    static exists(name) {
-        // check if project esists inside workspace
+    static exists(project) {
+        return new Promise((resolve, reject) => {
+            const projectPath = Config.getProjectPath(project);
+            fs.access(projectPath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(projectPath);
+                }
+            });
+        });
     }
 }
 

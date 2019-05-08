@@ -5,6 +5,10 @@ const WRONG_PROJECT_NAME = { code: 400, text: 'Selected project is unavailable '
 
 const PROJECT_CREATED = { code: 201, text: ''};
 const PROJECT_NOT_CREATED = { code: 204, text: 'Something went wrong when creating the project.' };
+const PROJECT_STARTED = { code: 200, text: ''};
+const PROJECT_NOT_STARTED = { code: 204, text: 'Something went wrong when stopping the project.' };
+const PROJECT_STOPPED = { code: 200, text: ''};
+const PROJECT_NOT_STOPPED = { code: 204, text: 'Something went wrong when stopping the project.' };
 
 const CONFIG_MISSING = { code: 404, text: 'Configuration is unavailable.' };
 const CONFIG_AVAILABLE = { code: 200 };
@@ -38,6 +42,10 @@ module.exports = {
     PROJECT_NAME_MISSING: PROJECT_NAME_MISSING,
     SCENE_NAME_MISSING: SCENE_NAME_MISSING,
     PROJECT_CREATED: PROJECT_CREATED,
+    PROJECT_STARTED: PROJECT_STARTED,
+    PROJECT_NOT_STARTED: PROJECT_NOT_STARTED,
+    PROJECT_STOPPED:  PROJECT_STOPPED,
+    PROJECT_NOT_STOPPED: PROJECT_NOT_STOPPED,
     CONFIG_MISSING: CONFIG_MISSING,
     CONFIG_AVAILABLE: CONFIG_AVAILABLE,
     PROJECT_NOT_CREATED: PROJECT_NOT_CREATED,
