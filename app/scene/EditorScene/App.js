@@ -7,7 +7,7 @@ import {
     ControlsManager,
     ImagesEngine,
     AmbientLight,
-    DirectionalLight,
+    SunLight,
     THREE,
     Mesh,
     PostProcessingEngine,
@@ -20,8 +20,6 @@ import {
     observeStore
 } from './reduxStore';
 
-import { script } from './cube';
-
 export class EditorScene extends App {
 
     constructor(...props) {
@@ -32,6 +30,23 @@ export class EditorScene extends App {
 
     progressAnimation(callback) {
         callback();
+    }
+
+    addAmbientLight() {
+        const light = new AmbientLight(0xeeeeee, 1);
+
+        light.addHelper();
+    }
+
+    addDirectionalLight() {
+        const light = new SunLight(0xeeeeee, 1, { x: 1, y: 1, z: 1});
+        light.position({
+            x: (Math.random() * 200) - 100,
+            y: (Math.random() * 200) - 100,
+            z: (Math.random() * 200) - 100
+        });
+
+        light.addHelper();
     }
 
     addCube() {
