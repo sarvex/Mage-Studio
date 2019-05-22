@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
-import { addMesh } from '../actions/scene';
+import { addMesh, addLight } from '../actions/scene';
 
 const PLAY_OPTION = 'play';
 const FULLSCREEN_OPTION = 'fullscreen';
@@ -25,19 +25,20 @@ export class SceneToolbar extends React.Component {
     getMenu() {
         return (
             <Menu>
-                <Menu.Item onClick={this.handleModelClick}>
+                <Menu.Item title='model' onClick={this.handleModelClick}>
                     model
                 </Menu.Item>
                 <Menu.SubMenu title="mesh">
-                    <Menu.Item onClick={this.handleMenuClick('cube')}>cube</Menu.Item>
-                    <Menu.Item onClick={this.handleMenuClick('sphere')}>sphere</Menu.Item>
-                    <Menu.Item onClick={this.handleMenuClick('cylinder')}>cylinder</Menu.Item>
+                    <Menu.Item title='cube' onClick={this.handleMeshClick('cube')}>cube</Menu.Item>
+                    <Menu.Item title='sphere' onClick={this.handleMeshClick('sphere')}>sphere</Menu.Item>
+                    <Menu.Item title='cylinder' onClick={this.handleMeshClick('cylinder')}>cylinder</Menu.Item>
                 </Menu.SubMenu>
                 <Menu.SubMenu title="sound">
                     <Menu.Item>sorry</Menu.Item>
                 </Menu.SubMenu>
                 <Menu.SubMenu title="light">
-                    <Menu.Item>sorry</Menu.Item>
+                    <Menu.Item title='ambient' onClick={this.handleLightClick('ambient')}>ambient light</Menu.Item>
+                    <Menu.Item title='sun' onClick={this.handleLightClick('sun')}>sun light</Menu.Item>
                 </Menu.SubMenu>
             </Menu>
         )
@@ -49,10 +50,18 @@ export class SceneToolbar extends React.Component {
         showModelModal();
     }
 
-    handleMenuClick = (which) => () => {
+    restoreButtonHighlight = () => {
         this.setState({ ...this.defaultState });
+    }
 
+    handleMeshClick = (which) => () => {
+        this.restoreButtonHighlight();
         addMesh(which);
+    }
+
+    handleLightClick = (which) => () => {
+        this.restoreButtonHighlight();
+        addLight(which);
     }
 
     handleOptionClick = (option) => {

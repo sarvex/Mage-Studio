@@ -15,6 +15,8 @@ import axios from 'axios';
 const CUBE = 'cube';
 const SPHERE = 'sphere';
 const CYLINDER = 'cylinder';
+const AMBIENT = 'ambient';
+const SUN = 'sun';
 
 export const requestSceneJson = () => ({
     type: SCENE_SAVE_REQUEST,
@@ -45,7 +47,23 @@ export const projectPlayerVisible = (visible) => (dispatch) => {
     dispatch({
         type: visible ? PROJECT_PLAYER_VISIBLE : PROJECT_PLAYER_HIDDEN
     })
-}
+};
+
+export const addLight = (type) => {
+    getOrCreateApp()
+        .then(app => {
+           switch(type) {
+               case AMBIENT:
+                   app.addAmbientLight();
+                   break;
+               case SUN:
+                   app.addSunLight();
+                   break;
+               default:
+                   break;
+           }
+        });
+};
 
 export const addMesh = (type) => {
     getOrCreateApp()
