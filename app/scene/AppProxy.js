@@ -29,13 +29,25 @@ let app;
 export async function getOrCreateApp() {
 
     if (window && !app) {
-        const { Router } = await import('mage-engine');
-        const { EditorScene } = await import('./EditorScene/App');
-
-        Router.on('/', EditorScene);
-
-        app = await Router.start(config, {}, '#gameContainer');
+        // const { Router } = await import('mage-engine');
+        // const { EditorScene } = await import('./EditorScene/App');
+        //
+        // Router.on('/', EditorScene);
+        //
+        // app = await Router.start(config, {}, '#gameContainer');
+        return Promise.all([
+            import('mage-engine'),
+            import('./EditorScene/App')
+        ]).then(([{ Router }, { EditorScene }]) => {
+            Router.on('/', EditorScene);
+            return Router
+                .start(config, {}, '#gameContainer')
+                .then((application) => {
+                    app = application;
+                    return Promise.resolve(app);
+                })
+        });
     }
 
-    return app;
+    return Promise.resolve(app);
 }

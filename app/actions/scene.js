@@ -12,11 +12,11 @@ import { getProjectsUrl, getScenesUrl } from '../lib/constants';
 import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 
-const CUBE = 'cube';
-const SPHERE = 'sphere';
-const CYLINDER = 'cylinder';
-const AMBIENT = 'ambient';
-const SUN = 'sun';
+export const CUBE = 'cube';
+export const SPHERE = 'sphere';
+export const CYLINDER = 'cylinder';
+export const AMBIENT = 'ambient';
+export const SUN = 'sun';
 
 export const requestSceneJson = () => ({
     type: SCENE_SAVE_REQUEST,
@@ -87,7 +87,6 @@ export const addMesh = (type) => {
 
 export const saveScene = (name, scene) => (dispatch) => {
     dispatch(sceneSaveLoading());
-
     axios
         .post(getScenesUrl(name), { scene: JSON.stringify(scene) })
         .then(() => {
@@ -98,16 +97,18 @@ export const saveScene = (name, scene) => (dispatch) => {
         });
 };
 
-export const loadScene = (name) => (dispatch) => {
+export const loadScene = (name) => () => {
     const url = getScenesUrl(name);
 
     // should dispatch an action here and show some loading screen when
     // loading the scene from BE.
-
     getOrCreateApp()
         .then(app => {
-            axios(url)
-                .then(({ data }) => app.parseScene(data))
+            axios
+                .get(url)
+                .then(({ data }) => {
+                    app.parseScene(data)
+                });
         })
 };
 
