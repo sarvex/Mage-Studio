@@ -38,7 +38,7 @@ export class EditorScene extends App {
         light.addHelper();
     }
 
-    addDirectionalLight() {
+    addSunLight() {
         const light = new SunLight(0xeeeeee, 1, { x: 1, y: 1, z: 1});
         light.position({
             x: (Math.random() * 200) - 100,
