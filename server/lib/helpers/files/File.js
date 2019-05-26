@@ -40,6 +40,10 @@ class File {
         return fs.existsSync(this.fullPath);
     }
 
+    folderExists() {
+        return fs.existsSync(this.folder);
+    }
+
     setContent(content) {
         if (content instanceof Buffer) {
             this.isBuffer = true;
@@ -48,25 +52,45 @@ class File {
         this.content = content;
     }
 
-    read() {
-        const content = fs.readFileSync(this.fullPath);
-
-        this.setContent(content);
-        return content;
+    hasContent() {
+        return !!this.content;
     }
 
-    writeToFile() {
-        if (this.isBuffer) {
-            return this.writeBuffer();
+    read() {
+        if (this.exists()) {
+            const content = fs.readFileSync(this.fullPath);
+
+            this.setContent(content);
+            return content;
         }
-        return this.writeText();
+
+        return false;
+    }
+
+    write() {
+        if (this.hasContent()) {
+            if (this.isBuffer) {
+                return this.writeBuffer();
+            }
+            return this.writeText();
+        }
+
+        return false;
     }
 
     writeBuffer() {
         try {
-            const descriptor = fs.openSync(this.fullPath, 'w');
-            fs.writeSync(descriptor, this.content, 0, this.content.length, null);
-            fs.closeSync(descriptor);
+            const write = () => {
+                const descriptor = fs.openSync(this.fullPath, 'w');
+                fs.writeSync(descriptor, this.content, 0, this.content.length, null);
+                fs.closeSync(descriptor);
+            };
+
+            if (!this.folderExists()) {
+                fs.mkdir(this.folder, { recursive: true }, write);
+            } else {
+                write();
+            }
 
             return true;
         } catch (e) {
@@ -74,8 +98,22 @@ class File {
         }
     }
 
-    writeText(text) {
+    writeText() {
+        try {
+            const write = () => {
 
+            };
+
+            if (!this.folderExists()) {
+                fs.mkdir(this.folder, { recursive: true }, write);
+            } else {
+                write();
+            }
+
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
     move(destination) {

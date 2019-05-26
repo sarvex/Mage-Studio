@@ -110,7 +110,7 @@ class ModelsController {
                 const file = FileHelper.fileFromBuffer(data.name, FileHelper.TEXTURE_TYPE(), buffer);
 
                 Promise.all([
-                    Promise.resolve(file.writeToFile()),
+                    Promise.resolve(file.write()),
                     ProjectHelper.updateIndexFile()
                 ])
                 .then(() => {
