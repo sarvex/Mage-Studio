@@ -3,6 +3,7 @@ import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 import * as actions from './scene';
 import * as types from './types';
+import { MIMETYPES } from '../lib/constants';
 jest.mock('../scene/AppProxy');
 jest.mock('axios');
 
@@ -152,9 +153,16 @@ describe('actions - scene', () => {
 
         it('should make a POST to right url with right payload', () => {
             axios.post.mockReturnValue(Promise.resolve());
-            actions.saveScene('scene', { "value": "test" })(f => f);
+            const scene = { "value": "test" };
+            const blobParts = [JSON.stringify({ ...scene })];
+            const blobOptions = { type: MIMETYPES.APPLICATION_JSON };
+            const blob = new Blob(blobParts, blobOptions);
+            const formData = new FormData();
+            formData.append('data', blob, 'scene.json');
 
-            expect(axios.post).toHaveBeenCalledWith('api/scenes/scene', { scene: "{\"value\":\"test\"}" });
+            actions.saveScene('scene', scene)(f => f);
+
+            expect(axios.post).toHaveBeenCalledWith('api/scenes/scene', formData);
         });
     });
 

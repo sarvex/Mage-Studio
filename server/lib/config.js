@@ -91,6 +91,9 @@ function getFolderByAssetType(type) {
         case 'texture':
             folder = getTexturesPath();
             break;
+        case 'scene':
+            folder = getSrcRoot();
+            break;
         default:
             break;
     }

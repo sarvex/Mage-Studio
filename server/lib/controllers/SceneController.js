@@ -1,3 +1,4 @@
+const FileHelper = require('../helpers/files/FileHelper');
 const messages = require('../messages');
 const SceneHelper = require('../helpers/SceneHelper');
 const electron = require('../electron');
@@ -9,7 +10,7 @@ class SceneController {
     }
 
     static getSceneData(req, res) {
-        // getting name of the scen
+        // getting name of the scene
         const name = req.params.id;
 
         if (!name) {
@@ -21,7 +22,7 @@ class SceneController {
         } else {
             if (electron.isDesktop()) {
                 if (SceneHelper.exists(name)) {
-                    const content = SceneHelper.readSceneData(name);
+                    const { content } = SceneHelper.readSceneData(name);
 
                     if (content) {
                         // if success, then return ok
@@ -49,6 +50,16 @@ class SceneController {
     static updateSceneData(req, res) {
         // getting name of the scen
         const name = req.params.id;
+        const files = req.files;
+
+        if (!files) {
+            return res
+                .status(messages.SCENE_DATA_MISSING.code)
+                .json({ message: messages.SCENE_DATA_MISSING.text });
+        }
+
+        const data = files.data;
+        const buffer = data.data;
 
         if (!name) {
             // return malformed input
@@ -59,31 +70,19 @@ class SceneController {
         } else {
             if (electron.isDesktop()) {
                 if (SceneHelper.exists(name)) {
-                    // check id scene data is available
-                    const data = req.body.scene;
 
-                    if (!data) {
-                        // no data available
+                    const file = FileHelper.fileFromBuffer(data.name, FileHelper.SCENE_TYPE(), buffer);
+
+                    if (file.write()) {
                         return res
-                            .status(messages.SCENE_DATA_MISSING.code)
-                            .json({ message: messages.SCENE_DATA_MISSING.text });
-
-                    } else {
-                        // try to copy data to scene json inside workspace/project/src/scene
-                        const status = SceneHelper.updateSceneData(name, data);
-
-                        if (status) {
-                            // if success, then return ok
-                            return res
-                                .status(messages.SCENE_JSON_CREATED.code)
-                                .json({ message: messages.SCENE_JSON_CREATED.text });
-                        } else {
-                            // if failure then return error message
-                            return res
-                                .status(messages.SCENE_JSON_NOT_CREATED.code)
-                                .json({ message: messages.SCENE_JSON_NOT_CREATED.text });
-                        }
+                            .status(messages.SCENE_JSON_CREATED.code)
+                            .json({ message: messages.SCENE_JSON_CREATED.text });
                     }
+
+                    return res
+                        .status(messages.SCENE_JSON_NOT_CREATED.code)
+                        .json({ message: messages.SCENE_JSON_NOT_CREATED.text });
+
                 } else {
                     // scene doesnt exist, return not created
                     return res
