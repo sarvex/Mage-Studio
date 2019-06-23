@@ -1,3 +1,4 @@
+const Scene = require('./Scene');
 const File = require('./File');
 const Asset = require('./Asset');
 const Script = require('./Script');
@@ -11,6 +12,8 @@ class FileHelper {
     static TEXTURE_TYPE() { return 'texture' }
     static SCRIPT_TYPE() { return 'script' }
 
+    static SCENE_TYPE() { return 'scene' }
+
     static fileFromBuffer(filename, type, buffer) {
         let file = null;
         switch(type) {
@@ -21,6 +24,10 @@ class FileHelper {
             case FileHelper.TEXTURE_TYPE():
             case FileHelper.IMAGE_TYPE():
                 file = new Asset(filename, type);
+                file.setContent(buffer);
+                break;
+            case FileHelper.SCENE_TYPE():
+                file = new Scene();
                 file.setContent(buffer);
                 break;
             default:
@@ -42,6 +49,9 @@ class FileHelper {
             case FileHelper.TEXTURE_TYPE():
             case FileHelper.IMAGE_TYPE():
                 file = new Asset(name, type);
+                break;
+            case FileHelper.SCENE_TYPE():
+                file = new Scene();
                 break;
             default:
                 break;

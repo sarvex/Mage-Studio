@@ -8,7 +8,7 @@ import {
     PROJECT_PLAYER_VISIBLE,
     PROJECT_PLAYER_HIDDEN
 } from './types';
-import { getProjectsUrl, getScenesUrl } from '../lib/constants';
+import {getProjectsUrl, getScenesUrl, MIMETYPES} from '../lib/constants';
 import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 
@@ -87,8 +87,16 @@ export const addMesh = (type) => {
 
 export const saveScene = (name, scene) => (dispatch) => {
     dispatch(sceneSaveLoading());
+
+    const blobParts = [JSON.stringify({ ...scene })];
+    const blobOptions = { type: MIMETYPES.APPLICATION_JSON };
+    const blob = new Blob(blobParts, blobOptions);
+    const formData = new FormData();
+
+    formData.append('data', blob, 'scene.json');
+
     axios
-        .post(getScenesUrl(name), { scene: JSON.stringify(scene) })
+        .post(getScenesUrl(name), formData)
         .then(() => {
             dispatch(sceneSaveSuccess());
         })

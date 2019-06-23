@@ -2,10 +2,12 @@ const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
 const Config = require('../config');
+const FileHelper = require('./files/FileHelper');
 
 const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
 const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
+const DEFAULT_SCENE_FILENAME = 'scene.json';
 
 class SceneHelper {
 
@@ -18,31 +20,22 @@ class SceneHelper {
                 if (err) {
                     reject(err);
                 } else {
-                    SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName);
-                    resolve();
+                    if (SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName)) {
+                        resolve();
+                    } else {
+                        reject();
+                    }
                 }
             });
         });
     }
 
     static rename(location, oldName, newName) {
-        const oldPath = path.join(location, oldName);
-        const newPath = path.join(location, newName);
-
-        fs.renameSync(oldPath, newPath);
-    }
-
-    static updateSceneData(sceneName, data) {
-        // copy scene.json inside the folder
-        const filename = 'scene.json';
-
-        const sceneJsonPath = path.join(
-            Config.getScenePath(sceneName),
-            filename
-        );
-
         try {
-            fs.writeFileSync(sceneJsonPath, data);
+            const oldPath = path.join(location, oldName);
+            const newPath = path.join(location, newName);
+            fs.renameSync(oldPath, newPath);
+
             return true;
         } catch(e) {
             return false;
@@ -51,15 +44,10 @@ class SceneHelper {
 
     static readSceneData(sceneName) {
         if (SceneHelper.exists(sceneName)) {
-            const sceneJsonPath = path.join(
-                Config.getScenePath(sceneName),
-                'scene.json'
-            );
-
             try {
-                const stringContent = fs.readFileSync(sceneJsonPath).toString('utf8');
-
-                return JSON.parse(stringContent);
+                const file = FileHelper.fileFromPath(DEFAULT_SCENE_FILENAME, FileHelper.SCENE_TYPE());
+                console.log(file);
+                return file.toJSON();
             } catch(e) {
                 return {};
             }
@@ -90,7 +78,7 @@ class SceneHelper {
 
     static exists(sceneName) {
         // check if a folder called sceneName exists inside projectName
-        return fs.existsSync(Config.getScenePath(sceneName));
+        return sceneName !== undefined  && fs.existsSync(Config.getScenePath(sceneName));
     }
 }
 
