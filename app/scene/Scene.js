@@ -29,6 +29,12 @@ export class Scene extends React.Component {
         this.app.addEventListener('sceneExported', onSceneExported(config.scene));
     }
 
+    async componentDidUpdate(prevProps) {
+        if (prevProps.fullscreen !== this.props.fullscreen && this.app) {
+            this.app.onResize();
+        }
+    }
+
     render() {
         return <div id="gameContainer" tabIndex={0}></div>
     }

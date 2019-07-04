@@ -161,7 +161,6 @@ describe('SceneToolbar', () => {
 
             expect(toolbar.state().add).toBe(false);
             expect(toolbar.state().play).toBe(false);
-            expect(toolbar.state().fullscreen).toBe(false);
         });
 
         it('should set state.add to true when clicking onn add dropdown', () => {
@@ -180,15 +179,6 @@ describe('SceneToolbar', () => {
             item.simulate('click');
 
             expect(toolbar.state().play).toBe(true);
-        });
-
-        it('should set state.fullscreen to true when clicking on fullscreen button', () => {
-            const toolbar = shallow(<SceneToolbar config={{ project: 'test' }}/>);
-            const item = toolbar.find('p').at(2);
-
-            item.simulate('click');
-
-            expect(toolbar.state().fullscreen).toBe(true);
         });
     });
 

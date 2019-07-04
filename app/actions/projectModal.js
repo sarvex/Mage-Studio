@@ -2,7 +2,9 @@ import {
     NEW_PROJECT_COMPLETED,
     NEW_PROJECT_SAVING,
     NEW_PROJECT_SAVED,
-    NEW_PROJECT_ERROR
+    NEW_PROJECT_ERROR,
+    NEW_PROJECT_HIDE,
+    NEW_PROJECT_SHOW
 } from './types';
 import { PROJECTS_URL } from '../lib/constants';
 import axios from 'axios';

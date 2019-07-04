@@ -13,8 +13,7 @@ export class SceneToolbar extends React.Component {
 
         this.defaultState = {
             add: false,
-            play: false,
-            fullscreen: false
+            play: false
         };
 
         this.state = this.defaultState;
@@ -65,7 +64,15 @@ export class SceneToolbar extends React.Component {
     }
 
     handleOptionClick = (option) => {
-        const { startProject = f => f, stopProject = f => f, config, playerVisible } = this.props;
+        const {
+            startProject = f => f,
+            stopProject = f => f,
+            config,
+            playerVisible,
+            onFullScreen = _ => g => g,
+            fullscreen
+        } = this.props;
+
         const { project } = config;
 
         switch(option) {
@@ -73,6 +80,8 @@ export class SceneToolbar extends React.Component {
                 playerVisible ? stopProject(project) : startProject(project);
                 break;
             case FULLSCREEN_OPTION:
+                onFullScreen(!fullscreen);
+                break;
             default:
                 break;
         }
@@ -89,12 +98,18 @@ export class SceneToolbar extends React.Component {
         }
     }
 
+    handleFullScreen = () => {
+        const { fullscreen, onFullScreen = f => f } = this.props;
+
+        onFullScreen(!fullscreen);
+    }
+
     getPlayIcon = (playerVisible) => (
         playerVisible ? <Icon type="pause" /> : <Icon type="caret-right" />
     )
 
     render() {
-        const { playerVisible } = this.props;
+        const { playerVisible, onFullScreen = _ => g => g, fullscreen } = this.props;
 
         const addClassName = `scene-toolbar-action ${this.state.add ? 'active' : '' }`;
         const playClassName = `scene-toolbar-action ${this.state.play ? 'active' : '' }`;
@@ -118,7 +133,7 @@ export class SceneToolbar extends React.Component {
                 </p>
                 <p
                     className={fullscreenClassName}
-                    onClick={this.handleClick(FULLSCREEN_OPTION)}>
+                    onClick={this.handleFullScreen}>
                     <Icon type="fullscreen" />
                 </p>
             </div>

@@ -24,10 +24,18 @@ import ModelModal from '../modals/ModelUploadModal';
 import './scene.scss';
 import { showModelUploadModal } from '../actions/models';
 
-class SceneContainer extends React.Component {
+export class SceneContainer extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            fullscreen: false
+        };
+    }
+
+    handleFullScreen = (fullscreen) => {
+        this.setState({ fullscreen });
     }
 
     render() {
@@ -45,14 +53,19 @@ class SceneContainer extends React.Component {
             stopProject
         } = this.props;
 
+        const { fullscreen } = this.state;
+
         const { projectPlayerVisible, projectUrl } = scene;
+        const fullScreenClassName = fullscreen ? 'fullscreen' : '';
+        const className = `scene-container ${fullScreenClassName}`;
 
         return (
-            <div className='scene-container'>
+            <div className={className}>
                 <Player
                     url={projectUrl}
                     visible={projectPlayerVisible} />
                 <Scene
+                    fullscreen={fullscreen}
                     config={config}
                     store={store}
                     onSceneLoad={loadScene}
@@ -65,7 +78,9 @@ class SceneContainer extends React.Component {
                     stopProject={stopProject}
                     config={config}
                     showModelModal={showModelModal}
-                    startProject={startProject} />
+                    startProject={startProject}
+                    fullscreen={fullscreen}
+                    onFullScreen={this.handleFullScreen}/>
                 <ModelModal />
             </div>
         );
