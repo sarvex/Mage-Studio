@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SceneContainer should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`SceneContainer should render properly if fullscreen 1`] = `ShallowWrapper {}`;

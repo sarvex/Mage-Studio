@@ -24,7 +24,7 @@ import ModelModal from '../modals/ModelUploadModal';
 import './scene.scss';
 import { showModelUploadModal } from '../actions/models';
 
-class SceneContainer extends React.Component {
+export class SceneContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class SceneContainer extends React.Component {
         };
     }
 
-    handleFullScreen = (fullscreen) => () => {
+    handleFullScreen = (fullscreen) => {
         this.setState({ fullscreen });
     }
 

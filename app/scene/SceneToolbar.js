@@ -69,7 +69,7 @@ export class SceneToolbar extends React.Component {
             stopProject = f => f,
             config,
             playerVisible,
-            onFullScreen = f => f,
+            onFullScreen = _ => g => g,
             fullscreen
         } = this.props;
 
@@ -98,12 +98,18 @@ export class SceneToolbar extends React.Component {
         }
     }
 
+    handleFullScreen = () => {
+        const { fullscreen, onFullScreen = f => f } = this.props;
+
+        onFullScreen(!fullscreen);
+    }
+
     getPlayIcon = (playerVisible) => (
         playerVisible ? <Icon type="pause" /> : <Icon type="caret-right" />
     )
 
     render() {
-        const { playerVisible, onFullScreen, fullscreen } = this.props;
+        const { playerVisible, onFullScreen = _ => g => g, fullscreen } = this.props;
 
         const addClassName = `scene-toolbar-action ${this.state.add ? 'active' : '' }`;
         const playClassName = `scene-toolbar-action ${this.state.play ? 'active' : '' }`;
@@ -127,7 +133,7 @@ export class SceneToolbar extends React.Component {
                 </p>
                 <p
                     className={fullscreenClassName}
-                    onClick={onFullScreen(!fullscreen)}>
+                    onClick={this.handleFullScreen}>
                     <Icon type="fullscreen" />
                 </p>
             </div>
