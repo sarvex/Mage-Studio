@@ -47,7 +47,7 @@ const setupServer = function() {
 
 // API routes
 electron
-    .setup()
+    .setup(PORT)
     .then(function() {
         app.prepare()
             .then(setupServer);
