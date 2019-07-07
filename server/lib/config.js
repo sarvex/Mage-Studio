@@ -14,17 +14,28 @@ function getDefaultLocalConfig() {
     return {
         workspace: '',
         project: '',
-        scene: 'BaseScene'
+        scene: 'BaseScene',
+        electron: {
+            window: {
+                title: 'Mage Studio',
+                darkTheme: true,
+                titleBarStyle: 'hidden'
+            }
+        }
     }
 }
 
 function getLocalConfig() {
     try {
+        const defaultConfig = getDefaultLocalConfig();
         const configPath = path.resolve(CONFIG_FILE_NAME);
         const file = fs.readFileSync(configPath, 'utf8');
         const content = yaml.safeLoad(file);
 
-        return content;
+        return {
+            ...defaultConfig,
+            ...content
+        };
     } catch(e) {
         console.log('[Mage] An error occured reading config file.', e);
         return false;
