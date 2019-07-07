@@ -10,7 +10,8 @@ class ConfigController {
         if (electron.isDesktop()) {
             // we're using electron, loading config from yml file
             const localconfig = Config.getLocalConfig();
-            if (!localconfig) {
+
+            if (!localconfig || !Object.keys(localconfig).length) {
                 res
                     .status(messages.CONFIG_MISSING.code)
                     .json({ message: messages.CONFIG_MISSING.text });

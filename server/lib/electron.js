@@ -1,6 +1,7 @@
 const electron = require('electron');
-const {app} = electron;
-const {BrowserWindow} = electron;
+const config = require('./config');
+const { app } = electron;
+const { BrowserWindow } = electron;
 
 let electronWindow;
 
@@ -17,11 +18,16 @@ const start = function(PORT) {
         return;
     }
 
+    const configuration = config.getLocalConfig();
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
 
     console.log('> window size: ', width, height);
 
-    electronWindow = new BrowserWindow({ width, height })
+    electronWindow = new BrowserWindow({
+        width,
+        height,
+        ...configuration.electron.window
+    });
     electronWindow.loadURL(`http://localhost:${PORT}`);
     console.log('> window size: ', width, height);
 
@@ -30,7 +36,7 @@ const start = function(PORT) {
     });
 }
 
-const setup = function() {
+const setup = function(PORT) {
     return new Promise(function(resolve, reject) {
         if (!isAvailable()) {
             resolve();
@@ -45,7 +51,7 @@ const setup = function() {
 
             app.on('activate', () => {
                 if (electronWindow === null) {
-                    start();
+                    start(PORT);
                 }
             });
         }
