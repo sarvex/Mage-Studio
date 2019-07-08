@@ -22,16 +22,19 @@ export const assetsFailure = () => ({
 
 export const getAllAssets = (project) => {
     return (dispatch) => {
-        const url = getAssetsUrl(project);
+        if (project) {
+            const url = getAssetsUrl(project);
 
-        dispatch(assetsLoading());
+            dispatch(assetsLoading());
 
-        axios(url)
-            .then(response => {
-                dispatch(assetsCompleted(response));
-            })
-            .catch( () => {
-                dispatch(assetsFailure());
-            });
+            axios
+                .get(url)
+                .then(response => {
+                    dispatch(assetsCompleted(response));
+                })
+                .catch( () => {
+                    dispatch(assetsFailure());
+                });
+        }
     }
 };

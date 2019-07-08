@@ -46,12 +46,12 @@ class AssetUploadModal extends React.Component {
     }
 
     render() {
-        const { visible, loading } = this.props;
+        const { visible, loading, type } = this.props;
 
         return (
             <Modal
                 className='modal'
-                title="Models"
+                title={type}
                 visible={visible}
                 onCancel={this.handleCancel}
                 footer={this.getFooter(loading)}>

@@ -127,6 +127,8 @@ class ProjectModal extends React.Component {
                 className='modal'
                 title="Project setup"
                 visible={isVisible}
+                closable={false}
+                maskClosable={false}
                 onCancel={this.props.onCancel}
                 footer={this.getFooter()}>
                 <div className='box'>
