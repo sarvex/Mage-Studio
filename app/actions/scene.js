@@ -93,7 +93,7 @@ export const saveScene = (name, scene) => (dispatch) => {
     const blob = new Blob(blobParts, blobOptions);
     const formData = new FormData();
 
-    formData.append('data', blob, 'scene.json');
+    formData.append('data', blob, name+'.json');
 
     axios
         .post(getScenesUrl(name), formData)
