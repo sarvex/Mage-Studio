@@ -158,11 +158,11 @@ describe('actions - scene', () => {
             const blobOptions = { type: MIMETYPES.APPLICATION_JSON };
             const blob = new Blob(blobParts, blobOptions);
             const formData = new FormData();
-            formData.append('data', blob, 'scene.json');
+            formData.append('data', blob, 'fakename.json');
 
-            actions.saveScene('scene', scene)(f => f);
+            actions.saveScene('fakename', scene)(f => f);
 
-            expect(axios.post).toHaveBeenCalledWith('api/scenes/scene', formData);
+            expect(axios.post).toHaveBeenCalledWith('api/scenes/fakename', formData);
         });
     });
 

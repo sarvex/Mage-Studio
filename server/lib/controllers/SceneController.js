@@ -69,26 +69,19 @@ class SceneController {
 
         } else {
             if (electron.isDesktop()) {
-                if (SceneHelper.exists(name)) {
 
-                    const file = FileHelper.fileFromBuffer(data.name, FileHelper.SCENE_TYPE(), buffer);
+                const file = FileHelper.fileFromBuffer(data.name, FileHelper.SCENE_TYPE(), buffer);
 
-                    if (file.write()) {
-                        return res
-                            .status(messages.SCENE_JSON_CREATED.code)
-                            .json({ message: messages.SCENE_JSON_CREATED.text });
-                    }
-
+                if (file.write()) {
                     return res
-                        .status(messages.SCENE_JSON_NOT_CREATED.code)
-                        .json({ message: messages.SCENE_JSON_NOT_CREATED.text });
-
-                } else {
-                    // scene doesnt exist, return not created
-                    return res
-                        .status(messages.SCENE_NOT_FOUND.code)
-                        .json({ message: messages.SCENE_NOT_FOUND.text });
+                        .status(messages.SCENE_JSON_CREATED.code)
+                        .json({ message: messages.SCENE_JSON_CREATED.text });
                 }
+
+                return res
+                    .status(messages.SCENE_JSON_NOT_CREATED.code)
+                    .json({ message: messages.SCENE_JSON_NOT_CREATED.text });
+
             } else {
                 // we should call real backend here
             }

@@ -9,6 +9,7 @@ const SCRIPTS = 'scripts';
 const TEXTURES = 'textures';
 const IMAGES = 'images';
 const MODELS = 'models';
+const SCENES = 'scenes';
 
 function getDefaultLocalConfig() {
     return {
@@ -69,25 +70,12 @@ function getProjectPath(project) {
     return path.join(local.workspace, projectName);
 }
 
-function getAssetsPath() {
-    return path.join(getProjectPath(), ASSETS);
-}
-
-function getScriptsPath() {
-    return path.join(getAssetsPath(), SCRIPTS);
-}
-
-function getTexturesPath() {
-    return path.join(getAssetsPath(), TEXTURES);
-}
-
-function getImagesPath() {
-    return path.join(getAssetsPath(), IMAGES);
-}
-
-function getModelsPath() {
-    return path.join(getAssetsPath(), MODELS);
-}
+function getAssetsPath() { return path.join(getProjectPath(), ASSETS); }
+function getScriptsPath() { return path.join(getAssetsPath(), SCRIPTS); }
+function getTexturesPath() { return path.join(getAssetsPath(), TEXTURES); }
+function getImagesPath() { return path.join(getAssetsPath(), IMAGES); }
+function getModelsPath() { return path.join(getAssetsPath(), MODELS); }
+function getScenePath() { return path.join(getAssetsPath(), SCENES); }
 
 function getFolderByAssetType(type) {
     let folder = getAssetsPath();
@@ -117,13 +105,6 @@ function getSrcRoot() {
         getProjectPath(),
         SRC
     );
-}
-
-function getScenePath(sceneName) {
-    return path.join(
-        getSrcRoot(),
-        sceneName
-    )
 }
 
 module.exports = {

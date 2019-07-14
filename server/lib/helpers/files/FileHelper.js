@@ -27,7 +27,7 @@ class FileHelper {
                 file.setContent(buffer);
                 break;
             case FileHelper.SCENE_TYPE():
-                file = new Scene();
+                file = new Scene(filename);
                 file.setContent(buffer);
                 break;
             default:
@@ -51,7 +51,7 @@ class FileHelper {
                 file = new Asset(name, type);
                 break;
             case FileHelper.SCENE_TYPE():
-                file = new Scene();
+                file = new Scene(name);
                 break;
             default:
                 break;
@@ -61,6 +61,9 @@ class FileHelper {
         return file;
     }
 
+    static fileHasExtension(filename = '') {
+        return filename.split('.').length >= 2;
+    }
 }
 
 module.exports = FileHelper;
