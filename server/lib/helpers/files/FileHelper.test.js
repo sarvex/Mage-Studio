@@ -151,4 +151,18 @@ describe('FileHelper', () => {
             expect(file.read.called).toBe(true);
         });
     });
+
+    describe('fileHasExtension', () => {
+
+        it('should return true if filename has an extension', () => {
+            const filename = 'simplefilename.js';
+            expect(FileHelper.fileHasExtension(filename)).toBe(true);
+
+        });
+
+        it('should return false if filename doesnt have an extension', () => {
+            const filename = 'noextension';
+            expect(FileHelper.fileHasExtension(filename)).toBe(false);
+        });
+    });
 });

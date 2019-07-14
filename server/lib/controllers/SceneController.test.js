@@ -101,14 +101,6 @@ describe('SceneController', () => {
             expect(mockResponse.json.calledWith({ message: 'Scene name is missing.' })).toBe(true);
         });
 
-        it('should return a response with right status and message if the scene doesnt exist', () => {
-            SceneHelper.exists.mockImplementation(() => false);
-            SceneController.updateSceneData(request, mockResponse);
-
-            expect(mockResponse.status.calledWith(404)).toBe(true);
-            expect(mockResponse.json.calledWithExactly({ message: 'Scene could not be found.' }));
-        });
-
         it('should return a response with right status and message if manages to write content', () => {
             SceneHelper.exists.mockImplementation(() => true);
             FileHelper.fileFromBuffer.mockImplementation(() => ({ write: () => true }));
