@@ -1,7 +1,5 @@
 import React from 'react';
-import Layout from '../app/Layout';
-import { version, Button } from 'antd';
-import axios from 'axios';
+import Layout from '../code/Layout';
 
 import "antd/dist/antd.min.css";
 

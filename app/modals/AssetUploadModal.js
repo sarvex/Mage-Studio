@@ -6,7 +6,7 @@ import Footer from './footer';
 import FileUploaderBox from './content/FileUploaderBox';
 
 import './modals.scss';
-import '../style.scss';
+import '../../lib/style.scss';
 
 class AssetUploadModal extends React.Component {
 

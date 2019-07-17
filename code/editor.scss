@@ -1,0 +1,30 @@
+@import './../lib/constants.scss';
+
+.code {
+    &-editor,
+    &-column {
+        height: 100% !important;
+        width: 100%;
+        background: $deep-blue-13;
+    }
+
+    &-container,
+    &-content {
+        height: inherit;
+        width: inherit;
+
+        & textarea {
+            border: none;
+            overflow: auto;
+            outline: none;
+
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+
+            resize: none; /*remove the resize handle on the bottom right*/
+        }
+    }
+
+
+}

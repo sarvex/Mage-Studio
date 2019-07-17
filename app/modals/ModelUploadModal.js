@@ -14,7 +14,7 @@ import ModelsSelector from './content/ModelsSelector';
 import FileUploaderBox from './content/FileUploaderBox';
 
 import './modals.scss';
-import '../style.scss';
+import '../../lib/style.scss';
 
 class ModelUploadModal extends React.Component {
 

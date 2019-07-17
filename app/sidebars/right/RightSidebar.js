@@ -20,7 +20,7 @@ import {
 
 import {
     getScripts,
-    getSingleScript
+    loadSingleScript
 } from '../../actions/scripts';
 
 class RightSidebar extends React.Component {
@@ -171,7 +171,7 @@ const mapDispatchToProps = (dispatch) => ({
     onTextureChange: (project, name) => dispatch(textureChanged(project, name)),
     onMaterialChange: (name) => dispatch(materialChanged(name)),
     getScripts: (project) => dispatch(getScripts(project)),
-    getSingleScript: (project, name) => dispatch(getSingleScript(project, name))
+    getSingleScript: (project, name) => dispatch(loadSingleScript(project, name))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightSidebar);
