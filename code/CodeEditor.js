@@ -1,18 +1,6 @@
-/* @flow */
-/* global require */
-/* eslint-disable import/no-commonjs */
-
 import React from 'react';
-// import Editor from 'react-simple-code-editor';
-// import dedent from 'dedent';
-//import { Controlled as CodeMirror } from 'react-codemirror2';
-
-// import { highlight, languages } from 'prismjs';
-// import 'prismjs/themes/prism-dark.css';
 import 'codemirror/lib/codemirror.css';
-//import 'codemirror/theme/monokai.css';
 import './theme.scss';
-
 
 import ProjectTree from './ProjectTree';
 import { Col, Skeleton } from 'antd';
@@ -20,6 +8,8 @@ import { connect } from 'react-redux';
 import { getScripts, getScriptContent } from '../app/actions/scripts';
 
 let CodeMirror;
+const CODEMIRROR = 'react-codemirror2';
+const CODEMIRROR_JAVASCRIPT = 'codemirror/mode/javascript/javascript';
 
 class CodeEditor extends React.Component {
     state = {

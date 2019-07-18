@@ -8,6 +8,18 @@
         background: $deep-blue-15;
     }
 
+    &-sidebar {
+        background: $deep-blue-14;
+
+        & span {
+            color: $deep-blue-5 !important;
+        }
+
+        & .code-icon svg {
+            font-weight: bold;
+            color: $deep-blue-0 !important;
+        }
+    }
 
     &-column {
         font-size: 14px;

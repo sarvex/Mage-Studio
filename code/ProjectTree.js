@@ -13,7 +13,7 @@ const ProjectTree = ({ scripts, onScriptSelect = f => f, config }) => {
     return (
         <Col
             span={4}
-            className="sidebar">
+            className="sidebar code-sidebar">
             <p className="title">
                 <Icon className="icon" type="project" />
                 <span>Project</span>
@@ -23,11 +23,17 @@ const ProjectTree = ({ scripts, onScriptSelect = f => f, config }) => {
                     defaultExpandAll
                     onSelect={onScriptSelect}>
                     <TreeNode
-                        icon={<Icon type="book" />}
+                        className={"project-file"}
+                        icon={<Icon
+                            type="book"
+                            className={"code-icon"}/>}
                         title={project}>
                         { list.map((s, i) => (
                             <TreeNode
-                                icon={<Icon type="file-text" />}
+                                className={"project-file"}
+                                icon={<Icon
+                                    className="code-icon"
+                                    type="file-text" />}
                                 title={s.name}
                                 key={s.name}
                                 isLeaf />
