@@ -93,6 +93,7 @@
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-codemirror": "^1.0.0",
+    "react-codemirror2": "^6.0.0",
     "react-dom": "16.8.6",
     "react-hot-loader": "4.3.12",
     "react-redux": "5.1.1",

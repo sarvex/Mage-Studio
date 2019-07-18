@@ -5,20 +5,26 @@
 import React from 'react';
 // import Editor from 'react-simple-code-editor';
 // import dedent from 'dedent';
-import CodeMirror from 'react-codemirror';
+//import { Controlled as CodeMirror } from 'react-codemirror2';
+
 // import { highlight, languages } from 'prismjs';
 // import 'prismjs/themes/prism-dark.css';
-import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
+//import 'codemirror/theme/monokai.css';
+import './theme.scss';
+
 
 import ProjectTree from './ProjectTree';
-import { Col } from 'antd';
+import { Col, Skeleton } from 'antd';
 import { connect } from 'react-redux';
 import { getScripts, getScriptContent } from '../app/actions/scripts';
+
+let CodeMirror;
 
 class CodeEditor extends React.Component {
     state = {
         code: '',
+        loaded: false
     };
 
     componentDidMount() {
@@ -26,11 +32,17 @@ class CodeEditor extends React.Component {
         const { project } = config;
 
         getScripts(project);
+
+        Promise.all([
+            require('react-codemirror2'),
+            require('codemirror/mode/javascript/javascript')
+        ]).then(([{ Controlled }]) => {
+            CodeMirror = Controlled;
+            this.setState({ loaded: true });
+        })
     }
 
-    highlight = (code) => highlight(code, languages.javascript, 'javascript');
-
-    handleOnChange = (code) => {
+    handleOnBeforeChange = (editor, data, code) => {
         this.setState({ code });
     };
 
@@ -47,34 +59,31 @@ class CodeEditor extends React.Component {
     };
 
     render() {
-        const { scripts } = this.props;
-        var options = {
+        const { scripts, config } = this.props;
+        const options = {
             lineNumbers: true,
-            mode: 'javascript'
+            mode: 'javascript',
+            theme: 'magestudio'
         };
 
         return (
             <div className="code-container">
                 <ProjectTree
+                    config={config}
                     scripts={scripts}
                     onScriptSelect={this.handleScriptSelect}
                 />
                 <Col
-                    span={18}
+                    span={20}
                     className="code-column">
-                    <CodeMirror value={this.state.code} onChange={this.handleOnChange} options={options} />
-                    {/*<Editor*/}
-                        {/*placeholder="Type some code…"*/}
-                        {/*value={this.state.code}*/}
-                        {/*onValueChange={this.handleOnChange}*/}
-                        {/*highlight={this.highlight}*/}
-                        {/*padding={10}*/}
-                        {/*className="code-content"*/}
-                        {/*style={{*/}
-                            {/*fontFamily: '"Fira code", "Fira Mono", monospace',*/}
-                            {/*fontSize: 13*/}
-                        {/*}}*/}
-                    {/*/>*/}
+                    { this.state.loaded ?
+                        <CodeMirror
+                            className='code-content'
+                            value={this.state.code}
+                            onBeforeChange={this.handleOnBeforeChange}
+                            options={options} /> :
+                        <Skeleton active />
+                    }
                 </Col>
 
             </div>
