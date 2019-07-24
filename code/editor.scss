@@ -19,6 +19,23 @@
             font-weight: bold;
             color: $deep-blue-0 !important;
         }
+
+        & .project-file {
+            & .ant-tree-node-content-wrapper {
+                &:hover {
+                    &::before,
+                    &:before {
+                        background: transparent !important;
+                    }
+                }
+            }
+
+            & .ant-tree-node-selected {
+                &::before {
+                    background: $deep-blue-10 !important;
+                }
+            }
+        }
     }
 
     &-column {
