@@ -61,6 +61,14 @@ $header-height: $base-unit * 4;
             background-color: $deep-blue-10 !important;
         }
 
+        &.ant-dropdown-menu-item-disabled {
+            color: $grey !important;
+
+            &:hover {
+                background-color: transparent !important;
+            }
+        }
+
         &:hover {
             background-color: $deep-blue-11 !important;
         }

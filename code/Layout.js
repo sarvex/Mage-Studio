@@ -11,7 +11,7 @@ import './editor.scss';
 export default () => {
     return (
         <div className="app">
-            <Header />
+            <Header isCodeEditor/>
             <Row className="main-container code-editor">
                 <CodeEditor />
             </Row>
