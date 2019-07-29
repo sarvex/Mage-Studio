@@ -183,7 +183,7 @@ describe('asset', () => {
             const textureModal = component
                 .findWhere(node => node.props().type === 'textures');
 
-            textureModal.simulate('upload', { file: 'testfile' });
+            textureModal.simulate('confirm', { file: 'testfile' });
 
             expect(uploadTexture.called).toBe(true);
         });

@@ -82,8 +82,8 @@ export class AssetsBox extends React.Component {
                 </div>
                 <AssetUploadModal
                     type={"textures"}
-                    hideModal={this.handleModalHide('textures')}
-                    onUpload={this.handleUpload('textures')}
+                    onDismiss={this.handleModalHide('textures')}
+                    onConfirm={this.handleUpload('textures')}
                     loading={textures.textureModalLoading}
                     visible={textures.textureModalVisible} />
             </div>

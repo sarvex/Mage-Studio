@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Modal } from 'antd';
 
 import Footer from './footer';
@@ -22,28 +21,30 @@ class AssetUploadModal extends React.Component {
             loading={loading}
             onConfirm={this.handleConfirm}
         />
-    )
+    );
 
     handleCancel = () => {
-        const { hideModal = f => f } = this.props;
+        const { onDismiss = f => f } = this.props;
 
-        hideModal();
-    }
+        onDismiss();
+    };
 
     handleConfirm = () => {
        const { file } = this.state;
-       const { onUpload } = this.props;
+       const { onConfirm } = this.props;
+
+       console.log('inside handleconfirm');
 
        if (file) {
-           onUpload(file);
+           onConfirm(file);
        }
-    }
+    };
 
     handleBeforeUpload = (file) => {
         this.setState({ file });
 
         return false;
-    }
+    };
 
     render() {
         const { visible, loading, type } = this.props;
