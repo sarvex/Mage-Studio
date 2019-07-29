@@ -3,19 +3,15 @@ import Layout from '../code/Layout';
 
 import "antd/dist/antd.min.css";
 
-class Index extends React.Component {
+class Code extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
     render() {
-        return (
-            <div>
-                <Layout { ...this.props } />
-            </div>
-        )
+        return <Layout { ...this.props } />;
     }
 }
 
-export default Index;
+export default Code;

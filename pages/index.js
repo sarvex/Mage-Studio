@@ -12,11 +12,7 @@ class Index extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <Layout { ...this.props } />
-            </div>
-        )
+        return <Layout { ...this.props } />;
     }
 }
 

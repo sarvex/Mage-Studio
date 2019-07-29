@@ -1,5 +1,4 @@
 import React from 'react';
-import 'codemirror/lib/codemirror.css';
 import './theme.scss';
 
 import ProjectTree from './ProjectTree';
