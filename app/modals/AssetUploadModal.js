@@ -33,8 +33,6 @@ class AssetUploadModal extends React.Component {
        const { file } = this.state;
        const { onConfirm } = this.props;
 
-       console.log('inside handleconfirm');
-
        if (file) {
            onConfirm(file);
        }

@@ -43,15 +43,11 @@ class SceneHelper {
     }
 
     static readSceneData(sceneName) {
-        console.log('inside read scenedata', sceneName);
-
         const filename = SceneHelper.exists(sceneName);
-        console.log('got filename', filename);
 
         if (filename) {
             try {
                 const file = FileHelper.fileFromPath(filename, FileHelper.SCENE_TYPE());
-                console.log(file);
                 return file.toJSON();
             } catch(e) {
                 return {};
@@ -85,8 +81,6 @@ class SceneHelper {
         // check if a folder called sceneName exists inside projectName
         const filename = FileHelper.fileHasExtension(sceneName) ? sceneName : `${sceneName}.json`;
         const scenePath = path.join(Config.getScenePath(), filename);
-
-        console.log('checking scenepath', scenePath);
 
         return sceneName !== undefined  && fs.existsSync(scenePath) && filename;
     }

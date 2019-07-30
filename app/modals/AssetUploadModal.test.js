@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import AssetUploadModal from './AssetUploadModal';
@@ -32,25 +32,14 @@ describe('AssetUploadModal', () => {
             expect(spy.called).toBe(true);
         });
 
-        // it.only('should update the state when user tries to upload a file', () => {
-        //     const spy = sinon.spy();
-        //     const component = shallow(<AssetUploadModal
-        //         onConfirm={spy}
-        //         visible />);
-        //
-        //     console.log(component.debug());
-        //
-        //     // const instance = component.instance();
-        //     // const footer = shallow(instance.getFooter.call(instance));
-        //     const footer = component.find('Footer');
-        //
-        //     footer.simulate('confirm');
-        //     //
-        //     // expect(spy.called).toBe(true);
-        // });
-        //
-        // it('should call onConfirm when the user confirms the upload', () => {
-        //
-        // });
+        it('should update the state when user tries to upload a file', () => {
+            const component = shallow(<AssetUploadModal visible />);
+
+            const fileUploader = component.find('FileUploaderBox');
+
+            fileUploader.simulate('beforeUpload', 'filename');
+
+            expect(component.state().file).toBe('filename');
+        });
     });
 });
