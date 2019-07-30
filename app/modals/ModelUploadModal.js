@@ -72,7 +72,7 @@ export class ModelUploadModal extends Component {
         }
     }
 
-    handleOnSelect = (selection) => () => {
+    handleOnSelect = (selection) => {
         this.setState({ selection });
     }
 
