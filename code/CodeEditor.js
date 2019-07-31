@@ -7,17 +7,15 @@ import { connect } from 'react-redux';
 import { getScripts, getScriptContent } from '../app/actions/scripts';
 
 let CodeMirror;
-const CODEMIRROR = 'react-codemirror2';
-const CODEMIRROR_JAVASCRIPT = 'codemirror/mode/javascript/javascript';
 
-class CodeEditor extends React.Component {
+export class CodeEditor extends React.Component {
     state = {
         code: '',
         loaded: false
     };
 
     componentDidMount() {
-        const { config, getScripts } = this.props;
+        const { config, getScripts = f => f } = this.props;
         const { project } = config;
 
         getScripts(project);

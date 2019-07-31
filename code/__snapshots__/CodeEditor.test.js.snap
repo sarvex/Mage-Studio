@@ -1,3 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout should render fine 1`] = `ShallowWrapper {}`;
+exports[`CodeEditor should render fine 1`] = `
+<div
+  className="code-container"
+>
+  <ProjectTree
+    config={
+      Object {
+        "project": "test",
+      }
+    }
+    onScriptSelect={[Function]}
+    scripts={
+      Object {
+        "list": Array [],
+      }
+    }
+  />
+  <Col
+    className="code-column"
+    span={20}
+  >
+    <Skeleton
+      active={true}
+      avatar={false}
+      paragraph={true}
+      prefixCls="ant-skeleton"
+      title={true}
+    />
+  </Col>
+</div>
+`;

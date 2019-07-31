@@ -23,7 +23,7 @@ import {
     loadSingleScript
 } from '../../actions/scripts';
 
-class RightSidebar extends React.Component {
+export class RightSidebar extends React.Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +56,7 @@ class RightSidebar extends React.Component {
         onMaterialChange(name);
     }
 
-    onPositionChange = (axis) => (value) => {
+    handlePositionChange = (axis) => (value) => {
         const { onPositionChange, element, position, rotation, scale } = this.props;
         const newPosition = {
             ...position,
@@ -66,7 +66,7 @@ class RightSidebar extends React.Component {
         onPositionChange(element, newPosition, rotation, scale);
     }
 
-    onRotationChange = (axis) => (value) => {
+    handleRotationChange = (axis) => (value) => {
         const { onRotationChange, element, position, rotation, scale } = this.props;
         const newRotation = {
             ...rotation,
@@ -76,7 +76,7 @@ class RightSidebar extends React.Component {
         onRotationChange(element, position, newRotation, scale);
     }
 
-    onScaleChange = (axis) => (value) => {
+    handleScaleChange = (axis) => (value) => {
         const { onScaleChange, element, position, rotation, scale } = this.props;
         const newScale = {
             ...scale,
@@ -123,9 +123,9 @@ class RightSidebar extends React.Component {
                     </p>
                     <div className="content">
                         <Inspector
-                            onPositionChange={this.onPositionChange}
-                            onRotationChange={this.onRotationChange}
-                            onScaleChange={this.onScaleChange}
+                            onPositionChange={this.handlePositionChange}
+                            onRotationChange={this.handleRotationChange}
+                            onScaleChange={this.handleScaleChange}
                             onScriptsMount={this.handleScriptMount}
                             onScriptChange={this.handleScriptChange}
                             onTextureChange={this.handleTextureChange}
