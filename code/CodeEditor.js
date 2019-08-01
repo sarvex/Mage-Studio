@@ -33,10 +33,9 @@ export class CodeEditor extends React.Component {
         this.setState({ code });
     };
 
-    handleScriptSelect = (selection) => {
+    handleScriptSelect = ([ scriptName ]) => {
         const { config } = this.props;
         const { project } = config;
-        const scriptName = selection[0];
 
         getScriptContent(project, scriptName)
             .then(({ data }) => {
@@ -72,7 +71,6 @@ export class CodeEditor extends React.Component {
                         <Skeleton active />
                     }
                 </Col>
-
             </div>
         );
     }
