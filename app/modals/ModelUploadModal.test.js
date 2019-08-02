@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import toJSON from 'enzyme-to-json';
 import { shallow } from 'enzyme';
 
 import { ModelUploadModal } from './ModelUploadModal';
@@ -13,7 +14,7 @@ const getModal = (props) => shallow(<ModelUploadModal {...defaultProps} {...prop
 describe('ModelUploadModal', () => {
 
     it('should render fine', () => {
-        expect(getModal()).toMatchSnapshot();
+        expect(toJSON(getModal())).toMatchSnapshot();
     });
 
     it('should have right initial state', () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJSON from 'enzyme-to-json';
 import sinon from 'sinon';
 import { SceneContainer } from './SceneContainer';
 
@@ -10,7 +11,7 @@ describe('SceneContainer', () => {
     it('should render properly', () => {
         const component = getSceneContainer();
 
-        expect(component).toMatchSnapshot();
+        expect(toJSON(component)).toMatchSnapshot();
     });
 
     it('should render properly if fullscreen', () => {
@@ -18,7 +19,7 @@ describe('SceneContainer', () => {
 
        component.setState({ fullscreen: true });
 
-       expect(component).toMatchSnapshot();
+       expect(toJSON(component)).toMatchSnapshot();
     });
 
     it('should have state.fullscreen set to false', () => {

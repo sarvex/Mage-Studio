@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render fine 1`] = `
+<div
+  className="header"
+>
+  <Logo />
+  <ProjectMenu />
+  <Connect(SceneMenu) />
+  <Dropdown
+    mouseEnterDelay={0.15}
+    mouseLeaveDelay={0.1}
+    overlay={
+      <Menu
+        className=""
+        focusable={false}
+        onClick={[Function]}
+        prefixCls="ant-menu"
+        theme="light"
+      >
+        <MenuItem
+          className="option"
+        >
+          1st menu item
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          2nd memu item
+        </MenuItem>
+        <Divider />
+        <MenuItem
+          className="option"
+        >
+          3rd menu item
+        </MenuItem>
+      </Menu>
+    }
+    placement="bottomLeft"
+    prefixCls="ant-dropdown"
+  >
+    <span
+      className="main-menu-item"
+      href="#"
+    >
+      View
+    </span>
+  </Dropdown>
+  <Dropdown
+    mouseEnterDelay={0.15}
+    mouseLeaveDelay={0.1}
+    overlay={
+      <Menu
+        className=""
+        focusable={false}
+        onClick={[Function]}
+        prefixCls="ant-menu"
+        theme="light"
+      >
+        <MenuItem
+          className="option"
+        >
+          1st menu item
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          2nd memu item
+        </MenuItem>
+        <Divider />
+        <MenuItem
+          className="option"
+        >
+          3rd menu item
+        </MenuItem>
+      </Menu>
+    }
+    placement="bottomLeft"
+    prefixCls="ant-dropdown"
+  >
+    <span
+      className="main-menu-item"
+      href="#"
+    >
+      Help
+    </span>
+  </Dropdown>
+</div>
+`;

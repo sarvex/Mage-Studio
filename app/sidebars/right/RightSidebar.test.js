@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJSON from 'enzyme-to-json';
 import sinon from 'sinon';
 
 import { RightSidebar } from './RightSidebar';
@@ -15,8 +16,7 @@ const getSidebar = (props) =>  shallow(<RightSidebar { ...defaultProps } { ...pr
 describe('RightSidebar', () => {
 
     it('should render fine', () => {
-        const component = getSidebar();
-        expect(component).toMatchSnapshot();
+        expect(toJSON(getSidebar())).toMatchSnapshot();
     });
 
     describe('events', () => {

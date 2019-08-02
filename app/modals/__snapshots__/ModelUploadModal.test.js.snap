@@ -1,3 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModelUploadModal should render fine 1`] = `ShallowWrapper {}`;
+exports[`ModelUploadModal should render fine 1`] = `
+<Modal
+  cancelButtonDisabled={false}
+  className="modal big"
+  confirmLoading={false}
+  footer={
+    <Footer
+      canCancel={true}
+      onCancel={[Function]}
+      onConfirm={[Function]}
+    />
+  }
+  maskTransitionName="fade"
+  okButtonDisabled={false}
+  okType="primary"
+  onCancel={[Function]}
+  prefixCls="ant-modal"
+  title="Models"
+  transitionName="zoom"
+  visible={false}
+  width={520}
+>
+  <div
+    className="box row"
+  >
+    <ModelsSelector
+      onSelect={[Function]}
+      selection={false}
+    />
+    <FileUploaderBox
+      className="models"
+      name="data"
+      onBeforeUpload={[Function]}
+    />
+  </div>
+</Modal>
+`;

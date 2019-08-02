@@ -1,3 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectTree should render fine 1`] = `ShallowWrapper {}`;
+exports[`ProjectTree should render fine 1`] = `
+<Col
+  className="sidebar code-sidebar"
+  span={4}
+>
+  <p
+    className="title"
+  >
+    <Icon
+      className="icon"
+      type="project"
+    />
+    <span>
+      Project
+    </span>
+  </p>
+  <div
+    className="content"
+  >
+    <DirectoryTree
+      defaultExpandAll={true}
+      expandAction="click"
+      onSelect={[Function]}
+      prefixCls="ant-tree"
+      showIcon={true}
+    >
+      <TreeNode
+        className="project-file"
+        icon={
+          <Icon
+            className="code-icon"
+            type="book"
+          />
+        }
+        title="test"
+      />
+    </DirectoryTree>
+  </div>
+</Col>
+`;

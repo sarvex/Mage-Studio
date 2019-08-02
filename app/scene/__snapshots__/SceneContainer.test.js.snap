@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SceneContainer should render properly 1`] = `ShallowWrapper {}`;
+exports[`SceneContainer should render properly 1`] = `
+<div
+  className="scene-container "
+>
+  <Player />
+  <Scene
+    fullscreen={false}
+  />
+  <SceneToolbar
+    fullscreen={false}
+    onFullScreen={[Function]}
+  />
+  <Connect(ModelUploadModal) />
+</div>
+`;
 
-exports[`SceneContainer should render properly if fullscreen 1`] = `ShallowWrapper {}`;
+exports[`SceneContainer should render properly if fullscreen 1`] = `
+<div
+  className="scene-container fullscreen"
+>
+  <Player />
+  <Scene
+    fullscreen={true}
+  />
+  <SceneToolbar
+    fullscreen={true}
+    onFullScreen={[Function]}
+  />
+  <Connect(ModelUploadModal) />
+</div>
+`;

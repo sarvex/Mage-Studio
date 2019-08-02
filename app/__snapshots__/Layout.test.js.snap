@@ -1,3 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout should render fine 1`] = `ShallowWrapper {}`;
+exports[`Layout should render fine 1`] = `
+<div
+  className="app"
+>
+  <Header />
+  <Row
+    className="main-container"
+    gutter={0}
+  >
+    <LeftSidebar />
+    <div
+      className="canvas-container"
+    >
+      <Connect(SceneContainer) />
+    </div>
+    <Connect(RightSidebar) />
+  </Row>
+  <Footer />
+  <Connect(ProjectModal) />
+</div>
+`;
