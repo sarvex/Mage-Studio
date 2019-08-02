@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'antd';
 
@@ -14,9 +14,9 @@ import ModelsSelector from './content/ModelsSelector';
 import FileUploaderBox from './content/FileUploaderBox';
 
 import './modals.scss';
-import '../style.scss';
+import '../../lib/style.scss';
 
-class ModelUploadModal extends React.Component {
+export class ModelUploadModal extends Component {
 
     constructor(props) {
         super(props);
@@ -32,7 +32,6 @@ class ModelUploadModal extends React.Component {
             this.fetchModels();
             this.setState({ file: false, selection: false });
         }
-
     }
 
     componentDidMount() {
@@ -44,7 +43,7 @@ class ModelUploadModal extends React.Component {
         const { project } = config;
 
         getModels(project);
-    }
+    };
 
     getFooter = (loading) => (
         <Footer
@@ -53,13 +52,13 @@ class ModelUploadModal extends React.Component {
             onConfirm={this.handleConfirm}
             canCancel
         />
-    )
+    );
 
     handleCancel = () => {
-        const { hideModelUploadModal } = this.props;
+        const { onDismiss } = this.props;
 
-        hideModelUploadModal();
-    }
+        onDismiss();
+    };
 
     handleConfirm = () => {
         const { loadSingleModel, config, uploadModel } = this.props;
@@ -73,7 +72,7 @@ class ModelUploadModal extends React.Component {
         }
     }
 
-    handleOnSelect = (selection) => () => {
+    handleOnSelect = (selection) => {
         this.setState({ selection });
     }
 
@@ -143,7 +142,7 @@ const mapStateToProps = (state = {}) => {
 const mapDispatchToProps = (dispatch) => ({
     getModels: (project) => dispatch(getModels(project)),
     uploadModel: (project, payload) => dispatch(uploadModel(project, payload)),
-    hideModelUploadModal: () => dispatch(hideModelUploadModal()),
+    onDismiss: () => dispatch(hideModelUploadModal()),
     loadSingleModel: (project, name) => dispatch(loadSingleModel(project, name))
 });
 

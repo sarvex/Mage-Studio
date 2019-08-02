@@ -1,0 +1,68 @@
+@import '~codemirror/lib/codemirror.css';
+@import './../lib/constants.scss';
+
+.code {
+    &-editor,
+    &-column {
+        height: 100% !important;
+        width: 100%;
+        background: $deep-blue-15;
+    }
+
+    &-sidebar {
+        background: $deep-blue-14;
+
+        & span {
+            color: $deep-blue-5 !important;
+        }
+
+        & .code-icon svg {
+            font-weight: bold;
+            color: $deep-blue-0 !important;
+        }
+
+        & .project-file {
+            & .ant-tree-node-content-wrapper {
+                &:hover {
+                    &::before,
+                    &:before {
+                        background: $deep-blue-10 !important;
+                    }
+                }
+            }
+
+            & .ant-tree-node-selected {
+                &::before {
+                    background: $deep-blue-10 !important;
+                }
+            }
+        }
+    }
+
+    &-column {
+        font-size: 14px;
+        background: $deep-blue-17;
+    }
+
+
+    &-container,
+    &-content {
+        height: 100%;
+        width: 100%;
+
+
+        & textarea {
+            border: none;
+            overflow: auto;
+            outline: none;
+
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+
+            resize: none; /*remove the resize handle on the bottom right*/
+        }
+    }
+
+
+}

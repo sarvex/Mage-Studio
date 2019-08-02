@@ -8,7 +8,11 @@ import {
     PROJECT_PLAYER_VISIBLE,
     PROJECT_PLAYER_HIDDEN
 } from './types';
-import {getProjectsUrl, getScenesUrl, MIMETYPES} from '../lib/constants';
+import {
+    getProjectsUrl,
+    getScenesUrl,
+    MIMETYPES
+} from '../lib/constants';
 import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 
@@ -84,7 +88,6 @@ export const addMesh = (type) => {
         })
 };
 
-
 export const saveScene = (name, scene) => (dispatch) => {
     dispatch(sceneSaveLoading());
 
@@ -97,12 +100,8 @@ export const saveScene = (name, scene) => (dispatch) => {
 
     axios
         .post(getScenesUrl(name), formData)
-        .then(() => {
-            dispatch(sceneSaveSuccess());
-        })
-        .catch(() => {
-            dispatch(sceneSaveFailure());
-        });
+        .then(() => dispatch(sceneSaveSuccess()))
+        .catch(() => dispatch(sceneSaveFailure()));
 };
 
 export const loadScene = (name) => () => {
@@ -114,9 +113,7 @@ export const loadScene = (name) => () => {
         .then(app => {
             axios
                 .get(url)
-                .then(({ data }) => {
-                    app.parseScene(data)
-                });
+                .then(({ data }) => app.parseScene(data));
         })
 };
 
@@ -141,7 +138,6 @@ export const stopProject = project => dispatch => {
     const url = `${getProjectsUrl(project)}/stop`;
 
     // dispatch something here about starting the app
-
     axios
         .post(url)
         .then(({ data }) => {

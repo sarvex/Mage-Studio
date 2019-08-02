@@ -1,11 +1,9 @@
 import React from 'react';
-import Layout from '../app/Layout';
-import { version, Button } from 'antd';
-import axios from 'axios';
+import Layout from '../code/Layout';
 
 import "antd/dist/antd.min.css";
 
-class Index extends React.Component {
+class Code extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,4 +14,4 @@ class Index extends React.Component {
     }
 }
 
-export default Index;
+export default Code;

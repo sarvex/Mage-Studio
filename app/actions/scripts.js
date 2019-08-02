@@ -44,24 +44,27 @@ export const getScripts = (project) => (dispatch) => {
         .catch(() => {
             dispatch(scriptsFetchFailed());
         });
-}
+};
 
-export const getSingleScript = (project, scriptid) => (dispatch) => {
+export const getScriptContent = (project, scriptid) => {
     const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
 
+    return axios(url);
+};
+
+export const loadSingleScript = (project, scriptid) => (dispatch) => {
     dispatch(scriptsFetchStarted());
 
     getOrCreateApp()
         .then((app) => {
-            axios(url)
+            getScriptContent(project, scriptid)
                 .then(({ data }) => {
                     dispatch(singleScriptFetchCompleted(data));
                     app.loadScript(data.content);
                 })
-                .catch((e) => {
-                    dispatch(scriptsFetchFailed())
-                });
-        })
-}
+                .catch(dispatch(scriptsFetchFailed()));
+        });
+};
+
 
 // fetch single script

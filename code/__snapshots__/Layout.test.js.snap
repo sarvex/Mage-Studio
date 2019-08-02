@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should render fine 1`] = `
+<div
+  className="app"
+>
+  <Header
+    isCodeEditor={true}
+  />
+  <Row
+    className="main-container code-editor"
+    gutter={0}
+  >
+    <Connect(CodeEditor) />
+  </Row>
+  <Footer />
+</div>
+`;

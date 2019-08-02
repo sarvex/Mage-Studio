@@ -1,4 +1,4 @@
-@import '../constants.scss';
+@import '../../lib/constants.scss';
 
 $header-height: $base-unit * 4;
 
@@ -59,6 +59,14 @@ $header-height: $base-unit * 4;
         &.ant-dropdown-menu-submenu-active,
         &.ant-dropdown-menu-submenu-selected {
             background-color: $deep-blue-10 !important;
+        }
+
+        &.ant-dropdown-menu-item-disabled {
+            color: $grey !important;
+
+            &:hover {
+                background-color: transparent !important;
+            }
         }
 
         &:hover {
