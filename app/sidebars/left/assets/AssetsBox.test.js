@@ -139,6 +139,28 @@ describe('asset', () => {
             expect(showTextureModal.called).toBe(true);
         });
 
+        it('should call window.open if user clicks on scripts inside AssetsMenu', () => {
+            const assets = {
+                textures: [],
+                models: [],
+                images: []
+            };
+            const textures = {};
+            const config = { project: 'test' };
+            const stub = sinon.stub(window, 'open');
+
+            const component = shallow(
+                <AssetsBox
+                    assets={assets}
+                    config={config}
+                    textures={textures}
+                />);
+
+            component.find('AssetsMenu').simulate('assetsMenuClick', { key: 'scripts' });
+
+            expect(stub.called).toBe(true);
+        });
+
         it('should not call showTextureModal if user clicks on diff menu item', () => {
             const assets = {
                 textures: [],

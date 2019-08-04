@@ -2,6 +2,8 @@ export const CONFIG_URL = 'api/config';
 export const PROJECTS_URL = 'api/projects';
 export const SCENES_URL = 'api/scenes';
 
+export const SCRIPTS_EDITOR_PATH = '/code';
+
 export const ASSETS_TYPES = [
     { code: 'textures', display: 'Texture' },
     { code: 'models', display: 'Model' },
@@ -9,6 +11,7 @@ export const ASSETS_TYPES = [
     { code: 'videos', display: 'Video' },
     { code: 'scripts', display: 'Script' }
 ];
+
 
 export const buildUrl = (baseUrl, url) => (`http://${baseUrl}/${url}`);
 export const getScenesUrl = (scene) => `${SCENES_URL}/${scene}`;

@@ -6,6 +6,8 @@ import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
 import AssetUploadModal from '../../../modals/AssetUploadModal';
 
+import { SCRIPTS_EDITOR_PATH } from '../../../lib/constants';
+
 import { getAllAssets } from "../../../actions/assets";
 import {
     showTextureModal,
@@ -22,12 +24,19 @@ export class AssetsBox extends React.Component {
         getAssets(project);
     }
 
+    navigateToScriptsEditor = () => {
+        window.open(SCRIPTS_EDITOR_PATH, '_blank');
+    }
+
     handleAssetsMenuChange = ({ key }) => {
         const  { showTextureModal } = this.props;
 
         switch(key) {
             case 'textures':
                 showTextureModal();
+                break;
+            case 'scripts':
+                this.navigateToScriptsEditor();
                 break;
             default:
                 break;
