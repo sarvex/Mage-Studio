@@ -30,9 +30,7 @@ const onListenComplete = function() {
     electron.start(PORT);
 }
 
-const onWildcard = function(req, res) {
-    return handle(req, res, req.url);
-}
+const onWildcard = (req, res) => handle(req, res, req.url);
 
 const setupServer = function() {
     server.use(config.endpoint, config.router);
