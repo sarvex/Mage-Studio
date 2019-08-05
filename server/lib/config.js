@@ -19,8 +19,7 @@ function getDefaultLocalConfig() {
         electron: {
             window: {
                 title: 'Mage Studio',
-                darkTheme: true,
-                titleBarStyle: 'hidden'
+                darkTheme: true
             }
         }
     }

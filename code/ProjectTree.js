@@ -1,9 +1,40 @@
 import React from 'react';
 import { Col, Tree, Icon } from 'antd';
-
+import ContextMenu from './contextmenu/ContextMenu';
 const { TreeNode, DirectoryTree } = Tree;
 
 import '../app/sidebars/sidebar.scss';
+
+const projectIcon = () => (
+    <Icon
+        type="book"
+        className={"code-icon"}/>
+);
+
+const fileIcon = () => (
+    <Icon
+        className="code-icon"
+        type="file-text" />
+);
+
+const mapFilesToTreeNodes = list => (
+    list.map(s => (
+        <TreeNode
+            className={"project-file"}
+            icon={fileIcon()}
+            title={getTiteLabel(s.name)}
+            key={s.name}
+            isLeaf />
+    ))
+);
+
+const getTiteLabel = title => (
+    <ContextMenu>
+        <span>
+            { title }
+        </span>
+    </ContextMenu>
+);
 
 const ProjectTree = ({ scripts, onScriptSelect = f => f, config }) => {
 
@@ -24,20 +55,9 @@ const ProjectTree = ({ scripts, onScriptSelect = f => f, config }) => {
                     onSelect={onScriptSelect}>
                     <TreeNode
                         className={"project-file"}
-                        icon={<Icon
-                            type="book"
-                            className={"code-icon"}/>}
-                        title={project}>
-                        { list.map((s, i) => (
-                            <TreeNode
-                                className={"project-file"}
-                                icon={<Icon
-                                    className="code-icon"
-                                    type="file-text" />}
-                                title={s.name}
-                                key={s.name}
-                                isLeaf />
-                        ))}
+                        icon={projectIcon()}
+                        title={getTiteLabel(project)}>
+                        { mapFilesToTreeNodes(list) }
                     </TreeNode>
                 </DirectoryTree>
             </div>
