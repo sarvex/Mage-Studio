@@ -19,6 +19,8 @@ export const getProjectsUrl = (project) => `${PROJECTS_URL}/${project}`;
 export const getAssetsUrl = (project) => `${getProjectsUrl(project)}/assets`;
 export const getImagesUrl = (project) => `${getProjectsUrl(project)}/images`;
 export const getImageUrl = (project, image) => `${getImagesUrl(project)}/${image}`;
+export const getScriptsUrl = (project) => `${getProjectsUrl(project)}/scripts`;
+export const getScriptUrl = (project, script) => `${getScriptsUrl(project)}/${script}`;
 
 export const MIMETYPES = {
     APPLICATION_JSON: 'application/json'

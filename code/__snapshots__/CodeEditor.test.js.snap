@@ -25,7 +25,6 @@ exports[`CodeEditor should render fine 1`] = `
       active={true}
       avatar={false}
       paragraph={true}
-      prefixCls="ant-skeleton"
       title={true}
     />
   </Col>

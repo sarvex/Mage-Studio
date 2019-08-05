@@ -4,6 +4,7 @@ import {Row} from 'antd';
 import Header from '../lib/header/Header';
 import Footer from '../lib/footer/Footer';
 import CodeEditor from './CodeEditor';
+import NewFileModal from '../app/modals/NewFileModal';
 
 import '../lib/style.scss';
 import './editor.scss';
@@ -16,6 +17,7 @@ export default () => {
                 <CodeEditor />
             </Row>
             <Footer />
+            <NewFileModal />
         </div>
     );
 };

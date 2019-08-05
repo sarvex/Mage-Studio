@@ -46,11 +46,11 @@ export const getScripts = (project) => (dispatch) => {
         });
 };
 
-export const getScriptContent = (project, scriptid) => {
-    const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
+export const getScriptContent = (project, scriptid) => axios(getScriptUrl(prohect, scriptid));
 
-    return axios(url);
-};
+export const setScriptContent = (project, scriptid, content) => {
+    const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
+}
 
 export const loadSingleScript = (project, scriptid) => (dispatch) => {
     dispatch(scriptsFetchStarted());

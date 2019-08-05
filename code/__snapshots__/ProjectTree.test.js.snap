@@ -23,7 +23,6 @@ exports[`ProjectTree should render fine 1`] = `
       defaultExpandAll={true}
       expandAction="click"
       onSelect={[Function]}
-      prefixCls="ant-tree"
       showIcon={true}
     >
       <TreeNode
@@ -34,7 +33,13 @@ exports[`ProjectTree should render fine 1`] = `
             type="book"
           />
         }
-        title="test"
+        title={
+          <ContextMenu>
+            <span>
+              test
+            </span>
+          </ContextMenu>
+        }
       />
     </DirectoryTree>
   </div>

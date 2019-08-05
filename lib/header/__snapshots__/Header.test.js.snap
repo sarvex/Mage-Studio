@@ -12,11 +12,7 @@ exports[`Header should render fine 1`] = `
     mouseLeaveDelay={0.1}
     overlay={
       <Menu
-        className=""
-        focusable={false}
         onClick={[Function]}
-        prefixCls="ant-menu"
-        theme="light"
       >
         <MenuItem
           className="option"
@@ -37,7 +33,6 @@ exports[`Header should render fine 1`] = `
       </Menu>
     }
     placement="bottomLeft"
-    prefixCls="ant-dropdown"
   >
     <span
       className="main-menu-item"
@@ -51,11 +46,7 @@ exports[`Header should render fine 1`] = `
     mouseLeaveDelay={0.1}
     overlay={
       <Menu
-        className=""
-        focusable={false}
         onClick={[Function]}
-        prefixCls="ant-menu"
-        theme="light"
       >
         <MenuItem
           className="option"
@@ -76,7 +67,6 @@ exports[`Header should render fine 1`] = `
       </Menu>
     }
     placement="bottomLeft"
-    prefixCls="ant-dropdown"
   >
     <span
       className="main-menu-item"

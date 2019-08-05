@@ -94,8 +94,6 @@ class ProjectModal extends React.Component {
         }
 
         return <span>LOADING</span>
-
-
     }
 
     getContent = () => {
@@ -120,7 +118,6 @@ class ProjectModal extends React.Component {
         if (isVisible === undefined) {
             isVisible = !project || String(project).length === 0;
         }
-
 
         return (
             <Modal
