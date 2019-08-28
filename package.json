@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "IS_DESKTOP=true node server/index",
     "dev:inspect": "IS_DESKTOP=true node --inspect server/index",
-    "build": "next build",
+    "build": "npm run build:targz && next build",
     "start": "NODE_ENV=production node server/index",
     "electron": "npm run build && NODE_ENV=production IS_DESKTOP=true electron server/index",
+    "build:targz": "npm run clean:targz && node bin/tar.js && npm run clean:nodemodules ",
+    "clean:targz": "rimraf server/.templates/.project/modules.tar.gz",
+    "clean:nodemodules": "rimraf server/.templates/.project/node_modules",
     "test": "jest",
     "test:update-snapshots": "jest -u",
     "test:watch": "jest --watch",
@@ -67,7 +70,8 @@
     "sass-loader": "7.0.3",
     "sinon": "7.3.2",
     "webpack": "4.3.0",
-    "webpack-cli": "3.2.1"
+    "webpack-cli": "3.2.1",
+    "rimraf": "3.0.0"
   },
   "dependencies": {
     "@zeit/next-css": "1.0.1",
@@ -99,6 +103,7 @@
     "redux": "4.0.1",
     "redux-devtools-extension": "2.13.5",
     "redux-thunk": "2.3.0",
-    "uuid": "3.3.2"
+    "uuid": "3.3.2",
+    "tar": "4.4.10"
   }
 }
