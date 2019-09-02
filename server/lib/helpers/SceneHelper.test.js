@@ -48,7 +48,7 @@ describe('SceneHelper', () => {
 
         it('should copy scene files from right template path to right destination', () => {
             SceneHelper.create('destination', 'sceneName');
-            const expectedSrc = 'server/.templates/.scene';
+            const expectedSrc = 'server/templates/scene';
             const expectedDestination = 'destination/src';
 
             expect(ncp).toHaveBeenCalledWith(expectedSrc, expectedDestination, expect.any(Function));

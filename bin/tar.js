@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const tar = require('tar');
 
-const basePath = './server/.templates/.project/';
+const basePath = 'server/templates/project/';
 const nodeModulesPath = path.resolve(basePath, 'node_modules');
 
 const checkNodeModulesExist = () => {
@@ -25,12 +25,14 @@ const checkNodeModulesExist = () => {
 const zipNodeModules = () => {
     return tar.c({
         gzip: true,
+        cwd: basePath,
         file: path.resolve(basePath, 'modules.tgz')
-    }, [nodeModulesPath])
+    }, ['node_modules'])
 };
 
-const endProcess = (success) => () => {
-    console.log(success ? 'Success!' : 'Error while zipping node modules');
+const endProcess = (success) => (e) => {
+    console.log(success ? '[tar] Success!' : 'Error while zipping node modules');
+    if (e) console.log(e);
     process.exit(+!success);
 }
 
