@@ -7,7 +7,7 @@ const MODULES_TAR_FILENAME = 'modules.tgz';
 class NpmHelper {
 
     static extract(projectPath) {
-        return tar.x({
+        return tar.Extract({
             file: path.resolve(projectPath, MODULES_TAR_FILENAME),
             cwd: projectPath
         });

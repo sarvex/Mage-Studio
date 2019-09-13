@@ -2,7 +2,6 @@ const ProjectServer = require('./ProjectServer');
 const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
-const npm = require('npm');
 const Config = require('../config');
 const NpmHelper = require( './NpmHelper');
 const StringTemplates = require('./StringTemplates');
@@ -26,7 +25,6 @@ class ProjectHelper {
     }
 
     static installDependencies(project) {
-        // get npm and install dependencies inside project
         return new Promise((resolve, reject) => {
             ProjectHelper
                 .exists(project)

@@ -26,7 +26,7 @@ class SceneHelper {
                         SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName),
                         SceneHelper.renameSceneClassname(final_destination, sceneName)
                     ])
-                    .then(resolve)
+                    .then(() => resolve())
                     .catch(reject);
                 }
             });
@@ -34,17 +34,15 @@ class SceneHelper {
     }
 
     static rename(location, oldName, newName) {
-        return new Promise((resolve, reject) => {
-            try {
-                const oldPath = path.join(location, oldName);
-                const newPath = path.join(location, newName);
-                fs.renameSync(oldPath, newPath);
+        try {
+            const oldPath = path.join(location, oldName);
+            const newPath = path.join(location, newName);
+            fs.renameSync(oldPath, newPath);
 
-                resolve();
-            } catch(e) {
-                reject();
-            }
-        });
+            return Promise.resolve();
+        } catch(e) {
+            return Promise.reject(e);
+        }
     }
 
     static renameSceneClassname(location, scene) {
@@ -61,7 +59,7 @@ class SceneHelper {
                 });
             });
 
-            resolve();
+            resolve(true);
         });
     }
 
