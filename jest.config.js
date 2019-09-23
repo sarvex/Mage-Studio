@@ -21,7 +21,7 @@ module.exports = {
         "^.+\\.js?$": "babel-jest"
     },
     // The glob patterns Jest uses to detect test files
-    testMatch: [   
+    testMatch: [
         '**/__tests__/**/*.js?(x)',
         '**/?(*.)+(spec|test).js?(x)'
     ],
@@ -36,5 +36,7 @@ module.exports = {
     },
     // Indicates whether each individual test should be reported during the build
     verbose: false,
-    maxConcurrency: 50
+    maxConcurrency: 50,
+    notify: true,
+    notifyMode: 'always'
 };

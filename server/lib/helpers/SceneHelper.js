@@ -4,10 +4,12 @@ const fs = require('fs');
 const Config = require('../config');
 const FileHelper = require('./files/FileHelper');
 
-const SCENE_TEMPLATE_PATH = 'server/.templates/.scene';
+const SCENE_TEMPLATE_PATH = 'server/templates/scene';
 const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 const DEFAULT_SCENE_FILENAME = 'scene.json';
+const DEFAULT_SCENE_CLASSNAME = 'FirstScene';
+const DEFAULT_SCENE_CLASS_FILENAME = 'App.js';
 
 class SceneHelper {
 
@@ -20,11 +22,12 @@ class SceneHelper {
                 if (err) {
                     reject(err);
                 } else {
-                    if (SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName)) {
-                        resolve();
-                    } else {
-                        reject();
-                    }
+                    Promise.all([
+                        SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName),
+                        SceneHelper.renameSceneClassname(final_destination, sceneName)
+                    ])
+                    .then(() => resolve())
+                    .catch(reject);
                 }
             });
         });
@@ -36,10 +39,28 @@ class SceneHelper {
             const newPath = path.join(location, newName);
             fs.renameSync(oldPath, newPath);
 
-            return true;
+            return Promise.resolve();
         } catch(e) {
-            return false;
+            return Promise.reject(e);
         }
+    }
+
+    static renameSceneClassname(location, scene) {
+        return new Promise((resolve, reject) => {
+            const scenePath = path.join(location, scene, DEFAULT_SCENE_CLASS_FILENAME);
+
+            fs.readFile(scenePath, 'utf8', function (err,data) {
+                if (err) reject();
+
+                const result = data.replace(DEFAULT_SCENE_CLASSNAME, scene);
+
+                fs.writeFile(scenePath, result, 'utf8', function (err) {
+                    if (err) reject();
+                });
+            });
+
+            resolve(true);
+        });
     }
 
     static readSceneData(sceneName) {

@@ -25,9 +25,13 @@ describe('SceneHelper', () => {
         FileHelper.fileFromPath.mockClear();
 
         Scene.mockClear();
-        Scene.mockImplementation(() => (
-            { setContent: sinon.spy(), type: 'scene', read: sinon.spy(), toJSON: () => fakeSceneData }
-        ));
+        Scene.mockImplementation(() => ({
+                setContent: sinon.spy(),
+                type: 'scene',
+                read: sinon.spy(),
+                toJSON: () => fakeSceneData
+            })
+        );
 
         path.join.mockClear();
         path.resolve.mockClear();
@@ -35,59 +39,92 @@ describe('SceneHelper', () => {
         path.resolve.mockImplementation(p => p);
 
         fs.existsSync.mockClear();
+        fs.renameSync.mockClear();
         fs.existsSync.mockImplementation(() => true);
     });
 
     describe('create', () => {
 
-        it('should copy scene files from template to destination', () => {
-            SceneHelper.create('destination', 'sceneName');
+        let renameStub,
+            renameSceneClassnameStub;
+
+        beforeEach(() => {
+            renameStub = sinon.stub(SceneHelper, 'rename');
+            renameSceneClassnameStub = sinon.stub(SceneHelper, 'renameSceneClassname');
+        });
+
+        afterEach(() => {
+            SceneHelper.rename.restore();
+            SceneHelper.renameSceneClassname.restore();
+        });
+
+        it('should copy scene files from template to destination', async () => {
+            renameStub.returns(true);
+            renameSceneClassnameStub.returns(true);
+
+            ncp.mockImplementation((s, d, cb) => cb());
+
+            await SceneHelper.create('destination', 'sceneName');
 
             expect(ncp).toHaveBeenCalledTimes(1);
         });
 
-        it('should copy scene files from right template path to right destination', () => {
-            SceneHelper.create('destination', 'sceneName');
-            const expectedSrc = 'server/.templates/.scene';
+        it('should copy scene files from right template path to right destination', async () => {
+            renameStub.returns(true);
+            renameSceneClassnameStub.returns(true);
+
+            ncp.mockImplementation((s, d, cb) => cb());
+
+            await SceneHelper.create('destination', 'sceneName');
+            const expectedSrc = 'server/templates/scene';
             const expectedDestination = 'destination/src';
 
             expect(ncp).toHaveBeenCalledWith(expectedSrc, expectedDestination, expect.any(Function));
         });
 
-        it('should call SceneHelper rename after done copying', () => {
-            ncp.mockImplementation((a, b, c) => c());
-            const stub = sinon.stub(SceneHelper, 'rename');
+        it('should call SceneHelper rename after done copying', async () => {
+            renameStub.callsFake(_ => true);
+            renameSceneClassnameStub.callsFake(_ => true);
 
-            SceneHelper.create('destination', 'test');
+            ncp.mockImplementation((s, d, cb) => cb());
 
-            expect(stub.calledWith('destination/src', 'BaseScene', 'test')).toBe(true);
+            await SceneHelper.create('destination', 'test');
 
-            stub.restore();
+            expect(renameStub.calledWith('destination/src', 'BaseScene', 'test')).toBe(true);
+        });
+
+        it('should call sceneHelper renameSceneClassname after done copying', async () => {
+            renameStub.callsFake(_ => true);
+            renameSceneClassnameStub.callsFake(_ => true);
+
+            ncp.mockImplementation((s, d, cb) => cb());
+
+            await SceneHelper.create('destination', 'test');
+
+            expect(renameSceneClassnameStub.calledWith('destination/src', 'test')).toBe(true);
         });
 
         it('should return a rejected promise if it fails copying files over', () => {
             ncp.mockImplementation((a, b, c) => c('error'));
 
             expect(SceneHelper.create('destination', 'test')).rejects.toEqual('error');
-            
         });
 
         it('should return a resolved promise if everything goes according to plan', () => {
-            ncp.mockImplementation((a, b, c) => c());
-            const stub = sinon.stub(SceneHelper, 'rename').returns(true);
+            renameStub.callsFake(_ => true);
+            renameSceneClassnameStub.callsFake(_ => true);
 
-            expect(SceneHelper.create('destination', 'test')).resolves.toEqual(undefined);
+            ncp.mockImplementation((s, d, cb) => cb());
 
-            stub.restore();
+            expect(SceneHelper.create('destination', 'test')).resolves.toEqual([ true, true ]);
         });
 
         it('should return a rejected promise if it fails renaming', () => {
-            ncp.mockImplementation((a, b, c) => c());
-            const stub = sinon.stub(SceneHelper, 'rename').returns(false);
+            renameStub.callsFake(_ => new Error('error'));
+            renameSceneClassnameStub.callsFake(_ => true);
+            ncp.mockImplementation((s, d, cb) => cb());
 
-            expect(SceneHelper.create('destination', 'test')).rejects.toEqual(undefined);
-
-            stub.restore();
+            expect(SceneHelper.create('destination', 'test')).rejects.toEqual('error');
         });
 
     });
