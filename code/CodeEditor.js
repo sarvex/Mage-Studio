@@ -4,7 +4,12 @@ import './theme.scss';
 import ProjectTree from './ProjectTree';
 import { Col, Skeleton } from 'antd';
 import { connect } from 'react-redux';
-import { getScripts, getScriptContent } from '../app/actions/scripts';
+import NewFileModal from '../app/modals/NewFileModal';
+import {
+    getScripts,
+    getScriptContent,
+    displayNewScriptModal
+} from '../app/actions/scripts';
 
 let CodeMirror;
 
@@ -44,8 +49,14 @@ export class CodeEditor extends React.Component {
             })
     };
 
+    handleModalDismiss = () => {
+        const { onModalDismiss = f => f } = this.props;
+
+        onModalDismiss();
+    };
+
     render() {
-        const { scripts, config } = this.props;
+        const { scripts, config, modalVisible } = this.props;
         const options = {
             lineNumbers: true,
             mode: 'javascript',
@@ -71,6 +82,10 @@ export class CodeEditor extends React.Component {
                         <Skeleton active />
                     }
                 </Col>
+                <NewFileModal
+                    visible={modalVisible}
+                    onDismiss={this.handleModalDismiss}
+                />
             </div>
         );
     }

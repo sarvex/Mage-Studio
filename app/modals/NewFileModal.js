@@ -50,7 +50,7 @@ class NewFileModal extends React.Component {
             <Modal
                 className='modal'
                 title={'New File'}
-                visible={true}
+                visible={visible}
                 onCancel={this.handleCancel}
                 footer={this.getFooter(loading)}>
                 <div className='box row'>

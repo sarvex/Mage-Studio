@@ -2,7 +2,8 @@ import {
     SCRIPTS_FETCH_FAILED,
     SCRIPTS_FETCH_STARTED,
     SCRIPTS_FETCH_COMPLETED,
-    SCRIPTS_SINGLE_FETCH_COMPLETED
+    SCRIPTS_SINGLE_FETCH_COMPLETED,
+    SCRIPTS_NEW_FILE_MODAL
 } from './types';
 
 import { PROJECTS_URL } from '../lib/constants';
@@ -26,6 +27,11 @@ export const scriptsFetchFailed = () => ({
 export const singleScriptFetchCompleted = (data) => ({
     type: SCRIPTS_SINGLE_FETCH_COMPLETED,
     data
+});
+
+export const displayNewScriptModal = (visible) => ({
+    type: SCRIPTS_NEW_FILE_MODAL,
+    visible
 });
 
 export const getScripts = (project) => (dispatch) => {

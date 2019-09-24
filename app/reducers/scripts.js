@@ -2,7 +2,8 @@ import {
     SCRIPTS_FETCH_FAILED,
     SCRIPTS_FETCH_STARTED,
     SCRIPTS_FETCH_COMPLETED,
-    SCRIPTS_SINGLE_FETCH_COMPLETED
+    SCRIPTS_SINGLE_FETCH_COMPLETED,
+    SCRIPTS_NEW_FILE_MODAL
 } from '../actions/types';
 
 const DEFAULT = {
@@ -10,7 +11,8 @@ const DEFAULT = {
     error: false,
     completed: false,
     data: null,
-    list: []
+    list: [],
+    modalVisible: false
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
@@ -43,6 +45,13 @@ export default function reducer(state = DEFAULT, action = {}) {
                 ...DEFAULT,
                 data: action.data,
                 completed: true
+            };
+            break;
+        case SCRIPTS_NEW_FILE_MODAL:
+            return {
+                ...DEFAULT,
+                ...state,
+                modalVisible: action.visible
             };
             break;
         default:
