@@ -26,7 +26,7 @@ class SceneHelper {
                         SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName),
                         SceneHelper.renameSceneClassname(final_destination, sceneName)
                     ])
-                    .then(() => resolve())
+                    .then(resolve)
                     .catch(reject);
                 }
             });

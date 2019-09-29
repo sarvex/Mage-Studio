@@ -23,11 +23,11 @@ exports[`CodeEditor should render fine 1`] = `
   >
     <Skeleton
       active={true}
-      avatar={false}
-      paragraph={true}
-      prefixCls="ant-skeleton"
-      title={true}
     />
   </Col>
+  <NewFileModal
+    onConfirm={[Function]}
+    onDismiss={[Function]}
+  />
 </div>
 `;

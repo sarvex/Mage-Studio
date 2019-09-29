@@ -10,7 +10,6 @@ import { PROJECTS_URL } from '../lib/constants';
 import { getOrCreateApp } from '../scene/AppProxy';
 import axios from 'axios';
 
-// fetch scripts
 export const scriptsFetchStarted = () => ({
     type: SCRIPTS_FETCH_STARTED
 });
@@ -52,6 +51,25 @@ export const getScripts = (project) => (dispatch) => {
         });
 };
 
+export const newScript = (project, filename) => (dispatch) => {
+    const url = `${PROJECTS_URL}/${project}/scripts`;
+    const formData = new FormData();
+    formData.append('filename', filename);
+
+    axios
+        .post(url, formData)
+        .then((response) => {
+            if (!response) {
+                dispatch(scriptsFetchFailed());
+            } else {
+                dispatch(scriptsFetchCompleted(response));
+            }
+        })
+        .catch(() => {
+            dispatch(scriptsFetchFailed());
+        });
+}
+
 export const getScriptContent = (project, scriptid) => {
     const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
 
@@ -71,6 +89,3 @@ export const loadSingleScript = (project, scriptid) => (dispatch) => {
                 .catch(dispatch(scriptsFetchFailed()));
         });
 };
-
-
-// fetch single script

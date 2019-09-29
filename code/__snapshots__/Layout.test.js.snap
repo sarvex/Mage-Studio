@@ -6,12 +6,16 @@ exports[`Layout should render fine 1`] = `
 >
   <Header
     isCodeEditor={true}
+    onNewScript={[Function]}
   />
   <Row
     className="main-container code-editor"
     gutter={0}
   >
-    <Connect(CodeEditor) />
+    <Connect(CodeEditor)
+      modalVisible={false}
+      onModalDismiss={[Function]}
+    />
   </Row>
   <Footer />
 </div>

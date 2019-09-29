@@ -83,8 +83,8 @@ describe('SceneHelper', () => {
         });
 
         it('should call SceneHelper rename after done copying', async () => {
-            renameStub.callsFake(_ => true);
-            renameSceneClassnameStub.callsFake(_ => true);
+            renameStub.returns(true);
+            renameSceneClassnameStub.returns(true);
 
             ncp.mockImplementation((s, d, cb) => cb());
 
@@ -94,8 +94,8 @@ describe('SceneHelper', () => {
         });
 
         it('should call sceneHelper renameSceneClassname after done copying', async () => {
-            renameStub.callsFake(_ => true);
-            renameSceneClassnameStub.callsFake(_ => true);
+            renameStub.returns(true);
+            renameSceneClassnameStub.returns(true);
 
             ncp.mockImplementation((s, d, cb) => cb());
 
@@ -111,8 +111,8 @@ describe('SceneHelper', () => {
         });
 
         it('should return a resolved promise if everything goes according to plan', () => {
-            renameStub.callsFake(_ => true);
-            renameSceneClassnameStub.callsFake(_ => true);
+            renameStub.returns(true);
+            renameSceneClassnameStub.returns(true);
 
             ncp.mockImplementation((s, d, cb) => cb());
 
@@ -120,8 +120,8 @@ describe('SceneHelper', () => {
         });
 
         it('should return a rejected promise if it fails renaming', () => {
-            renameStub.callsFake(_ => new Error('error'));
-            renameSceneClassnameStub.callsFake(_ => true);
+            renameStub.returns(new Error('error'));
+            renameSceneClassnameStub.returns(true);
             ncp.mockImplementation((s, d, cb) => cb());
 
             expect(SceneHelper.create('destination', 'test')).rejects.toEqual('error');

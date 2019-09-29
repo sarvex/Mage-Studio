@@ -16,6 +16,10 @@ export default () => {
         }
     };
 
+    const handleModalDismiss = () => {
+        setModalVisible(false);
+    };
+
     return (
         <div className="app">
             <Header
@@ -24,7 +28,7 @@ export default () => {
             <Row className="main-container code-editor">
                 <CodeEditor
                     modalVisible={modalVisible}
-                    onModalDismiss={() => setModalVisible(false)}/>
+                    onModalDismiss={handleModalDismiss}/>
             </Row>
             <Footer />
         </div>

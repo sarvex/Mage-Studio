@@ -2,7 +2,6 @@ import React from 'react';
 import { Modal, Input } from 'antd';
 
 import Footer from './footer';
-import FileUploaderBox from './content/FileUploaderBox';
 
 import './modals.scss';
 import '../../lib/style.scss';
@@ -43,7 +42,7 @@ class NewFileModal extends React.Component {
     };
 
     render() {
-        const { visible, loading, type } = this.props;
+        const { visible, loading } = this.props;
         const { value } = this.state;
 
         return (

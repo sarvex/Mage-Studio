@@ -95,9 +95,37 @@ class ScriptsController {
     }
 
     static createScript(req, res) {
+        const { filename } = req.body;
+        const id = req.params.id;
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (!filename) {
+            return res
+                .status(messages.SCRIPT_NAME_MISSING.code)
+                .json({ message: messages.SCRIPT_NAME_MISSING.text });
+        }
+
+        const buffer = new Buffer('');
+        const script = FileHelper.fileFromBuffer(filename, FileHelper.SCRIPT_TYPE(), buffer);
+
+        if (script.write()) {
+            return ScriptsController.getAllScripts(req, res);
+        } else {
+            return res
+                .status(messages.FILE_WRITE_FAILURE.code)
+                .json({ message: messages.FILE_WRITE_FAILURE.text });
+        }
+    }
+
+    static updateScript(_req, res) {
         return res
-            .status(200)
-            .json({ message: 'ok' });
+            .status(messages.NOT_IMPLEMENTED.code)
+            .json(messages.NOT_IMPLEMENTED.text);
     }
 }
 
