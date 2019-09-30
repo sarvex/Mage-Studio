@@ -1,5 +1,6 @@
 import sinon from 'sinon';
 import * as actions from './scripts';
+import axios from 'axios';
 import {
     SCRIPTS_FETCH_STARTED,
     SCRIPTS_FETCH_COMPLETED,
@@ -7,8 +8,15 @@ import {
     SCRIPTS_NEW_FILE_MODAL,
     SCRIPTS_SINGLE_FETCH_COMPLETED
 } from './types';
+jest.mock('axios');
 
 describe('Scripts', () => {
+
+    beforeEach(() => {
+        axios.mockClear();
+        axios.get.mockClear();
+        axios.post.mockClear();
+    });
 
     it('scriptsFetchStarted should return the right type', () => {
         expect(actions.scriptsFetchStarted()).toEqual({ type: SCRIPTS_FETCH_STARTED });
@@ -47,4 +55,23 @@ describe('Scripts', () => {
             visible: false
         })
     });
+
+    describe('getScripts', () => {
+
+        it('should make the call to the right endpoint', () => {
+            const project = 'fake';
+            const fakeDispatch = f => f;
+            actions.getScripts(project)(fakeDispatch);
+
+            expect(axios.get).toHaveBeenCalledWith('/api/projects/fake/scripts');
+        });
+    });
+
+    describe('newScript', () => {
+        it('should make the call to the right endpoint and right payload');
+    });
+
+    describe('loadSingleScript', () => {
+        it('should make the call to the right endpoint and right payload');
+    })
 });

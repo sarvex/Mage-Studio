@@ -38,7 +38,8 @@ export const getScripts = (project) => (dispatch) => {
 
     dispatch(scriptsFetchStarted());
 
-    axios(url)
+    axios
+        .get(url)
         .then((response) => {
             if (!response) {
                 dispatch(scriptsFetchFailed());
