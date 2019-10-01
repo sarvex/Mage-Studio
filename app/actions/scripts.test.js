@@ -61,17 +61,40 @@ describe('Scripts', () => {
         it('should make the call to the right endpoint', () => {
             const project = 'fake';
             const fakeDispatch = f => f;
+            axios.get.mockReturnValue(Promise.resolve());
+
             actions.getScripts(project)(fakeDispatch);
 
-            expect(axios.get).toHaveBeenCalledWith('/api/projects/fake/scripts');
+            expect(axios.get).toHaveBeenCalledWith('api/projects/fake/scripts');
         });
     });
 
     describe('newScript', () => {
-        it('should make the call to the right endpoint and right payload');
+
+        it('should make the call to the right endpoint and right payload', () => {
+            const project = 'fake'
+            const filename = 'script.js';
+            const fakeDispatch = f => f;
+            const formData = new FormData();
+            formData.append('filename', filename);
+            axios.post.mockReturnValue(Promise.resolve());
+
+            actions.newScript(project, filename)(fakeDispatch);
+
+            expect(axios.post).toHaveBeenCalledWith('api/projects/fake/scripts', formData);
+        });
     });
 
-    describe('loadSingleScript', () => {
-        it('should make the call to the right endpoint and right payload');
+    describe('getScriptContent', () => {
+
+        it('should make the call to the right endpoint and right payload', () => {
+            const project = 'fake';
+            const script = 'fakeScript';
+            axios.get.mockReturnValue(Promise.resolve());
+
+            actions.getScriptContent(project, script);
+
+            expect(axios.get).toHaveBeenCalledWith('api/projects/fake/scripts/fakeScript');
+        });
     })
 });

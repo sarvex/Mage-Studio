@@ -4,7 +4,7 @@ exports[`Layout should render fine 1`] = `
 <div
   className="app"
 >
-  <Header
+  <Connect(Header)
     isCodeEditor={true}
     onNewScript={[Function]}
   />

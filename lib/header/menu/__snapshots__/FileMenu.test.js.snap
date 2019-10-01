@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileMenu should render fine 1`] = `
+<Dropdown
+  mouseEnterDelay={0.15}
+  mouseLeaveDelay={0.1}
+  overlay={
+    <Menu
+      className=""
+      focusable={false}
+      prefixCls="ant-menu"
+      theme="light"
+    >
+      <SubMenu
+        title="New"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+        <MenuItem
+          className="option"
+          disabled={true}
+        >
+          Script
+        </MenuItem>
+      </SubMenu>
+      <SubMenu
+        title="Open"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+      <Divider />
+      <SubMenu
+        title="Save"
+      >
+        <MenuItem
+          className="option"
+        >
+          Save Scene
+        </MenuItem>
+        <MenuItem
+          className="option"
+          disabled={true}
+        >
+          Save file
+        </MenuItem>
+      </SubMenu>
+      <Divider />
+      <SubMenu
+        title="Import"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+      <SubMenu
+        title="Export"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+    </Menu>
+  }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
+>
+  <span
+    className="main-menu-item"
+  >
+    File
+  </span>
+</Dropdown>
+`;
+
+exports[`FileMenu should render properly when is inside code editor 1`] = `
+<Dropdown
+  mouseEnterDelay={0.15}
+  mouseLeaveDelay={0.1}
+  overlay={
+    <Menu
+      className=""
+      focusable={false}
+      prefixCls="ant-menu"
+      theme="light"
+    >
+      <SubMenu
+        title="New"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+        <MenuItem
+          className="option"
+          disabled={false}
+        >
+          Script
+        </MenuItem>
+      </SubMenu>
+      <SubMenu
+        title="Open"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+      <Divider />
+      <SubMenu
+        title="Save"
+      >
+        <MenuItem
+          className="option"
+          disabled={true}
+        >
+          Save Scene
+        </MenuItem>
+        <MenuItem
+          className="option"
+          disabled={false}
+        >
+          Save file
+        </MenuItem>
+      </SubMenu>
+      <Divider />
+      <SubMenu
+        title="Import"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+      <SubMenu
+        title="Export"
+      >
+        <MenuItem
+          className="option"
+        >
+          Project
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          Scene
+        </MenuItem>
+      </SubMenu>
+    </Menu>
+  }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
+>
+  <span
+    className="main-menu-item"
+  >
+    File
+  </span>
+</Dropdown>
+`;

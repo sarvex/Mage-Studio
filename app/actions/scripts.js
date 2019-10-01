@@ -74,7 +74,7 @@ export const newScript = (project, filename) => (dispatch) => {
 export const getScriptContent = (project, scriptid) => {
     const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
 
-    return axios(url);
+    return axios.get(url);
 };
 
 export const loadSingleScript = (project, scriptid) => (dispatch) => {
