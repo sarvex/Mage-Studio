@@ -8,7 +8,7 @@ import NpmHelper from './NpmHelper';
 jest.mock('path');
 jest.mock('child_process');
 
-describe.only('NpmHelper', () => {
+describe('NpmHelper', () => {
 
     beforeEach(() => {
         // tar.Extract.mockImplementation(() => Promise.resolve());

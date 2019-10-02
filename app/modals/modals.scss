@@ -98,6 +98,7 @@ $max-input-size: $base-unit * 20;
     & .scene-setting {
 
         height: auto;
+        flex: 1 1 auto;
 
         .setting-input-group {
             float: right;

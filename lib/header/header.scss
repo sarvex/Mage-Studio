@@ -46,7 +46,8 @@ $header-height: $base-unit * 4;
 
 
     & .ant-dropdown-menu-item,
-    & .ant-dropdown-menu-submenu > * {
+    & .ant-dropdown-menu-submenu > *,
+    & .ant-dropdown-menu-item a {
         background-color: $deep-blue-13 !important;
         color: $white !important;
         font-family: 'Roboto Mono', sans-serif;

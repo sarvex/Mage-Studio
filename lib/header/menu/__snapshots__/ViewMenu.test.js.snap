@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewMenu should render fine 1`] = `
+<Dropdown
+  mouseEnterDelay={0.15}
+  mouseLeaveDelay={0.1}
+  overlay={
+    <Menu
+      className=""
+      focusable={false}
+      prefixCls="ant-menu"
+      theme="light"
+    >
+      <MenuItem
+        className="option"
+      >
+        <a
+          href="/code"
+          target="_blank"
+        >
+          Code Editor
+        </a>
+      </MenuItem>
+      <MenuItem
+        className="option"
+      >
+        <a
+          href="/"
+          target="_blank"
+        >
+          Scene Editor
+        </a>
+      </MenuItem>
+      <Divider />
+      <MenuItem
+        className="option"
+      >
+        Toggle Full Screen
+      </MenuItem>
+      <SubMenu
+        title="Sidebars"
+      >
+        <MenuItem
+          className="option"
+        >
+          option 1
+        </MenuItem>
+        <MenuItem
+          className="option"
+        >
+          option 2
+        </MenuItem>
+      </SubMenu>
+    </Menu>
+  }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
+>
+  <span
+    className="main-menu-item"
+  >
+    View
+  </span>
+</Dropdown>
+`;

@@ -2,9 +2,16 @@ import React from 'react';
 import './theme.scss';
 
 import ProjectTree from './ProjectTree';
-import { Col, Skeleton } from 'antd';
+import { Col } from 'antd';
 import { connect } from 'react-redux';
-import { getScripts, getScriptContent } from '../app/actions/scripts';
+import NewFileModal from '../app/modals/NewFileModal';
+import Skeleton from '../lib/shared/Skeleton';
+
+import {
+    getScripts,
+    getScriptContent,
+    newScript
+} from '../app/actions/scripts';
 
 let CodeMirror;
 
@@ -29,7 +36,7 @@ export class CodeEditor extends React.Component {
         })
     }
 
-    handleOnBeforeChange = (editor, data, code) => {
+    handleOnBeforeChange = (_editor, _data, code) => {
         this.setState({ code });
     };
 
@@ -44,8 +51,22 @@ export class CodeEditor extends React.Component {
             })
     };
 
+    handleNewFile = (filename) => {
+        const { onNewFile = f => f, onModalDismiss = f => f, config } = this.props;
+        const { project } = config;
+
+        onModalDismiss();
+        onNewFile(project, filename);
+    }
+
+    handleModalDismiss = () => {
+        const { onModalDismiss = f => f } = this.props;
+
+        onModalDismiss();
+    };
+
     render() {
-        const { scripts, config } = this.props;
+        const { scripts, config, modalVisible } = this.props;
         const options = {
             lineNumbers: true,
             mode: 'javascript',
@@ -71,6 +92,11 @@ export class CodeEditor extends React.Component {
                         <Skeleton active />
                     }
                 </Col>
+                <NewFileModal
+                    visible={modalVisible}
+                    onDismiss={this.handleModalDismiss}
+                    onConfirm={this.handleNewFile}
+                />
             </div>
         );
     }
@@ -82,7 +108,8 @@ const mapStateToProps = ({ config, scripts }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getScripts: (project) => dispatch(getScripts(project))
+    getScripts: (project) => dispatch(getScripts(project)),
+    onNewFile: (project, filename) => dispatch(newScript(project, filename))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeEditor);

@@ -28,7 +28,7 @@ const ProjectTree = ({ scripts, onScriptSelect = f => f, config }) => {
                             type="book"
                             className={"code-icon"}/>}
                         title={project}>
-                        { list.map((s, i) => (
+                        { list.map(s => (
                             <TreeNode
                                 className={"project-file"}
                                 icon={<Icon

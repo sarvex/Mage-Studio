@@ -30,6 +30,9 @@ class FileHelper {
                 file = new Scene(filename);
                 file.setContent(buffer);
                 break;
+            case FileHelper.SCRIPT_TYPE():
+                file = new Script(filename);
+                file.setContent(buffer);
             default:
                 break;
         }

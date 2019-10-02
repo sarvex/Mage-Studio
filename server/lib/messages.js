@@ -1,7 +1,7 @@
 const PROJECT_NAME_MISSING = { code: 400, text: 'Project name is missing.' };
 const SCENE_NAME_MISSING = { code: 400, text: 'Scene name is missing.' };
 
-const WRONG_PROJECT_NAME = { code: 400, text: 'Selected project is unavailable '};
+const WRONG_PROJECT_NAME = { code: 400, text: 'Selected project is unavailable.'};
 
 const PROJECT_CREATED = { code: 201, text: ''};
 const PROJECT_NOT_CREATED = { code: 204, text: 'Something went wrong when creating the project.' };
@@ -34,9 +34,11 @@ const IMAGE_NOT_FOUND = { code: 404, text: 'Image not found' };
 const IMAGE_NAME_MISSING = { code: 400, text: 'Image name is missing' };
 
 const SCRIPTS_NOT_FOUND = { code: 404, text: 'Script not found' };
-const SCRIPT_NAME_MISSING = { code: 400, text: 'Script name is missing' };
+const SCRIPT_NAME_MISSING = { code: 400, text: 'Script name is missing.' };
 
 const ASSETS_NOT_FOUND = { code: 404, text: 'Assets not found' };
+
+const NOT_IMPLEMENTED = { code: 501, text: 'Method not implemented, come back later. '};
 
 module.exports = {
     PROJECT_NAME_MISSING: PROJECT_NAME_MISSING,
@@ -66,5 +68,6 @@ module.exports = {
     ASSETS_NOT_FOUND: ASSETS_NOT_FOUND,
     IMAGES_NOT_FOUND: IMAGES_NOT_FOUND,
     IMAGE_NOT_FOUND: IMAGE_NOT_FOUND,
-    IMAGE_NAME_MISSING: IMAGE_NAME_MISSING
+    IMAGE_NAME_MISSING: IMAGE_NAME_MISSING,
+    NOT_IMPLEMENTED: NOT_IMPLEMENTED
 };

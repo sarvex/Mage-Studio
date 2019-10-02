@@ -1,5 +1,5 @@
-import React from 'react';
-import {Row} from 'antd';
+import React, { useState } from 'react';
+import { Row } from 'antd';
 
 import Header from '../lib/header/Header';
 import Footer from '../lib/footer/Footer';
@@ -9,11 +9,26 @@ import '../lib/style.scss';
 import './editor.scss';
 
 export default () => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const handleNewScript = () => {
+        if (!modalVisible) {
+            setModalVisible(true);
+        }
+    };
+
+    const handleModalDismiss = () => {
+        setModalVisible(false);
+    };
+
     return (
         <div className="app">
-            <Header isCodeEditor/>
+            <Header
+                onNewScript={handleNewScript}
+                isCodeEditor/>
             <Row className="main-container code-editor">
-                <CodeEditor />
+                <CodeEditor
+                    modalVisible={modalVisible}
+                    onModalDismiss={handleModalDismiss}/>
             </Row>
             <Footer />
         </div>

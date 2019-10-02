@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewFileModal should render fine 1`] = `
+<Modal
+  cancelButtonDisabled={false}
+  className="modal"
+  confirmLoading={false}
+  footer={
+    <Footer
+      onConfirm={[Function]}
+    />
+  }
+  maskTransitionName="fade"
+  okButtonDisabled={false}
+  okType="primary"
+  onCancel={[Function]}
+  prefixCls="ant-modal"
+  title="New File"
+  transitionName="zoom"
+  visible={false}
+  width={520}
+>
+  <div
+    className="box row"
+  >
+    <div
+      className="scene-setting"
+    >
+      <div
+        className="setting-row"
+      >
+        <label
+          className="setting-label"
+        >
+          file name
+        </label>
+        <div
+          className="setting-input right"
+        >
+          <Input
+            disabled={false}
+            onChange={[Function]}
+            placeholder="newscript.js"
+            prefixCls="ant-input"
+            size="small"
+            type="text"
+            value={null}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</Modal>
+`;
