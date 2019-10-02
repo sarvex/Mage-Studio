@@ -63,7 +63,7 @@ class NewFileModal extends React.Component {
                                     onChange={this.handleChange}
                                     value={value}
                                     size="small"
-                                    placeholder="newscript" />
+                                    placeholder="newscript.js" />
                             </div>
                         </div>
                     </div>
