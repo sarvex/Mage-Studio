@@ -7,7 +7,6 @@ const electron = require('../electron');
 class ScriptsController {
 
     static getAllScripts(req, res) {
-        // get scripts from assets
         const id = req.params.id;
         const currentconfig = Config.getLocalConfig();
 
