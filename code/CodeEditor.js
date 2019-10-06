@@ -10,19 +10,18 @@ import Skeleton from '../lib/shared/Skeleton';
 import {
     getScripts,
     getScriptContent,
-    newScript
+    newScript,
+    editorReady,
+    editorScriptLoaded,
+    editorScriptChanged
 } from '../app/actions/scripts';
 
 let CodeMirror;
 
 export class CodeEditor extends React.Component {
-    state = {
-        code: '',
-        loaded: false
-    };
 
     componentDidMount() {
-        const { config, getScripts = f => f } = this.props;
+        const { config, getScripts = f => f, onEditorReady } = this.props;
         const { project } = config;
 
         getScripts(project);
@@ -32,22 +31,27 @@ export class CodeEditor extends React.Component {
             require('codemirror/mode/javascript/javascript')
         ]).then(([{ Controlled }]) => {
             CodeMirror = Controlled;
-            this.setState({ loaded: true });
+
+            onEditorReady();
         })
     }
 
     handleOnBeforeChange = (_editor, _data, code) => {
-        this.setState({ code });
+        const { onCodeChange, scripts } = this.props;
+        const { editor: { filename } } = scripts;
+
+        onCodeChange(filename, code);
     };
 
     handleScriptSelect = ([ scriptName ]) => {
-        const { config } = this.props;
+        const { config, onScriptLoaded } = this.props;
         const { project } = config;
 
         getScriptContent(project, scriptName)
             .then(({ data }) => {
                 const { content } = data;
-                this.setState({ code: content });
+
+                onScriptLoaded(scriptName, content);
             })
     };
 
@@ -59,14 +63,10 @@ export class CodeEditor extends React.Component {
         onNewFile(project, filename);
     }
 
-    handleModalDismiss = () => {
-        const { onModalDismiss = f => f } = this.props;
-
-        onModalDismiss();
-    };
-
     render() {
-        const { scripts, config, modalVisible } = this.props;
+        const { scripts, config, modalVisible, onModalDismiss } = this.props;
+        const { editor: { loaded, code } } = scripts;
+        console.log(loaded);
         const options = {
             lineNumbers: true,
             mode: 'javascript',
@@ -83,10 +83,10 @@ export class CodeEditor extends React.Component {
                 <Col
                     span={20}
                     className="code-column">
-                    { this.state.loaded ?
+                    { loaded ?
                         <CodeMirror
                             className='code-content'
-                            value={this.state.code}
+                            value={code}
                             onBeforeChange={this.handleOnBeforeChange}
                             options={options} /> :
                         <Skeleton active />
@@ -94,7 +94,7 @@ export class CodeEditor extends React.Component {
                 </Col>
                 <NewFileModal
                     visible={modalVisible}
-                    onDismiss={this.handleModalDismiss}
+                    onDismiss={onModalDismiss}
                     onConfirm={this.handleNewFile}
                 />
             </div>
@@ -109,7 +109,10 @@ const mapStateToProps = ({ config, scripts }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getScripts: (project) => dispatch(getScripts(project)),
-    onNewFile: (project, filename) => dispatch(newScript(project, filename))
+    onNewFile: (project, filename) => dispatch(newScript(project, filename)),
+    onEditorReady: () => dispatch(editorReady()),
+    onScriptLoaded: (filename, code) => dispatch(editorScriptLoaded(filename, code)),
+    onCodeChange: (filename, code) => dispatch(editorScriptChanged(filename, code))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeEditor);

@@ -3,7 +3,10 @@ import {
     SCRIPTS_FETCH_STARTED,
     SCRIPTS_FETCH_COMPLETED,
     SCRIPTS_SINGLE_FETCH_COMPLETED,
-    SCRIPTS_NEW_FILE_MODAL
+    SCRIPTS_NEW_FILE_MODAL,
+    SCRIPTS_EDITOR_SCRIPT_CHANGED,
+    SCRIPTS_EDITOR_SCRIPT_LOADED,
+    SCRIPTS_EDITOR_FINISHED_LOADING
 } from '../actions/types';
 
 const DEFAULT = {
@@ -12,7 +15,12 @@ const DEFAULT = {
     completed: false,
     data: null,
     list: [],
-    modalVisible: false
+    modalVisible: false,
+    editor: {
+        loaded: false,
+        filename: '',
+        code: ''
+    }
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
@@ -26,23 +34,23 @@ export default function reducer(state = DEFAULT, action = {}) {
             break;
         case SCRIPTS_FETCH_FAILED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 error: true
             };
             break;
         case SCRIPTS_FETCH_COMPLETED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 list: action.list,
                 completed: true
             };
             break;
         case SCRIPTS_SINGLE_FETCH_COMPLETED:
             return {
-                ...state,
                 ...DEFAULT,
+                ...state,
                 data: action.data,
                 completed: true
             };
@@ -52,6 +60,28 @@ export default function reducer(state = DEFAULT, action = {}) {
                 ...DEFAULT,
                 ...state,
                 modalVisible: action.visible
+            };
+            break;
+        case SCRIPTS_EDITOR_SCRIPT_CHANGED:
+        case SCRIPTS_EDITOR_SCRIPT_LOADED:
+            return {
+                ...DEFAULT,
+                ...state,
+                editor: {
+                    ...state.editor,
+                    filename: action.filename,
+                    code: action.code
+                }
+            };
+            break;
+        case SCRIPTS_EDITOR_FINISHED_LOADING:
+            return {
+                ...DEFAULT,
+                ...state,
+                editor: {
+                    ...state.editor,
+                    loaded: true
+                }
             };
             break;
         default:

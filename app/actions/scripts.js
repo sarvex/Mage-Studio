@@ -3,7 +3,10 @@ import {
     SCRIPTS_FETCH_STARTED,
     SCRIPTS_FETCH_COMPLETED,
     SCRIPTS_SINGLE_FETCH_COMPLETED,
-    SCRIPTS_NEW_FILE_MODAL
+    SCRIPTS_NEW_FILE_MODAL,
+    SCRIPTS_EDITOR_FINISHED_LOADING,
+    SCRIPTS_EDITOR_SCRIPT_LOADED,
+    SCRIPTS_EDITOR_SCRIPT_CHANGED
 } from './types';
 
 import { PROJECTS_URL } from '../lib/constants';
@@ -32,6 +35,22 @@ export const displayNewScriptModal = (visible) => ({
     type: SCRIPTS_NEW_FILE_MODAL,
     visible
 });
+
+export const editorReady = () => ({
+    type: SCRIPTS_EDITOR_FINISHED_LOADING,
+});
+
+export const editorScriptLoaded = (filename, code) => ({
+    type: SCRIPTS_EDITOR_SCRIPT_LOADED,
+    filename,
+    code
+});
+
+export const editorScriptChanged = (filename, code) => ({
+    type: SCRIPTS_EDITOR_SCRIPT_CHANGED,
+    filename,
+    code
+})
 
 export const getScripts = (project) => (dispatch) => {
     const url = `${PROJECTS_URL}/${project}/scripts`;
@@ -90,3 +109,12 @@ export const loadSingleScript = (project, scriptid) => (dispatch) => {
                 .catch(dispatch(scriptsFetchFailed()));
         });
 };
+
+export const saveScript = (project, filename, content) => () => {
+    const url = `${PROJECTS_URL}/${project}/scripts/${filename}`;
+
+    const formData = new FormData();
+    formData.append('content', content);
+
+    axios.put(url, formData)
+}
