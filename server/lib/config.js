@@ -84,6 +84,22 @@ function getProjectPath(project) {
     return path.join(local.workspace, projectName);
 }
 
+function getSceneScriptPath(scene) {
+    const local = getLocalConfig();
+    const sceneName = scene || local.scene || '';
+
+    return path.join(getProjectPath(), SRC, sceneName);
+}
+
+function getPathByScriptType(type) {
+    switch (type) {
+        case 'scene':
+            return getSceneScriptPath();
+        default:
+            return getScriptsPath();
+    }
+}
+
 function getAssetsPath() { return path.join(getProjectPath(), ASSETS); }
 function getScriptsPath() { return path.join(getAssetsPath(), SCRIPTS); }
 function getTexturesPath() { return path.join(getAssetsPath(), TEXTURES); }
@@ -127,6 +143,8 @@ module.exports = {
     updateLocalConfig: updateLocalConfig,
     getProjectPath: getProjectPath,
     getAssetsPath: getAssetsPath,
+    getSceneScriptPath: getSceneScriptPath,
+    getPathByScriptType: getPathByScriptType,
     getScriptsPath: getScriptsPath,
     getTexturesPath: getTexturesPath,
     getImagesPath: getImagesPath,

@@ -23,20 +23,20 @@ class ScriptsController {
         }
 
         if (electron.isDesktop()) {
-            AssetsHelper
-                .getScripts()
-                .then(function(scripts) {
-                    if (scripts.length) {
-                        return res
-                            .status(200)
-                            .json(scripts);
-                    } else {
-                        return res
-                            .status(200)
-                            .json([]);
-                    }
+            Promise.all([
+                AssetsHelper.getScripts(),
+                AssetsHelper.getSceneScript() // this should get all scripts of all scenes
+            ]).then(function([_scripts, _sceneScript]) {
+                    const scripts = (_scripts.length && _scripts) || [];
+                    const sceneScript = (_sceneScript.length && _sceneScript) || [];
+
+                    return res
+                        .status(200)
+                        .json(scripts.concat(sceneScript));
+
                 })
                 .catch(function(err) {
+                    console.log(err);
                     return res
                         .status(messages.SCRIPTS_NOT_FOUND.code)
                         .json({ message: messages.SCRIPTS_NOT_FOUND.text });
@@ -52,6 +52,7 @@ class ScriptsController {
         const id = req.params.id;
         const currentconfig = Config.getLocalConfig();
         const scriptid = req.params.scriptid;
+        const type = req.query.type;
 
         if (!id) {
             return res
@@ -73,7 +74,7 @@ class ScriptsController {
 
         if (electron.isDesktop()) {
             AssetsHelper
-                .getScript(scriptid)
+                .getScript(scriptid, type)
                 .then(function(json) {
                     return res
                         .status(200)

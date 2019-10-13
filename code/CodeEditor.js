@@ -44,12 +44,19 @@ export class CodeEditor extends React.Component {
     };
 
     handleScriptSelect = ([ scriptName ]) => {
-        const { config, onScriptLoaded } = this.props;
+        const { config, onScriptLoaded, scripts: { list } } = this.props;
         const { project } = config;
 
+<<<<<<< HEAD
         console.log(this.props);
 
         getScriptContent(project, scriptName)
+=======
+        const filteredList = list.filter(script => script.name === scriptName);
+        const type = filteredList.length ? filteredList[0].type : 'script';
+
+        getScriptContent(project, scriptName, type)
+>>>>>>> MS-hqpc test
             .then(({ data }) => {
                 const { content } = data;
 
@@ -83,7 +90,7 @@ export class CodeEditor extends React.Component {
                     onScriptSelect={this.handleScriptSelect}
                 />
                 <Col
-                    span={20}
+                    span={19}
                     className="code-column">
                     { loaded ?
                         <CodeMirror

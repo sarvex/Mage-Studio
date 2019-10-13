@@ -90,18 +90,18 @@ export const newScript = (project, filename) => (dispatch) => {
         });
 }
 
-export const getScriptContent = (project, scriptid) => {
-    const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}`;
+export const getScriptContent = (project, scriptid, type) => {
+    const url = `${PROJECTS_URL}/${project}/scripts/${scriptid}?type=${type}`;
 
     return axios.get(url);
 };
 
-export const loadSingleScript = (project, scriptid) => (dispatch) => {
+export const loadSingleScript = (project, scriptid, type) => (dispatch) => {
     dispatch(scriptsFetchStarted());
 
     getOrCreateApp()
         .then((app) => {
-            getScriptContent(project, scriptid)
+            getScriptContent(project, scriptid, type)
                 .then(({ data }) => {
                     dispatch(singleScriptFetchCompleted(data));
                     app.loadScript(data.content);
