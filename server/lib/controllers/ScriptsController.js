@@ -121,10 +121,39 @@ class ScriptsController {
         }
     }
 
-    static updateScript(_req, res) {
-        return res
-            .status(messages.NOT_IMPLEMENTED.code)
-            .json(messages.NOT_IMPLEMENTED.text);
+    static updateScript(req, res) {
+        const { content } = req.body;
+        const id = req.params.id;
+        const scriptid = req.params.scriptid;
+
+        if (!id) {
+            return res
+                .status(messages.PROJECT_NAME_MISSING.code)
+                .json({ message: messages.PROJECT_NAME_MISSING.text });
+        }
+
+        if (!scriptid) {
+            return res
+                .status(messages.SCRIPT_NAME_MISSING.code)
+                .json({ message: messages.SCRIPT_NAME_MISSING.text });
+        }
+
+        if(!content || typeof content !== 'string') {
+            return res
+                .status(messages.SCRIPT_CONTENT_MISSING.code)
+                .json({ message: messages.SCRIPT_CONTENT_MISSING.text });
+        }
+
+        const buffer = new Buffer(content);
+        const script = FileHelper.fileFromBuffer(scriptid, FileHelper.SCRIPT_TYPE(), buffer);
+
+        if (script.write()) {
+            return ScriptsController.getAllScripts(req, res);
+        } else {
+            return res
+                .status(messages.FILE_WRITE_FAILURE.code)
+                .json({ message: messages.FILE_WRITE_FAILURE.text });
+        }
     }
 }
 

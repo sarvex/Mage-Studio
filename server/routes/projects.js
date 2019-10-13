@@ -40,7 +40,8 @@ router.route('/:id/scripts')
     .get(ScriptsController.getAllScripts);
 
 router.route('/:id/scripts/:scriptid')
-    .get(ScriptsController.getScript);
+    .get(ScriptsController.getScript)
+    .put(ScriptsController.updateScript);
 
 router.route('/:id/assets')
     .get(ProjectController.getAssets);
