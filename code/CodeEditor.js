@@ -38,9 +38,9 @@ export class CodeEditor extends React.Component {
 
     handleOnBeforeChange = (_editor, _data, code) => {
         const { onCodeChange, scripts } = this.props;
-        const { editor: { filename } } = scripts;
+        const { editor: { filename, scriptType } } = scripts;
 
-        onCodeChange(filename, code);
+        onCodeChange(filename, code, scriptType);
     };
 
     handleScriptSelect = ([ scriptName ]) => {
@@ -60,7 +60,7 @@ export class CodeEditor extends React.Component {
             .then(({ data }) => {
                 const { content } = data;
 
-                onScriptLoaded(scriptName, content);
+                onScriptLoaded(scriptName, content, type);
             })
     };
 
@@ -120,8 +120,8 @@ const mapDispatchToProps = (dispatch) => ({
     getScripts: (project) => dispatch(getScripts(project)),
     onNewFile: (project, filename) => dispatch(newScript(project, filename)),
     onEditorReady: () => dispatch(editorReady()),
-    onScriptLoaded: (filename, code) => dispatch(editorScriptLoaded(filename, code)),
-    onCodeChange: (filename, code) => dispatch(editorScriptChanged(filename, code))
+    onScriptLoaded: (filename, code, type) => dispatch(editorScriptLoaded(filename, code, type)),
+    onCodeChange: (filename, code, type) => dispatch(editorScriptChanged(filename, code, type))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeEditor);

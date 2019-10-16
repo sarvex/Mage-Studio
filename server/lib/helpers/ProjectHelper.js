@@ -62,24 +62,28 @@ class ProjectHelper {
     }
 
     static updateIndexFile() {
-        StringTemplates
-            .buildInitScript()
-            .then(data => {
-                // write script in index file inside src
-                const filename = 'index.js';
+        return new Promise((resolve, reject) => {
+            StringTemplates
+                .buildInitScript()
+                .then(data => {
+                    // write script in index file inside src
+                    const filename = 'index.js';
 
-                const indexPath = path.join(
-                    Config.getSrcRoot(),
-                    filename
-                );
+                    const indexPath = path.join(
+                        Config.getSrcRoot(),
+                        filename
+                    );
 
-                try {
-                    fs.writeFileSync(indexPath, data);
-                    return Promise.resolve();
-                } catch(e) {
-                    return Promise.reject(e);
-                }
-            });
+                    try {
+                        fs.writeFileSync(indexPath, data);
+                        console.log('done updating index file')
+                        resolve();
+                    } catch(e) {
+                        console.log('e', e);
+                        reject(e);
+                    }
+                });
+        });
     }
 
     static exists(project) {

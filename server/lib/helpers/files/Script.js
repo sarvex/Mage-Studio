@@ -32,6 +32,7 @@ class Script extends File {
                 type: this.type
             }
         } catch (e) {
+            console.log(e);
             return {};
         }
     }

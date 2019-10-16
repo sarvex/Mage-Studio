@@ -123,7 +123,7 @@ class ScriptsController {
     }
 
     static updateScript(req, res) {
-        const { content } = req.body;
+        const { content, type } = req.body;
         const id = req.params.id;
         const scriptid = req.params.scriptid;
 
@@ -146,7 +146,12 @@ class ScriptsController {
         }
 
         const buffer = new Buffer(content);
-        const script = FileHelper.fileFromBuffer(scriptid, FileHelper.SCRIPT_TYPE(), buffer);
+        const scriptType = type === 'scene' ?
+            FileHelper.SCENE_SCRIPT_TYPE() :
+            FileHelper.SCRIPT_TYPE();
+        const script = FileHelper.fileFromBuffer(scriptid, scriptType, buffer);
+
+        console.log('writing in', script.toJSON());
 
         if (script.write()) {
             return ScriptsController.getAllScripts(req, res);

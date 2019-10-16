@@ -35,6 +35,12 @@ class FileHelper {
             case FileHelper.SCRIPT_TYPE():
                 file = new Script(filename);
                 file.setContent(buffer);
+                break;
+            case FileHelper.SCENE_SCRIPT_TYPE():
+                file = new Script(filename);
+                file.setContent(buffer);
+                file.setType('scene');
+                break;
             default:
                 break;
         }
