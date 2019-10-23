@@ -91,7 +91,7 @@
     "express-fileupload": "1.1.5",
     "js-yaml": "3.13.1",
     "lodash": "4.17.11",
-    "mage-engine": "1.2.2",
+    "mage-engine": "1.4.0",
     "morgan": "1.9.1",
     "ncp": "2.0.0",
     "next": "7.0.2",

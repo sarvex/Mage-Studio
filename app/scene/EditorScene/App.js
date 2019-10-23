@@ -129,6 +129,14 @@ export class EditorScene extends App {
         this.dispatchEvent({ type: 'meshDetached' });
     }
 
+    onKeyDown = (e) => {
+        console.log(e);
+    }
+
+    onKeyUp = (e) => {
+        console.log(e);
+    }
+
     onKeyPress = ({ event }) => {
         switch (event.key) {
 			case "q": // Q
