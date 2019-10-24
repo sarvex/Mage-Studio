@@ -1,4 +1,5 @@
 const FileHelper = require('../helpers/files/FileHelper');
+const ProjectHelper = require('../helpers/ProjectHelper');
 const AssetsHelper = require('../helpers/AssetsHelper');
 const Config = require('../config');
 const messages = require('../messages');
@@ -114,7 +115,9 @@ class ScriptsController {
         const script = FileHelper.fileFromBuffer(filename, FileHelper.SCRIPT_TYPE(), buffer);
 
         if (script.write()) {
-            return ScriptsController.getAllScripts(req, res);
+            ProjectHelper
+                .updateIndexFile()
+                .then(() => ScriptsController.getAllScripts(req, res));
         } else {
             return res
                 .status(messages.FILE_WRITE_FAILURE.code)
@@ -154,7 +157,9 @@ class ScriptsController {
         console.log('writing in', script.toJSON());
 
         if (script.write()) {
-            return ScriptsController.getAllScripts(req, res);
+            ProjectHelper
+                .updateIndexFile()
+                .then(() => ScriptsController.getAllScripts(req, res));
         } else {
             return res
                 .status(messages.FILE_WRITE_FAILURE.code)
