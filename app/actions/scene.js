@@ -113,7 +113,7 @@ export const loadScene = (name) => () => {
         .then(app => {
             axios
                 .get(url)
-                .then(({ data }) => app.parseScene(data));
+                .then(({ data }) => app.parseScene(data, { scriptEnabled: false }));
         })
 };
 
