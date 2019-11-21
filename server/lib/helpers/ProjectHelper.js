@@ -1,27 +1,20 @@
 const ProjectServer = require('./ProjectServer');
-const ncp = require('ncp').ncp;
 const path = require('path');
 const fs = require('fs');
 const Config = require('../config');
 const NpmHelper = require( './NpmHelper');
 const StringTemplates = require('./StringTemplates');
+const Downloader = require('../downloadFile');
 
-const PROJECT_TEMPLATE_PATH = 'server/templates/project';
+const PROJECT_TEMPLATE_FILE = 'project.template.zip';
 
 class ProjectHelper {
 
     static create(destination) {
-        return new Promise(function(resolve, reject) {
-            const source = path.resolve(PROJECT_TEMPLATE_PATH);
+        const projectUrl = Config.getProjectTemplateUrl();
+        const destinationFile = path.join(destination, PROJECT_TEMPLATE_FILE);
 
-            ncp(source, destination, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
+        return Downloader.downloadFileToPath(projectUrl, destinationFile);
     }
 
     static installDependencies(project) {

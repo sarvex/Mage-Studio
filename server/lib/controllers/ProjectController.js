@@ -98,8 +98,8 @@ class ProjectController {
                 req.setTimeout(60 * 4 * 1000);
 
                 ProjectHelper.create(destination)
-                    .then(() => SceneHelper.create(destination, sceneName))
                     .then(() => ProjectHelper.installDependencies(projectName))
+                    .then(() => SceneHelper.create(destination, sceneName))
                     .then(() => ProjectHelper.updateIndexFile())
                     .then(function() {
                         return res

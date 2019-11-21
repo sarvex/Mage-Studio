@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const CONFIG_FILE_NAME = './.config.yml';
+const CONFIG_FILE_NAME = './config/mage.studio.config.yml';
 const ASSETS = 'assets';
 const SRC = 'src';
 const SCRIPTS = 'scripts';
@@ -63,6 +63,16 @@ function updateLocalConfig(config) {
     }
 }
 
+function getProjectTemplateUrl() {
+    const local = getLocalConfig();
+    return local.template.projectUrl;
+}
+
+function getSceneTemplateUrl() {
+    const local = getLocalConfig();
+    return local.template.sceneUrl;
+}
+
 function getProjectPath(project) {
     const local = getLocalConfig();
     const projectName = project || local.project || '';
@@ -119,5 +129,7 @@ module.exports = {
     getModelsPath: getModelsPath,
     getFolderByAssetType: getFolderByAssetType,
     getSrcRoot: getSrcRoot,
-    getScenePath: getScenePath
+    getScenePath: getScenePath,
+    getProjectTemplateUrl: getProjectTemplateUrl,
+    getSceneTemplateUrl: getSceneTemplateUrl
 };

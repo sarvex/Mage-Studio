@@ -1,0 +1,11 @@
+template:
+    projectUrl: https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/project.template.zip
+    sceneUrl: https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/scene.template.zip
+
+workspace: /Users/marcostagni/Documents/dev/personal/Mage-Workspace
+project: newprojectmarco15
+scene: Marco
+electron:
+  window:
+    title: Mage Studio
+    darkTheme: true
