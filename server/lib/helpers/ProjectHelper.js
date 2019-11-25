@@ -4,17 +4,31 @@ const fs = require('fs');
 const Config = require('../config');
 const NpmHelper = require( './NpmHelper');
 const StringTemplates = require('./StringTemplates');
-const Downloader = require('../downloadFile');
+const Downloader = require('../Downloader');
+const Zipper = require('../Zipper');
+const FileHelper = require('./files/FileHelper');
 
-const PROJECT_TEMPLATE_FILE = 'project.template.zip';
+const PROJECT_TEMPLATE_FILE = 'project.template.tgz';
 
 class ProjectHelper {
 
     static create(destination) {
-        const projectUrl = Config.getProjectTemplateUrl();
-        const destinationFile = path.join(destination, PROJECT_TEMPLATE_FILE);
+        return new Promise(function(resolve, reject) {
+            const projectUrl = Config.getProjectTemplateUrl();
+            const destinationFile = path.join(destination, PROJECT_TEMPLATE_FILE);
 
-        return Downloader.downloadFileToPath(projectUrl, destinationFile);
+            FileHelper
+                .createFolder(desination)
+                .then(() => {
+                    Downloader
+                        .downloadFileToPath(projectUrl, destinationFile)
+                        .then(() => Zipper.unzip(destination, destinationFile))
+                        .then(resolve)
+                        .catch(reject);
+                })
+                .catch(reject);
+        });
+
     }
 
     static installDependencies(project) {

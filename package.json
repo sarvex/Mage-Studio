@@ -9,12 +9,6 @@
     "build": "next build",
     "start": "NODE_ENV=production node server/index",
     "electron": "npm run build && NODE_ENV=production IS_DESKTOP=true electron server/index",
-    "postinstall": "npm run build:targz",
-    "prebuild:targz": "npm run clean:targz",
-    "build:targz": "node bin/install && node bin/tar.js",
-    "postbuild:targz": "npm run clean:nodemodules",
-    "clean:targz": "rimraf server/templates/project/modules.tgz",
-    "clean:nodemodules": "rimraf server/templates/project/node_modules",
     "test": "jest",
     "test:update-snapshots": "jest -u",
     "test:watch": "jest --watch",
@@ -106,7 +100,7 @@
     "redux": "4.0.1",
     "redux-devtools-extension": "2.13.5",
     "redux-thunk": "2.3.0",
-    "uuid": "3.3.2",
-    "tar": "4.4.10"
+    "tar": "^5.0.5",
+    "uuid": "3.3.2"
   }
 }
