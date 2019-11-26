@@ -18,14 +18,10 @@ class ProjectHelper {
             const destinationFile = path.join(destination, PROJECT_TEMPLATE_FILE);
 
             FileHelper
-                .createFolder(desination)
-                .then(() => {
-                    Downloader
-                        .downloadFileToPath(projectUrl, destinationFile)
-                        .then(() => Zipper.unzip(destination, destinationFile))
-                        .then(resolve)
-                        .catch(reject);
-                })
+                .createFolder(destination)
+                .then(() => Downloader.downloadFileToPath(projectUrl, destinationFile))
+                .then(() => Zipper.unzip(destination, destinationFile))
+                .then(resolve)
                 .catch(reject);
         });
 

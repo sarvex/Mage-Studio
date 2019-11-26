@@ -71,10 +71,12 @@ class FileHelper {
 
     static pathExists(pathToCheck) {
         return new Promise((resolve, reject) => {
-            fs.stat(pathToCheck, function(err, stat) {
+            fs.stat(pathToCheck, function(err) {
+                console.log('checking path..');
                 if(err == null) {
                     resolve(true); // file exists
                 } else if (err.code === 'ENOENT'){
+                    console.log('folder does not exist');
                     resolve(false); // file does not exist
                 } else {
                     reject(err);
@@ -89,7 +91,8 @@ class FileHelper {
                 .pathExists(destination)
                 .then(exists => {
                     if (!exists) {
-                        fs.mkdirSync(destination);
+                        console.log('creating folder..', destination);
+                        fs.mkdirSync(destination, { recursive: true });
                     }
                     resolve();
                 })

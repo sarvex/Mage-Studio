@@ -2,16 +2,10 @@ const path = require('path');
 const tar = require('tar');
 
 function unzip(source, filename) {
-    return new Promise((resolve, reject) => {
-        try {
-            tar.x({
-                file: path.resolve(source, filename),
-                cwd: source
-            });
-            resolve();
-        } catch(e) {
-            reject();
-        }
+    console.log('unzipping');
+    return tar.x({
+        file: path.resolve(source, filename),
+        cwd: source
     });
 
 }

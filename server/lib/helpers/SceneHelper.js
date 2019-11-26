@@ -4,62 +4,37 @@ const fs = require('fs');
 const Config = require('../config');
 const FileHelper = require('./files/FileHelper');
 const Downloader = require('../Downloader');
+const Zipper = require('../Zipper');
 
-const SCENE_TEMPLATE_PATH = 'server/templates/scene';
 const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 const DEFAULT_SCENE_FILENAME = 'scene.json';
 const DEFAULT_SCENE_CLASSNAME = 'FirstScene';
 const DEFAULT_SCENE_CLASS_FILENAME = 'App.js';
 
-const PROJECT_TEMPLATE_FILE = 'scene.template.tgz';
+const SCENE_TEMPLATE_FILE = 'scene.template.tgz';
 
 class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
             const sceneUrl = Config.getSceneTemplateUrl();
-            const scenePath = path.join(destination, SCENES_PATH);
-            const destinationFile = path.join(scenePath, PROJECT_TEMPLATE_FILE);
+            const scenePath = path.join(destination, SCENES_PATH, sceneName);
+            const destinationFile = path.join(scenePath, SCENE_TEMPLATE_FILE);
 
-            Downloader
-                .downloadFileToPath(sceneUrl, destinationFile)
-                .then(() => (
-                    Zipper
-                        .unzip(scenePath, destinationFile)
-                        .then(function() {
-                            return Promise.all([
-                                SceneHelper.rename(scenePath, DEFAULT_SCENE_NAME, sceneName),
-                                SceneHelper.renameSceneClassname(scenePath, sceneName)
-                            ])
-                            .then(resolve)
-                        })
-                ))
-                .catch(reject);
+            FileHelper
+                .createFolder(scenePath)
+                .then(() => Downloader.downloadFileToPath(sceneUrl, destinationFile))
+                .then(() => Zipper.unzip(scenePath, destinationFile))
+                .then(() => Promise.all([
+                    //SceneHelper.rename(scenePath, DEFAULT_SCENE_NAME, sceneName),
+                    SceneHelper.renameSceneClassname(scenePath, sceneName)
+                ]))
+                .then(resolve)
+                .catch(reject)
         });
     }
 
-/*
-    static create(destination, sceneName) {
-        return new Promise(function(resolve, reject) {
-            const source = path.resolve(SCENE_TEMPLATE_PATH);
-            const final_destination = path.join(destination, SCENES_PATH);
-
-            ncp(source, final_destination, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    Promise.all([
-                        SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName),
-                        SceneHelper.renameSceneClassname(final_destination, sceneName)
-                    ])
-                    .then(resolve)
-                    .catch(reject);
-                }
-            });
-        });
-    }
-*/
     static rename(location, oldName, newName) {
         try {
             const oldPath = path.join(location, oldName);
