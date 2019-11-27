@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const CONFIG_FILE_NAME = './.config.yml';
+const CONFIG_FILE_NAME = './config/mage.studio.config.yml';
 const ASSETS = 'assets';
 const SRC = 'src';
 const SCRIPTS = 'scripts';
@@ -22,6 +22,10 @@ function getDefaultLocalConfig() {
                 darkTheme: true,
                 titleBarStyle: 'hidden'
             }
+        },
+        template: {
+            projectUrl: 'https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/project.template.tgz',
+            sceneUrl: 'https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/scene.template.tgz'
         }
     }
 }
@@ -31,7 +35,7 @@ function getLocalConfig() {
         const defaultConfig = getDefaultLocalConfig();
         const configPath = path.resolve(CONFIG_FILE_NAME);
         const file = fs.readFileSync(configPath, 'utf8');
-        const content = yaml.safeLoad(file);
+        const content = yaml.safeLoad(file) || {};
 
         return {
             ...defaultConfig,
@@ -61,6 +65,16 @@ function updateLocalConfig(config) {
         console.log('[Mage] An error occured writing config file.', e);
         return false;
     }
+}
+
+function getProjectTemplateUrl() {
+    const local = getLocalConfig();
+    return local.template.projectUrl;
+}
+
+function getSceneTemplateUrl() {
+    const local = getLocalConfig();
+    return local.template.sceneUrl;
 }
 
 function getProjectPath(project) {
@@ -119,5 +133,7 @@ module.exports = {
     getModelsPath: getModelsPath,
     getFolderByAssetType: getFolderByAssetType,
     getSrcRoot: getSrcRoot,
-    getScenePath: getScenePath
+    getScenePath: getScenePath,
+    getProjectTemplateUrl: getProjectTemplateUrl,
+    getSceneTemplateUrl: getSceneTemplateUrl
 };

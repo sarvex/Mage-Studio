@@ -47,6 +47,8 @@ export class CodeEditor extends React.Component {
         const { config, onScriptLoaded } = this.props;
         const { project } = config;
 
+        console.log(this.props);
+
         getScriptContent(project, scriptName)
             .then(({ data }) => {
                 const { content } = data;
@@ -66,7 +68,7 @@ export class CodeEditor extends React.Component {
     render() {
         const { scripts, config, modalVisible, onModalDismiss } = this.props;
         const { editor: { loaded, code } } = scripts;
-        console.log(loaded);
+
         const options = {
             lineNumbers: true,
             mode: 'javascript',

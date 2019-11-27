@@ -1,14 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
+import sinon from 'sinon';
 import * as actions from '../app/actions/scripts';
 import { CodeEditor } from './CodeEditor';
 
 jest.mock('../app/actions/scripts');
 
 const defaultProps = {
+    onEditorReady: f => f,
     scripts: {
-        list: []
+        list: [],
+        editor: {}
     },
     config: {
         project: 'test'
@@ -28,13 +31,6 @@ describe('CodeEditor', () => {
         expect(toJSON(getEditor())).toMatchSnapshot();
     });
 
-    it('should start with the right state', () => {
-        const component = getEditor();
-
-        expect(component.state().code).toBe('');
-        expect(component.state().loaded).toBe(false);
-    });
-
     describe('events', () => {
 
         it('should fetch script content on script selection', () => {
@@ -47,15 +43,20 @@ describe('CodeEditor', () => {
             expect(actions.getScriptContent).toHaveBeenCalledTimes(1);
         });
 
-        it('should set state when script is done fetching', (done) => {
+        it.only('should call onScriptLoaded when is done fetching script content', (done) => {
             actions.getScriptContent.mockReturnValue(Promise.resolve({ data: { content: 'content' }}));
-            const component = getEditor();
+            const spy = sinon.spy();
+            const onScriptLoaded = function() {
+                spy();
+            };
+
+            const component = getEditor({ onScriptLoaded });
             const tree = component.find('ProjectTree');
 
             tree.simulate('scriptSelect', ['filename.js']);
 
             setTimeout(() => {
-                expect(component.state().code).toBe('content');
+                expect(spy.called).toEqual(true);
                 done();
             });
         });

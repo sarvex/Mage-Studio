@@ -1,3 +1,4 @@
+const fs = require('fs');
 const Scene = require('./Scene');
 const File = require('./File');
 const Asset = require('./Asset');
@@ -66,6 +67,34 @@ class FileHelper {
 
     static fileHasExtension(filename = '') {
         return filename.split('.').length >= 2;
+    }
+
+    static pathExists(pathToCheck) {
+        return new Promise((resolve, reject) => {
+            fs.stat(pathToCheck, function(err) {
+                if(err == null) {
+                    resolve(true); // file exists
+                } else if (err.code === 'ENOENT'){
+                    resolve(false); // file does not exist
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    static createFolder(destination) {
+        return new Promise((resolve, reject) => {
+            FileHelper
+                .pathExists(destination)
+                .then(exists => {
+                    if (!exists) {
+                        fs.mkdirSync(destination, { recursive: true });
+                    }
+                    resolve();
+                })
+                .catch(reject);
+        });
     }
 }
 

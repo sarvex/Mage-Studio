@@ -3,33 +3,32 @@ const path = require('path');
 const fs = require('fs');
 const Config = require('../config');
 const FileHelper = require('./files/FileHelper');
+const Downloader = require('../Downloader');
+const Zipper = require('../Zipper');
 
-const SCENE_TEMPLATE_PATH = 'server/templates/scene';
 const SCENES_PATH = 'src';
 const DEFAULT_SCENE_NAME = 'BaseScene';
 const DEFAULT_SCENE_FILENAME = 'scene.json';
 const DEFAULT_SCENE_CLASSNAME = 'FirstScene';
 const DEFAULT_SCENE_CLASS_FILENAME = 'App.js';
 
+const SCENE_TEMPLATE_FILE = 'scene.template.tgz';
+
 class SceneHelper {
 
     static create(destination, sceneName) {
         return new Promise(function(resolve, reject) {
-            const source = path.resolve(SCENE_TEMPLATE_PATH);
-            const final_destination = path.join(destination, SCENES_PATH);
+            const sceneUrl = Config.getSceneTemplateUrl();
+            const scenePath = path.join(destination, SCENES_PATH, sceneName);
+            const destinationFile = path.join(scenePath, SCENE_TEMPLATE_FILE);
 
-            ncp(source, final_destination, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    Promise.all([
-                        SceneHelper.rename(final_destination, DEFAULT_SCENE_NAME, sceneName),
-                        SceneHelper.renameSceneClassname(final_destination, sceneName)
-                    ])
-                    .then(resolve)
-                    .catch(reject);
-                }
-            });
+            FileHelper
+                .createFolder(scenePath)
+                .then(() => Downloader.downloadFileToPath(sceneUrl, destinationFile))
+                .then(() => Zipper.unzip(scenePath, destinationFile))
+                .then(() => SceneHelper.renameSceneClassname(scenePath, sceneName))
+                .then(resolve)
+                .catch(reject)
         });
     }
 
@@ -47,7 +46,7 @@ class SceneHelper {
 
     static renameSceneClassname(location, scene) {
         return new Promise((resolve, reject) => {
-            const scenePath = path.join(location, scene, DEFAULT_SCENE_CLASS_FILENAME);
+            const scenePath = path.join(location, DEFAULT_SCENE_CLASS_FILENAME);
 
             fs.readFile(scenePath, 'utf8', function (err,data) {
                 if (err) reject();
