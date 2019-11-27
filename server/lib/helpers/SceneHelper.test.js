@@ -6,6 +6,8 @@ import fs from 'fs';
 import SceneHelper from './SceneHelper';
 import FileHelper from './files/FileHelper';
 import Scene from './files/Scene';
+import Zipper from '../Zipper';
+import Downloader from '../Downloader';
 
 jest.mock('ncp');
 jest.mock('path');
@@ -13,11 +15,16 @@ jest.mock('fs');
 jest.mock('./files/FileHelper');
 jest.mock('./files/Scene');
 
-describe('SceneHelper', () => {
+jest.mock('../Zipper');
+jest.mock('../Downloader');
+
+describe.only('SceneHelper', () => {
 
     const fakeSceneData = {
         data: 'fake data'
     };
+
+    let renameSceneClassnameStub;
 
     beforeEach(() => {
         ncp.mockClear();
@@ -41,32 +48,44 @@ describe('SceneHelper', () => {
         fs.existsSync.mockClear();
         fs.renameSync.mockClear();
         fs.existsSync.mockImplementation(() => true);
+
+        Zipper.unzip.mockClear();
+        Zipper.unzip.mockImplementation(() => Promise.resolve());
+
+        Downloader.downloadFileToPath.mockClear();
+        Downloader.downloadFileToPath.mockImplementation(() => Promise.resolve());
+
+        FileHelper.createFolder.mockClear();
+        FileHelper.createFolder.mockImplementation(() => Promise.resolve());
+
+        renameSceneClassnameStub = sinon.stub(SceneHelper, 'renameSceneClassname');
+    });
+
+    afterEach(() => {
+        SceneHelper.renameSceneClassname.restore();
     });
 
     describe('create', () => {
 
-        let renameSceneClassnameStub, createFolder;
-
-        beforeEach(() => {
-            renameSceneClassnameStub = sinon.stub(SceneHelper, 'renameSceneClassname');
-            createFolder = sinon.stub(FileHelper, 'createFolder');
+        it('should call FileHelper.createFolder', async () => {
+            await SceneHelper.create('/fake/destination', 'sceneName');
+            expect(FileHelper.createFolder).toHaveBeenCalledTimes(1);
         });
 
-        afterEach(() => {
-            SceneHelper.renameSceneClassname.restore();
-            FileHelper.createFolder.restore();
+        it('should call Downloader.downloadFileToPath with the right url and path', async () => {
+            await SceneHelper.create('/fake/destination', 'sceneName');
+            expect(Downloader.downloadFileToPath).toHaveBeenCalledTimes(1);
         });
 
-
-        it('should call FileHelper.createFolder', () => {
-            
+        it('should call Zipper.unzip with the right path', async () => {
+            await SceneHelper.create('/fake/destination', 'sceneName');
+            expect(Zipper.unzip).toHaveBeenCalledTimes(1);
         });
 
-        it('should call Downloader.downloadFileToPath with the right url and path');
-
-        it('should call Zipper.unzip with the right path');
-
-        it('should call SceneHelper.renameSceneClassname with the right params');
+        it('should call SceneHelper.renameSceneClassname with the right params', async () => {
+            await SceneHelper.create('/fake/destination', 'sceneName');
+            expect(SceneHelper.renameSceneClassname.called).toEqual(true);
+        });
 
     });
 

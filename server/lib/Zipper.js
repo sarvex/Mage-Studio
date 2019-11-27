@@ -2,7 +2,6 @@ const path = require('path');
 const tar = require('tar');
 
 function unzip(source, filename) {
-    console.log('unzipping');
     return tar.x({
         file: path.resolve(source, filename),
         cwd: source

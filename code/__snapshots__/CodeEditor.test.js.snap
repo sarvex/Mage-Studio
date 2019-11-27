@@ -13,6 +13,7 @@ exports[`CodeEditor should render fine 1`] = `
     onScriptSelect={[Function]}
     scripts={
       Object {
+        "editor": Object {},
         "list": Array [],
       }
     }
@@ -27,7 +28,6 @@ exports[`CodeEditor should render fine 1`] = `
   </Col>
   <NewFileModal
     onConfirm={[Function]}
-    onDismiss={[Function]}
   />
 </div>
 `;

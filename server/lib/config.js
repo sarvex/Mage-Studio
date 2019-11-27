@@ -22,6 +22,10 @@ function getDefaultLocalConfig() {
                 darkTheme: true,
                 titleBarStyle: 'hidden'
             }
+        },
+        template: {
+            projectUrl: 'https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/project.template.tgz',
+            sceneUrl: 'https://s3.us-east-2.amazonaws.com/mage.studio.test-bucket/scene.template.tgz'
         }
     }
 }
@@ -31,7 +35,7 @@ function getLocalConfig() {
         const defaultConfig = getDefaultLocalConfig();
         const configPath = path.resolve(CONFIG_FILE_NAME);
         const file = fs.readFileSync(configPath, 'utf8');
-        const content = yaml.safeLoad(file);
+        const content = yaml.safeLoad(file) || {};
 
         return {
             ...defaultConfig,
