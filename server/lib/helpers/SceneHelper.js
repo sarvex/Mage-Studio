@@ -26,10 +26,7 @@ class SceneHelper {
                 .createFolder(scenePath)
                 .then(() => Downloader.downloadFileToPath(sceneUrl, destinationFile))
                 .then(() => Zipper.unzip(scenePath, destinationFile))
-                .then(() => Promise.all([
-                    //SceneHelper.rename(scenePath, DEFAULT_SCENE_NAME, sceneName),
-                    SceneHelper.renameSceneClassname(scenePath, sceneName)
-                ]))
+                .then(() => SceneHelper.renameSceneClassname(scenePath, sceneName))
                 .then(resolve)
                 .catch(reject)
         });
@@ -49,7 +46,7 @@ class SceneHelper {
 
     static renameSceneClassname(location, scene) {
         return new Promise((resolve, reject) => {
-            const scenePath = path.join(location, scene, DEFAULT_SCENE_CLASS_FILENAME);
+            const scenePath = path.join(location, DEFAULT_SCENE_CLASS_FILENAME);
 
             fs.readFile(scenePath, 'utf8', function (err,data) {
                 if (err) reject();

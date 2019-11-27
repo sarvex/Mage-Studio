@@ -45,87 +45,28 @@ describe('SceneHelper', () => {
 
     describe('create', () => {
 
-        let renameStub,
-            renameSceneClassnameStub;
+        let renameSceneClassnameStub, createFolder;
 
         beforeEach(() => {
-            renameStub = sinon.stub(SceneHelper, 'rename');
             renameSceneClassnameStub = sinon.stub(SceneHelper, 'renameSceneClassname');
+            createFolder = sinon.stub(FileHelper, 'createFolder');
         });
 
         afterEach(() => {
-            SceneHelper.rename.restore();
             SceneHelper.renameSceneClassname.restore();
+            FileHelper.createFolder.restore();
         });
 
-        it('should copy scene files from template to destination', async () => {
-            renameStub.returns(true);
-            renameSceneClassnameStub.returns(true);
 
-            ncp.mockImplementation((s, d, cb) => cb());
-
-            await SceneHelper.create('destination', 'sceneName');
-
-            expect(ncp).toHaveBeenCalledTimes(1);
+        it('should call FileHelper.createFolder', () => {
+            
         });
 
-        it('should copy scene files from right template path to right destination', async () => {
-            renameStub.returns(true);
-            renameSceneClassnameStub.returns(true);
+        it('should call Downloader.downloadFileToPath with the right url and path');
 
-            ncp.mockImplementation((s, d, cb) => cb());
+        it('should call Zipper.unzip with the right path');
 
-            await SceneHelper.create('destination', 'sceneName');
-            const expectedSrc = 'server/templates/scene';
-            const expectedDestination = 'destination/src';
-
-            expect(ncp).toHaveBeenCalledWith(expectedSrc, expectedDestination, expect.any(Function));
-        });
-
-        it('should call SceneHelper rename after done copying', async () => {
-            renameStub.returns(true);
-            renameSceneClassnameStub.returns(true);
-
-            ncp.mockImplementation((s, d, cb) => cb());
-
-            await SceneHelper.create('destination', 'test');
-
-            expect(renameStub.calledWith('destination/src', 'BaseScene', 'test')).toBe(true);
-        });
-
-        it('should call sceneHelper renameSceneClassname after done copying', async () => {
-            renameStub.returns(true);
-            renameSceneClassnameStub.returns(true);
-
-            ncp.mockImplementation((s, d, cb) => cb());
-
-            await SceneHelper.create('destination', 'test');
-
-            expect(renameSceneClassnameStub.calledWith('destination/src', 'test')).toBe(true);
-        });
-
-        it('should return a rejected promise if it fails copying files over', () => {
-            ncp.mockImplementation((a, b, c) => c('error'));
-
-            expect(SceneHelper.create('destination', 'test')).rejects.toEqual('error');
-        });
-
-        it('should return a resolved promise if everything goes according to plan', () => {
-            renameStub.returns(true);
-            renameSceneClassnameStub.returns(true);
-
-            ncp.mockImplementation((s, d, cb) => cb());
-
-            expect(SceneHelper.create('destination', 'test')).resolves.toEqual([ true, true ]);
-        });
-
-        it('should return a rejected promise if it fails renaming', () => {
-            renameStub.returns(new Error('error'));
-            renameSceneClassnameStub.returns(true);
-            ncp.mockImplementation((s, d, cb) => cb());
-
-            expect(SceneHelper.create('destination', 'test')).rejects.toEqual('error');
-        });
+        it('should call SceneHelper.renameSceneClassname with the right params');
 
     });
 
