@@ -25,6 +25,7 @@ describe('ScriptsController', () => {
         mockResponse.json = sinon.stub().returns(mockResponse);
 
         AssetsHelper.getScripts.mockClear();
+        AssetsHelper.getSceneScript.mockClear();
         FileHelper.fileFromBuffer.mockClear();
     });
 
@@ -32,6 +33,8 @@ describe('ScriptsController', () => {
 
         it('should return the right payload if project is missing', () => {
             const request = { params: { id: undefined } };
+            AssetsHelper.getScripts.mockImplementation(() => Promise.resolve(['lol']));
+            AssetsHelper.getSceneScript.mockImplementation(() => Promise.resolve(['scene']));
             ScriptsController.getAllScripts(request, mockResponse);
 
             expect(mockResponse.status.calledWith(400)).toBe(true);
@@ -41,6 +44,8 @@ describe('ScriptsController', () => {
         it('should return the right payload if project is not the current', () => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
             const request = { params: { id: 'something' } };
+            AssetsHelper.getScripts.mockImplementation(() => Promise.resolve(['lol']));
+            AssetsHelper.getSceneScript.mockImplementation(() => Promise.resolve(['scene']));
             ScriptsController.getAllScripts(request, mockResponse);
 
             expect(mockResponse.status.calledWith(400)).toBe(true);
@@ -49,30 +54,30 @@ describe('ScriptsController', () => {
 
         it('should call Assets.getScripts', () => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
-            AssetsHelper.getScripts.mockImplementation(() => Promise.resolve([]));
+            AssetsHelper.getScripts.mockImplementation(() => Promise.resolve(['lol']));
+            AssetsHelper.getSceneScript.mockImplementation(() => Promise.resolve(['scene']));
             const request = { params: { id: 'mage' } };
             ScriptsController.getAllScripts(request, mockResponse);
 
             expect(AssetsHelper.getScripts).toHaveBeenCalledTimes(1);
         });
 
-        it('should return right payload if everything goes right', (done) => {
+        it('should return right payload if everything goes right', async () => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
             AssetsHelper.getScripts.mockImplementation(() => Promise.resolve(['lol']));
+            AssetsHelper.getSceneScript.mockImplementation(() => Promise.resolve(['scene']));
 
             const request = { params: { id: 'mage' } };
-            ScriptsController.getAllScripts(request, mockResponse);
+            await ScriptsController.getAllScripts(request, mockResponse);
 
-            setTimeout(() => {
-                expect(mockResponse.status.calledWith(200)).toBe(true);
-                expect(mockResponse.json.calledWithExactly(['lol'])).toBe(true);
-                done();
-            });
+            expect(mockResponse.status.calledWith(200)).toBe(true);
+            expect(mockResponse.json.calledWithExactly(['lol', 'scene'])).toBe(true);
         });
 
         it('should return right payload if there are no scripts', (done) => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
             AssetsHelper.getScripts.mockImplementation(() => Promise.resolve([]));
+            AssetsHelper.getSceneScript.mockImplementation(() => Promise.resolve([]));
 
             const request = { params: { id: 'mage' } };
             ScriptsController.getAllScripts(request, mockResponse);
@@ -88,7 +93,7 @@ describe('ScriptsController', () => {
     describe('getScript', () => {
 
         it('should return the right payload if project is missing', () => {
-            const request = { params: { id: undefined } };
+            const request = { params: { id: undefined }, query: { type: 'script'} };
             ScriptsController.getScript(request, mockResponse);
 
             expect(mockResponse.status.calledWith(400)).toBe(true);
@@ -96,7 +101,7 @@ describe('ScriptsController', () => {
         });
 
         it('should return the right payload if scriptid is missing', () => {
-            const request = { params: { id: 'ok' } };
+            const request = { params: { id: 'ok' }, query: { type: 'script'} };
             ScriptsController.getScript(request, mockResponse);
 
             expect(mockResponse.status.calledWith(400)).toBe(true);
@@ -105,7 +110,7 @@ describe('ScriptsController', () => {
 
         it('should return the right payload if project is not the current', () => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
-            const request = { params: { id: 'something', scriptid: 'marco' } };
+            const request = { params: { id: 'something', scriptid: 'marco' }, query: { type: 'script'} };
             ScriptsController.getScript(request, mockResponse);
 
             expect(mockResponse.status.calledWith(400)).toBe(true);
@@ -115,7 +120,7 @@ describe('ScriptsController', () => {
         it('should call Assets.getScripts', () => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
             AssetsHelper.getScript.mockImplementation(() => Promise.resolve([]));
-            const request = { params: { id: 'mage', scriptid: 'marco' } };
+            const request = { params: { id: 'mage', scriptid: 'marco' }, query: { type: 'script'} };
 
             ScriptsController.getScript(request, mockResponse);
 
@@ -125,7 +130,7 @@ describe('ScriptsController', () => {
         it('should return right payload if everything goes right', (done) => {
             Config.getLocalConfig.mockImplementation(() => ({ project: 'mage' }));
             AssetsHelper.getScript.mockImplementation(() => Promise.resolve('somecontent'));
-            const request = { params: { id: 'mage', scriptid: 'marco' } };
+            const request = { params: { id: 'mage', scriptid: 'marco' }, query: { type: 'script'} };
 
             ScriptsController.getScript(request, mockResponse);
 

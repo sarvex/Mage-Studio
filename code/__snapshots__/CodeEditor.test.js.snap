@@ -20,7 +20,7 @@ exports[`CodeEditor should render fine 1`] = `
   />
   <Col
     className="code-column"
-    span={20}
+    span={19}
   >
     <Skeleton
       active={true}

@@ -76,10 +76,8 @@ class ProjectHelper {
 
                     try {
                         fs.writeFileSync(indexPath, data);
-                        console.log('done updating index file')
                         resolve();
                     } catch(e) {
-                        console.log('e', e);
                         reject(e);
                     }
                 });

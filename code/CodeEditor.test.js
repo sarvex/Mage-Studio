@@ -9,6 +9,7 @@ jest.mock('../app/actions/scripts');
 
 const defaultProps = {
     onEditorReady: f => f,
+    onScriptLoaded: f => f,
     scripts: {
         list: [],
         editor: {}
@@ -43,7 +44,7 @@ describe('CodeEditor', () => {
             expect(actions.getScriptContent).toHaveBeenCalledTimes(1);
         });
 
-        it.only('should call onScriptLoaded when is done fetching script content', (done) => {
+        it('should call onScriptLoaded when is done fetching script content', (done) => {
             actions.getScriptContent.mockReturnValue(Promise.resolve({ data: { content: 'content' }}));
             const spy = sinon.spy();
             const onScriptLoaded = function() {

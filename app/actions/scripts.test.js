@@ -90,11 +90,12 @@ describe('Scripts', () => {
         it('should make the call to the right endpoint and right payload', () => {
             const project = 'fake';
             const script = 'fakeScript';
+            const type = 'script';
             axios.get.mockReturnValue(Promise.resolve());
 
-            actions.getScriptContent(project, script);
+            actions.getScriptContent(project, script, type);
 
-            expect(axios.get).toHaveBeenCalledWith('api/projects/fake/scripts/fakeScript');
+            expect(axios.get).toHaveBeenCalledWith('api/projects/fake/scripts/fakeScript?type=script');
         });
     })
 });

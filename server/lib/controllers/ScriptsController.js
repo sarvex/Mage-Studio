@@ -24,12 +24,12 @@ class ScriptsController {
         }
 
         if (electron.isDesktop()) {
-            Promise.all([
+            return Promise.all([
                 AssetsHelper.getScripts(),
                 AssetsHelper.getSceneScript() // this should get all scripts of all scenes
             ]).then(function([_scripts, _sceneScript]) {
-                    const scripts = (_scripts.length && _scripts) || [];
-                    const sceneScript = (_sceneScript.length && _sceneScript) || [];
+                    const scripts = Array.isArray(_scripts) ? _scripts : [];
+                    const sceneScript = Array.isArray(_sceneScript) ? _sceneScript : [];
 
                     return res
                         .status(200)
@@ -37,7 +37,6 @@ class ScriptsController {
 
                 })
                 .catch(function(err) {
-                    console.log(err);
                     return res
                         .status(messages.SCRIPTS_NOT_FOUND.code)
                         .json({ message: messages.SCRIPTS_NOT_FOUND.text });
@@ -153,8 +152,6 @@ class ScriptsController {
             FileHelper.SCENE_SCRIPT_TYPE() :
             FileHelper.SCRIPT_TYPE();
         const script = FileHelper.fileFromBuffer(scriptid, scriptType, buffer);
-
-        console.log('writing in', script.toJSON());
 
         if (script.write()) {
             ProjectHelper
