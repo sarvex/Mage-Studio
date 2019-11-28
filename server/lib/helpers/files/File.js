@@ -11,6 +11,8 @@ class File {
     constructor(name, path, uuidNamespace) {
         this.name = name;
         this.extension = File.getExtension(this.name);
+        this.isBuffer = false;
+        this.content = undefined;
 
         this.setPath(path);
 
@@ -31,9 +33,6 @@ class File {
     setPath(folder) {
         this.folder = folder;
         this.fullPath = path.join(this.folder, this.name);
-
-        this.content = undefined;
-        this.isBuffer = false;
     }
 
     exists() {

@@ -70,7 +70,8 @@ export default function reducer(state = DEFAULT, action = {}) {
                 editor: {
                     ...state.editor,
                     filename: action.filename,
-                    code: action.code
+                    code: action.code,
+                    scriptType: action.scriptType
                 }
             };
             break;

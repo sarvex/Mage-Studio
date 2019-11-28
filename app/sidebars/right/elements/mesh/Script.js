@@ -12,7 +12,9 @@ class Script extends React.Component {
     mapScripts = () => {
         const { list = [] } = this.props;
 
-        return list.map(script => <Select.Option key={script.name}>{script.name}</Select.Option>)
+        return list
+            .filter(script => script.type === 'script')
+            .map(script => <Select.Option key={script.name}>{script.name}</Select.Option>)
     }
 
     handleScriptChange = (name) => {
@@ -22,7 +24,7 @@ class Script extends React.Component {
     }
 
     render() {
-        const { onScriptSwitchChange = f => f, list = [] } = this.props;
+        const { onScriptSwitchChange = f => f } = this.props;
 
         return (
             <div>

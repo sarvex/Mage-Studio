@@ -12,6 +12,7 @@ class FileHelper {
     static IMAGE_TYPE() { return 'image' }
     static TEXTURE_TYPE() { return 'texture' }
     static SCRIPT_TYPE() { return 'script' }
+    static SCENE_SCRIPT_TYPE() { return 'scene_script' }
 
     static SCENE_TYPE() { return 'scene' }
 
@@ -34,6 +35,12 @@ class FileHelper {
             case FileHelper.SCRIPT_TYPE():
                 file = new Script(filename);
                 file.setContent(buffer);
+                break;
+            case FileHelper.SCENE_SCRIPT_TYPE():
+                file = new Script(filename);
+                file.setContent(buffer);
+                file.setType('scene');
+                break;
             default:
                 break;
         }
@@ -49,6 +56,10 @@ class FileHelper {
                 break;
             case FileHelper.SCRIPT_TYPE():
                 file = new Script(name);
+                break;
+            case FileHelper.SCENE_SCRIPT_TYPE():
+                file = new Script(name);
+                file.setType('scene');
                 break;
             case FileHelper.TEXTURE_TYPE():
             case FileHelper.IMAGE_TYPE():

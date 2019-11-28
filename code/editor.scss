@@ -5,8 +5,8 @@
     &-editor,
     &-column {
         height: 100% !important;
-        width: 100%;
-        background: $deep-blue-15;
+        font-size: 14px;
+        background: $deep-blue-17;
     }
 
     &-sidebar {
@@ -37,11 +37,6 @@
                 }
             }
         }
-    }
-
-    &-column {
-        font-size: 14px;
-        background: $deep-blue-17;
     }
 
 

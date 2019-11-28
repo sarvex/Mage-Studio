@@ -71,6 +71,31 @@ function getModel(name) {
     return Promise.reject();
 }
 
+function getSceneScript(scene) {
+    const filename = 'App.js';
+    const scriptPath = path.join(Config.getSceneScriptPath(scene), filename);
+
+    return new Promise(function(resolve, reject) {
+        glob(scriptPath, {}, function (err, files) {
+            if (err) {
+                reject(err);
+            } else {
+                const mapped = files
+                    .map(function (file) {
+                        const filename = path.basename(file);
+                        const script = FileHelper
+                            .fileFromPath(filename, FileHelper.SCRIPT_TYPE());
+
+                        script.setType('scene');
+                        return script.toJSON(true);
+                    });
+
+                resolve(mapped);
+            }
+        });
+    });
+}
+
 function getScripts() {
     const pattern = '*.js';
     const scriptsPath = path.join(Config.getScriptsPath(), pattern);
@@ -94,8 +119,12 @@ function getScripts() {
     });
 }
 
-function getScript(name) {
-    const file = FileHelper.fileFromPath(name, FileHelper.SCRIPT_TYPE());
+function getScript(name, type) {
+    const scriptType = type === 'scene' ?
+        FileHelper.SCENE_SCRIPT_TYPE() :
+        FileHelper.SCRIPT_TYPE();
+    const file = FileHelper.fileFromPath(name, scriptType);
+
     const content = file.toJSON();
 
     if (content) {
@@ -158,6 +187,7 @@ module.exports = {
     getModels: getModels,
     getModel: getModel,
     getScripts: getScripts,
+    getSceneScript: getSceneScript,
     getScript: getScript,
     getImages: getImages,
     getImage: getImage,

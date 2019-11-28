@@ -38,22 +38,22 @@ export class CodeEditor extends React.Component {
 
     handleOnBeforeChange = (_editor, _data, code) => {
         const { onCodeChange, scripts } = this.props;
-        const { editor: { filename } } = scripts;
+        const { editor: { filename, scriptType } } = scripts;
 
-        onCodeChange(filename, code);
+        onCodeChange(filename, code, scriptType);
     };
 
     handleScriptSelect = ([ scriptName ]) => {
-        const { config, onScriptLoaded } = this.props;
+        const { config, onScriptLoaded, scripts: { list } } = this.props;
         const { project } = config;
+        const filteredList = list.filter(script => script.name === scriptName);
+        const type = filteredList.length ? filteredList[0].type : 'script';
 
-        console.log(this.props);
-
-        getScriptContent(project, scriptName)
+        getScriptContent(project, scriptName, type)
             .then(({ data }) => {
                 const { content } = data;
 
-                onScriptLoaded(scriptName, content);
+                onScriptLoaded(scriptName, content, type);
             })
     };
 
@@ -83,7 +83,7 @@ export class CodeEditor extends React.Component {
                     onScriptSelect={this.handleScriptSelect}
                 />
                 <Col
-                    span={20}
+                    span={19}
                     className="code-column">
                     { loaded ?
                         <CodeMirror
@@ -113,8 +113,8 @@ const mapDispatchToProps = (dispatch) => ({
     getScripts: (project) => dispatch(getScripts(project)),
     onNewFile: (project, filename) => dispatch(newScript(project, filename)),
     onEditorReady: () => dispatch(editorReady()),
-    onScriptLoaded: (filename, code) => dispatch(editorScriptLoaded(filename, code)),
-    onCodeChange: (filename, code) => dispatch(editorScriptChanged(filename, code))
+    onScriptLoaded: (filename, code, type) => dispatch(editorScriptLoaded(filename, code, type)),
+    onCodeChange: (filename, code, type) => dispatch(editorScriptChanged(filename, code, type))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeEditor);
