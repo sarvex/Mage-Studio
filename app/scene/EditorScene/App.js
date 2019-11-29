@@ -112,6 +112,7 @@ export class EditorScene extends App {
     }
 
     onMeshClick = ({ meshes }) => {
+        console.log('clicked something');
         const mesh = meshes[0];
         this.currentMesh = mesh;
         this.transform.attach(mesh);
