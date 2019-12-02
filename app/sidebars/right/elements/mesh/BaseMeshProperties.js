@@ -1,15 +1,11 @@
 import React from 'react';
 
-import {
-    InputNumber,
-    Icon
-} from 'antd';
+import { Icon } from 'antd';
 
 import Position from './Position';
 import Rotation from './Rotation';
 import Scale from './Scale';
 import Name from './Name';
-import UUID from './UUID';
 
 const BaseMeshProperties = (props) => {
 
@@ -17,7 +13,8 @@ const BaseMeshProperties = (props) => {
             position = {},
             rotation = {},
             scale = {},
-            uuid,
+            name,
+            onNameChange,
             onPositionChange,
             onRotationChange,
             onScaleChange
@@ -32,7 +29,10 @@ const BaseMeshProperties = (props) => {
                     </div>
                 </div>
                 <div className="scene-setting">
-                    <Name />
+                    <Name
+                        name={name}
+                        onNameChange={onNameChange}
+                    />
                     <Position
                         onPositionChange={onPositionChange}
                         x={position.x}
@@ -51,7 +51,6 @@ const BaseMeshProperties = (props) => {
                         y={scale.y}
                         z={scale.z}
                     />
-                    <UUID uuid={uuid} />
                 </div>
             </div>
     )

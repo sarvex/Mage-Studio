@@ -15,7 +15,8 @@ class MeshInspector extends React.Component {
             position,
             rotation,
             scale,
-            uuid,
+            name,
+            onNameChange,
             onPositionChange,
             onRotationChange,
             onScaleChange,
@@ -33,10 +34,11 @@ class MeshInspector extends React.Component {
         return (
             <div>
                 <BaseMeshProperties
+                    onNameChange={onNameChange}
                     onPositionChange={onPositionChange}
                     onRotationChange={onRotationChange}
                     onScaleChange={onScaleChange}
-                    uuid={uuid}
+                    name={name}
                     position={position}
                     rotation={rotation}
                     scale={scale} />

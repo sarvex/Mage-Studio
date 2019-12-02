@@ -56,40 +56,46 @@ export class RightSidebar extends React.Component {
         onMaterialChange(name);
     }
 
+    handleNameChange = (e) => {
+        const { onNameChange, position, rotation, scale } = this.props;
+        
+        onNameChange(e.target.value, position, rotation, scale);
+    }
+
     handlePositionChange = (axis) => (value) => {
-        const { onPositionChange, element, position, rotation, scale } = this.props;
+        const { onPositionChange, name, position, rotation, scale } = this.props;
         const newPosition = {
             ...position,
             [axis]: value
         };
 
-        onPositionChange(element, newPosition, rotation, scale);
+        onPositionChange(name, newPosition, rotation, scale);
     }
 
     handleRotationChange = (axis) => (value) => {
-        const { onRotationChange, element, position, rotation, scale } = this.props;
+        const { onRotationChange, name, position, rotation, scale } = this.props;
         const newRotation = {
             ...rotation,
             [axis]: value
         };
 
-        onRotationChange(element, position, newRotation, scale);
+        onRotationChange(name, position, newRotation, scale);
     }
 
     handleScaleChange = (axis) => (value) => {
-        const { onScaleChange, element, position, rotation, scale } = this.props;
+        const { onScaleChange, name, position, rotation, scale } = this.props;
         const newScale = {
             ...scale,
             [axis]: value
         };
 
-        onScaleChange(element, position, rotation, newScale);
+        onScaleChange(name, position, rotation, newScale);
     }
 
     render() {
         const {
             empty,
-            element,
+            name,
             position,
             rotation,
             scale,
@@ -130,10 +136,11 @@ export class RightSidebar extends React.Component {
                             onScriptChange={this.handleScriptChange}
                             onTextureChange={this.handleTextureChange}
                             onMaterialChange={this.handleMaterialChange}
+                            onNameChange={this.handleNameChange}
                             scripts={scripts}
                             empty={empty}
                             type={type}
-                            element={element}
+                            name={name}
                             position={position}
                             rotation={rotation}
                             scale={scale}
@@ -149,12 +156,12 @@ export class RightSidebar extends React.Component {
 
 const mapStateToProps = (state) => {
     const { rightsidebar, scripts = {}, assets, config } = state;
-    const { empty = true, element = '', type = '', position = {}, rotation = {}, scale= {} } = rightsidebar;
+    const { empty = true, name = '', type = '', position = {}, rotation = {}, scale = {} } = rightsidebar;
 
     return {
         assets,
         empty,
-        element,
+        name,
         type,
         position,
         rotation,
@@ -165,9 +172,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onPositionChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
-    onRotationChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
-    onScaleChange: (element, position, rotation, scale) => dispatch(meshChanged(element, position, rotation, scale)),
+    onPositionChange: (name, position, rotation, scale) => dispatch(meshChanged(name, position, rotation, scale)),
+    onRotationChange: (name, position, rotation, scale) => dispatch(meshChanged(name, position, rotation, scale)),
+    onScaleChange: (name, position, rotation, scale) => dispatch(meshChanged(name, position, rotation, scale)),
+    onNameChange: (name, position, rotation, scale) => dispatch(meshChanged(name, position, rotation, scale)),
     onTextureChange: (project, name) => dispatch(textureChanged(project, name)),
     onMaterialChange: (name) => dispatch(materialChanged(name)),
     getScripts: (project) => dispatch(getScripts(project)),

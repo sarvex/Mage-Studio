@@ -6,7 +6,7 @@ import {
 
 const DEFAULT = {
     empty: true,
-    element: undefined,
+    name: '',
     type: '',
     position: { x: 0, y: 0, z: 0 },
     rotation: { x: 0, y: 0, z: 0 },
@@ -21,7 +21,7 @@ export default function reducer(state = DEFAULT, action = {}) {
                 ...state,
                 empty: false,
                 type: 'mesh',
-                element: action.element,
+                name: action.name,
                 position: { ...action.position },
                 rotation: { ...action.rotation },
                 scale: { ...action.scale }

@@ -18,13 +18,13 @@ export const observeStore = (store, onChange) => {
 
 export const select = (state) => {
     const { controls = {}, fog = {}, snap = {}, rightsidebar, scene } = state;
-    const { element, position, rotation, scale } = rightsidebar;
+    const { name, position, rotation, scale } = rightsidebar;
 
     return {
         snap,
         controls,
         fog,
-        element,
+        name,
         position,
         rotation,
         scale,

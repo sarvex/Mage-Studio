@@ -93,14 +93,13 @@ const mapStateToProps = ({ config, scene }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
     startProject: project => dispatch(startProject(project)),
     showModelModal: () => dispatch(showModelUploadModal()),
-    onMeshChanged: ({element, position, rotation, scale}) => {
-        return dispatch(meshChanged(element, position, rotation, scale))
+    onMeshChanged: ({name, position, rotation, scale}) => {
+        return dispatch(meshChanged(name, position, rotation, scale))
     },
-    onMeshAttached: ({element, position, rotation, scale}) => {
-        return dispatch(meshAttached(element, position, rotation, scale))
+    onMeshAttached: ({name, position, rotation, scale}) => {
+        return dispatch(meshAttached(name, position, rotation, scale))
     },
     onMeshDetached: () => dispatch(meshDetached()),
     onSceneExported: (name) => ({ data }) => dispatch(saveScene(name, data)),

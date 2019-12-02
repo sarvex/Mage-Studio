@@ -93,17 +93,16 @@ export class EditorScene extends App {
         this.currentMesh.addScript(script.name());
     }
 
-    updateCurrentMesh = (uuid = '', position, rotation, scale) => {
-        const mesh = Universe.get(uuid);
-
-        if (mesh) {
-            mesh.position(position);
-            mesh.rotation(rotation);
-            mesh.scale(scale);
+    updateCurrentMesh = (name = '', position, rotation, scale) => {
+        if (this.currentMesh && this.hasSelection) {
+            this.currentMesh.position(position);
+            this.currentMesh.rotation(rotation);
+            this.currentMesh.scale(scale);
+            this.currentMesh.setName(name, { replace: true })
 
             this.dispatchEvent({
                 type: 'meshChanged',
-                element: mesh.uuid(),
+                name: this.currentMesh.name,
                 position,
                 rotation,
                 scale
@@ -114,11 +113,12 @@ export class EditorScene extends App {
     onMeshClick = ({ meshes }) => {
         const mesh = meshes[0];
         this.currentMesh = mesh;
+        this.hasSelection = true;
         this.transform.attach(mesh);
 
         this.dispatchEvent({
             type: 'meshAttached',
-            element: mesh.uuid(),
+            name: mesh.name,
             rotation: mesh.rotation(),
             scale: mesh.scale(),
             position: mesh.position()
@@ -126,11 +126,11 @@ export class EditorScene extends App {
     }
 
     onMeshDeselect = () => {
+        this.hasSelection = false;
         this.dispatchEvent({ type: 'meshDetached' });
     }
 
     onKeyDown = (e) => {}
-
     onKeyUp = (e) => {}
 
     onKeyPress = ({ event }) => {
@@ -231,7 +231,7 @@ export class EditorScene extends App {
 
         this.dispatchEvent({
             type: 'meshChanged',
-            element: this.currentMesh.uuid(),
+            name: this.currentMesh.name,
             rotation: this.currentMesh.rotation(),
             scale: this.currentMesh.scale(),
             position: this.currentMesh.position()
@@ -247,7 +247,7 @@ export class EditorScene extends App {
         this.changeTransformControl(state.controls);
 
         this.updateCurrentMesh(
-            state.element,
+            state.name,
             state.position,
             state.rotation,
             state.scale);
@@ -275,6 +275,6 @@ export class EditorScene extends App {
         this.setTranformControls();
         this.enableInput();
 
-        this.sceneHelper.addGrid(200, 10);
+        this.sceneHelper.addGrid(2000, 100);
     }
 }

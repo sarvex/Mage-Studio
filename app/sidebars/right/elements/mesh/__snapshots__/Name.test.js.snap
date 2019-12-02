@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RightSidebar should render fine 1`] = `
+<div
+  className="setting-row"
+>
+  <label
+    className="setting-label"
+  >
+    Name
+  </label>
+  <div
+    className="setting-input right"
+  >
+    <Input
+      disabled={false}
+      onChange={[Function]}
+      placeholder="name"
+      prefixCls="ant-input"
+      size="small"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
