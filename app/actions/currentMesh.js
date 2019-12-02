@@ -7,36 +7,32 @@ import {
 import { getOrCreateApp } from '../scene/AppProxy';
 import { getImageUrl } from '../lib/constants';
 
-export const meshChanged = (mesh, position, rotation, scale) => ({
+export const meshChanged = (name, position, rotation, scale) => ({
     type: MESH_CHANGED,
-    element: mesh,
+    name,
     position,
     rotation,
     scale
 });
 
-export const meshAttached = (mesh, position, rotation, scale) => ({
+export const meshAttached = (name, position, rotation, scale) => ({
     type: MESH_ATTACHED,
-    element: mesh,
+    name,
     position,
     rotation,
     scale
 });
 
-export const textureChanged = (project, name) => (dispatch) => {
+export const textureChanged = (project, name) => () => {
     const url = getImageUrl(project, name);
 
     getOrCreateApp()
-        .then((app) => {
-            app.changeTexture(name, url);
-        });
+        .then((app) => app.changeTexture(name, url));
 };
 
-export const materialChanged = (name) => (dispatch) => {
+export const materialChanged = (name) => () => {
     getOrCreateApp()
-        .then(app => {
-            app.changeMaterial(name);
-        });
+        .then(app => app.changeMaterial(name));
 };
 
 export const meshDetached = () => ({

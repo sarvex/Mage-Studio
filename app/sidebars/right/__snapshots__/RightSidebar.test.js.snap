@@ -48,6 +48,7 @@ exports[`RightSidebar should render fine 1`] = `
     >
       <Inspector
         onMaterialChange={[Function]}
+        onNameChange={[Function]}
         onPositionChange={[Function]}
         onRotationChange={[Function]}
         onScaleChange={[Function]}

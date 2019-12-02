@@ -10,12 +10,12 @@ class Inspector extends React.Component {
 
     getContent() {
         const {
-            empty,
-            element,
             type,
             position,
             rotation,
             scale,
+            name,
+            onNameChange,
             onPositionChange,
             onRotationChange,
             onScriptsMount,
@@ -27,7 +27,7 @@ class Inspector extends React.Component {
             assets
         } = this.props;
 
-        if (element && type === 'mesh') {
+        if (type === 'mesh') {
             return (
                 <MeshInspector
                     onPositionChange={onPositionChange}
@@ -37,7 +37,8 @@ class Inspector extends React.Component {
                     onScriptChange={onScriptChange}
                     onTextureChange={onTextureChange}
                     onMaterialChange={onMaterialChange}
-                    uuid={element}
+                    onNameChange={onNameChange}
+                    name={name}
                     scripts={scripts}
                     position={position}
                     rotation={rotation}
