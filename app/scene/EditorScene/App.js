@@ -33,20 +33,28 @@ export class EditorScene extends App {
     }
 
     addAmbientLight() {
-        const light = new AmbientLight(0xeeeeee, 1);
+        const light = new AmbientLight({
+            color:0xeeeeee,
+            intensity: 1
+        });
 
         light.addHelper();
     }
 
     addSunLight() {
-        const light = new SunLight(0xeeeeee, 1, { x: 1, y: 1, z: 1});
+
+        const light = new SunLight({
+            color: 0xeeeeee,
+            intensity: 1,
+            position: { x: 40, y: 40, z: 40},
+            target: { x: 1, y: 1, z: 1 }
+        });
+        light.addHelper();
         light.position({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
         });
-
-        light.addHelper();
     }
 
     addCube() {
