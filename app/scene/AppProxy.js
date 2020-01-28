@@ -24,6 +24,13 @@ const config = {
     }
 };
 
+const assets = {
+    Models: {
+        'ambientlightholder': 'static/models/lamp.glb',
+        'lightholder': 'static/models/lamp.glb'
+    }
+};
+
 let app;
 
 export async function getOrCreateApp() {
@@ -41,7 +48,7 @@ export async function getOrCreateApp() {
         ]).then(([{ Router }, { EditorScene }]) => {
             Router.on('/', EditorScene);
             return Router
-                .start(config, {}, '#gameContainer')
+                .start(config, assets, '#gameContainer')
                 .then((application) => {
                     app = application;
                     return Promise.resolve(app);

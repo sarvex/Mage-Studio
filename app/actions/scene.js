@@ -107,13 +107,17 @@ export const saveScene = (name, scene) => (dispatch) => {
 export const loadScene = (name) => () => {
     const url = getScenesUrl(name);
 
+    const sceneOptions = {
+        scriptEnabled: false,
+        useHelper: true
+    };
     // should dispatch an action here and show some loading screen when
     // loading the scene from BE.
     getOrCreateApp()
         .then(app => {
             axios
                 .get(url)
-                .then(({ data }) => app.parseScene(data, { scriptEnabled: false }));
+                .then(({ data }) => app.parseScene(data, sceneOptions));
         })
 };
 

@@ -1,6 +1,6 @@
 workspace: /Users/marcostagni/Documents/dev/personal/Mage-Workspace
-project: newprojectmarco22
-scene: Marco
+project: 3rdperson
+scene: first
 electron:
   window:
     title: Mage Studio
