@@ -40,52 +40,52 @@ export class EditorScene extends App {
 
     addSunLight() {
         const light = new SunLight(0xeeeeee, 1, { x: 1, y: 1, z: 1});
-        light.position({
+        light.position = {
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
-        });
+        };
 
         light.addHelper();
     }
 
     addCube() {
         const cube = this.sceneHelper.addCube(20, 0x00ff00, { wireframe: true });
-        cube.position({
+        cube.position = {
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
-        });
+        };
 
         return cube;
     }
 
     addSphere() {
         const sphere = this.sceneHelper.addSphere(20, 0xffff00, { wireframe: true });
-        sphere.position({
+        sphere.position = {
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
-        });
+        };
 
         return sphere;
     }
 
     addCylinder() {
         const cylinder = this.sceneHelper.addCylinder(10, 10, 30, 0x0fff00, { wireframe: true });
-        cylinder.position({
+        cylinder.position = {
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
-        });
+        };
 
         return cylinder;
     }
 
     loadModel = (model) => {
         const parsed = ModelsEngine.parseModel(model);
-        parsed.scale({x: 5, y: 5, z: 5 });
-        parsed.position({x: 0, y: 0, z: 0})
+        parsed.scale = {x: 5, y: 5, z: 5 };
+        parsed.position = {x: 0, y: 0, z: 0};
     }
 
     loadScript = (scriptContent) => {
@@ -95,9 +95,9 @@ export class EditorScene extends App {
 
     updateCurrentMesh = (name = '', position, rotation, scale) => {
         if (this.currentMesh && this.hasSelection) {
-            this.currentMesh.position(position);
-            this.currentMesh.rotation(rotation);
-            this.currentMesh.scale(scale);
+            this.currentMesh.position = position;
+            this.currentMesh.rotation = rotation;
+            this.currentMesh.scale = scale;
             this.currentMesh.setName(name, { replace: true })
 
             this.dispatchEvent({
@@ -119,9 +119,9 @@ export class EditorScene extends App {
         this.dispatchEvent({
             type: 'meshAttached',
             name: mesh.name,
-            rotation: mesh.rotation(),
-            scale: mesh.scale(),
-            position: mesh.position()
+            rotation: mesh.rotation,
+            scale: mesh.scale,
+            position: mesh.position
         });
     }
 
@@ -232,9 +232,9 @@ export class EditorScene extends App {
         this.dispatchEvent({
             type: 'meshChanged',
             name: this.currentMesh.name,
-            rotation: this.currentMesh.rotation(),
-            scale: this.currentMesh.scale(),
-            position: this.currentMesh.position()
+            rotation: this.currentMesh.rotation,
+            scale: this.currentMesh.scale,
+            position: this.currentMesh.position
         });
     }
 
@@ -269,7 +269,7 @@ export class EditorScene extends App {
     }
 
     onCreate() {
-        SceneManager.camera.position({y: 70, z: 150});
+        SceneManager.camera.position = {y: 70, z: 150};
         SceneManager.camera.lookAt(0, 0, 0);
 
         this.setTranformControls();
