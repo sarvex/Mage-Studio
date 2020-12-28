@@ -1,23 +1,31 @@
 @import '../../lib/constants.scss';
 @import '../../lib/theme.scss';
 
+.controls-settings-group {
+    height: $base-unit * 3;
+    border-radius: 4px;
+    background: $background-darker;
+}
+
 .editorsettingsbar {
-    min-height: $base-unit * 4;
+    // min-height: $base-unit * 4;
     position: relative;
     width: 100%;
     background: $background-lighter;
-    padding: 4px;
+    // padding: 4px $base-unit * 2;
 
     & > .settings-list {
-        margin: 0;
+        // margin: 0;
         padding: 0;
-        height: 100%;
+        // height: $base-unit * 4;
+        margin: $base-unit $base-unit * 2;
 
         & > .settings-list-item {
             list-style: none;
             display: inline-block;
-            line-height: $base-unit * 4;
+            line-height: $base-unit * 3;
             margin-right: $base-unit * 3;
+            height: 100%;
         }
     }
 
@@ -31,6 +39,7 @@
         transition: none;
         font-size: 10px;
         font-family: "Open Sans";
+        top: 1px;
 
         &:hover,
         &:focus,
@@ -42,25 +51,70 @@
     }
 
     & .controls-settings-radio-group {
-        height: $base-unit * 3;
+        @extend .controls-settings-group;
 
         &-button {
             height: $base-unit * 3;
-            line-height: $base-unit * 3 - 2;
+            line-height: $base-unit * 3;
             background-color: transparent;
             color: $white;
-            border: 1px solid $atomic-tangerine !important;
             width: $base-unit * 3;
             padding: 0px 6px;
             font-size: 10px;
             font-family: "Open Sans";
-            margin-left: $base-unit;
+            border: none !important;
+            width: 42px;
+            padding: 0px $base-unit * 2;
+
+            &::before {
+                background-color: transparent !important;
+            }
+
+            &.ant-radio-button-wrapper-checked {
+                color: $atomic-tangerine !important;
+                background: $background-darker !important;
+                border-bottom: 2px solid $logo !important;
+            }
 
             &:hover,
             &:active {
-                color: $white;
-                border: 1px solid $atomic-tangerine;
+                color: $background-darker;
                 background-color: $atomic-tangerine;
+            }
+        }
+    }
+
+    & .snap-settings-group {
+        padding: 0 $base-unit;
+        top: -1px;
+        position: relative;
+
+        &-item {
+            margin-right: $base-unit * 2;
+            max-width: 88px;
+            max-height: 24px;
+            line-height: 24px;
+            transition: none;
+
+            &-text-input,
+            &-text-input input {
+                top: $base-unit / 4;
+                height: 20px;
+                position: relative;
+                border: none;
+                background: transparent;
+                font-size: $base-unit * 1.5;
+                text-align: center;
+                color: $white;
+
+                & input {
+                    top: 1px;
+                    height: $base-unit * 2 + 3;
+                }
+            }
+
+            &:last-child {
+                margin-right: 0;
             }
         }
     }
