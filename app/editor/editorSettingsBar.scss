@@ -1,0 +1,67 @@
+@import '../../lib/constants.scss';
+@import '../../lib/theme.scss';
+
+.editorsettingsbar {
+    min-height: $base-unit * 4;
+    position: relative;
+    width: 100%;
+    background: $background-lighter;
+    padding: 4px;
+
+    & > .settings-list {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+
+        & > .settings-list-item {
+            list-style: none;
+            display: inline-block;
+            line-height: $base-unit * 4;
+            margin-right: $base-unit * 3;
+        }
+    }
+
+    & .space-settings-button {
+        height: $base-unit * 3;
+        border-radius: $base-unit / 2;
+        color: $atomic-tangerine;
+        font-weight: bold;
+        background: transparent;
+        border: 1px solid $atomic-tangerine;
+        transition: none;
+        font-size: 10px;
+        font-family: "Open Sans";
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: $background-darker;
+            background-color: $atomic-tangerine !important;
+            outline: none;
+        }
+    }
+
+    & .controls-settings-radio-group {
+        height: $base-unit * 3;
+
+        &-button {
+            height: $base-unit * 3;
+            line-height: $base-unit * 3 - 2;
+            background-color: transparent;
+            color: $white;
+            border: 1px solid $atomic-tangerine !important;
+            width: $base-unit * 3;
+            padding: 0px 6px;
+            font-size: 10px;
+            font-family: "Open Sans";
+            margin-left: $base-unit;
+
+            &:hover,
+            &:active {
+                color: $white;
+                border: 1px solid $atomic-tangerine;
+                background-color: $atomic-tangerine;
+            }
+        }
+    }
+}

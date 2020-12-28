@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import './constants.scss';
 @import './theme';
 
@@ -9,22 +9,18 @@
 
 body {
     overflow: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .app {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    color: $deep-blue-1;
+    color: $white;
     font-size: 0.6rem;
     font-weight: 400;
     //letter-spacing: -0.01rem;
 
-}
-
-.footer {
-    height: 30px;
 }
 
 .main-container {
