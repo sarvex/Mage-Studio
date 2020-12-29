@@ -7,7 +7,7 @@
     background: $background-darker;
 }
 
-.editorsettingsbar {
+.toolbar {
     // min-height: $base-unit * 4;
     position: relative;
     width: 100%;
@@ -86,7 +86,6 @@
 
     & .snap-settings-group {
         padding: 0 $base-unit;
-        top: -1px;
         position: relative;
 
         &-item {

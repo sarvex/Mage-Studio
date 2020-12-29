@@ -31,7 +31,7 @@ body {
         display: flex;
         height: 100%;
         float: left;
-        width: 66.66% !important;
+        width: 100%;
     }
 }
 
@@ -39,6 +39,6 @@ body {
     flex: 2 1 auto !important;
 }
 
-.ant-switch-handle {
-    top: 1px !important;
-}
+// .ant-switch-handle {
+//     // top: 1px !important;
+// }

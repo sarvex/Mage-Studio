@@ -1,12 +1,32 @@
-import { Button, Radio, Tooltip, Switch, Input } from 'antd';
+import { Button, Radio, Tooltip, Switch, Input, Dropdown, Menu } from 'antd';
 import React from 'react';
 import { DragOutlined, RedoOutlined, ArrowsAltOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
 
-import './editorSettingsBar.scss';
+import './toolbar.scss';
 
-const EditorSettingsBar = props => {
+const getAddMenu = () => (
+    <Menu>
+        <Menu.Item title='model'>
+            model
+        </Menu.Item>
+        <Menu.SubMenu title="mesh">
+            <Menu.Item title='cube'>cube</Menu.Item>
+            <Menu.Item title='sphere'>sphere</Menu.Item>
+            <Menu.Item title='cylinder'>cylinder</Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu title="sound">
+            <Menu.Item>sorry</Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu title="light">
+            <Menu.Item title='ambient'>ambient light</Menu.Item>
+            <Menu.Item title='sun'>sun light</Menu.Item>
+        </Menu.SubMenu>
+    </Menu>
+);
+
+const Toolbar = props => {
     return (
-        <div className='editorsettingsbar'>
+        <div className='toolbar'>
             <ul className='settings-list'>
                 <li className='settings-list-item'>
                     <Tooltip title='Local/global space setting'>
@@ -36,16 +56,17 @@ const EditorSettingsBar = props => {
                             className='snap-settings-group-item snap-settings-group-item-text-input'
                             prefix={<MinusOutlined/>}
                             suffix={<PlusOutlined/>}/>
-                        {/* <Input
-                            className='snap-settings-group-item'
-                            placeholder="Enter your username"
-                            prefix={<UserOutlined className="site-form-item-icon" />}
-                            suffix={
-                                <Tooltip title="Extra information">
-                                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
-                                </Tooltip>
-                            }
-                        /> */}
+                    </div>
+                </li>
+                <li className='settings-list-item'>
+                    <div className='controls-settings-group'>
+                        <Dropdown
+                            overlay={getAddMenu()}
+                            trigger={['click']}
+                            placement={'topLeft'}>
+                            <Button className='space-settings-button'><PlusOutlined/>Add</Button>
+                        </Dropdown>
+                        
                     </div>
                 </li>
             </ul>
@@ -53,4 +74,4 @@ const EditorSettingsBar = props => {
     );
 };
 
-export default EditorSettingsBar;
+export default Toolbar;

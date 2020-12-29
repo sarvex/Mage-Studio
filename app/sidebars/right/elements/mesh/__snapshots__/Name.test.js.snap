@@ -13,10 +13,8 @@ exports[`RightSidebar should render fine 1`] = `
     className="setting-input right"
   >
     <Input
-      disabled={false}
       onChange={[Function]}
       placeholder="name"
-      prefixCls="ant-input"
       size="small"
       type="text"
       value=""
