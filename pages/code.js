@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../code/Layout';
+import Code from '../code';
 
 import "antd/dist/antd.min.css";
 
@@ -10,7 +10,7 @@ class Code extends React.Component {
     }
 
     render() {
-        return <Layout { ...this.props } />;
+        return <Code { ...this.props } />;
     }
 }
 

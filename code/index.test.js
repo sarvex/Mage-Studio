@@ -2,12 +2,12 @@ import React from 'react';
 import toJSON from 'enzyme-to-json';
 import { shallow } from 'enzyme';
 
-import Layout from './Layout';
+import Code from './index';
 
-describe('Layout', () => {
+describe('Code', () => {
 
     it('should render fine', () => {
-        const component = shallow(<Layout />);
+        const component = shallow(<Code />);
         expect(toJSON(component)).toMatchSnapshot();
     });
 });
