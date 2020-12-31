@@ -17,9 +17,9 @@ import {
 } from '../actions/scene';
 
 import Scene from './Scene';
-import SceneToolbar from './SceneToolbar';
+// import SceneToolbar from './SceneToolbar';
 import Player from './Player';
-import ModelModal from '../modals/ModelUploadModal';
+// import ModelModal from '../modals/ModelUploadModal';
 
 import './scene.scss';
 import { showModelUploadModal } from '../actions/models';
@@ -73,15 +73,15 @@ export class SceneContainer extends React.Component {
                     onMeshAttached={onMeshAttached}
                     onMeshDetached={onMeshDetached}
                     onSceneExported={onSceneExported} />
-                <SceneToolbar
+                {/* <SceneToolbar
                     playerVisible={projectPlayerVisible}
                     stopProject={stopProject}
                     config={config}
                     showModelModal={showModelModal}
                     startProject={startProject}
                     fullscreen={fullscreen}
-                    onFullScreen={this.handleFullScreen}/>
-                <ModelModal />
+                    onFullScreen={this.handleFullScreen}/> */}
+                {/* <ModelModal /> */}
             </div>
         );
     }

@@ -3,12 +3,12 @@
 exports[`Footer should render fine 1`] = `
 <Row
   className="footer"
-  gutter={0}
 >
   <Col
     span={12}
   >
-    Stuff
+    Mage Studio v
+    0.0.3
   </Col>
 </Row>
 `;

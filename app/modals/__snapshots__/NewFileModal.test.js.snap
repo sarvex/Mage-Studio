@@ -2,7 +2,6 @@
 
 exports[`NewFileModal should render fine 1`] = `
 <Modal
-  cancelButtonDisabled={false}
   className="modal"
   confirmLoading={false}
   footer={
@@ -11,10 +10,8 @@ exports[`NewFileModal should render fine 1`] = `
     />
   }
   maskTransitionName="fade"
-  okButtonDisabled={false}
   okType="primary"
   onCancel={[Function]}
-  prefixCls="ant-modal"
   title="New File"
   transitionName="zoom"
   visible={false}
@@ -38,10 +35,8 @@ exports[`NewFileModal should render fine 1`] = `
           className="setting-input right"
         >
           <Input
-            disabled={false}
             onChange={[Function]}
             placeholder="newscript.js"
-            prefixCls="ant-input"
             size="small"
             type="text"
             value={null}
