@@ -1,0 +1,61 @@
+@import '../../../lib/constants.scss';
+@import '../../../lib/theme.scss';
+
+.left-toolbar {
+    height: auto;
+    position: absolute;
+    top: $base-unit * 12;
+    left: $base-unit * 2;
+    width: $left-toolbar-width;
+    border-radius: $base-unit / 2;
+    background: $background-lighter;
+    padding: $base-unit / 2;
+
+    &-list {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        // padding: $base-unit * 2 0px;
+        width: 100%;
+        background: $background-darker;
+
+        & li {
+            height: $base-unit * 7;
+            line-height: $base-unit * 7;
+            width: 100%;
+            list-style: none;
+            background: transparent;
+            color: $white;
+            text-align: center;
+
+            // &::before {
+            //     content: ' ';
+            //     position: absolute;
+            //     height: 1px;
+            //     left: 4px;
+            //     width: $base-unit * 2;
+            //     background: $background-darker;
+            // }
+
+            // &:last-child::after {
+            //     content: ' ';
+            //     position: absolute;
+            //     height: 1px;
+            //     left: 4px;
+            //     width: $base-unit * 2;
+            //     top: calc(100% - 16px);
+            //     background: $background-darker;
+            // }
+
+            &:hover {
+                color: $background;
+                background: $atomic-tangerine;
+                cursor: pointer;
+            }
+
+            &.selected {
+                border-right: 2px solid $logo;
+            }
+        }
+    }
+}

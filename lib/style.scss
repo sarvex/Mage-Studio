@@ -24,6 +24,7 @@ body {
 .main-container {
     flex: 1;
     background-color: $black;
+    height: calc(100% - 146px);
     & .canvas-container {
         display: flex;
         height: 100%;

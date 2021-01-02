@@ -1,0 +1,31 @@
+@import '../../../../lib/constants.scss';
+@import '../../../../lib/theme.scss';
+
+.asset-item {
+
+    position: relative;
+    float: left;
+    height: $base-unit * 5;
+    width: $base-unit * 5;
+
+    margin: ($base-unit * 2) $base-unit;
+
+    & .icon {
+        font-size: $base-unit * 5;
+        color: $deep-blue-5;
+        height: $base-unit * 4;
+        width: $base-unit * 4;
+    }
+
+    & img {
+        height: $base-unit * 5;
+        width: $base-unit * 5;
+    }
+
+    & .name {
+        width: $base-unit * 5;
+        display: inline-block;
+        text-align: center;
+        font-size: $base-unit;
+    }
+}
