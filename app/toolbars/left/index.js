@@ -9,12 +9,15 @@ export default props => {
             <ul className='left-toolbar-list'>
                 <li className=''>
                     <PartitionOutlined style={{ fontSize: '12px' }} />
+                    Hierarchy
                 </li>
                 <li className=''>
                     <FolderOpenOutlined style={{ fontSize: '12px' }} />
+                    Assets
                 </li>
                 <li className=''>
                     <HddOutlined style={{ fontSize: '12px' }} />
+                    Level
                 </li>
             </ul>
         </div>
