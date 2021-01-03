@@ -3,7 +3,7 @@ import { Icon, Dropdown, Menu } from 'antd';
 import CopyButton from '../../../common/CopyButton';
 import DeleteButton from '../../../common/DeleteButton';
 import SearchButton from '../../../common/SearchButton';
-import {ASSETS_TYPES} from '../../../lib/constants';
+import {ASSETS_TYPES} from '../../../../../lib/constants';
 
 const getMenu = (onAssetsMenuClick) => {
     return (

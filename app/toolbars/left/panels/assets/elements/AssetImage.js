@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { getImageUrl } from '../../../lib/constants';
+import { getImageUrl } from '../../../../../lib/constants';
 
 import '../assets.scss';
 

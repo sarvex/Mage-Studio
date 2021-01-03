@@ -14,20 +14,17 @@
         margin: 0;
         padding: 0;
         position: relative;
-        // padding: $base-unit * 2 0px;
         width: 100%;
-        // background: $background-darker;
 
-        & li {
-            height: $base-unit * 5;
-            line-height: $base-unit * 4;
-            width: $base-unit * 11;
+        &-item {
+            line-height: $base-unit * 3;
+            min-width: $base-unit * 11;
             list-style: none;
             background: transparent;
             color: $white;
             text-align: center;
             display: inline-block;
-            padding: $base-unit / 2 $base-unit;
+            padding: $base-unit / 2 $base-unit * 2;
 
             &:first-child {
                 border-top-left-radius: $base-unit / 2;
@@ -38,24 +35,6 @@
                 border-top-right-radius: $base-unit / 2;
                 border-bottom-right-radius: $base-unit / 2;
             }
-            // &::before {
-            //     content: ' ';
-            //     position: absolute;
-            //     height: 1px;
-            //     left: 4px;
-            //     width: $base-unit * 2;
-            //     background: $background-darker;
-            // }
-
-            // &:last-child::after {
-            //     content: ' ';
-            //     position: absolute;
-            //     height: 1px;
-            //     left: 4px;
-            //     width: $base-unit * 2;
-            //     top: calc(100% - 16px);
-            //     background: $background-darker;
-            // }
 
             &:hover {
                 color: $background;
@@ -64,8 +43,21 @@
             }
 
             &.selected {
-                border-right: 2px solid $logo;
+                border: 1px solid $logo;
+                border-bottom-width: $base-unit / 2 - 1;
             }
+
+            &-icon {
+                margin-right: $base-unit * 2;
+            }
+        }
+    }
+
+    &-drawer {
+        & .ant-drawer-header,
+        & .ant-drawer-content {
+            color: $white;
+            background: $background !important;
         }
     }
 }

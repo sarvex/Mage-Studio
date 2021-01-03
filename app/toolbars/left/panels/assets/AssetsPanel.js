@@ -6,16 +6,16 @@ import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
 // import AssetUploadModal from '../../modals/AssetUploadModal';
 
-import { SCRIPTS_EDITOR_PATH } from '../../lib/constants';
+import { SCRIPTS_EDITOR_PATH } from '../../../../lib/constants';
 
-import { getAllAssets } from "../../actions/assets";
+import { getAllAssets } from "../../../../actions/assets";
 import {
     showTextureModal,
     hideTextureModal,
     uploadTexture
-} from '../../actions/textures';
+} from '../../../../actions/textures';
 
-export class Assets extends React.Component {
+export class AssetsPanel extends React.Component {
 
     componentDidMount() {
         const { getAssets = f => f, config } = this.props;
@@ -120,4 +120,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Assets);
+export default connect(mapStateToProps, mapDispatchToProps)(AssetsPanel);

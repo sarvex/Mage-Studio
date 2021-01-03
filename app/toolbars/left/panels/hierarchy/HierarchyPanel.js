@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tree, Input, Icon } from 'antd';
 
-import './rightsidebar.scss';
+import './hierarchypanel.scss';
 
 const { TreeNode } = Tree;
 const Search = Input.Search;
@@ -62,7 +62,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 
-class SearchTree extends React.Component {
+class HierarchyPanel extends React.Component {
   state = {
     expandedKeys: [],
     searchValue: '',
@@ -143,4 +143,4 @@ class SearchTree extends React.Component {
   }
 }
 
-export default SearchTree;
+export default HierarchyPanel;
