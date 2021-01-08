@@ -1,0 +1,111 @@
+@import '../../../../../lib/constants.scss';
+@import '../../../../../lib/theme.scss';
+
+.ant-tree {
+    background: $background-darker !important;
+    border: 1px solid $background-very-dark !important;
+    border-radius: $base-unit / 2;
+
+    &-list {
+        height: $base-unit * 65;
+    }
+
+    &-switcher {
+        background: $background-darker !important;
+    }
+
+    &-node-selected,
+    &-node-content-wrapper:hover {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+     &-switcher i {
+        color: $white !important;
+
+        &.anticon-file {
+            visibility: hidden;
+        }
+    }
+}
+
+.hierarchy-search-filter {
+    /* align-self: center; */
+    display: inline-block;
+    width: 100%;
+    background: $background-darker;
+    border: 1px solid $background-very-dark;
+    
+    margin-bottom: $base-unit * 2;
+    //border-radius: 6px;
+
+    &.right {
+        float: right;
+        width: $base-unit * 20;
+    }
+
+    & > *,
+    & input {
+        height: $base-unit * 3;
+        // font-family: 'Roboto Mono', sans-serif;
+        font-size: .55rem;
+        font-weight: 700;
+        background: $background-darker;
+        border: none;
+        color: white;
+        border-radius: 0px;
+        width: 100% !important;
+
+        & svg {
+            color: $white;
+        }
+    }
+
+    & .ant-input-group-addon {
+        color: $white;
+        background: $background-very-dark;
+        left: 0 !important;
+
+        & button {
+            box-shadow: none;
+            border: none;
+            height: $base-unit * 3;
+            background: $background-very-dark;
+        }
+    }
+
+    &.disabled > * {
+        color: $grey;
+        opacity: .2;
+    }
+}
+
+.hierarchy {
+
+    overflow-y: auto;
+    background: $background;
+
+    & li,
+    & span {
+        //background: $sidebar-background !important;
+        color: $white;
+        font-family: 'Roboto Mono', sans-serif;
+        font-size: .55rem;
+        font-weight: 700;
+        line-height: $base-unit * 2;
+    }
+
+    li[role='treeitem'] {
+        //height: $base-unit * 2 !important;
+        padding: 0px !important;
+    }
+}
+
+.inspector-empty-icon {
+    color: $black;
+    font-size: 2rem;
+}
+
+.setting-value-action {
+    margin-left: $base-unit;
+}

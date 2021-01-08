@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Drawer } from 'antd';
-import { FolderOutlined, HddOutlined, FolderOpenOutlined, PartitionOutlined, SettingOutlined } from '@ant-design/icons';
-import './lefttoolbar.scss';
+import { FolderOpenOutlined, PartitionOutlined, SettingOutlined } from '@ant-design/icons';
+import './bottom.scss';
 import { upperCaseFirst } from '../../lib/util';
-import HierarchyPanel from './panels/hierarchy/HierarchyPanel';
+import { Hierarchy } from './panels/hierarchy/HierarchyPanel';
 
 const HIERARCHY = 'hierarchy';
 const ASSETS = 'assets';
@@ -12,7 +12,7 @@ const SETTINGS = 'settings';
 const hierarchyListItem = (
     <>
         <PartitionOutlined
-            className='left-toolbar-list-item-icon'
+            className='bottom-toolbar-list-item-icon'
             style={{ fontSize: '12px' }} />
         Hierarchy
     </>
@@ -21,7 +21,7 @@ const hierarchyListItem = (
 const assetsListItem = (
     <>
         <FolderOpenOutlined
-            className='left-toolbar-list-item-icon'
+            className='bottom-toolbar-list-item-icon'
             style={{ fontSize: '12px' }} />
         Assets
     </>
@@ -30,7 +30,7 @@ const assetsListItem = (
 const settingsListItem = (
     <>
         <SettingOutlined
-            className='left-toolbar-list-item-icon'
+            className='bottom-toolbar-list-item-icon'
             style={{ fontSize: '12px' }} />
         Settings
     </>
@@ -42,17 +42,17 @@ const TOOLBAR_ITEMS = {
     [SETTINGS]: settingsListItem
 };
 
-const getDrawerPanel = selection => ({
-    [HIERARCHY]: HierarchyPanel,
-    [ASSETS]: HierarchyPanel,
-    [SETTINGS]: HierarchyPanel
-}[selection]);
+const DRAWER_PANELS = {
+    [HIERARCHY]: <Hierarchy/>,
+    [ASSETS]: <Hierarchy/>,
+    [SETTINGS]: <Hierarchy/>
+};
 
 const mapListItems = (selected, onClick) => (
     Object
         .keys(TOOLBAR_ITEMS)
         .map(item => {
-            const className = `left-toolbar-list-item ${selected === item ? 'selected' : ''}`;
+            const className = `bottom-toolbar-list-item ${selected === item ? 'selected' : ''}`;
             const handleClick = () => selected === item ? onClick(false) : onClick(item);
 
             return (
@@ -67,8 +67,8 @@ const mapListItems = (selected, onClick) => (
 );
 
 export default props => {
-    const [selected, changeSelected] = useState('');
-    const [drawerVisible, toggleDrawer] = useState(false);
+    const [selected, changeSelected] = useState(HIERARCHY);
+    const [drawerVisible, toggleDrawer] = useState(true);
     
     const handleClick = (selection) => {
         changeSelected(selection);
@@ -80,14 +80,17 @@ export default props => {
         toggleDrawer(false);
     };
 
+    const panel = selected && DRAWER_PANELS[selected];
+    const drawerTitle = selected && upperCaseFirst(selected);
+
     return (
-        <div className='left-toolbar'>
-            <ul className='left-toolbar-list'>
+        <div className='bottom-toolbar'>
+            <ul className='bottom-toolbar-list'>
                 { mapListItems(selected, handleClick) }
             </ul>
             <Drawer
-                className='left-toolbar-drawer'
-                title={upperCaseFirst(selected)}
+                className='bottom-toolbar-drawer'
+                title={drawerTitle}
                 placement={'bottom'}
                 closable
                 height={640}
@@ -99,7 +102,7 @@ export default props => {
                 style={{
                     position: 'absolute',
                     bottom: '42px' }}>
-                { getDrawerPanel('hierarchy') }
+                { panel }
             </Drawer>
         </div>
     );

@@ -4,7 +4,7 @@ import {Row} from 'antd';
 import Header from '../lib/header/Header';
 import Footer from '../lib/footer/Footer';
 import TopToolbar from './toolbars/top';
-import LeftToolbar from './toolbars/left';
+import BottomToolbar from './toolbars/bottom';
 import SceneContainer from './scene/SceneContainer';
 
 export default (props) => {
@@ -13,7 +13,7 @@ export default (props) => {
             <Header />
             <TopToolbar/>
             <Row className="main-container">
-                <LeftToolbar />
+                <BottomToolbar />
                 <div className="canvas-container">
                     <SceneContainer store={props.store}/>
                 </div>

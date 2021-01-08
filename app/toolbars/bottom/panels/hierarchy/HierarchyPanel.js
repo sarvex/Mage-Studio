@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tree, Input, Icon } from 'antd';
+import { Tree, Input } from 'antd';
+import { FolderOutlined } from '@ant-design/icons';
 
 import './hierarchypanel.scss';
 
@@ -62,7 +63,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 
-class HierarchyPanel extends React.Component {
+export class Hierarchy extends React.Component {
   state = {
     expandedKeys: [],
     searchValue: '',
@@ -93,7 +94,7 @@ class HierarchyPanel extends React.Component {
 
   getIcon() {
       return (
-          <Icon type='folder' theme='outlined' height='4px' width='4px' className='label-icon'/>
+          <FolderOutlined height='4px' width='4px' className='label-icon'/>
       )
   }
 
@@ -121,26 +122,22 @@ class HierarchyPanel extends React.Component {
     });
 
     return (
-      <div className='scene-setting'>
-        <div className='setting-row'>
-            <div className='setting-input'>
-                <Search placeholder="Search" onChange={this.onChange} />
-            </div>
+      <div>
+        <div className='hierarchy-search-filter'>
+            <Search placeholder="Search" onChange={this.onChange} />
         </div>
-        <div className='setting-row'>
-            <Tree
-                className='hierarchy'
-                showIcon
-                showLine
-                onExpand={this.onExpand}
-                expandedKeys={expandedKeys}
-                autoExpandParent={autoExpandParent}>
-                { loop(gData) }
-            </Tree>
-        </div>
+        <Tree
+            className='hierarchy'
+            showIcon
+            showLine
+            onExpand={this.onExpand}
+            expandedKeys={expandedKeys}
+            autoExpandParent={autoExpandParent}>
+            { loop(gData) }
+        </Tree>
       </div>
     );
   }
 }
 
-export default HierarchyPanel;
+export default Hierarchy;

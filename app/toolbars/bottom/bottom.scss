@@ -1,7 +1,7 @@
 @import '../../../lib/constants.scss';
 @import '../../../lib/theme.scss';
 
-.left-toolbar {
+.bottom-toolbar {
     height: auto;
     position: absolute;
     top: calc(100% - 91px);
@@ -53,11 +53,35 @@
         }
     }
 
-    &-drawer {
-        & .ant-drawer-header,
-        & .ant-drawer-content {
+    & .ant-drawer {
+
+        &-header,
+        &-content,
+        &-title {
             color: $white;
             background: $background !important;
+            font-family: 'Open Sans';
+            font-weight: lighter;
+            font-size: 12px;
+        }
+
+        &-content {
+            border: 1px solid $background-very-dark;
+            border-radius: $base-unit / 2;
+        }
+
+        &-header {
+            padding: $base-unit $base-unit * 2;
+        }
+
+        &-body {
+            padding: $base-unit * 2;
+        }
+
+        &-close {
+            padding: 13px !important;
+            font-size: 12px;
+            color: white !important;
         }
     }
 }
