@@ -27,29 +27,29 @@
         }
     }
 
-    .title {
-        background: $background-lighter;
-        padding: $base-unit;
-        max-height: $base-unit * 5;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 0.65rem;
-        margin-bottom: $base-unit / 2;
+    // .title {
+    //     background: $background-lighter;
+    //     padding: $base-unit;
+    //     max-height: $base-unit * 5;
+    //     text-transform: uppercase;
+    //     font-weight: 700;
+    //     font-size: 0.65rem;
+    //     margin-bottom: $base-unit / 2;
 
-        & .icon {
-            color: $logo;
-        }
+    //     & .icon {
+    //         color: $logo;
+    //     }
 
-        & .assets-action {
-            float: right;
-            margin-top: $base-unit / 4;
-            margin-right: $base-unit;
-        }
+    //     & .assets-action {
+    //         float: right;
+    //         margin-top: $base-unit / 4;
+    //         margin-right: $base-unit;
+    //     }
 
-        & span {
-            margin-left: $base-unit;
-        }
-    }
+    //     & span {
+    //         margin-left: $base-unit;
+    //     }
+    // }
 
     .scene-property {
 

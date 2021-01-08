@@ -1,8 +1,6 @@
 import React from 'react';
 import { Tooltip, Icon } from 'antd';
 
-import '../assets.scss';
-
 const AssetItem = ({ name, type = 'file' }) => (
     <div>
         <Tooltip title={name} placement="bottom">

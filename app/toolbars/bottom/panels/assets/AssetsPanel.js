@@ -15,6 +15,8 @@ import {
     uploadTexture
 } from '../../../../actions/textures';
 
+import './assets.scss';
+
 export class AssetsPanel extends React.Component {
 
     componentDidMount() {

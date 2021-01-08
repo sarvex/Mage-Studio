@@ -4,6 +4,7 @@ import { FolderOpenOutlined, PartitionOutlined, SettingOutlined } from '@ant-des
 import './bottom.scss';
 import { upperCaseFirst } from '../../lib/util';
 import { Hierarchy } from './panels/hierarchy/HierarchyPanel';
+import AssetsPanel from './panels/assets/AssetsPanel';
 
 const HIERARCHY = 'hierarchy';
 const ASSETS = 'assets';
@@ -44,7 +45,7 @@ const TOOLBAR_ITEMS = {
 
 const DRAWER_PANELS = {
     [HIERARCHY]: <Hierarchy/>,
-    [ASSETS]: <Hierarchy/>,
+    [ASSETS]: <AssetsPanel/>,
     [SETTINGS]: <Hierarchy/>
 };
 

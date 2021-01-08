@@ -1,8 +1,9 @@
 import React from 'react';
-import { Icon, Dropdown, Menu } from 'antd';
-import CopyButton from '../../../common/CopyButton';
-import DeleteButton from '../../../common/DeleteButton';
-import SearchButton from '../../../common/SearchButton';
+import { Dropdown, Menu } from 'antd';
+import { HddOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import CopyButton from '../../../../../shared/buttons/CopyButton';
+import DeleteButton from '../../../../../shared/buttons/DeleteButton';
+import SearchButton from '../../../../../shared/buttons/SearchButton';
 import {ASSETS_TYPES} from '../../../../../lib/constants';
 
 const getMenu = (onAssetsMenuClick) => {
@@ -17,7 +18,7 @@ const getMenu = (onAssetsMenuClick) => {
 
 const AssetsMenu = ({ onAssetsMenuClick = f => f }) => (
     <div>
-        <Icon className="icon" type="hdd" />
+        <HddOutlined className="icon" type="hdd" />
         <span>Assets</span>
         <DeleteButton />
         <CopyButton />
@@ -26,7 +27,7 @@ const AssetsMenu = ({ onAssetsMenuClick = f => f }) => (
             overlay={getMenu(onAssetsMenuClick)}
             trigger={['click']}
             placement={'bottomLeft'}>
-            <Icon type="plus-square" />
+            <PlusSquareOutlined/>
         </Dropdown>
         <SearchButton />
     </div>

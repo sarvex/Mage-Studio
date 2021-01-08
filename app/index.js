@@ -17,10 +17,8 @@ export default (props) => {
                 <div className="canvas-container">
                     <SceneContainer store={props.store}/>
                 </div>
-                {/* <RightSidebar /> */}
             </Row>
             <Footer />
-            {/* <ProjectModal/> */}
         </div>
     );
 };
