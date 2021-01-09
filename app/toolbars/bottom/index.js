@@ -94,7 +94,7 @@ export default props => {
                 title={drawerTitle}
                 placement={'bottom'}
                 closable
-                height={640}
+                height={'60vh'}
                 width={320}
                 mask={false}
                 onClose={handleDrawerClose}
