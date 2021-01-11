@@ -6,7 +6,6 @@ const next = require('next');
 const scenes = require('./routes/scenes');
 const projects = require('./routes/projects');
 const config = require('./routes/config');
-const electron = require('./lib/electron');
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -27,7 +26,6 @@ server.use(bodyParser.json({ limit: '100mb', extended: true }));
 
 const onListenComplete = function() {
     console.log(`> Ready on http://localhost:${PORT}`);
-    electron.start(PORT);
 }
 
 const onWildcard = (req, res) => handle(req, res, req.url);
@@ -44,9 +42,4 @@ const setupServer = function() {
 }
 
 // API routes
-electron
-    .setup(PORT)
-    .then(function() {
-        app.prepare()
-            .then(setupServer);
-    });
+app.prepare().then(setupServer);

@@ -1,65 +1,17 @@
-@import '../../lib/constants.scss';
-@import '../../lib/theme.scss';
-
-$header-height: $base-unit * 4;
-
-.header {
-    height: $base-unit * 4;
-    line-height: 0.6rem;
-    background: $background;//$deep-purple-100;
-    border-bottom: 1px solid $background-darker; //$deep-purple-70;
-    padding: 0px $base-unit * 2;
-
-    .logo {
-        color: $logo;
-        margin-right: $base-unit * 2;
-        font-size: $base-unit * 2;
-        font-style: italic;
-        font-family: LeckerliOne;
-        height: $base-unit * 4;
-
-        &::after {
-            content: '';
-            height: $base-unit / 4;
-            width: $base-unit * 2;
-            position: absolute;
-            background: $logo;
-            top: 22px;
-            left: $base-unit * 2;
-        }
-    }
-
-    & .main-menu-item {
-        color: $white;
-        height: 31px;
-        line-height: 31px;
-        display: inline-block;
-        padding: 0 $base-unit;
-        cursor: pointer;
-
-        &:hover {
-            border-bottom: 2px solid $logo;
-            color: $background-darker;
-            background: $atomic-tangerine;
-        }
-    }
-}
-
+@import './lib/constants.scss';
+@import './lib/theme.scss';
 .ant-dropdown-menu-vertical {
     margin-top: $base-unit;
     background-color: $background !important;
     border: 1px solid $background-darker;
     border-radius: 0px !important;
     width: $base-unit * 20;
-
     & .ant-divider-horizontal {
         margin: $base-unit 0;
         background-color: $separator;
     }
-
-
     & .ant-dropdown-menu-item,
-    & .ant-dropdown-menu-submenu > *,
+    & .ant-dropdown-menu-submenu>*,
     & .ant-dropdown-menu-item a {
         background-color: $background !important;
         color: $white !important;
@@ -67,7 +19,6 @@ $header-height: $base-unit * 4;
         font-size: .55rem;
         line-height: $base-unit * 2;
         height: $base-unit * 3;
-
         &.ant-dropdown-menu-item-active,
         &.ant-dropdown-menu-item-selected,
         &.ant-dropdown-menu-submenu-active,
@@ -75,24 +26,19 @@ $header-height: $base-unit * 4;
             color: $background-darker !important;
             background-color: $atomic-tangerine !important;
         }
-
         &.ant-dropdown-menu-item-disabled {
             color: $grey !important;
-
             &:hover {
                 background-color: transparent !important;
             }
         }
-
         &:hover {
             color: $background-darker !important;
             background-color: $atomic-tangerine !important;
         }
     }
-
     & .ant-dropdown-menu-item,
     & .ant-dropdown-menu-submenu {
-
         &[class$='-disabled'] {
             background: red;
         }

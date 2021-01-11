@@ -21,7 +21,7 @@ import Scene from './Scene';
 import Player from './Player';
 // import ModelModal from '../modals/ModelUploadModal';
 
-import './scene.scss';
+import style from './scene.module.scss';
 import { showModelUploadModal } from '../actions/models';
 
 export class SceneContainer extends React.Component {
@@ -60,7 +60,7 @@ export class SceneContainer extends React.Component {
         const className = `scene-container ${fullScreenClassName}`;
 
         return (
-            <div className={className}>
+            <div className={style['scene-container']}>
                 <Player
                     url={projectUrl}
                     visible={projectPlayerVisible} />

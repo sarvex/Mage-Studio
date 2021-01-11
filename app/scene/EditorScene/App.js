@@ -8,7 +8,7 @@ import {
     ImagesEngine,
     AmbientLight,
     SunLight,
-    THREE,
+    // THREE,
     Mesh,
     PostProcessingEngine,
     BackgroundSound,
@@ -148,7 +148,7 @@ export class EditorScene extends App {
 				break;
 			case "ctrl": // Ctrl
 				this.transform.setTranslationSnap(100);
-				this.transform.setRotationSnap(THREE.Math.degToRad(15));
+				// this.transform.setRotationSnap(THREE.Math.degToRad(15));
 				break;
 			case "w": // W
 				this.transform.setMode("translate");
@@ -204,7 +204,7 @@ export class EditorScene extends App {
         if (this.transform) {
             if (snapEnabled) {
                 this.transform.setTranslationSnap(snapValue);
-                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+                // this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
             } else {
                 this.transform.setTranslationSnap(null);
                 this.transform.setRotationSnap(null);

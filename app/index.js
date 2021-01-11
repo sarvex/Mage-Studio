@@ -10,8 +10,6 @@ import SceneContainer from './scene/SceneContainer';
 // import LeftSidebar from './sidebars/left/LeftSidebar';
 // import RightSidebar from './sidebars/right/RightSidebar';
 
-import '../lib/style.scss';
-
 export default (props) => {
     return (
         <div className="app">

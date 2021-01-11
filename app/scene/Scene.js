@@ -1,6 +1,5 @@
 import React from 'react';
 import debounce from '../lib/debounce';
-import './scene.scss';
 import { getOrCreateApp } from './AppProxy';
 
 export class Scene extends React.Component {
