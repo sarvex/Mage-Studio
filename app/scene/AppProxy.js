@@ -25,7 +25,7 @@ const config = {
 };
 
 const assets = {
-    Models: {
+    models: {
         'ambientlightholder': 'public/models/lamp.glb',
         'lightholder': 'public/models/lamp.glb'
     }
