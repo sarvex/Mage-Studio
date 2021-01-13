@@ -1,44 +1,41 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import './constants.scss';
 @import './theme';
-
 @font-face {
     font-family: 'LeckerliOne';
-    src: url('/static/fonts/LeckerliOne-Regular.otf');
+    src: url('/fonts/LeckerliOne-Regular.otf');
 }
 
 body {
     overflow: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .app {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    color: $deep-blue-1;
+    color: $white;
     font-size: 0.6rem;
     font-weight: 400;
     //letter-spacing: -0.01rem;
-
-}
-
-.footer {
-    height: 30px;
 }
 
 .main-container {
     flex: 1;
     background-color: $black;
-
     & .canvas-container {
         display: flex;
         height: 100%;
         float: left;
-        width: 66.66% !important;
+        width: 100%;
     }
 }
 
 .flex-grow-2 {
     flex: 2 1 auto !important;
 }
+
+// .ant-switch-handle {
+//     // top: 1px !important;
+// }

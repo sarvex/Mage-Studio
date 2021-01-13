@@ -25,9 +25,9 @@ const config = {
 };
 
 const assets = {
-    Models: {
-        'ambientlightholder': 'static/models/lamp.glb',
-        'lightholder': 'static/models/lamp.glb'
+    models: {
+        'ambientlightholder': 'public/models/lamp.glb',
+        'lightholder': 'public/models/lamp.glb'
     }
 };
 
@@ -47,10 +47,12 @@ export async function getOrCreateApp() {
             import('./EditorScene/App')
         ]).then(([{ Router }, { EditorScene }]) => {
             Router.on('/', EditorScene);
+            console.log('creating app');
             return Router
                 .start(config, assets, '#gameContainer')
                 .then((application) => {
                     app = application;
+                    console.log(application);
                     return Promise.resolve(app);
                 })
         });
