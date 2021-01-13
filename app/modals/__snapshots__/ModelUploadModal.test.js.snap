@@ -2,6 +2,7 @@
 
 exports[`ModelUploadModal should render fine 1`] = `
 <Modal
+  cancelButtonDisabled={false}
   className="modal big"
   confirmLoading={false}
   footer={
@@ -12,8 +13,10 @@ exports[`ModelUploadModal should render fine 1`] = `
     />
   }
   maskTransitionName="fade"
+  okButtonDisabled={false}
   okType="primary"
   onCancel={[Function]}
+  prefixCls="ant-modal"
   title="Models"
   transitionName="zoom"
   visible={false}

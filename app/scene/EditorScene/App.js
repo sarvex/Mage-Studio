@@ -1,18 +1,18 @@
 import {
-    Level,
-    Models,
-    Shaders,
-    Scene,
-    Scripts,
-    Controls,
-    Images,
+    App,
+    ModelsEngine,
+    ShadersEngine,
+    SceneManager,
+    ScriptManager,
+    ControlsManager,
+    ImagesEngine,
     AmbientLight,
     SunLight,
-    // THREE,
+    THREE,
     Mesh,
-    PostProcessing,
+    PostProcessingEngine,
     BackgroundSound,
-    Audio,
+    AudioEngine,
     Universe
 } from 'mage-engine';
 
@@ -20,7 +20,7 @@ import {
     observeStore
 } from './reduxStore';
 
-export class EditorScene extends Level {
+export class EditorScene extends App {
 
     constructor(...props) {
         super(...props);
@@ -91,13 +91,13 @@ export class EditorScene extends Level {
     }
 
     loadModel = (model) => {
-        const parsed = Models.parseModel(model);
+        const parsed = ModelsEngine.parseModel(model);
         parsed.scale({x: 5, y: 5, z: 5 });
         parsed.position({x: 0, y: 0, z: 0})
     }
 
     loadScript = (scriptContent) => {
-        const script = Scripts.createFromString(scriptContent);
+        const script = ScriptManager.createFromString(scriptContent);
         this.currentMesh.addScript(script.name());
     }
 
@@ -148,7 +148,7 @@ export class EditorScene extends Level {
 				break;
 			case "ctrl": // Ctrl
 				this.transform.setTranslationSnap(100);
-				// this.transform.setRotationSnap(THREE.Math.degToRad(15));
+				this.transform.setRotationSnap(THREE.Math.degToRad(15));
 				break;
 			case "w": // W
 				this.transform.setMode("translate");
@@ -186,10 +186,10 @@ export class EditorScene extends Level {
     }
 
     setTranformControls() {
-        Controls.setOrbitControl();
-        Controls.setTransformControl();
+        ControlsManager.setOrbitControl();
+        ControlsManager.setTransformControl();
 
-        this.transform = Controls.getControl('transform');
+        this.transform = ControlsManager.getControl('transform');
         this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
     }
 
@@ -204,7 +204,7 @@ export class EditorScene extends Level {
         if (this.transform) {
             if (snapEnabled) {
                 this.transform.setTranslationSnap(snapValue);
-                // this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
             } else {
                 this.transform.setTranslationSnap(null);
                 this.transform.setRotationSnap(null);
@@ -214,13 +214,13 @@ export class EditorScene extends Level {
 
     changeFog = (fog) => {
         if (fog.color && fog.density && fog.enabled) {
-            Scene.fog(fog.color, fog.density/1000);
+            SceneManager.fog(fog.color, fog.density/1000);
         }
     }
 
     changeTexture = (textureId, texturePath) => {
         if (this.currentMesh) {
-            Images
+            ImagesEngine
                 .loadSingleTexture(textureId, texturePath)
                 .then((texture) => {
                     this.currentMesh.setTexture(textureId);
@@ -277,8 +277,8 @@ export class EditorScene extends Level {
     }
 
     onCreate() {
-        Scene.camera.position({y: 70, z: 150});
-        Scene.camera.lookAt(0, 0, 0);
+        SceneManager.camera.position({y: 70, z: 150});
+        SceneManager.camera.lookAt(0, 0, 0);
 
         this.setTranformControls();
         this.enableInput();

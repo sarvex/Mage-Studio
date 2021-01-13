@@ -8,6 +8,11 @@ exports[`SceneContainer should render properly 1`] = `
   <Scene
     fullscreen={false}
   />
+  <SceneToolbar
+    fullscreen={false}
+    onFullScreen={[Function]}
+  />
+  <Connect(ModelUploadModal) />
 </div>
 `;
 
@@ -19,5 +24,10 @@ exports[`SceneContainer should render properly if fullscreen 1`] = `
   <Scene
     fullscreen={true}
   />
+  <SceneToolbar
+    fullscreen={true}
+    onFullScreen={[Function]}
+  />
+  <Connect(ModelUploadModal) />
 </div>
 `;

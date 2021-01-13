@@ -16,12 +16,12 @@ import {
     stopProject
 } from '../actions/scene';
 
-// import Scene from './Scene';
-// import SceneToolbar from './SceneToolbar';
+import Scene from './Scene';
+import SceneToolbar from './SceneToolbar';
 import Player from './Player';
-// import ModelModal from '../modals/ModelUploadModal';
+import ModelModal from '../modals/ModelUploadModal';
 
-import style from './scene.module.scss';
+import './scene.scss';
 import { showModelUploadModal } from '../actions/models';
 
 export class SceneContainer extends React.Component {
@@ -60,11 +60,10 @@ export class SceneContainer extends React.Component {
         const className = `scene-container ${fullScreenClassName}`;
 
         return (
-            <div className={style['scene-container']}>
+            <div className={className}>
                 <Player
                     url={projectUrl}
                     visible={projectPlayerVisible} />
-                {/*
                 <Scene
                     fullscreen={fullscreen}
                     config={config}
@@ -74,17 +73,15 @@ export class SceneContainer extends React.Component {
                     onMeshAttached={onMeshAttached}
                     onMeshDetached={onMeshDetached}
                     onSceneExported={onSceneExported} />
-                */}
-                
-                {/* <SceneToolbar
+                <SceneToolbar
                     playerVisible={projectPlayerVisible}
                     stopProject={stopProject}
                     config={config}
                     showModelModal={showModelModal}
                     startProject={startProject}
                     fullscreen={fullscreen}
-                    onFullScreen={this.handleFullScreen}/> */}
-                {/* <ModelModal /> */}
+                    onFullScreen={this.handleFullScreen}/>
+                <ModelModal />
             </div>
         );
     }

@@ -3,9 +3,10 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const fileupload = require('express-fileupload');
 const next = require('next');
-// const scenes = require('./routes/scenes');
-// const projects = require('./routes/projects');
-// const config = require('./routes/config');
+const scenes = require('./routes/scenes');
+const projects = require('./routes/projects');
+const config = require('./routes/config');
+const electron = require('./lib/electron');
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -26,14 +27,15 @@ server.use(bodyParser.json({ limit: '100mb', extended: true }));
 
 const onListenComplete = function() {
     console.log(`> Ready on http://localhost:${PORT}`);
+    electron.start(PORT);
 }
 
 const onWildcard = (req, res) => handle(req, res, req.url);
 
 const setupServer = function() {
-    // server.use(config.endpoint, config.router);
-    // server.use(scenes.endpoint, scenes.router);
-    // server.use(projects.endpoint, projects.router);
+    server.use(config.endpoint, config.router);
+    server.use(scenes.endpoint, scenes.router);
+    server.use(projects.endpoint, projects.router);
     // add other endpoints here
     server.get('*', onWildcard);
 
@@ -42,4 +44,9 @@ const setupServer = function() {
 }
 
 // API routes
-app.prepare().then(setupServer);
+electron
+    .setup(PORT)
+    .then(function() {
+        app.prepare()
+            .then(setupServer);
+    });

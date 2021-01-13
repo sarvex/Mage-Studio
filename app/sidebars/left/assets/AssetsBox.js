@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import AssetsMenu from './elements/AssetsMenu';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
-// import AssetUploadModal from '../../../modals/AssetUploadModal';
+import AssetUploadModal from '../../../modals/AssetUploadModal';
 
 import { SCRIPTS_EDITOR_PATH } from '../../../lib/constants';
 
@@ -89,12 +89,12 @@ export class AssetsBox extends React.Component {
                         name={texture.name} />
                     )) }
                 </div>
-                {/* <AssetUploadModal
+                <AssetUploadModal
                     type={"textures"}
                     onDismiss={this.handleModalHide('textures')}
                     onConfirm={this.handleUpload('textures')}
                     loading={textures.textureModalLoading}
-                    visible={textures.textureModalVisible} /> */}
+                    visible={textures.textureModalVisible} />
             </div>
         );
     }

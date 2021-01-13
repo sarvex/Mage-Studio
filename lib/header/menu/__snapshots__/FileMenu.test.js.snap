@@ -5,7 +5,12 @@ exports[`FileMenu should render fine 1`] = `
   mouseEnterDelay={0.15}
   mouseLeaveDelay={0.1}
   overlay={
-    <Menu>
+    <Menu
+      className=""
+      focusable={false}
+      prefixCls="ant-menu"
+      theme="light"
+    >
       <SubMenu
         title="New"
       >
@@ -87,6 +92,8 @@ exports[`FileMenu should render fine 1`] = `
       </SubMenu>
     </Menu>
   }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
 >
   <span
     className="main-menu-item"
@@ -101,7 +108,12 @@ exports[`FileMenu should render properly when is inside code editor 1`] = `
   mouseEnterDelay={0.15}
   mouseLeaveDelay={0.1}
   overlay={
-    <Menu>
+    <Menu
+      className=""
+      focusable={false}
+      prefixCls="ant-menu"
+      theme="light"
+    >
       <SubMenu
         title="New"
       >
@@ -184,6 +196,8 @@ exports[`FileMenu should render properly when is inside code editor 1`] = `
       </SubMenu>
     </Menu>
   }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
 >
   <span
     className="main-menu-item"

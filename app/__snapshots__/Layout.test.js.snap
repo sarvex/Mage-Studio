@@ -5,16 +5,19 @@ exports[`Layout should render fine 1`] = `
   className="app"
 >
   <Connect(Header) />
-  <Toolbar />
   <Row
     className="main-container"
+    gutter={0}
   >
+    <LeftSidebar />
     <div
       className="canvas-container"
     >
       <Connect(SceneContainer) />
     </div>
+    <Connect(RightSidebar) />
   </Row>
   <Footer />
+  <Connect(ProjectModal) />
 </div>
 `;

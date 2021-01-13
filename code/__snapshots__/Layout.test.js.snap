@@ -10,6 +10,7 @@ exports[`Layout should render fine 1`] = `
   />
   <Row
     className="main-container code-editor"
+    gutter={0}
   >
     <Connect(CodeEditor)
       modalVisible={false}
