@@ -8,7 +8,7 @@ exports[`ProjectTree should render fine 1`] = `
   <p
     className="title"
   >
-    <Component
+    <Icon
       className="icon"
       type="project"
     />
@@ -23,12 +23,13 @@ exports[`ProjectTree should render fine 1`] = `
       defaultExpandAll={true}
       expandAction="click"
       onSelect={[Function]}
+      prefixCls="ant-tree"
       showIcon={true}
     >
       <TreeNode
         className="project-file"
         icon={
-          <UNDEFINED
+          <Icon
             className="code-icon"
             type="book"
           />
