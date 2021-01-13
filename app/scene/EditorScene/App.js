@@ -1,18 +1,18 @@
 import {
-    App,
-    ModelsEngine,
-    ShadersEngine,
-    SceneManager,
-    ScriptManager,
-    ControlsManager,
-    ImagesEngine,
+    Level,
+    Models,
+    Shaders,
+    Scene,
+    Scripts,
+    Controls,
+    Images,
     AmbientLight,
     SunLight,
     // THREE,
     Mesh,
-    PostProcessingEngine,
+    PostProcessing,
     BackgroundSound,
-    AudioEngine,
+    Audio,
     Universe
 } from 'mage-engine';
 
@@ -20,7 +20,7 @@ import {
     observeStore
 } from './reduxStore';
 
-export class EditorScene extends App {
+export class EditorScene extends Level {
 
     constructor(...props) {
         super(...props);
@@ -91,13 +91,13 @@ export class EditorScene extends App {
     }
 
     loadModel = (model) => {
-        const parsed = ModelsEngine.parseModel(model);
+        const parsed = Models.parseModel(model);
         parsed.scale({x: 5, y: 5, z: 5 });
         parsed.position({x: 0, y: 0, z: 0})
     }
 
     loadScript = (scriptContent) => {
-        const script = ScriptManager.createFromString(scriptContent);
+        const script = Scripts.createFromString(scriptContent);
         this.currentMesh.addScript(script.name());
     }
 
@@ -186,10 +186,10 @@ export class EditorScene extends App {
     }
 
     setTranformControls() {
-        ControlsManager.setOrbitControl();
-        ControlsManager.setTransformControl();
+        Controls.setOrbitControl();
+        Controls.setTransformControl();
 
-        this.transform = ControlsManager.getControl('transform');
+        this.transform = Controls.getControl('transform');
         this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
     }
 
@@ -214,13 +214,13 @@ export class EditorScene extends App {
 
     changeFog = (fog) => {
         if (fog.color && fog.density && fog.enabled) {
-            SceneManager.fog(fog.color, fog.density/1000);
+            Scene.fog(fog.color, fog.density/1000);
         }
     }
 
     changeTexture = (textureId, texturePath) => {
         if (this.currentMesh) {
-            ImagesEngine
+            Images
                 .loadSingleTexture(textureId, texturePath)
                 .then((texture) => {
                     this.currentMesh.setTexture(textureId);
@@ -277,8 +277,8 @@ export class EditorScene extends App {
     }
 
     onCreate() {
-        SceneManager.camera.position({y: 70, z: 150});
-        SceneManager.camera.lookAt(0, 0, 0);
+        Scene.camera.position({y: 70, z: 150});
+        Scene.camera.lookAt(0, 0, 0);
 
         this.setTranformControls();
         this.enableInput();
