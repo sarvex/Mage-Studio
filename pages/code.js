@@ -1,7 +1,5 @@
 import React from 'react';
-import Code from '../code';
-
-import "antd/dist/antd.min.css";
+import CodePage from '../code';
 
 class Code extends React.Component {
 
@@ -10,7 +8,7 @@ class Code extends React.Component {
     }
 
     render() {
-        return <Code { ...this.props } />;
+        return <CodePage { ...this.props } />;
     }
 }
 

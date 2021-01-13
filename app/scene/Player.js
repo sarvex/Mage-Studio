@@ -1,5 +1,5 @@
 import React from 'react';
-import './scene.scss';
+import style from './scene.module.scss';
 
 const Player = ({ visible, url }) => {
     if (!visible) return null;
