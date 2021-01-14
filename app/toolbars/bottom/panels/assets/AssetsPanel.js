@@ -4,18 +4,20 @@ import { connect } from "react-redux";
 import AssetsMenu from './elements/AssetsMenu';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
-// import AssetUploadModal from '../../../modals/AssetUploadModal';
+// import AssetUploadModal from '../../modals/AssetUploadModal';
 
-import { SCRIPTS_EDITOR_PATH } from '../../../lib/constants';
+import { SCRIPTS_EDITOR_PATH } from '../../../../lib/constants';
 
-import { getAllAssets } from "../../../actions/assets";
+import { getAllAssets } from "../../../../actions/assets";
 import {
     showTextureModal,
     hideTextureModal,
     uploadTexture
-} from '../../../actions/textures';
+} from '../../../../actions/textures';
 
-export class AssetsBox extends React.Component {
+import style from './assets.module.scss';
+
+export class AssetsPanel extends React.Component {
 
     componentDidMount() {
         const { getAssets = f => f, config } = this.props;
@@ -76,11 +78,11 @@ export class AssetsBox extends React.Component {
         } = this.props;
 
         return (
-            <div className="box">
-                <div className="title">
+            <div>
+                <div className={style.title}>
                     <AssetsMenu onAssetsMenuClick={this.handleAssetsMenuChange} />
                 </div>
-                <div className="content">
+                <div className={style.content}>
                     { assets.models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
                     { assets.images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
                     { assets.textures.map((texture, i) => ( <AssetImage
@@ -120,4 +122,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetsBox);
+export default connect(mapStateToProps, mapDispatchToProps)(AssetsPanel);

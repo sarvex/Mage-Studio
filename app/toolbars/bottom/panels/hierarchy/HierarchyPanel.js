@@ -1,7 +1,10 @@
 import React from 'react';
-import { Tree, Input, Icon } from 'antd';
+import { Tree, Input } from 'antd';
+import { FolderOutlined } from '@ant-design/icons';
 
-const TreeNode = Tree.TreeNode;
+import style from './hierarchypanel.module.scss';
+
+const { TreeNode } = Tree;
 const Search = Input.Search;
 
 const x = 3;
@@ -60,7 +63,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 
-class AssetsTree extends React.Component {
+export class Hierarchy extends React.Component {
   state = {
     expandedKeys: [],
     searchValue: '',
@@ -89,6 +92,12 @@ class AssetsTree extends React.Component {
     });
   }
 
+  getIcon() {
+      return (
+          <FolderOutlined height='4px' width='4px' className={style['label-icon']}/>
+      )
+  }
+
   render() {
     const { searchValue, expandedKeys, autoExpandParent } = this.state;
     const loop = data => data.map((item) => {
@@ -104,30 +113,31 @@ class AssetsTree extends React.Component {
       ) : <span>{item.title}</span>;
       if (item.children) {
         return (
-          <TreeNode icon={<Icon type="hdd"/>} key={item.key} title={title}>
+          <TreeNode icon={this.getIcon()} key={item.key} title={title}>
             {loop(item.children)}
           </TreeNode>
         );
       }
-      return <TreeNode icon={<Icon type="hdd"/>} key={item.key} title={title} />;
+      return <TreeNode icon={this.getIcon()} key={item.key} title={title} />;
     });
-
 
     return (
       <div>
-        <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={this.onChange} />
+        <div className={style['hierarchy-search-filter']}>
+            <Search placeholder="Search" onChange={this.onChange} />
+        </div>
         <Tree
-            showLine
+            className={style.hierarchy}
             showIcon
+            showLine
             onExpand={this.onExpand}
             expandedKeys={expandedKeys}
-            autoExpandParent={autoExpandParent}
-        >
-          {loop(gData)}
+            autoExpandParent={autoExpandParent}>
+            { loop(gData) }
         </Tree>
       </div>
     );
   }
 }
 
-export default AssetsTree;
+export default Hierarchy;

@@ -10,7 +10,7 @@ const DEFAULT = {
     density: 0.05
 };
 
-export default function reducer(state = DEFAULT, action = {}) {
+export default (state = DEFAULT, action = {}) => {
     switch(action.type) {
         case SCENE_FOG_ENABLED:
             const { enabled } = action;

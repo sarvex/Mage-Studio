@@ -1,10 +1,12 @@
 import React from 'react';
 import { Dropdown, Menu } from 'antd';
-import { HddOutlined, PlusOutlined } from '@ant-design/icons';
-import CopyButton from '../../../../shared/buttons/CopyButton';
-import DeleteButton from '../../../../shared/buttons/DeleteButton';
-import SearchButton from '../../../../shared/buttons/SearchButton';
-import {ASSETS_TYPES} from '../../../../lib/constants';
+import { HddOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import CopyButton from '../../../../../shared/buttons/CopyButton';
+import DeleteButton from '../../../../../shared/buttons/DeleteButton';
+import SearchButton from '../../../../../shared/buttons/SearchButton';
+import { ASSETS_TYPES } from '../../../../../lib/constants';
+
+import style from '../assets.module.scss';
 
 const getMenu = (onAssetsMenuClick) => {
     return (
@@ -18,16 +20,16 @@ const getMenu = (onAssetsMenuClick) => {
 
 const AssetsMenu = ({ onAssetsMenuClick = f => f }) => (
     <div>
-        <HddOutlined className='icon'/>
+        <HddOutlined className={style.icon} type="hdd" />
         <span>Assets</span>
         <DeleteButton />
         <CopyButton />
         <Dropdown
-            className='assets-action'
+            className={style['assets-action']}
             overlay={getMenu(onAssetsMenuClick)}
             trigger={['click']}
             placement={'bottomLeft'}>
-            <PlusOutlined />
+            <PlusSquareOutlined/>
         </Dropdown>
         <SearchButton />
     </div>

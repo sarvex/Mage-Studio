@@ -12,6 +12,9 @@ export const arraysEqual = (arr1, arr2) => {
 export const upperCaseFirst = (text = '') => {
     const split = text.split('');
     return split.length ?
-        split.shift().toUpperCase().concat(split.join('')) :
+        split
+            .shift()
+            .toUpperCase()
+            .concat(split.join('')) :
         '';
 };

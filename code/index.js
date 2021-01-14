@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { Row } from 'antd';
 
-import Header from '../lib/header/Header';
-import Footer from '../lib/footer/Footer';
-import CodeEditor from './CodeEditor';
+// import Header from '../lib/header/Header';
+// import Footer from '../lib/footer/Footer';
+// import CodeEditor from './CodeEditor';
 
-import '../lib/style.scss';
-import './editor.scss';
+// import '../lib/style.scss';
+// import './editor.scss';
 
 export default () => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const handleNewScript = () => {
-        if (!modalVisible) {
-            setModalVisible(true);
-        }
-    };
+    // const [modalVisible, setModalVisible] = useState(false);
+    // const handleNewScript = () => {
+    //     if (!modalVisible) {
+    //         setModalVisible(true);
+    //     }
+    // };
 
-    const handleModalDismiss = () => {
-        setModalVisible(false);
-    };
+    // const handleModalDismiss = () => {
+    //     setModalVisible(false);
+    // };
 
     return (
         <div className="app">
-            <Header
+            {/* <Header
                 onNewScript={handleNewScript}
                 isCodeEditor/>
             <Row className="main-container code-editor">
@@ -30,7 +30,7 @@ export default () => {
                     modalVisible={modalVisible}
                     onModalDismiss={handleModalDismiss}/>
             </Row>
-            <Footer />
+            <Footer /> */}
         </div>
     );
 };

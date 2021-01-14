@@ -1,15 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import App from '../app';
 
-class Index extends React.Component {
+const IndexPage = props => (
+    <App { ...props } />
+);
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return <App { ...this.props } />;
-    }
-}
-
-export default Index;
+export default IndexPage;

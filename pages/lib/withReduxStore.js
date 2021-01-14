@@ -13,7 +13,7 @@ async function getOrCreateStore (initialState, request) {
     }
     // Create store if unavailable on the client and set it on the window object
     if (!window[__NEXT_REDUX_STORE__]) {
-        window[__NEXT_REDUX_STORE__] = await initializeStore(state);
+        window[__NEXT_REDUX_STORE__] = await initializeStore({});
     }
     return window[__NEXT_REDUX_STORE__];
 }
