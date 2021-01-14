@@ -2,7 +2,7 @@ import React from 'react';
 import { Tree, Input } from 'antd';
 import { FolderOutlined } from '@ant-design/icons';
 
-import './hierarchypanel.scss';
+import style from './hierarchypanel.module.scss';
 
 const { TreeNode } = Tree;
 const Search = Input.Search;
@@ -94,7 +94,7 @@ export class Hierarchy extends React.Component {
 
   getIcon() {
       return (
-          <FolderOutlined height='4px' width='4px' className='label-icon'/>
+          <FolderOutlined height='4px' width='4px' className={style['label-icon']}/>
       )
   }
 
@@ -123,11 +123,11 @@ export class Hierarchy extends React.Component {
 
     return (
       <div>
-        <div className='hierarchy-search-filter'>
+        <div className={style['hierarchy-search-filter']}>
             <Search placeholder="Search" onChange={this.onChange} />
         </div>
         <Tree
-            className='hierarchy'
+            className={style.hierarchy}
             showIcon
             showLine
             onExpand={this.onExpand}

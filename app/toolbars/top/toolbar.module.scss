@@ -1,6 +1,5 @@
-@import '../../lib/constants.scss';
-@import '../../lib/theme.scss';
-
+@import '../../../lib/constants.scss';
+@import '../../../lib/theme.scss';
 .controls-settings-group {
     height: $base-unit * 3;
     border-radius: 4px;
@@ -13,14 +12,12 @@
     width: 100%;
     background: $background-lighter;
     // padding: 4px $base-unit * 2;
-
-    & > .settings-list {
+    &>.settings-list {
         // margin: 0;
         padding: 0;
         // height: $base-unit * 4;
         margin: $base-unit $base-unit * 2;
-
-        & > .settings-list-item {
+        &>.settings-list-item {
             list-style: none;
             display: inline-block;
             line-height: $base-unit * 3;
@@ -28,7 +25,6 @@
             height: 100%;
         }
     }
-
     & .space-settings-button {
         height: $base-unit * 3;
         border-radius: $base-unit / 2;
@@ -40,7 +36,6 @@
         font-size: 10px;
         font-family: "Open Sans";
         top: 1px;
-
         &:hover,
         &:focus,
         &:active {
@@ -49,10 +44,8 @@
             outline: none;
         }
     }
-
     & .controls-settings-radio-group {
         @extend .controls-settings-group;
-
         &-button {
             height: $base-unit * 3;
             line-height: $base-unit * 3;
@@ -65,17 +58,14 @@
             border: none !important;
             width: 42px;
             padding: 0px $base-unit * 2;
-
             &::before {
                 background-color: transparent !important;
             }
-
             &.ant-radio-button-wrapper-checked {
                 color: $atomic-tangerine !important;
                 background: $background-darker !important;
                 border-bottom: 2px solid $logo !important;
             }
-
             &:hover,
             &:active {
                 color: $background-darker;
@@ -83,18 +73,15 @@
             }
         }
     }
-
     & .snap-settings-group {
         padding: 0 $base-unit;
         position: relative;
-
         &-item {
             margin-right: $base-unit * 2;
             max-width: 88px;
             max-height: 24px;
             line-height: 24px;
             transition: none;
-
             &-text-input,
             &-text-input input {
                 top: $base-unit / 4;
@@ -105,13 +92,11 @@
                 font-size: $base-unit * 1.5;
                 text-align: center;
                 color: $white;
-
                 & input {
                     top: 1px;
                     height: $base-unit * 2 + 3;
                 }
             }
-
             &:last-child {
                 margin-right: 0;
             }

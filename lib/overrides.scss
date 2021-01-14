@@ -44,3 +44,65 @@
         }
     }
 }
+
+.ant-drawer {
+    &-header,
+    &-content,
+    &-title {
+        color: $white;
+        background: $background !important;
+        font-family: 'Open Sans';
+        font-weight: lighter;
+        font-size: 12px;
+    }
+    &-content {
+        border: 1px solid $background-very-dark;
+        border-radius: $base-unit / 2;
+    }
+    &-header {
+        padding: $base-unit $base-unit * 2;
+    }
+    &-body {
+        padding: $base-unit * 2;
+    }
+    &-close {
+        padding: 13px !important;
+        font-size: 12px;
+        color: white !important;
+    }
+}
+
+.ant-tree {
+    background: $background-darker !important;
+    border: 1px solid $background-very-dark !important;
+    border-radius: $base-unit / 2;
+    &-list {
+        height: 45vh;
+    }
+    &-switcher {
+        background: $background-darker !important;
+    }
+    &-node-selected,
+    &-node-content-wrapper:hover {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    &-switcher i {
+        color: $white !important;
+        &.anticon-file {
+            visibility: hidden;
+        }
+    }
+}
+
+.ant-input-group-addon {
+    color: $white;
+    background: $background-very-dark;
+    left: 0 !important;
+    & button {
+        box-shadow: none;
+        border: none;
+        height: $base-unit * 3;
+        background: $background-very-dark;
+    }
+}

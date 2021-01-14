@@ -15,7 +15,7 @@ import {
     uploadTexture
 } from '../../../../actions/textures';
 
-import './assets.scss';
+import style from './assets.module.scss';
 
 export class AssetsPanel extends React.Component {
 
@@ -78,11 +78,11 @@ export class AssetsPanel extends React.Component {
         } = this.props;
 
         return (
-            <div className="box">
-                <div className="title">
+            <div>
+                <div className={style.title}>
                     <AssetsMenu onAssetsMenuClick={this.handleAssetsMenuChange} />
                 </div>
-                <div className="content">
+                <div className={style.content}>
                     { assets.models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
                     { assets.images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
                     { assets.textures.map((texture, i) => ( <AssetImage

@@ -1,15 +1,8 @@
 import React from 'react';
-import CodePage from '../code';
+import Code from '../code';
 
-class Code extends React.Component {
+const CodePage = props => (
+    <Code { ...props } />
+);
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return <CodePage { ...this.props } />;
-    }
-}
-
-export default Code;
+export default CodePage;

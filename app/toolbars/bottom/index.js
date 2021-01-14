@@ -1,40 +1,43 @@
 import React, { useState } from 'react';
 import { Drawer } from 'antd';
 import { FolderOpenOutlined, PartitionOutlined, SettingOutlined } from '@ant-design/icons';
-import './bottom.scss';
+import classnames from 'classnames';
+
 import { upperCaseFirst } from '../../lib/util';
 import { Hierarchy } from './panels/hierarchy/HierarchyPanel';
 import AssetsPanel from './panels/assets/AssetsPanel';
+
+import style from './bottom.module.scss';
 
 const HIERARCHY = 'hierarchy';
 const ASSETS = 'assets';
 const SETTINGS = 'settings';
 
 const hierarchyListItem = (
-    <>
+    <div>
         <PartitionOutlined
-            className='bottom-toolbar-list-item-icon'
+            className={style['bottom-toolbar-list-item-icon']}
             style={{ fontSize: '12px' }} />
         Hierarchy
-    </>
+    </div>
 );
 
 const assetsListItem = (
-    <>
+    <div>
         <FolderOpenOutlined
-            className='bottom-toolbar-list-item-icon'
+            className={style['bottom-toolbar-list-item-icon']}
             style={{ fontSize: '12px' }} />
         Assets
-    </>
+    </div>
 );
 
 const settingsListItem = (
-    <>
+    <div>
         <SettingOutlined
-            className='bottom-toolbar-list-item-icon'
+            className={style['bottom-toolbar-list-item-icon']}
             style={{ fontSize: '12px' }} />
         Settings
-    </>
+    </div>
 )
 
 const TOOLBAR_ITEMS = {
@@ -53,7 +56,9 @@ const mapListItems = (selected, onClick) => (
     Object
         .keys(TOOLBAR_ITEMS)
         .map(item => {
-            const className = `bottom-toolbar-list-item ${selected === item ? 'selected' : ''}`;
+            const className = classnames(style['bottom-toolbar-list-item'], {
+                [style.selected]: selected === item
+            });
             const handleClick = () => selected === item ? onClick(false) : onClick(item);
 
             return (
@@ -85,12 +90,12 @@ export default props => {
     const drawerTitle = selected && upperCaseFirst(selected);
 
     return (
-        <div className='bottom-toolbar'>
-            <ul className='bottom-toolbar-list'>
+        <div className={style['bottom-toolbar']}>
+            <ul className={style['bottom-toolbar-list']}>
                 { mapListItems(selected, handleClick) }
             </ul>
             <Drawer
-                className='bottom-toolbar-drawer'
+                className={style['bottom-toolbar-drawer']}
                 title={drawerTitle}
                 placement={'bottom'}
                 closable

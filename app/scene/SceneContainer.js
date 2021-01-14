@@ -17,9 +17,7 @@ import {
 } from '../actions/scene';
 
 // import Scene from './Scene';
-// import SceneToolbar from './SceneToolbar';
 import Player from './Player';
-// import ModelModal from '../modals/ModelUploadModal';
 
 import style from './scene.module.scss';
 import { showModelUploadModal } from '../actions/models';
