@@ -1,24 +1,19 @@
 @import '../../lib/constants.scss';
 @import '../../lib/theme.scss';
-
 .scene-container {
     width: 100%;
     height: 100%;
-
     &.fullscreen {
-
         position: absolute;
         left: 0;
         z-index: 100;
-
-        & #gameContainer,
-        & #gamePlayer {
+        & .gameContainer,
+        & .gamePlayer {
             height: 100%;
             width: 100%;
         }
     }
-
-    & #gameContainer {
+    & .gameContainer {
         flex: 1 1 auto;
         // min-height: 600px;
         // min-width: 800px;
@@ -26,31 +21,25 @@
         z-index: 0;
         display: block;
         height: 100%;
-
         & canvas {
             background: $background-darker;
         }
     }
-
-    & #gamePlayer + #gameContainer {
+    & .gamePlayer+.gameContainer {
         visibility: hidden;
     }
-
-    & #gamePlayer {
+    & .gamePlayer {
         position: relative;
         margin: auto;
         height: 95.6vh;
         width: 66.6vw;
     }
-
     // & .scene-toolbar {
     //     /* margin: auto; */
     //     /* display: inline-block; */
-
     //     position: absolute;
     //     top: 0;
     //     margin-left: $base-unit / 2;
-
     //     .scene-toolbar-action {
     //         /* width: 24px; */
     //         padding: $base-unit / 2;
@@ -64,22 +53,17 @@
     //         background: $deep-blue-13;
     //         float: left;
     //         border-right: 1px solid $deep-blue-10;
-
     //         &:last-child {
     //             border: none;
     //         }
-
     //         &.active {
     //             border-bottom: 1px solid $deep-blue-5;
     //             background: $deep-blue-15;
     //         }
-
     //         &:hover {
     //             background: $deep-blue-15;
     //             cursor: pointer;
     //         }
     //     }
-
-
     // }
 }

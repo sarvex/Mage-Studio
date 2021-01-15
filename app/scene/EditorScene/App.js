@@ -1,19 +1,17 @@
 import {
     Level,
     Models,
-    Shaders,
     Scene,
     Scripts,
     Controls,
     Images,
     AmbientLight,
     SunLight,
-    // THREE,
-    Mesh,
-    PostProcessing,
-    BackgroundSound,
-    Audio,
-    Universe
+    THREE,
+    Grid,
+    Cylinder,
+    Cube,
+    Sphere
 } from 'mage-engine';
 
 import {
@@ -28,10 +26,6 @@ export class EditorScene extends Level {
 
     loadScene = () => Promise.resolve()
 
-    progressAnimation(callback) {
-        callback();
-    }
-
     addAmbientLight() {
         const light = new AmbientLight({
             color:0xeeeeee,
@@ -42,7 +36,6 @@ export class EditorScene extends Level {
     }
 
     addSunLight() {
-
         const light = new SunLight({
             color: 0xeeeeee,
             intensity: 1,
@@ -50,7 +43,7 @@ export class EditorScene extends Level {
             target: { x: 1, y: 1, z: 1 }
         });
         light.addHelper();
-        light.position({
+        light.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
@@ -58,8 +51,8 @@ export class EditorScene extends Level {
     }
 
     addCube() {
-        const cube = this.sceneHelper.addCube(20, 0x00ff00, { wireframe: true });
-        cube.position({
+        const cube = new Cube(20, 0x00ff00, { wireframe: true });
+        cube.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
@@ -69,8 +62,8 @@ export class EditorScene extends Level {
     }
 
     addSphere() {
-        const sphere = this.sceneHelper.addSphere(20, 0xffff00, { wireframe: true });
-        sphere.position({
+        const sphere = new Sphere(20, 0xffff00, { wireframe: true });
+        sphere.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
@@ -80,8 +73,8 @@ export class EditorScene extends Level {
     }
 
     addCylinder() {
-        const cylinder = this.sceneHelper.addCylinder(10, 10, 30, 0x0fff00, { wireframe: true });
-        cylinder.position({
+        const cylinder = new Cylinder(10, 10, 30, 0x0fff00, { wireframe: true });
+        cylinder.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
@@ -92,8 +85,8 @@ export class EditorScene extends Level {
 
     loadModel = (model) => {
         const parsed = Models.parseModel(model);
-        parsed.scale({x: 5, y: 5, z: 5 });
-        parsed.position({x: 0, y: 0, z: 0})
+        parsed.setScale({x: 5, y: 5, z: 5 });
+        parsed.setPosition({x: 0, y: 0, z: 0})
     }
 
     loadScript = (scriptContent) => {
@@ -103,9 +96,9 @@ export class EditorScene extends Level {
 
     updateCurrentMesh = (name = '', position, rotation, scale) => {
         if (this.currentMesh && this.hasSelection) {
-            this.currentMesh.position(position);
-            this.currentMesh.rotation(rotation);
-            this.currentMesh.scale(scale);
+            this.currentMesh.setPosition(position);
+            this.currentMesh.setRotation(rotation);
+            this.currentMesh.setScale(scale);
             this.currentMesh.setName(name, { replace: true })
 
             this.dispatchEvent({
@@ -127,9 +120,9 @@ export class EditorScene extends Level {
         this.dispatchEvent({
             type: 'meshAttached',
             name: mesh.name,
-            rotation: mesh.rotation(),
-            scale: mesh.scale(),
-            position: mesh.position()
+            rotation: mesh.getRotation(),
+            scale: mesh.getScale(),
+            position: mesh.getPosition()
         });
     }
 
@@ -143,46 +136,46 @@ export class EditorScene extends Level {
 
     onKeyPress = ({ event }) => {
         switch (event.key) {
-			case "q": // Q
-				this.transform.setSpace(this.transform.space === "local" ? "world" : "local");
-				break;
-			case "ctrl": // Ctrl
-				this.transform.setTranslationSnap(100);
-				// this.transform.setRotationSnap(THREE.Math.degToRad(15));
-				break;
-			case "w": // W
-				this.transform.setMode("translate");
-				break;
-			case "e": // E
-				this.transform.setMode("rotate");
-				break;
-			case "r": // R
-				this.transform.setMode("scale");
-				break;
-			case 187:
-			case 107: // +, =, num+
-				this.transform.setSize(this.transform.size + 0.1);
-				break;
-			case 189:
-			case 109: // -, _, num-
-				this.transform.setSize(Math.max(this.transform.size - 0.1, 0.1));
-				break;
-			case 'x': // X
-				this.transform.showX = ! this.transform.showX;
-				break;
-			case 'y': // Y
-				this.transform.showY = ! this.transform.showY;
-				break;
-			case 'z': // Z
-				this.transform.showZ = ! this.transform.showZ;
-				break;
-			case 32: // Spacebar
-				this.transform.enabled = ! this.transform.enabled;
-				break;
+            case "q": // Q
+                this.transform.setSpace(this.transform.space === "local" ? "world" : "local");
+                break;
+            case "ctrl": // Ctrl
+                this.transform.setTranslationSnap(100);
+                this.transform.setRotationSnap(THREE.Math.degToRad(15));
+                break;
+            case "w": // W
+                this.transform.setMode("translate");
+                break;
+            case "e": // E
+                this.transform.setMode("rotate");
+                break;
+            case "r": // R
+                this.transform.setMode("scale");
+                break;
+            case 187:
+            case 107: // +, =, num+
+                this.transform.setSize(this.transform.size + 0.1);
+                break;
+            case 189:
+            case 109: // -, _, num-
+                this.transform.setSize(Math.max(this.transform.size - 0.1, 0.1));
+                break;
+            case 'x': // X
+                this.transform.showX = ! this.transform.showX;
+                break;
+            case 'y': // Y
+                this.transform.showY = ! this.transform.showY;
+                break;
+            case 'z': // Z
+                this.transform.showZ = ! this.transform.showZ;
+                break;
+            case 32: // Spacebar
+                this.transform.enabled = ! this.transform.enabled;
+                break;
             case 'escape':
                 this.transform.detach()
                 break;
-		}
+        }
     }
 
     setTranformControls() {
@@ -204,7 +197,7 @@ export class EditorScene extends Level {
         if (this.transform) {
             if (snapEnabled) {
                 this.transform.setTranslationSnap(snapValue);
-                // this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
             } else {
                 this.transform.setTranslationSnap(null);
                 this.transform.setRotationSnap(null);
@@ -240,9 +233,9 @@ export class EditorScene extends Level {
         this.dispatchEvent({
             type: 'meshChanged',
             name: this.currentMesh.name,
-            rotation: this.currentMesh.rotation(),
-            scale: this.currentMesh.scale(),
-            position: this.currentMesh.position()
+            rotation: this.currentMesh.getRotation(),
+            scale: this.currentMesh.getScale(),
+            position: this.currentMesh.getPosition()
         });
     }
 
@@ -277,12 +270,15 @@ export class EditorScene extends Level {
     }
 
     onCreate() {
-        Scene.camera.position({y: 70, z: 150});
+        Scene.camera.setPosition({y: 70, z: 150});
         Scene.camera.lookAt(0, 0, 0);
+
+        Scene.setClearColor(0x040d10);
 
         this.setTranformControls();
         this.enableInput();
 
-        this.sceneHelper.addGrid(2000, 100);
+        //this.sceneHelper.addGrid(2000, 100);
+        this.grid = new Grid(2000, 100, 0xfb9d60, 0x5A6668);
     }
 }
