@@ -3,6 +3,8 @@ import {
     connect
 } from 'react-redux';
 
+import classnames from 'classnames';
+
 import {
     meshChanged,
     meshAttached,
@@ -16,7 +18,7 @@ import {
     stopProject
 } from '../actions/scene';
 
-// import Scene from './Scene';
+import Scene from './Scene';
 import Player from './Player';
 
 import style from './scene.module.scss';
@@ -52,17 +54,17 @@ export class SceneContainer extends React.Component {
         } = this.props;
 
         const { fullscreen } = this.state;
-
         const { projectPlayerVisible, projectUrl } = scene;
-        const fullScreenClassName = fullscreen ? 'fullscreen' : '';
-        const className = `scene-container ${fullScreenClassName}`;
+
+        const className = classnames(style['scene-container'], {
+            [style.fullscreen]: fullscreen
+        });
 
         return (
-            <div className={style['scene-container']}>
+            <div className={className}>
                 <Player
                     url={projectUrl}
                     visible={projectPlayerVisible} />
-                {/*
                 <Scene
                     fullscreen={fullscreen}
                     config={config}
@@ -72,7 +74,6 @@ export class SceneContainer extends React.Component {
                     onMeshAttached={onMeshAttached}
                     onMeshDetached={onMeshDetached}
                     onSceneExported={onSceneExported} />
-                */}
                 
                 {/* <SceneToolbar
                     playerVisible={projectPlayerVisible}

@@ -2,6 +2,8 @@ import React from 'react';
 import debounce from '../lib/debounce';
 import { getOrCreateApp } from './AppProxy';
 
+import style from './scene.module.scss';
+
 export class Scene extends React.Component {
 
     constructor(props) {
@@ -19,7 +21,6 @@ export class Scene extends React.Component {
             onSceneLoad(scene);
         }
 
-
         this.app.setStore(store);
 
         this.app.addEventListener('meshChanged', debounce(onMeshChanged, 15));
@@ -35,7 +36,10 @@ export class Scene extends React.Component {
     }
 
     render() {
-        return <div id="gameContainer" tabIndex={0}></div>
+        return <div
+            id="gameContainer"
+            className={style.gameContainer}
+            tabIndex={0}></div>
     }
 }
 

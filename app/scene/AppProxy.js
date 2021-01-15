@@ -24,24 +24,13 @@ const config = {
     }
 };
 
-const assets = {
-    models: {
-        'ambientlightholder': 'public/models/lamp.glb',
-        'lightholder': 'public/models/lamp.glb'
-    }
-};
+const assets = {};
 
 let app;
 
 export async function getOrCreateApp() {
 
     if (window && !app) {
-        // const { Router } = await import('mage-engine');
-        // const { EditorScene } = await import('./EditorScene/App');
-        //
-        // Router.on('/', EditorScene);
-        //
-        // app = await Router.start(config, {}, '#gameContainer');
         return Promise.all([
             import('mage-engine'),
             import('./EditorScene/App')
@@ -49,7 +38,7 @@ export async function getOrCreateApp() {
             Router.on('/', EditorScene);
             console.log('creating app');
             return Router
-                .start(config, assets, '#gameContainer')
+                .start(config, assets)
                 .then((application) => {
                     app = application;
                     console.log(application);
