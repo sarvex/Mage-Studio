@@ -53,6 +53,7 @@ class Inspector extends React.Component {
 
     render() {
         return (
+            // use a drawer component here
             <div>
                 { this.getContent() }
             </div>
