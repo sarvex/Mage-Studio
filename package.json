@@ -4,10 +4,10 @@
     "description": "Mage Studio",
     "main": "main.js",
     "scripts": {
-        "dev": "node server/index",
+        "dev": "next dev",
         "dev:inspect": "node --inspect server/index",
         "build": "next build",
-        "start": "NODE_ENV=production node server/index",
+        "start": "next start",
         "test": "jest",
         "test:update-snapshots": "jest -u",
         "test:watch": "jest --watch",
