@@ -4,7 +4,7 @@ import {
     MESH_DETACHED
 } from './types';
 
-import { getOrCreateApp } from '../scene/AppProxy';
+import { getOrCreateApp } from '../editor/scene/AppProxy';
 import { getImageUrl } from '../lib/constants';
 
 export const meshChanged = (name, position, rotation, scale) => ({

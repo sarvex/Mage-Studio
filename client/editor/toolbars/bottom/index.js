@@ -3,7 +3,7 @@ import { Drawer } from 'antd';
 import { FolderOpenOutlined, PartitionOutlined, SettingOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 
-import { upperCaseFirst } from '../../lib/util';
+import { upperCaseFirst } from '../../../lib/util';
 import { Hierarchy } from './panels/hierarchy/HierarchyPanel';
 import AssetsPanel from './panels/assets/AssetsPanel';
 

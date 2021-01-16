@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
-import { getImageUrl } from '../../../../../lib/constants';
+import { getImageUrl } from '../../../../../../lib/constants';
 
 import style from '../assets.module.scss';
 

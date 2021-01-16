@@ -10,7 +10,7 @@ import {
 } from './types';
 
 import { PROJECTS_URL } from '../lib/constants';
-import { getOrCreateApp } from '../scene/AppProxy';
+import { getOrCreateApp } from '../editor/scene/AppProxy';
 import axios from 'axios';
 
 export const scriptsFetchStarted = () => ({

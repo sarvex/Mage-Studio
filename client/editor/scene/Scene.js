@@ -1,5 +1,5 @@
 import React from 'react';
-import debounce from '../lib/debounce';
+import debounce from '../../lib/debounce';
 import { getOrCreateApp } from './AppProxy';
 
 import style from './scene.module.scss';

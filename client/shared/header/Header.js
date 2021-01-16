@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { requestSceneJson } from '../../editor/actions/scene';
-import { saveScript } from '../../editor/actions/scripts';
+import { requestSceneJson } from '../../actions/scene';
+import { saveScript } from '../../actions/scripts';
 
 import HelpMenu from './menu/HelpMenu';
 import ViewMenu from './menu/ViewMenu';

@@ -10,7 +10,7 @@ import {
     SCENE_MODEL_FETCH_COMPLETED,
     SCENE_MODEL_FETCH_FAILED
 } from './types';
-import { getOrCreateApp } from '../scene/AppProxy';
+import { getOrCreateApp } from '../editor/scene/AppProxy';
 import axios from 'axios';
 import { PROJECTS_URL } from '../lib/constants';
 

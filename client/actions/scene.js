@@ -13,7 +13,7 @@ import {
     getScenesUrl,
     MIMETYPES
 } from '../lib/constants';
-import { getOrCreateApp } from '../scene/AppProxy';
+import { getOrCreateApp } from '../editor/scene/AppProxy';
 import axios from 'axios';
 
 export const CUBE = 'cube';

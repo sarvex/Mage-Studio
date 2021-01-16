@@ -4,7 +4,7 @@ import { HddOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import CopyButton from '../../../../../shared/buttons/CopyButton';
 import DeleteButton from '../../../../../shared/buttons/DeleteButton';
 import SearchButton from '../../../../../shared/buttons/SearchButton';
-import { ASSETS_TYPES } from '../../../../../lib/constants';
+import { ASSETS_TYPES } from '../../../../../../lib/constants';
 
 import style from '../assets.module.scss';
 

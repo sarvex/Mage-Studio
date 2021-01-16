@@ -9,20 +9,20 @@ import {
     meshChanged,
     meshAttached,
     meshDetached
-} from '../actions/currentMesh';
+} from '../../actions/currentMesh';
 
 import {
     saveScene,
     loadScene,
     startProject,
     stopProject
-} from '../actions/scene';
+} from '../../actions/scene';
 
 import Scene from './Scene';
 import Player from './Player';
 
 import style from './scene.module.scss';
-import { showModelUploadModal } from '../actions/models';
+import { showModelUploadModal } from '../../actions/models';
 
 export class SceneContainer extends React.Component {
 
