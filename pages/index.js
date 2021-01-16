@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import App from '../app';
+import Editor from '../client/editor';
 
 const IndexPage = props => (
-    <App { ...props } />
+    <Editor { ...props } />
 );
 
 export default IndexPage;

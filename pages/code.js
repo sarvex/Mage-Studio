@@ -1,5 +1,5 @@
 import React from 'react';
-import Code from '../code';
+import Code from '../client/code';
 
 const CodePage = props => (
     <Code { ...props } />

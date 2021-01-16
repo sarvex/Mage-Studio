@@ -1,0 +1,46 @@
+import React from 'react';
+import debounce from '../../lib/debounce';
+import { getOrCreateApp } from './AppProxy';
+
+import style from './scene.module.scss';
+
+export class Scene extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.app = {};
+    }
+
+    async componentDidMount() {
+        const { store, onMeshChanged, onMeshAttached, onMeshDetached, onSceneExported, config, onSceneLoad } = this.props;
+        const { scene } = config;
+        this.app = await getOrCreateApp();
+
+        if (scene) {
+            onSceneLoad(scene);
+        }
+
+        this.app.setStore(store);
+
+        this.app.addEventListener('meshChanged', debounce(onMeshChanged, 15));
+        this.app.addEventListener('meshAttached', onMeshAttached);
+        this.app.addEventListener('meshDetached', onMeshDetached);
+        this.app.addEventListener('sceneExported', onSceneExported(config.scene));
+    }
+
+    async componentDidUpdate(prevProps) {
+        if (prevProps.fullscreen !== this.props.fullscreen && this.app) {
+            this.app.onResize();
+        }
+    }
+
+    render() {
+        return <div
+            id="gameContainer"
+            className={style.gameContainer}
+            tabIndex={0}></div>
+    }
+}
+
+export default Scene;
