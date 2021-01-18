@@ -3,19 +3,5 @@
 exports[`Code should render fine 1`] = `
 <div
   className="app"
->
-  <Connect(Header)
-    isCodeEditor={true}
-    onNewScript={[Function]}
-  />
-  <Row
-    className="main-container code-editor"
-  >
-    <Connect(CodeEditor)
-      modalVisible={false}
-      onModalDismiss={[Function]}
-    />
-  </Row>
-  <Footer />
-</div>
+/>
 `;

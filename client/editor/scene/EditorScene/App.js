@@ -32,7 +32,7 @@ export class EditorScene extends Level {
             intensity: 1
         });
 
-        light.addHelper();
+        light.addHelper('lightHolder');
     }
 
     addSunLight() {
@@ -42,7 +42,7 @@ export class EditorScene extends Level {
             position: { x: 40, y: 40, z: 40},
             target: { x: 1, y: 1, z: 1 }
         });
-        light.addHelper();
+        light.addHelper('lightHolder');
         light.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
@@ -51,6 +51,7 @@ export class EditorScene extends Level {
     }
 
     addCube() {
+        console.log('calling add cube');
         const cube = new Cube(20, 0x00ff00, { wireframe: true });
         cube.setPosition({
             x: (Math.random() * 200) - 100,

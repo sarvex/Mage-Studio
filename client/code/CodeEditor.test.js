@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 import sinon from 'sinon';
-import * as actions from '../app/actions/scripts';
+import * as actions from '../actions/scripts';
 import { CodeEditor } from './CodeEditor';
 
-jest.mock('../app/actions/scripts');
+jest.mock('../actions/scripts');
 
 const defaultProps = {
     onEditorReady: f => f,

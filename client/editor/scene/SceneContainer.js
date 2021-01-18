@@ -74,16 +74,6 @@ export class SceneContainer extends React.Component {
                     onMeshAttached={onMeshAttached}
                     onMeshDetached={onMeshDetached}
                     onSceneExported={onSceneExported} />
-                
-                {/* <SceneToolbar
-                    playerVisible={projectPlayerVisible}
-                    stopProject={stopProject}
-                    config={config}
-                    showModelModal={showModelModal}
-                    startProject={startProject}
-                    fullscreen={fullscreen}
-                    onFullScreen={this.handleFullScreen}/> */}
-                {/* <ModelModal /> */}
             </div>
         );
     }

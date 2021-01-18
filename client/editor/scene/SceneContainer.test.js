@@ -65,13 +65,5 @@ describe('SceneContainer', () => {
 
             expect(spy.called).toBe(true);
         });
-
-        it('should change state.fullscreen when toggling fullscreen', () => {
-            const component = getSceneContainer();
-
-            component.find('SceneToolbar').simulate('fullscreen', false);
-
-            expect(component.state().fullscreen).toBe(false);
-        });
     });
 });

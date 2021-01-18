@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 
-import { AssetsBox } from './AssetsBox';
+import { AssetsPanel } from './AssetsPanel';
 
 describe('asset', () => {
 
@@ -13,7 +13,7 @@ describe('asset', () => {
 
 
         const component = shallow(
-            <AssetsBox
+            <AssetsPanel
                 assets={assets}
                 config={config}
                 textures={textures}
@@ -39,7 +39,7 @@ describe('asset', () => {
 
 
         const component = shallow(
-            <AssetsBox
+            <AssetsPanel
                 assets={assets}
                 config={config}
                 textures={textures}
@@ -62,32 +62,13 @@ describe('asset', () => {
         const config = { project: 'test' };
 
         const component = shallow(
-            <AssetsBox
+            <AssetsPanel
                 assets={assets}
                 config={config}
                 textures={textures}
             />);
 
         expect(component.find('AssetImage').length).toBe(3);
-    });
-
-    it('should render one AssetUploadModal', () => {
-        const assets = {
-            textures: [],
-            models: [],
-            images: []
-        };
-        const textures = {};
-        const config = { project: 'test' };
-
-        const component = shallow(
-            <AssetsBox
-                assets={assets}
-                config={config}
-                textures={textures}
-            />);
-
-        expect(component.find('AssetUploadModal').length).toBe(1);
     });
 
     describe('mount', () => {
@@ -103,7 +84,7 @@ describe('asset', () => {
             const getAssets = sinon.spy();
 
             mount(
-                <AssetsBox
+                <AssetsPanel
                     getAssets={getAssets}
                     assets={assets}
                     config={config}
@@ -127,7 +108,7 @@ describe('asset', () => {
             const showTextureModal = sinon.spy();
 
             const component = shallow(
-                <AssetsBox
+                <AssetsPanel
                     assets={assets}
                     config={config}
                     textures={textures}
@@ -150,7 +131,7 @@ describe('asset', () => {
             const stub = sinon.stub(window, 'open');
 
             const component = shallow(
-                <AssetsBox
+                <AssetsPanel
                     assets={assets}
                     config={config}
                     textures={textures}
@@ -172,7 +153,7 @@ describe('asset', () => {
             const showTextureModal = sinon.spy();
 
             const component = shallow(
-                <AssetsBox
+                <AssetsPanel
                     assets={assets}
                     config={config}
                     textures={textures}
@@ -182,32 +163,6 @@ describe('asset', () => {
             component.find('AssetsMenu').simulate('assetsMenuClick', { key: 'images' });
 
             expect(showTextureModal.called).toBe(false);
-        });
-
-        it('should fire uploadTexture when user tries to upload a texture', () => {
-            const assets = {
-                textures: [],
-                models: [],
-                images: []
-            };
-            const textures = {};
-            const config = { project: 'test' };
-            const uploadTexture = sinon.spy();
-
-            const component = shallow(
-                <AssetsBox
-                    assets={assets}
-                    config={config}
-                    textures={textures}
-                    uploadTexture={uploadTexture}
-                />);
-
-            const textureModal = component
-                .findWhere(node => node.props().type === 'textures');
-
-            textureModal.simulate('confirm', { file: 'testfile' });
-
-            expect(uploadTexture.called).toBe(true);
         });
     });
 });

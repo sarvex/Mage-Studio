@@ -26,8 +26,5 @@ exports[`CodeEditor should render fine 1`] = `
       active={true}
     />
   </Col>
-  <NewFileModal
-    onConfirm={[Function]}
-  />
 </div>
 `;
