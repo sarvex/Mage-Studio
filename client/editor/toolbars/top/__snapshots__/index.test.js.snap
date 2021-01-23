@@ -10,17 +10,25 @@ exports[`TopToolbar render should render properly 1`] = `
     <li
       className="settings-list-item"
     >
-      <SpaceSettingsButton />
+      <SpaceSettingsButton
+        onTransformSpaceChange={[Function]}
+      />
     </li>
     <li
       className="settings-list-item"
     >
-      <ControlsRadioGroup />
+      <ControlsRadioGroup
+        onTransformControlChange={[Function]}
+      />
     </li>
     <li
       className="settings-list-item"
     >
-      <SnapControlsGroup />
+      <SnapControlsGroup
+        onSnapDecrease={[Function]}
+        onSnapEnabledChange={[Function]}
+        onSnapIncrease={[Function]}
+      />
     </li>
     <li
       className="settings-list-item"

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SnapControlsGroup renders properly 1`] = `
+<div
+  className="controls-settings-group snap-settings-group"
+>
+  <label
+    className="snap-settings-group-item"
+  >
+    Snap:
+  </label>
+  <Switch
+    className="snap-settings-group-item"
+    size="small"
+  />
+  <Input
+    className="snap-settings-group-item snap-settings-group-item-text-input"
+    placeholder="1"
+    prefix={<ForwardRef(MinusOutlined) />}
+    size="small"
+    suffix={<ForwardRef(PlusOutlined) />}
+    type="text"
+  />
+</div>
+`;

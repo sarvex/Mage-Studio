@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpaceSettingsButton should render properly 1`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  title="Local/global space setting"
+  transitionName="zoom-big-fast"
+>
+  <Button
+    className="space-settings-button"
+    onClick={[Function]}
+  />
+</Tooltip>
+`;

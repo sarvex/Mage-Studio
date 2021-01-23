@@ -4,12 +4,12 @@ import style from '../toolbar.module.scss';
 
 const TOOLTIP_LABEL = 'Local/global space setting';
 
-const SpaceSettingsButton = ({ onClick = f => f }) => (
+const SpaceSettingsButton = ({ space, onTransformSpaceChange = f => f }) => (
     <Tooltip title={TOOLTIP_LABEL}>
         <Button
             className={style['space-settings-button']}
-            onClick={onClick}>
-            Global
+            onClick={onTransformSpaceChange}>
+            { space }
         </Button>
     </Tooltip>
 );

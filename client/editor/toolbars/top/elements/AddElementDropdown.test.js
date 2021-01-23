@@ -5,7 +5,7 @@ import toJSON from 'enzyme-to-json';
 import AddElementDropdown from './AddElementDropdown';
 import sinon from 'sinon';
 
-describe.only('AddElementDropdown', () => {
+describe('AddElementDropdown', () => {
 
     describe('render', () => {
 

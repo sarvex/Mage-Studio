@@ -1,13 +1,19 @@
 import {
     SCENE_CONTROLS_CHANGED,
-    SCENE_FOG_ENABLED,
-    SCENE_FOG_COLOR_CHANGED,
-    SCENE_FOG_DENSITY_CHANGED,
-    SCENE_SHADOWS_CHANGED
+    SCENE_CONTROLS_SPACE_CHANGED,
+    SCENE_SNAP_CHANGED
 } from '../actions/types';
+import {
+    TRANSLATE_CONTROL,
+    GLOBAL_SPACE,
+    LOCAL_SPACE
+} from '../lib/constants';
 
 const DEFAULT = {
-    control: 'translate'
+    current: TRANSLATE_CONTROL,
+    space: GLOBAL_SPACE,
+    snapEnabled: false,
+    snap: 10
 };
 
 export default function reducer(state = DEFAULT, action = {}) {
@@ -15,19 +21,20 @@ export default function reducer(state = DEFAULT, action = {}) {
         case SCENE_CONTROLS_CHANGED:
             return {
                 ...state,
-                control: action.control || 'translate'
+                current: action.control || TRANSLATE_CONTROL
             };
-            break;
-        case SCENE_SHADOWS_CHANGED:
-            const { shadowEnabled, shadowType } = action;
+        case SCENE_CONTROLS_SPACE_CHANGED:
             return {
                 ...state,
-                shadowEnabled,
-                shadowType
+                space: state.space === GLOBAL_SPACE ? LOCAL_SPACE : GLOBAL_SPACE
             };
-            break;
+        case SCENE_SNAP_CHANGED:
+            return {
+                ...state,
+                snap: action.value < 10 ? 10 : action.value,
+                snapEnabled: action.snapEnabled
+            };
         default:
             return state;
-            break;
     }
 }

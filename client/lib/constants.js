@@ -12,6 +12,23 @@ export const ASSETS_TYPES = [
     { code: 'scripts', display: 'Script' }
 ];
 
+export const GLOBAL_SPACE = 'global';
+export const LOCAL_SPACE = 'local';
+
+export const AVAILABLE_SPACES = [
+    GLOBAL_SPACE,
+    LOCAL_SPACE
+];
+
+export const TRANSLATE_CONTROL = 'translate';
+export const ROTATE_CONTROL = 'rotate';
+export const SCALE_CONTROL = 'scale';
+
+export const AVAILABLE_CONTROLS = [
+    TRANSLATE_CONTROL,
+    ROTATE_CONTROL,
+    SCALE_CONTROL
+];
 
 export const buildUrl = (baseUrl, url) => (`http://${baseUrl}/${url}`);
 export const getScenesUrl = (scene) => `${SCENES_URL}/${scene}`;

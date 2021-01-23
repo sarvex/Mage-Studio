@@ -71,7 +71,12 @@
                 color: $background-darker;
                 background-color: $atomic-tangerine;
             }
+
+            &.selected {
+                border-bottom: 2px solid $atomic-tangerine !important;
+            }
         }
+
     }
     & .snap-settings-group {
         padding: 0 $base-unit;

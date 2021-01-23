@@ -5,7 +5,7 @@ exports[`App should render fine 1`] = `
   className="app"
 >
   <Connect(Header) />
-  <Toolbar />
+  <Connect(Toolbar) />
   <Row
     className="main-container"
   >
