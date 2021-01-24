@@ -5,18 +5,17 @@ exports[`App should render fine 1`] = `
   className="app"
 >
   <Connect(Header) />
+  <Connect(Toolbar) />
   <Row
     className="main-container"
   >
-    <LeftSidebar />
+    <_default />
     <div
       className="canvas-container"
     >
       <Connect(SceneContainer) />
     </div>
-    <Connect(RightSidebar) />
   </Row>
   <Footer />
-  <Connect(ProjectModal) />
 </div>
 `;

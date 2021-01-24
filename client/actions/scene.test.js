@@ -1,10 +1,10 @@
 import sinon from 'sinon';
-import { getOrCreateApp } from '../scene/AppProxy';
+import { getOrCreateApp } from '../editor/scene/AppProxy';
 import axios from 'axios';
 import * as actions from './scene';
 import * as types from './types';
 import { MIMETYPES } from '../lib/constants';
-jest.mock('../scene/AppProxy');
+jest.mock('../editor/scene/AppProxy');
 jest.mock('axios');
 
 describe('actions - scene', () => {
@@ -87,15 +87,15 @@ describe('actions - scene', () => {
         expect(value).toEqual({ type: types.PROJECT_PLAYER_HIDDEN });
     });
 
-    describe('addLight', () => {
+    describe('addElement', () => {
 
         it('should call getOrCreateApp', () => {
-            actions.addLight('');
+            actions.addElement('');
             expect(getOrCreateApp).toHaveBeenCalledTimes(1);
         });
 
         it('should call addAmbientLight if type is AMBIENT', (done) => {
-            actions.addLight(actions.AMBIENT);
+            actions.addElement(actions.AMBIENT);
 
             setTimeout(() => {
                 expect(addAmbientLight.called).toBe(true);
@@ -104,25 +104,16 @@ describe('actions - scene', () => {
         });
 
         it('should call addSunLight of type is SUN', (done) => {
-            actions.addLight(actions.SUN);
+            actions.addElement(actions.SUN);
 
             setTimeout(() => {
                 expect(addSunLight.called).toBe(true);
                 done();
             }, 50);
         });
-    });
-
-    describe('addMesh',() => {
-
-        it('should call getOrCreateApp', () => {
-            actions.addMesh('');
-
-            expect(getOrCreateApp).toHaveBeenCalledTimes(1);
-        });
 
         it('should call addCube if type is CUBE', (done) => {
-            actions.addMesh(actions.CUBE);
+            actions.addElement(actions.CUBE);
 
             setTimeout(() => {
                 expect(addCube.called).toBe(true);
@@ -131,7 +122,7 @@ describe('actions - scene', () => {
         });
 
         it('should call addSphere if type is SPHERE', (done) => {
-            actions.addMesh(actions.SPHERE);
+            actions.addElement(actions.SPHERE);
 
             setTimeout(() => {
                 expect(addSphere.called).toBe(true);
@@ -140,7 +131,7 @@ describe('actions - scene', () => {
         });
 
         it('should call addCylinder if type is CYLINDER', (done) => {
-            actions.addMesh(actions.CYLINDER);
+            actions.addElement(actions.CYLINDER);
 
             setTimeout(() => {
                 expect(addCylinder.called).toBe(true);

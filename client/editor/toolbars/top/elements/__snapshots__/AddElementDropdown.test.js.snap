@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddElementDropdown render should render properly 1`] = `
+<div
+  className="controls-settings-group"
+>
+  <Dropdown
+    mouseEnterDelay={0.15}
+    mouseLeaveDelay={0.1}
+    overlay={
+      <Menu
+        onClick={[Function]}
+      >
+        <MenuItem
+          title="model"
+        >
+          model
+        </MenuItem>
+        <SubMenu
+          title="mesh"
+        >
+          <MenuItem
+            title="cube"
+          >
+            cube
+          </MenuItem>
+          <MenuItem
+            title="sphere"
+          >
+            sphere
+          </MenuItem>
+          <MenuItem
+            title="cylinder"
+          >
+            cylinder
+          </MenuItem>
+        </SubMenu>
+        <SubMenu
+          title="sound"
+        >
+          <MenuItem>
+            sorry
+          </MenuItem>
+        </SubMenu>
+        <SubMenu
+          title="light"
+        >
+          <MenuItem
+            title="ambient"
+          >
+            ambient light
+          </MenuItem>
+          <MenuItem
+            title="sun"
+          >
+            sun light
+          </MenuItem>
+        </SubMenu>
+      </Menu>
+    }
+    placement="topLeft"
+    trigger={
+      Array [
+        "click",
+      ]
+    }
+  >
+    <Button
+      className="space-settings-button"
+    >
+      <ForwardRef(PlusOutlined) />
+      Add
+    </Button>
+  </Dropdown>
+</div>
+`;

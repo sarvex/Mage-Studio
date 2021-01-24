@@ -106,3 +106,15 @@
         background: $background-very-dark;
     }
 }
+
+.ant-switch {
+    &-checked {
+        background-color: $success;
+    }
+
+    &-handle::before {
+        background-color: $white;
+        border: 1px solid $background-very-dark;
+        border-radius: 100%;
+    }
+}

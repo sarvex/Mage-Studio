@@ -4,8 +4,8 @@ import './theme.scss';
 import ProjectTree from './ProjectTree';
 import { Col } from 'antd';
 import { connect } from 'react-redux';
-import NewFileModal from '../app/modals/NewFileModal';
-import Skeleton from '../lib/shared/Skeleton';
+// import NewFileModal from '../app/modals/NewFileModal';
+import Skeleton from '../shared/skeleton/Skeleton';
 
 import {
     getScripts,
@@ -14,7 +14,7 @@ import {
     editorReady,
     editorScriptLoaded,
     editorScriptChanged
-} from '../app/actions/scripts';
+} from '../actions/scripts';
 
 let CodeMirror;
 
@@ -94,11 +94,6 @@ export class CodeEditor extends React.Component {
                         <Skeleton active />
                     }
                 </Col>
-                <NewFileModal
-                    visible={modalVisible}
-                    onDismiss={onModalDismiss}
-                    onConfirm={this.handleNewFile}
-                />
             </div>
         );
     }

@@ -1,81 +1,78 @@
-import { Button, Radio, Tooltip, Switch, Input, Dropdown, Menu } from 'antd';
 import React from 'react';
-import { DragOutlined, RedoOutlined, ArrowsAltOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
+
+import {
+    SpaceSettingsButton,
+    ControlsRadioGroup,
+    SnapControlsGroup,
+    AddElementDropdown
+} from './elements';
 
 import style from './toolbar.module.scss';
+import { addElement } from '../../../actions/scene';
+import { connect } from 'react-redux';
+import {
+    transformSnapChanged,
+    transformControlChanged,
+    transformSpaceChanged
+} from '../../../actions/controls';
 
-const getAddMenu = () => (
-    <Menu>
-        <Menu.Item title='model'>
-            model
-        </Menu.Item>
-        <Menu.SubMenu title="mesh">
-            <Menu.Item title='cube'>cube</Menu.Item>
-            <Menu.Item title='sphere'>sphere</Menu.Item>
-            <Menu.Item title='cylinder'>cylinder</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.SubMenu title="sound">
-            <Menu.Item>sorry</Menu.Item>
-        </Menu.SubMenu>
-        <Menu.SubMenu title="light">
-            <Menu.Item title='ambient'>ambient light</Menu.Item>
-            <Menu.Item title='sun'>sun light</Menu.Item>
-        </Menu.SubMenu>
-    </Menu>
-);
+export const Toolbar = ({
+    control,
+    space,
+    snap,
+    snapEnabled,
+    onTransformControlChange,
+    onTransformSpaceChange,
+    onTransformSnapChange
+}) => {
 
-const Toolbar = props => {
+    const handleTransformControlChange = (e) => onTransformControlChange(e.target.value);
+    const handleTransformSpaceChange = () => onTransformSpaceChange();
 
-    const snapSettingsContainerClassname = `${style['controls-settings-group']} ${style['snap-settings-group']}`;
-    const snapSettingsInputClassname = `${style['snap-settings-group-item']} ${style['snap-settings-group-item-text-input']}`;
+    const handleSnapIncrease = () => onTransformSnapChange(snapEnabled, snap + 10);
+    const handleSnapDecrease = () => onTransformSnapChange(snapEnabled, snap - 10);
+    const handleSnapEnabledToggle = () => onTransformSnapChange(!snapEnabled, snap);
 
     return (
         <div className={style.toolbar}>
             <ul className={style['settings-list']}>
                 <li className={style['settings-list-item']}>
-                    <Tooltip title='Local/global space setting'>
-                        <Button className={style['space-settings-button']}>Global</Button>
-                    </Tooltip>
+                    <SpaceSettingsButton
+                        onTransformSpaceChange={handleTransformSpaceChange}
+                        space={space} />
                 </li>
                 <li className={style['settings-list-item']}>
-                    <Radio.Group className={style['controls-settings-radio-group']}>
-                        <Radio.Button className={style['controls-settings-radio-group-button']} value="move">
-                            <DragOutlined height={12} width={12} />
-                        </Radio.Button>
-                        <Radio.Button className={style['controls-settings-radio-group-button']} value="rotate">
-                            <RedoOutlined height={12} width={12}/>
-                        </Radio.Button>
-                        <Radio.Button className={style['controls-settings-radio-group-button']} value="scale">
-                            <ArrowsAltOutlined height={12} width={12}/>
-                        </Radio.Button>
-                    </Radio.Group>
+                    <ControlsRadioGroup
+                        onTransformControlChange={handleTransformControlChange}
+                        control={control} />
                 </li>
                 <li className={style['settings-list-item']}>
-                    <div className={snapSettingsContainerClassname}>
-                        <label className={style['snap-settings-group-item']}>Snap:</label>
-                        <Switch  className={style['snap-settings-group-item']} size="small" defaultChecked />
-                        <Input
-                            size="small"
-                            placeholder="1"
-                            className={snapSettingsInputClassname}
-                            prefix={<MinusOutlined/>}
-                            suffix={<PlusOutlined/>}/>
-                    </div>
+                    <SnapControlsGroup
+                        snap={snap}
+                        enabled={snapEnabled}
+                        onSnapDecrease={handleSnapDecrease}
+                        onSnapIncrease={handleSnapIncrease}
+                        onSnapEnabledChange={handleSnapEnabledToggle} />
                 </li>
                 <li className={style['settings-list-item']}>
-                    <div className={style['controls-settings-group']}>
-                        <Dropdown
-                            overlay={getAddMenu()}
-                            trigger={['click']}
-                            placement={'topLeft'}>
-                            <Button className={style['space-settings-button']}><PlusOutlined/>Add</Button>
-                        </Dropdown>
-                        
-                    </div>
+                    <AddElementDropdown onElementSelection={addElement} />
                 </li>
             </ul>
         </div>
     );
 };
 
-export default Toolbar;
+const mapStateToProps = ({ controls }) => ({
+    control: controls.current,
+    space: controls.space,
+    snapEnabled: controls.snapEnabled,
+    snap: controls.snap
+});
+
+const mapDispatchToProps = dispatch => ({
+    onTransformControlChange: value => dispatch(transformControlChanged(value)),
+    onTransformSpaceChange: () => dispatch(transformSpaceChanged()),
+    onTransformSnapChange: (enabled, value) => dispatch(transformSnapChanged(enabled, value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

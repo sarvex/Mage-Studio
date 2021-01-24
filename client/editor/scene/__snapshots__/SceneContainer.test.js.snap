@@ -2,7 +2,7 @@
 
 exports[`SceneContainer should render properly 1`] = `
 <div
-  className="scene-container "
+  className="scene-container"
 >
   <Player />
   <Scene

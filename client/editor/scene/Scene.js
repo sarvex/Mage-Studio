@@ -21,7 +21,7 @@ export class Scene extends React.Component {
             onSceneLoad(scene);
         }
 
-        this.app.setStore(store);
+        // this.app.setStore(store);
 
         this.app.addEventListener('meshChanged', debounce(onMeshChanged, 15));
         this.app.addEventListener('meshAttached', onMeshAttached);

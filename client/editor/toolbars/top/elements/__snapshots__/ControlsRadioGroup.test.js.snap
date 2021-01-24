@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ControlsRadioGroup render should render properly 1`] = `
+<[object Object]
+  className="controls-settings-radio-group"
+  onChange={[Function]}
+>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button selected"
+    value="translate"
+  >
+    <ForwardRef(DragOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="rotate"
+  >
+    <ForwardRef(RedoOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="scale"
+  >
+    <ForwardRef(ArrowsAltOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+</[object Object]>
+`;
+
+exports[`ControlsRadioGroup render should render properly when control is ROTATE_CONTROL 1`] = `
+<[object Object]
+  className="controls-settings-radio-group"
+  onChange={[Function]}
+>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="translate"
+  >
+    <ForwardRef(DragOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button selected"
+    value="rotate"
+  >
+    <ForwardRef(RedoOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="scale"
+  >
+    <ForwardRef(ArrowsAltOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+</[object Object]>
+`;
+
+exports[`ControlsRadioGroup render should render properly when control is SCALE_CONTROL 1`] = `
+<[object Object]
+  className="controls-settings-radio-group"
+  onChange={[Function]}
+>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="translate"
+  >
+    <ForwardRef(DragOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="rotate"
+  >
+    <ForwardRef(RedoOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button selected"
+    value="scale"
+  >
+    <ForwardRef(ArrowsAltOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+</[object Object]>
+`;
+
+exports[`ControlsRadioGroup render should render properly when control is TRANSLATE_CONTROL 1`] = `
+<[object Object]
+  className="controls-settings-radio-group"
+  onChange={[Function]}
+>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button selected"
+    value="translate"
+  >
+    <ForwardRef(DragOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="rotate"
+  >
+    <ForwardRef(RedoOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    className="controls-settings-radio-group-button"
+    value="scale"
+  >
+    <ForwardRef(ArrowsAltOutlined)
+      height={12}
+      width={12}
+    />
+  </ForwardRef(RadioButton)>
+</[object Object]>
+`;

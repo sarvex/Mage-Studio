@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopToolbar render should render properly 1`] = `
+<div
+  className="toolbar"
+>
+  <ul
+    className="settings-list"
+  >
+    <li
+      className="settings-list-item"
+    >
+      <SpaceSettingsButton
+        onTransformSpaceChange={[Function]}
+      />
+    </li>
+    <li
+      className="settings-list-item"
+    >
+      <ControlsRadioGroup
+        onTransformControlChange={[Function]}
+      />
+    </li>
+    <li
+      className="settings-list-item"
+    >
+      <SnapControlsGroup
+        onSnapDecrease={[Function]}
+        onSnapEnabledChange={[Function]}
+        onSnapIncrease={[Function]}
+      />
+    </li>
+    <li
+      className="settings-list-item"
+    >
+      <AddElementDropdown
+        onElementSelection={[MockFunction]}
+      />
+    </li>
+  </ul>
+</div>
+`;

@@ -24,7 +24,11 @@ const config = {
     }
 };
 
-const assets = {};
+const assets = {
+    models: {
+        'lightHolder': '/models/lamp.gltf'
+    }
+};
 
 let app;
 

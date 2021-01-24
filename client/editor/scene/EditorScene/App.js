@@ -13,6 +13,7 @@ import {
     Cube,
     Sphere
 } from 'mage-engine';
+import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL, SCALE_CONTROL, TRANSLATE_CONTROL } from '../../../lib/constants';
 
 import {
     observeStore
@@ -20,11 +21,11 @@ import {
 
 export class EditorScene extends Level {
 
-    constructor(...props) {
-        super(...props);
+    constructor(options) {
+        super(options);
     }
 
-    loadScene = () => Promise.resolve()
+    loadScene() { return Promise.resolve(); }
 
     addAmbientLight() {
         const light = new AmbientLight({
@@ -32,7 +33,7 @@ export class EditorScene extends Level {
             intensity: 1
         });
 
-        light.addHelper();
+        light.addHelper('lightHolder');
     }
 
     addSunLight() {
@@ -42,7 +43,7 @@ export class EditorScene extends Level {
             position: { x: 40, y: 40, z: 40},
             target: { x: 1, y: 1, z: 1 }
         });
-        light.addHelper();
+        light.addHelper('lightHolder');
         light.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
@@ -83,27 +84,27 @@ export class EditorScene extends Level {
         return cylinder;
     }
 
-    loadModel = (model) => {
+    loadModel(model) {
         const parsed = Models.parseModel(model);
         parsed.setScale({x: 5, y: 5, z: 5 });
         parsed.setPosition({x: 0, y: 0, z: 0})
     }
 
-    loadScript = (scriptContent) => {
+    loadScript(scriptContent) {
         const script = Scripts.createFromString(scriptContent);
-        this.currentMesh.addScript(script.name());
+        this.currentElement.addScript(script.name());
     }
 
-    updateCurrentMesh = (name = '', position, rotation, scale) => {
-        if (this.currentMesh && this.hasSelection) {
-            this.currentMesh.setPosition(position);
-            this.currentMesh.setRotation(rotation);
-            this.currentMesh.setScale(scale);
-            this.currentMesh.setName(name, { replace: true })
+    updateCurrentElement(name = '', position, rotation, scale) {
+        if (this.currentElement && this.hasSelection) {
+            this.currentElement.setPosition(position);
+            this.currentElement.setRotation(rotation);
+            this.currentElement.setScale(scale);
+            this.currentElement.setName(name, { replace: true })
 
             this.dispatchEvent({
-                type: 'meshChanged',
-                name: this.currentMesh.name,
+                type: 'elementChanged',
+                name: this.currentElement.name,
                 position,
                 rotation,
                 scale
@@ -111,30 +112,31 @@ export class EditorScene extends Level {
         }
     }
 
-    onMeshClick = ({ meshes }) => {
-        const mesh = meshes[0];
-        this.currentMesh = mesh;
+    onElementClick({ elements = [] }) {
+        const { element } = elements[0];
+        this.currentElement = element;
         this.hasSelection = true;
-        this.transform.attach(mesh);
+        this.transform.attach(element);
 
         this.dispatchEvent({
-            type: 'meshAttached',
-            name: mesh.name,
-            rotation: mesh.getRotation(),
-            scale: mesh.getScale(),
-            position: mesh.getPosition()
+            type: 'elementAttached',
+            name: element.name,
+            rotation: element.getRotation(),
+            scale: element.getScale(),
+            position: element.getPosition()
         });
     }
 
-    onMeshDeselect = () => {
+    onElementDeselect() {
+        console.log('deselecting');
         this.hasSelection = false;
-        this.dispatchEvent({ type: 'meshDetached' });
+        this.dispatchEvent({ type: 'elementDetached' });
     }
 
-    onKeyDown = (e) => {}
-    onKeyUp = (e) => {}
+    onKeyDown(e){ console.log(e); }
+    onKeyUp(e) {}
 
-    onKeyPress = ({ event }) => {
+    onKeyPress({ event }) {
         switch (event.key) {
             case "q": // Q
                 this.transform.setSpace(this.transform.space === "local" ? "world" : "local");
@@ -143,15 +145,15 @@ export class EditorScene extends Level {
                 this.transform.setTranslationSnap(100);
                 this.transform.setRotationSnap(THREE.Math.degToRad(15));
                 break;
-            case "w": // W
-                this.transform.setMode("translate");
-                break;
-            case "e": // E
-                this.transform.setMode("rotate");
-                break;
-            case "r": // R
-                this.transform.setMode("scale");
-                break;
+            // case "w": // W
+            //     this.transform.setMode(TRANSLATE_CONTROL);
+            //     break;
+            // case "e": // E
+            //     this.transform.setMode(ROTATE_CONTROL);
+            //     break;
+            // case "r": // R
+            //     this.transform.setMode(SCALE_CONTROL);
+            //     break;
             case 187:
             case 107: // +, =, num+
                 this.transform.setSize(this.transform.size + 0.1);
@@ -183,21 +185,30 @@ export class EditorScene extends Level {
         Controls.setTransformControl();
 
         this.transform = Controls.getControl('transform');
-        this.transform.addEventListener('objectChange', this.dispatchMeshChange.bind(this));
+        this.transform.addEventListener('objectChange', this.dispatchElementChange.bind(this));
     }
 
-    changeTransformControl = (controls) => {
+    changeTransformControl(control) {
         if (this.transform) {
-            if (controls.control) this.transform.setMode(controls.control);
-            if (controls.space) this.transform.setSpace(controls.space);
+            if (this.transform.getMode() != control) {
+                console.log(control, ROTATE_CONTROL, control === ROTATE_CONTROL);
+                this.transform.setMode(control);
+            }
         }
     }
 
-    changeTransformSnap = ({ snapValue = 100, snapEnabled = false}) => {
+    toggleTransformSpace() {
         if (this.transform) {
-            if (snapEnabled) {
-                this.transform.setTranslationSnap(snapValue);
-                this.transform.setRotationSnap(THREE.Math.degToRad(snapValue / 10));
+            const current = this.transform.getSpace();
+            this.transform.setSpace(current === GLOBAL_SPACE ? LOCAL_SPACE : GLOBAL_SPACE);
+        }
+    }
+
+    changeTransformSnap(enabled = false, value = 10) {
+        if (this.transform) {
+            if (enabled) {
+                this.transform.setTranslationSnap(value);
+                this.transform.setRotationSnap(THREE.Math.degToRad(value / 10));
             } else {
                 this.transform.setTranslationSnap(null);
                 this.transform.setRotationSnap(null);
@@ -205,62 +216,41 @@ export class EditorScene extends Level {
         }
     }
 
-    changeFog = (fog) => {
+    changeFog(fog) {
         if (fog.color && fog.density && fog.enabled) {
             Scene.fog(fog.color, fog.density/1000);
         }
     }
 
-    changeTexture = (textureId, texturePath) => {
-        if (this.currentMesh) {
+    changeTexture(textureId, texturePath) {
+        if (this.currentElement) {
             Images
                 .loadSingleTexture(textureId, texturePath)
                 .then((texture) => {
-                    this.currentMesh.setTexture(textureId);
+                    this.currentElement.setTexture(textureId);
                 });
         }
     }
 
-    changeMaterial = (materialName) => {
-        if (this.currentMesh) {
-            this.currentMesh.setMaterialFromName(materialName);
+    changeMaterial(materialName) {
+        if (this.currentElement) {
+            this.currentElement.setMaterialFromName(materialName);
         }
     }
 
-    dispatchMeshChange = () => {
-        if (!this.transform.object || !this.currentMesh) return;
+    dispatchElementChange() {
+        if (!this.transform.object || !this.currentElement) return;
 
         this.dispatchEvent({
-            type: 'meshChanged',
-            name: this.currentMesh.name,
-            rotation: this.currentMesh.getRotation(),
-            scale: this.currentMesh.getScale(),
-            position: this.currentMesh.getPosition()
+            type: 'elementChanged',
+            name: this.currentElement.name,
+            rotation: this.currentElement.getRotation(),
+            scale: this.currentElement.getScale(),
+            position: this.currentElement.getPosition()
         });
     }
-
-    setStore(store) {
-        this.store = store;
-        this.unsubscribe = observeStore(store, this.handleStoreChange);
-    }
-
-    handleStoreChange = (state) => {
-        this.changeTransformControl(state.controls);
-
-        this.updateCurrentMesh(
-            state.name,
-            state.position,
-            state.rotation,
-            state.scale);
-
-        this.changeFog(state.fog);
-
-        this.changeTransformSnap(state.snap);
-
-        this.handleSceneChange(state.scene);
-    }
-
-    handleSceneChange = (state) => {
+    
+    handleSceneChange(state) {
         if (state.requested) {
             this.dispatchEvent({
                 type: 'sceneExported',
@@ -276,7 +266,6 @@ export class EditorScene extends Level {
         Scene.setClearColor(0x040d10);
 
         this.setTranformControls();
-        this.enableInput();
 
         //this.sceneHelper.addGrid(2000, 100);
         this.grid = new Grid(2000, 100, 0xfb9d60, 0x5A6668);

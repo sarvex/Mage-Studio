@@ -53,25 +53,9 @@ export const projectPlayerVisible = (visible) => (dispatch) => {
     })
 };
 
-export const addLight = (type) => {
+export const addElement = (type) => {
     getOrCreateApp()
         .then(app => {
-           switch(type) {
-               case AMBIENT:
-                   app.addAmbientLight();
-                   break;
-               case SUN:
-                   app.addSunLight();
-                   break;
-               default:
-                   break;
-           }
-        });
-};
-
-export const addMesh = (type) => {
-    getOrCreateApp()
-        .then((app) => {
             switch(type) {
                 case CUBE:
                     app.addCube();
@@ -82,10 +66,16 @@ export const addMesh = (type) => {
                 case CYLINDER:
                     app.addCylinder();
                     break;
+                case AMBIENT:
+                    app.addAmbientLight();
+                    break;
+                case SUN:
+                    app.addSunLight();
+                    break;
                 default:
                     break;
             }
-        })
+        });
 };
 
 export const saveScene = (name, scene) => (dispatch) => {
