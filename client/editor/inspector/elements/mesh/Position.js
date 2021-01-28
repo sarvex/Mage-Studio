@@ -1,38 +1,48 @@
 import React from 'react';
+import classnames from 'classnames';
 import { InputNumber } from 'antd';
 
 import { MIN, MAX } from './constants';
 
-export default ({x, y, z, onPositionChange}) => (
-    <div className='setting-row'>
-        <label className='setting-label'>
+import style from '../../inspector.module.scss';
+
+const groupClassname = classnames(
+    style['inspector-property-value'],
+    style['inspector-property-input-group']
+);
+
+const inputClassname = classnames(
+    style['inspector-property-input'],
+    style['small']
+);
+
+export default ({x, y, z, onPositionChange = f => f }) => (
+    <div className={style['inspector-property']}>
+        <label className={style['inspector-property-label']}>
             Position
         </label>
-        <div className="setting-input-group">
-            <div className={"setting-input small"}>
+        <div className={groupClassname}>
+            <div className={inputClassname}>
                 <InputNumber
                     onChange={onPositionChange('x')}
-                    size="small"
                     min={MIN}
                     max={MAX}
                     step={0.1}
                     placeholder="0"
                     value={x} />
             </div>
-            <div className={"setting-input small"}>
+            <div className={inputClassname}>
                 <InputNumber
                     onChange={onPositionChange('y')}
-                    size="small"
                     min={MIN}
                     max={MAX}
                     step={0.1}
                     placeholder="0"
                     value={y} />
             </div>
-            <div className={"setting-input small last"}>
+            <div className={inputClassname}>
                 <InputNumber
                     onChange={onPositionChange('z')}
-                    size="small"
                     min={MIN}
                     max={MAX}
                     step={0.1}

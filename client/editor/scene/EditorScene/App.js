@@ -112,6 +112,10 @@ export class EditorScene extends Level {
         }
     }
 
+    getCurrentElement() {
+        return this.currentElement;
+    };
+
     onElementClick({ elements = [] }) {
         const { element } = elements[0];
         this.currentElement = element;

@@ -12,6 +12,14 @@ export const ASSETS_TYPES = [
     { code: 'scripts', display: 'Script' }
 ];
 
+export const ENTITY_TYPES = {
+    MESH: 'MESH',
+    LIGHT: 'LIGHT',
+    MODEL: 'MODEL',
+    SPRITE: 'SPRITE',
+    UNKNOWN: 'UNKNOWN'
+}; 
+
 export const GLOBAL_SPACE = 'global';
 export const LOCAL_SPACE = 'local';
 
