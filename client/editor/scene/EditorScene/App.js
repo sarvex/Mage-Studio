@@ -52,7 +52,7 @@ export class EditorScene extends Level {
     }
 
     addCube() {
-        const cube = new Cube(20, 0x00ff00, { wireframe: true });
+        const cube = new Cube(20, 0x00ff00, { wireframe: true, tags: ['test', 'marco', 'something', 'else'] });
         cube.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,

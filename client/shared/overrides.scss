@@ -186,3 +186,16 @@
     }
 }
 
+.ant-tag {
+    background: transparent !important;
+    border-radius: $base-unit / 2 !important;
+    min-width: $base-unit * 7 !important;
+    text-align: center !important;
+    opacity: .6;
+    margin-bottom: $base-unit / 2;
+
+    &-close-icon {
+        margin-left: $base-unit;
+    }
+}
+

@@ -2,9 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { InputNumber } from 'antd';
 
-import { MIN, MAX } from './constants';
+import { MIN, MAX } from '../constants';
 
-import style from '../../inspector.module.scss';
+import style from '../../../inspector.module.scss';
 
 const groupClassname = classnames(
     style['inspector-property-value'],
@@ -16,15 +16,15 @@ const inputClassname = classnames(
     style['small']
 );
 
-export default ({x, y, z, onRotationChange = f => f }) => (
+export default ({x, y, z, onScaleChange = f => f }) => (
     <div className={style['inspector-property']}>
         <label className={style['inspector-property-label']}>
-            Rotation
+            Scale
         </label>
         <div className={groupClassname}>
             <div className={inputClassname}>
                 <InputNumber
-                    onChange={onRotationChange('x')}
+                    onChange={onScaleChange('x')}
                     min={MIN}
                     max={MAX}
                     defaultValue={x}
@@ -34,7 +34,7 @@ export default ({x, y, z, onRotationChange = f => f }) => (
             </div>
             <div className={inputClassname}>
                 <InputNumber
-                    onChange={onRotationChange('y')}
+                    onChange={onScaleChange('y')}
                     min={MIN}
                     max={MAX}
                     defaultValue={y}
@@ -44,7 +44,7 @@ export default ({x, y, z, onRotationChange = f => f }) => (
             </div>
             <div className={inputClassname}>
                 <InputNumber
-                    onChange={onRotationChange('z')}
+                    onChange={onScaleChange('z')}
                     min={MIN}
                     max={MAX}
                     defaultValue={z}

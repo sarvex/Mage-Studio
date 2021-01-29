@@ -7,7 +7,7 @@ import {
 
 import { PictureOutlined } from '@ant-design/icons';
 
-import style from '../../inspector.module.scss';
+import style from '../../../inspector.module.scss';
 
 const mapTexturesToOption = (textures) => {
     return textures.map(texture => <Select.Option key={texture.name}>{texture.name}</Select.Option>)

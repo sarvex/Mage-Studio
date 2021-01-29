@@ -36,6 +36,7 @@ class Inspector extends React.Component {
                         position={element.getPosition()}
                         rotation={element.getRotation()}
                         scale={element.getScale()}
+                        tags={element.getTags()}
                         name={element.getName()} />
             }
         }

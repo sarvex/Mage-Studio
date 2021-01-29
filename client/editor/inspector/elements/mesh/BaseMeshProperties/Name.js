@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 
-import style from '../../inspector.module.scss';
+import style from '../../../inspector.module.scss';
 
 export default ({name = '', onNameChange = f => f }) => (
     <div className={style['inspector-property']}>

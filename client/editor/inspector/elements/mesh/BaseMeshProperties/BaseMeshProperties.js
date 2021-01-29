@@ -6,8 +6,9 @@ import Position from './Position';
 import Rotation from './Rotation';
 import Scale from './Scale';
 import Name from './Name';
+import Tags from './Tags';
 
-import style from '../../inspector.module.scss';
+import style from '../../../inspector.module.scss';
 
 const BaseMeshProperties = (props) => {
 
@@ -15,6 +16,7 @@ const BaseMeshProperties = (props) => {
             position = {},
             rotation = {},
             scale = {},
+            tags = [],
             name,
             onNameChange,
             onPositionChange,
@@ -51,6 +53,7 @@ const BaseMeshProperties = (props) => {
                         y={scale.y}
                         z={scale.z}
                     />
+                    <Tags tags={tags} />
                 </div>
             </div>
     )

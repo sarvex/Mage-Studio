@@ -2,9 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { InputNumber } from 'antd';
 
-import { MIN, MAX } from './constants';
+import { MIN, MAX } from '../constants';
 
-import style from '../../inspector.module.scss';
+import style from '../../../inspector.module.scss';
 
 const groupClassname = classnames(
     style['inspector-property-value'],

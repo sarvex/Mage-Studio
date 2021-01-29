@@ -120,4 +120,12 @@ button.ant-switch-small {
             }
         }
     }
+
+    &-box {
+        display: block;
+        background: $background-very-dark;
+        padding: $base-unit * 1.5;
+        width: 100%;
+        height: auto;
+    }
 }

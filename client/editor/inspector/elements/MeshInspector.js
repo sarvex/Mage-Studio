@@ -3,11 +3,12 @@ import { Tabs } from 'antd';
 import {
     InfoCircleOutlined,
     FileTextOutlined,
-    BgColorsOutlined
+    BgColorsOutlined,
+    SettingOutlined
 } from '@ant-design/icons';
-import BaseMeshProperties from './mesh/BaseMeshProperties';
-import Material from './mesh/Material';
-import Script from './mesh/Script';
+import BaseMeshProperties from './mesh/BaseMeshProperties/BaseMeshProperties';
+import Material from './mesh/Material/Material';
+import Script from './mesh/Scripts/Scripts';
 
 const { TabPane } = Tabs;
 
@@ -22,6 +23,7 @@ class MeshInspector extends React.Component {
             position,
             rotation,
             scale,
+            tags,
             name,
             onNameChange,
             onPositionChange,
@@ -49,7 +51,8 @@ class MeshInspector extends React.Component {
                         name={name}
                         position={position}
                         rotation={rotation}
-                        scale={scale} />
+                        scale={scale}
+                        tags={tags} />
                 </TabPane>
                 <TabPane tab={<BgColorsOutlined />} key="2">
                     <Material
@@ -62,6 +65,9 @@ class MeshInspector extends React.Component {
                         list={list}
                         onScriptsMount={onScriptsMount}
                         onScriptChange={onScriptChange} />
+                </TabPane>
+                <TabPane tab={<SettingOutlined />} key="4">
+                    PHYSICS YOOOOO
                 </TabPane>
             </Tabs>
         );
