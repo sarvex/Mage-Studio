@@ -16,13 +16,14 @@ const inputClassname = classnames(
     style['small']
 );
 
-export default ({x, y, z, onPositionChange = f => f }) => (
+export default ({ x, y, z, onPositionChange = f => f }) => (
     <div className={style['inspector-property']}>
         <label className={style['inspector-property-label']}>
             Position
         </label>
         <div className={groupClassname}>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>x:</span>
                 <InputNumber
                     onChange={onPositionChange('x')}
                     min={MIN}
@@ -32,6 +33,7 @@ export default ({x, y, z, onPositionChange = f => f }) => (
                     value={x} />
             </div>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>y:</span>
                 <InputNumber
                     onChange={onPositionChange('y')}
                     min={MIN}
@@ -41,6 +43,7 @@ export default ({x, y, z, onPositionChange = f => f }) => (
                     value={y} />
             </div>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>z:</span>
                 <InputNumber
                     onChange={onPositionChange('z')}
                     min={MIN}

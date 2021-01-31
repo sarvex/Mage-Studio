@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RightSidebar should render fine 1`] = `
+exports[`Name should render fine 1`] = `
 <div
   className="inspector-property"
 >

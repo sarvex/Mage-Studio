@@ -23,6 +23,7 @@ export default ({x, y, z, onScaleChange = f => f }) => (
         </label>
         <div className={groupClassname}>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>x:</span>
                 <InputNumber
                     onChange={onScaleChange('x')}
                     min={MIN}
@@ -33,6 +34,7 @@ export default ({x, y, z, onScaleChange = f => f }) => (
                     value={x} />
             </div>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>y:</span>
                 <InputNumber
                     onChange={onScaleChange('y')}
                     min={MIN}
@@ -43,6 +45,7 @@ export default ({x, y, z, onScaleChange = f => f }) => (
                     value={y} />
             </div>
             <div className={inputClassname}>
+                <span className={style['inspector-property-input-label']}>z:</span>
                 <InputNumber
                     onChange={onScaleChange('z')}
                     min={MIN}

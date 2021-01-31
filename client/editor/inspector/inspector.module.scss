@@ -113,10 +113,16 @@ button.ant-switch-small {
             display: inline-block;
             margin: 0px $base-unit/2;
             color: $white;
+            
+            &-label {
+                font-size: $base-unit * 1.6;
+                margin-right: $base-unit;
+                color: $grey;
+            }
 
             & input {
                 padding: $base-unit;
-                max-width: $base-unit * 11;
+                max-width: $base-unit * 8.75;
             }
         }
     }
