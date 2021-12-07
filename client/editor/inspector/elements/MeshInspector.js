@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import {
-    InfoCircleOutlined,
+    CodeSandboxOutlined,
     FileTextOutlined,
-    BgColorsOutlined,
+    PictureOutlined,
     SettingOutlined
 } from '@ant-design/icons';
 import BaseMeshProperties from './mesh/BaseMeshProperties/BaseMeshProperties';
@@ -42,7 +42,7 @@ class MeshInspector extends React.Component {
 
         return (
             <Tabs tabPosition={'left'}>
-                <TabPane tab={<InfoCircleOutlined />} key="1">
+                <TabPane tab={<CodeSandboxOutlined />} key="1">
                     <BaseMeshProperties
                         onNameChange={onNameChange}
                         onPositionChange={onPositionChange}
@@ -54,7 +54,7 @@ class MeshInspector extends React.Component {
                         scale={scale}
                         tags={tags} />
                 </TabPane>
-                <TabPane tab={<BgColorsOutlined />} key="2">
+                <TabPane tab={<PictureOutlined />} key="2">
                     <Material
                         textures={textures}
                         onMaterialChange={onMaterialChange}

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Select, Switch } from 'antd';
 
-import { CodeOutlined } from '@ant-design/icons';
+import { FileTextOutlined } from '@ant-design/icons';
+
+import style from '../../../inspector.module.scss';
 
 class Script extends React.Component {
 
@@ -29,30 +31,19 @@ class Script extends React.Component {
         const { onScriptSwitchChange = f => f } = this.props;
 
         return (
-            <div>
-                <div className='scene-property'>
-                    <div className='label'>
-                        <CodeOutlined height='8px' width='8px' className='label-icon'/>
-                        <span className='label-text'>SCRIPT</span>
-                    </div>
-                    <div className='enabled-toggle'>
-                        <span>active</span>
-                        <Switch
-                            onChange={onScriptSwitchChange}
-                            size={"small"}
-                            defaultChecked />
-                    </div>
+            <div className={style['inspector-block']}>
+                <div className={style['inspector-block-title']}>
+                    <FileTextOutlined height='8px' width='8px' className={style['inspector-block-title-label-icon']}/>
+                    <span className={style['inspector-block-title-label']}>Scripts</span>
                 </div>
-                <div className='scene-setting'>
-                    <div className='setting-row'>
-                        <label className='setting-label'>
-                            Name
+                <div className={style['inspector-block-values']}>
+                    <div className={style['inspector-property']}>
+                        <label className={style['inspector-property-label']}>
+                            Script
                         </label>
                         <Select
-                            onChange={this.handleScriptChange}
-                            className='setting-input right'
+                            className={style['property-dropdown-button']}
                             size={'small'}>
-                            { this.mapScripts() }
                         </Select>
                     </div>
                 </div>

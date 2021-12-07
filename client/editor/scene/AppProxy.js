@@ -51,5 +51,7 @@ export async function getOrCreateApp() {
         });
     }
 
+    console.log('we have the app');
+
     return Promise.resolve(app);
 }

@@ -135,3 +135,26 @@ button.ant-switch-small {
         height: auto;
     }
 }
+
+.property-dropdown-button {
+    height: $base-unit * 3;
+    border-radius: $base-unit / 2;
+    color: $atomic-tangerine;
+    font-weight: bold;
+    background: $background-very-dark;
+    border: 1px solid $atomic-tangerine;
+    transition: none;
+    font-size: 10px;
+    font-family: "Open Sans";
+    top: 1px;
+    min-width: $base-unit * 10;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $background-darker;
+        background-color: $atomic-tangerine !important;
+        outline: none;
+    }
+}
+
