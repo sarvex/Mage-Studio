@@ -73,8 +73,8 @@ const mapListItems = (selected, onClick) => (
 );
 
 export default props => {
-    const [selected, changeSelected] = useState(HIERARCHY);
-    const [drawerVisible, toggleDrawer] = useState(true);
+    const [selected, changeSelected] = useState(null);
+    const [drawerVisible, toggleDrawer] = useState(false);
     
     const handleClick = (selection) => {
         changeSelected(selection);
