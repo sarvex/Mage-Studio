@@ -33,7 +33,7 @@
         font-weight: bold;
         background: transparent;
         border: 1px solid $atomic-tangerine;
-        transition: none;
+        // transition: none;
         font-size: 10px;
         font-family: "Open Sans";
         top: 1px;
@@ -93,7 +93,7 @@
             max-width: 88px;
             max-height: 24px;
             line-height: 24px;
-            transition: none;
+            // transition: none;
             &-text-input,
             &-text-input input {
                 top: $base-unit / 4;
