@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from "react-redux";
+import classnames from 'classnames';
 
-import AssetsMenu from './elements/AssetsMenu';
+import AssetsTitle from './elements/AssetsTitle';
 import AssetItem from './elements/AssetItem';
 import AssetImage from './elements/AssetImage';
 // import AssetUploadModal from '../../modals/AssetUploadModal';
 
-import { SCRIPTS_EDITOR_PATH } from '../../../../../lib/constants';
+import { SCRIPTS_EDITOR_PATH } from '../../../lib/constants';
 
-import { getAllAssets } from "../../../../../actions/assets";
+import { getAllAssets } from "../../../actions/assets";
 import {
     showTextureModal,
     hideTextureModal,
     uploadTexture
-} from '../../../../../actions/textures';
+} from '../../../actions/textures';
 
 import style from './assets.module.scss';
 
@@ -30,7 +31,7 @@ export class AssetsPanel extends React.Component {
         window.open(SCRIPTS_EDITOR_PATH, '_blank');
     }
 
-    handleAssetsMenuChange = ({ key }) => {
+    handleAssetsTitleChange = ({ key }) => {
         const  { showTextureModal } = this.props;
 
         switch(key) {
@@ -72,20 +73,20 @@ export class AssetsPanel extends React.Component {
 
     render() {
         const {
-            assets,
-            textures,
+            assets = {},
             config
         } = this.props;
 
+        const { models = [], images = [], textures = [] } = assets;
+
         return (
-            <div>
-                <div className={style.title}>
-                    <AssetsMenu onAssetsMenuClick={this.handleAssetsMenuChange} />
-                </div>
+            <div className={classnames(style.panel, style.assets)}>
+                <h3 className={style.title}>Assets</h3>
+                {/* <AssetsTitle onAssetsTitleClick={this.handleAssetsTitleChange} /> */}
                 <div className={style.content}>
-                    { assets.models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
-                    { assets.images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
-                    { assets.textures.map((texture, i) => ( <AssetImage
+                    { models.map((model, i) => ( <AssetItem key={`model-${i}`} name={model.name}/>)) }
+                    { images.map((image, i) => ( <AssetItem key={`image-${i}`} name={image.name}/>)) }
+                    { textures.map((texture, i) => ( <AssetImage
                         key={`texture-${i}`}
                         project={config.project}
                         name={texture.name} />

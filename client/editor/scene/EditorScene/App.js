@@ -52,12 +52,14 @@ export class EditorScene extends Level {
     }
 
     addCube() {
-        const cube = new Cube(20, 0x00ff00, { wireframe: true, tags: ['test', 'marco', 'something', 'else'] });
+        const cube = new Cube(20, 0xeeeeee, { tags: ['test', 'marco', 'something', 'else'] });
         cube.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
         });
+
+        cube.setTextureMap('cube_prototype_dark');
 
         return cube;
     }
@@ -261,6 +263,10 @@ export class EditorScene extends Level {
                 data: this.toJSON()
             });
         }
+    }
+
+    resize(width, height) {
+        Scene.resize(width, height);
     }
 
     onCreate() {

@@ -42,6 +42,9 @@ export const Toolbar = ({
                         space={space} />
                 </li>
                 <li className={style['settings-list-item']}>
+                    <AddElementDropdown onElementSelection={addElement} />
+                </li>
+                <li className={style['settings-list-item']}>
                     <ControlsRadioGroup
                         onTransformControlChange={handleTransformControlChange}
                         control={control} />
@@ -53,9 +56,6 @@ export const Toolbar = ({
                         onSnapDecrease={handleSnapDecrease}
                         onSnapIncrease={handleSnapIncrease}
                         onSnapEnabledChange={handleSnapEnabledToggle} />
-                </li>
-                <li className={style['settings-list-item']}>
-                    <AddElementDropdown onElementSelection={addElement} />
                 </li>
             </ul>
         </div>

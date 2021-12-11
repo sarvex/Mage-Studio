@@ -1,8 +1,11 @@
 import React from 'react';
 import { Tree, Input } from 'antd';
+import classnames from 'classnames';
 import { FolderOutlined } from '@ant-design/icons';
 
 import style from './hierarchypanel.module.scss';
+
+console.log(style);
 
 const { TreeNode } = Tree;
 const Search = Input.Search;
@@ -122,8 +125,8 @@ export class Hierarchy extends React.Component {
     });
 
     return (
-      <div>
-        <div className={style['hierarchy-search-filter']}>
+      <div className={classnames(style.panel, style.hierarchy)}>
+        {/* <div className={style['hierarchy-search-filter']}>
             <Search placeholder="Search" onChange={this.onChange} />
         </div>
         <Tree
@@ -134,7 +137,11 @@ export class Hierarchy extends React.Component {
             expandedKeys={expandedKeys}
             autoExpandParent={autoExpandParent}>
             { loop(gData) }
-        </Tree>
+        </Tree> */}
+        <h3 className={style.title}>Hierarchy</h3>
+        <div className={style.content}>
+
+        </div>
       </div>
     );
   }

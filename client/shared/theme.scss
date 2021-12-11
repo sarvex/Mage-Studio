@@ -5,9 +5,21 @@
 
 $background: rgb(9,26,40);
 $background-darker: #091a20;//$charleston-green-darker;
-$background-very-dark: $black;
+$background-very-dark: $black;  
 $background-lighter: rgba(9,26,40, .92);
-$panel-background: rgba(44,58,71,.2);
+// $panel-background: rgba(44,58,71,.2);
 $logo: #f1c40f;
 $highlight: #ffbe76;
-$separator: rgba(255,190,118, .2);;
+$separator: rgba(255,190,118, .2);
+
+
+$main-background: black;
+$header-background: rgb(9,26,40);
+$footer-background: rgb(9,26,40);
+$panel-background: rgba(9,26,40, .5);
+$panel-border: rgba(60, 99, 130, .15);
+$panel-title: #ffbe76;
+$panel-content: rgba(9, 26, 40, .2);
+$scene-container-background: rgba(9, 26, 40, .3);
+$scene-toolbar-background: rgba(9, 26, 40, .6);
+$red: #ff7979; 

@@ -9,6 +9,7 @@
 body {
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
+    background: black;
 }
 
 .app {
@@ -23,13 +24,24 @@ body {
 
 .main-container {
     flex: 1;
+    display: flex;
+    flex-direction: row;
     background-color: $black;
     height: calc(100% - 146px);
-    & .canvas-container {
+
+    & .left-container,
+    & .right-container {
         display: flex;
-        height: 100%;
-        float: left;
-        width: 100%;
+        flex-direction: column;
+    }
+
+    & .left-container {
+        flex-grow: 3.7;
+        max-width: 73vw;
+    }
+
+    & .right-container {
+        flex-grow: 1;
     }
 }
 
