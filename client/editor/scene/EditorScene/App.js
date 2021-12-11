@@ -19,6 +19,15 @@ import {
     observeStore
 } from './reduxStore';
 
+const PROTOTYPE_TEXTURES = [
+    'cube_prototype_green',
+    'cube_prototype_dark',
+    'cube_prototype_light',
+    'cube_prototype_orange',
+    'cube_prototype_purple'
+];
+const getRandomPrototypeTexture = () => PROTOTYPE_TEXTURES[Math.floor(Math.random() * PROTOTYPE_TEXTURES.length)];
+
 export class EditorScene extends Level {
 
     constructor(options) {
@@ -59,7 +68,7 @@ export class EditorScene extends Level {
             z: (Math.random() * 200) - 100
         });
 
-        cube.setTextureMap('cube_prototype_dark');
+        cube.setTextureMap(getRandomPrototypeTexture());
 
         return cube;
     }
