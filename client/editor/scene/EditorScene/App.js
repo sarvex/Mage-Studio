@@ -13,7 +13,14 @@ import {
     Cube,
     Sphere
 } from 'mage-engine';
-import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL, SCALE_CONTROL, TRANSLATE_CONTROL } from '../../../lib/constants';
+
+import {
+    GLOBAL_SPACE,
+    LOCAL_SPACE,
+    ROTATE_CONTROL,
+    SCALE_CONTROL,
+    TRANSLATE_CONTROL
+} from '../../../lib/constants';
 
 import {
     observeStore
@@ -279,14 +286,13 @@ export class EditorScene extends Level {
     }
 
     onCreate() {
-        Scene.camera.setPosition({y: 70, z: 150});
-        Scene.camera.lookAt(0, 0, 0);
+        Scene.getCamera().setPosition({y: 70, z: 150});
+        Scene.getCamera().lookAt(0, 0, 0);
 
         Scene.setClearColor(0x040d10);
 
         this.setTranformControls();
 
-        //this.sceneHelper.addGrid(2000, 100);
         this.grid = new Grid(2000, 100, 0xfb9d60, 0x5A6668);
     }
 }

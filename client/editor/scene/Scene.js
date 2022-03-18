@@ -24,12 +24,14 @@ export class Scene extends React.Component {
 
         getOrCreateApp()
             .then(app => {
-                this.app = app;
-                // this.app.addEventListener('elementChanged', debounce(onMeshChanged, 15));
-                this.app.addEventListener('elementAttached', onElementAttached);
-                this.app.addEventListener('elementDetached', onElementDetached);
-
-                this.app.resize(this.levelRef.offsetWidth, this.levelRef.offsetHeight);
+                if (app) {
+                    this.app = app;
+                    // this.app.addEventListener('elementChanged', debounce(onMeshChanged, 15));
+                    this.app.addEventListener('elementAttached', onElementAttached);
+                    this.app.addEventListener('elementDetached', onElementDetached);
+    
+                    this.app.resize(this.levelRef.offsetWidth, this.levelRef.offsetHeight);
+                }
             });
 
     }

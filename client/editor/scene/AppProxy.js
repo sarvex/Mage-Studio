@@ -58,7 +58,7 @@ export async function getOrCreateApp() {
                 .start(config, assets)
                 .then((application) => {
                     app = application;
-                    console.log(application);
+                    console.log('got application', application);
                     return Promise.resolve(app);
                 })
         });

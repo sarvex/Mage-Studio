@@ -9,7 +9,7 @@ const getMenuContent = () => (
         <Item
             className="option"
             key="documentation">
-            Documentation
+            <a href='https://www.mage.studio/docs' target='_blank'>Documentation</a>
         </Item>
         <Item
             className="option"
