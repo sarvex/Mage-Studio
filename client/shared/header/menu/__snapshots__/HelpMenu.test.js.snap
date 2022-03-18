@@ -9,7 +9,12 @@ exports[`HelpMenu should render fine 1`] = `
       <MenuItem
         className="option"
       >
-        Documentation
+        <a
+          href="https://www.mage.studio/docs"
+          target="_blank"
+        >
+          Documentation
+        </a>
       </MenuItem>
       <MenuItem
         className="option"

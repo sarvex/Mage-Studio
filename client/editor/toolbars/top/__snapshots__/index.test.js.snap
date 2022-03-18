@@ -17,6 +17,13 @@ exports[`TopToolbar render should render properly 1`] = `
     <li
       className="settings-list-item"
     >
+      <AddElementDropdown
+        onElementSelection={[MockFunction]}
+      />
+    </li>
+    <li
+      className="settings-list-item"
+    >
       <ControlsRadioGroup
         onTransformControlChange={[Function]}
       />
@@ -28,13 +35,6 @@ exports[`TopToolbar render should render properly 1`] = `
         onSnapDecrease={[Function]}
         onSnapEnabledChange={[Function]}
         onSnapIncrease={[Function]}
-      />
-    </li>
-    <li
-      className="settings-list-item"
-    >
-      <AddElementDropdown
-        onElementSelection={[MockFunction]}
       />
     </li>
   </ul>
