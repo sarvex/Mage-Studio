@@ -4,11 +4,23 @@ exports[`Footer should render fine 1`] = `
 <Row
   className="footer"
 >
-  <Col
-    span={12}
+  <p
+    className="name"
   >
-    Mage Studio v
-    0.0.3
-  </Col>
+    Mage Studio 
+    <span
+      className="version"
+    >
+      v
+      0.0.3
+    </span>
+      running on mage-engine 
+    <span
+      className="version"
+    >
+      v
+      3.17.1
+    </span>
+  </p>
 </Row>
 `;

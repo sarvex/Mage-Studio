@@ -1,0 +1,22 @@
+.panel {
+    border-radius: $base-unit;
+    background-color: $panel-background;
+    border: 1px solid $panel-border;
+    flex: 1 1 auto;
+    padding: 4px;
+    margin: 4px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+
+    & .title {
+        color: $panel-title;
+        font-weight: bold;
+        margin: $base-unit;
+    }
+
+    & .content {
+        border-radius: $base-unit;
+        background-color: $panel-content;
+        flex: 1 1 auto;
+    }
+}

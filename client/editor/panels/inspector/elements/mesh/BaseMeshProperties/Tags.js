@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
-import { TAG_COLORS } from '../../../../../lib/constants';
+import { TAG_COLORS } from '../../../../../../lib/constants';
 import style from '../../../inspector.module.scss';
 
 const getRandomTagColor = () => TAG_COLORS[Math.floor(Math.random() * TAG_COLORS.length)];

@@ -5,6 +5,8 @@ import {
 
 import classnames from 'classnames';
 
+import TopToolbar from '../toolbars/top';
+
 // import {
 //     meshChanged,
 //     meshAttached,
@@ -58,7 +60,7 @@ export class SceneContainer extends React.Component {
         const { fullscreen } = this.state;
         // const { projectPlayerVisible, projectUrl } = scene;
 
-        const className = classnames(style['scene-container'], {
+        const className = classnames(style['scene-container'], style.panel, {
             [style.fullscreen]: fullscreen
         });
 
@@ -67,6 +69,7 @@ export class SceneContainer extends React.Component {
                 {/* <Player
                     url={projectUrl}
                     visible={projectPlayerVisible} /> */}
+                <TopToolbar />
                 <Scene
                     fullscreen={fullscreen}
                     config={config}

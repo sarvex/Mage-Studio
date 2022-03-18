@@ -2,8 +2,9 @@
 
 exports[`SceneContainer should render properly 1`] = `
 <div
-  className="scene-container"
+  className="scene-container panel"
 >
+  <Connect(Toolbar) />
   <Scene
     fullscreen={false}
   />
@@ -12,8 +13,9 @@ exports[`SceneContainer should render properly 1`] = `
 
 exports[`SceneContainer should render properly if fullscreen 1`] = `
 <div
-  className="scene-container fullscreen"
+  className="scene-container panel fullscreen"
 >
+  <Connect(Toolbar) />
   <Scene
     fullscreen={true}
   />

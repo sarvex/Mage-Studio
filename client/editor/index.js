@@ -1,25 +1,26 @@
 import React from 'react';
-import {Row} from 'antd';
 
 import Header from '../shared/header/Header';
 import Footer from '../shared/footer/Footer';
-import TopToolbar from './toolbars/top';
-import BottomToolbar from './toolbars/bottom';
 import SceneContainer from './scene/SceneContainer';
-import Inspector from './inspector/Inspector';
+import Inspector from './panels/inspector/Inspector';
+import Hierarchy from './panels/hierarchy/HierarchyPanel';
+import Assets from './panels/assets/AssetsPanel';
 
 export default (props) => {
     return (
         <div className="app">
             <Header />
-            <TopToolbar/>
-            <Row className="main-container">
-                <BottomToolbar />
-                <div className="canvas-container">
+            <div className="main-container">
+                <div className="left-container">
                     <SceneContainer store={props.store}/>
+                    <Assets />
                 </div>
-                <Inspector />
-            </Row>
+                <div className="right-container">
+                    <Hierarchy />
+                    <Inspector />
+                </div>
+            </div>
             <Footer />
         </div>
     );

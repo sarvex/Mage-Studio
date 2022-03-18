@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ControlsRadioGroup render should render properly 1`] = `
-<[object Object]
+<Memo(ForwardRef)
   className="controls-settings-radio-group"
   onChange={[Function]}
 >
@@ -32,11 +32,11 @@ exports[`ControlsRadioGroup render should render properly 1`] = `
       width={12}
     />
   </ForwardRef(RadioButton)>
-</[object Object]>
+</Memo(ForwardRef)>
 `;
 
 exports[`ControlsRadioGroup render should render properly when control is ROTATE_CONTROL 1`] = `
-<[object Object]
+<Memo(ForwardRef)
   className="controls-settings-radio-group"
   onChange={[Function]}
 >
@@ -67,11 +67,11 @@ exports[`ControlsRadioGroup render should render properly when control is ROTATE
       width={12}
     />
   </ForwardRef(RadioButton)>
-</[object Object]>
+</Memo(ForwardRef)>
 `;
 
 exports[`ControlsRadioGroup render should render properly when control is SCALE_CONTROL 1`] = `
-<[object Object]
+<Memo(ForwardRef)
   className="controls-settings-radio-group"
   onChange={[Function]}
 >
@@ -102,11 +102,11 @@ exports[`ControlsRadioGroup render should render properly when control is SCALE_
       width={12}
     />
   </ForwardRef(RadioButton)>
-</[object Object]>
+</Memo(ForwardRef)>
 `;
 
 exports[`ControlsRadioGroup render should render properly when control is TRANSLATE_CONTROL 1`] = `
-<[object Object]
+<Memo(ForwardRef)
   className="controls-settings-radio-group"
   onChange={[Function]}
 >
@@ -137,5 +137,5 @@ exports[`ControlsRadioGroup render should render properly when control is TRANSL
       width={12}
     />
   </ForwardRef(RadioButton)>
-</[object Object]>
+</Memo(ForwardRef)>
 `;

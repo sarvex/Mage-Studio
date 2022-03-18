@@ -5,12 +5,12 @@ import EmptyInspector from './elements/EmptyInspector';
 import MeshInspector from './elements/MeshInspector';
 
 import style from './inspector.module.scss';
-import { toggleInspectorVisibility } from '../../actions/inspector';
+import { toggleInspectorVisibility } from '../../../actions/inspector';
 import { connect } from 'react-redux';
-import { ENTITY_TYPES } from '../../lib/constants';
+import { ENTITY_TYPES } from '../../../lib/constants';
 
-import { getOrCreateApp } from '../scene/AppProxy';
-import debounce from '../../lib/debounce';
+import { getOrCreateApp } from '../../scene/AppProxy';
+import debounce from '../../../lib/debounce';
 
 const DEFAULT_STATE = {
     rotation: {},
@@ -90,23 +90,15 @@ class Inspector extends React.Component {
     }
 
     render() {
-        const { visible } = this.props;
-        const className = classnames(style['inspector-drawer'], {
-            [style['hidden']]: !visible
-        });
+        // const { visible } = this.props;
+        const className = classnames(style.inspector, style.panel);
         return (
-            <Drawer
-                className={className}
-                title={'Inpector'}
-                placement={'right'}
-                closable={false}
-                height={'80vh'}
-                width={400}
-                mask={false}
-                visible={visible}
-                getContainer={false}>
-                { this.getContent() }
-            </Drawer>
+            <div className={className}>
+                <h3 className={style.title}>Inspector</h3>
+                <div className={style.content}>
+                    {/* { this.getContent() } */}
+                </div>
+            </div>
         );
     }
 }

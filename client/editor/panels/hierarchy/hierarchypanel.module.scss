@@ -1,0 +1,65 @@
+@import '../../../shared/constants.scss';
+@import '../../../shared/theme.scss';
+@import '../panel.module.scss';
+
+// .hierarchy-search-filter {
+//     /* align-self: center; */
+//     display: inline-block;
+//     width: 100%;
+//     background: $background-darker;
+//     border: 1px solid $background-very-dark;
+//     margin-bottom: $base-unit * 2;
+//     //border-radius: 6px;
+//     &.right {
+//         float: right;
+//         width: $base-unit * 20;
+//     }
+//     &>*,
+//     & input {
+//         height: $base-unit * 3;
+//         // font-family: 'Roboto Mono', sans-serif;
+//         font-size: .55rem;
+//         font-weight: 700;
+//         background: $background-darker;
+//         border: none;
+//         color: white;
+//         border-radius: 0px;
+//         width: 100% !important;
+//         & svg {
+//             color: $white;
+//         }
+//     }
+//     &.disabled>* {
+//         color: $grey;
+//         opacity: .2;
+//     }
+// }
+
+.hierarchy {
+    flex-grow: 1;
+    margin-bottom: 0px;
+    // overflow-y: auto;
+    // // background: $background;
+    // & li,
+    // & span {
+    //     //background: $sidebar-background !important;
+    //     color: $white;
+    //     font-family: 'Roboto Mono', sans-serif;
+    //     font-size: .55rem;
+    //     font-weight: 700;
+    //     line-height: $base-unit * 2;
+    // }
+    // li[role='treeitem'] {
+    //     //height: $base-unit * 2 !important;
+    //     padding: 0px !important;
+    // }
+}
+
+// .inspector-empty-icon {
+//     color: $black;
+//     font-size: 2rem;
+// }
+
+// .setting-value-action {
+//     margin-left: $base-unit;
+// }

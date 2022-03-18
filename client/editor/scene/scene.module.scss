@@ -1,39 +1,44 @@
 @import '../../shared/constants.scss';
 @import '../../shared/theme.scss';
+@import '../panels/panel.module.scss';
+
 .scene-container {
-    width: 100%;
-    height: 100%;
-    &.fullscreen {
-        position: absolute;
-        left: 0;
-        z-index: 100;
-        & .gameContainer,
-        & .gamePlayer {
-            height: 100%;
-            width: 100%;
-        }
-    }
+
+    flex: 3 1 auto;
+    border: 0;
+    margin-bottom: 0;
+    background-color: $scene-container-background;
+    max-width: 73vw;
+    max-height: calc(73vh - 64px);
+
+    // &.fullscreen {
+    //     position: absolute;
+    //     left: 0;
+    //     z-index: 100;
+    //     & .gameContainer,
+    //     & .gamePlayer {
+    //         height: 100%;
+    //         width: 100%;
+    //     }
+    // }
+
     & .gameContainer {
         flex: 1 1 auto;
-        // min-height: 600px;
-        // min-width: 800px;
-        width: 100%;
-        z-index: 0;
-        display: block;
-        height: 100%;
-        & canvas {
-            background: $background-darker;
-        }
+        max-width: 73vw;
+        max-height: calc(73vh - 64px);
+        margin-bottom: 2px;
     }
-    & .gamePlayer+.gameContainer {
-        visibility: hidden;
-    }
-    & .gamePlayer {
-        position: relative;
-        margin: auto;
-        height: 95.6vh;
-        width: 66.6vw;
-    }
+
+    // & .gamePlayer+.gameContainer {
+    //     visibility: hidden;
+    // }
+
+    // & .gamePlayer {
+    //     position: relative;
+    //     margin: auto;
+    //     height: 95.6vh;
+    //     width: 66.6vw;
+    // }
     // & .scene-toolbar {
     //     /* margin: auto; */
     //     /* display: inline-block; */

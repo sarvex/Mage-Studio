@@ -13,11 +13,27 @@ import {
     Cube,
     Sphere
 } from 'mage-engine';
-import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL, SCALE_CONTROL, TRANSLATE_CONTROL } from '../../../lib/constants';
+
+import {
+    GLOBAL_SPACE,
+    LOCAL_SPACE,
+    ROTATE_CONTROL,
+    SCALE_CONTROL,
+    TRANSLATE_CONTROL
+} from '../../../lib/constants';
 
 import {
     observeStore
 } from './reduxStore';
+
+const PROTOTYPE_TEXTURES = [
+    'cube_prototype_green',
+    'cube_prototype_dark',
+    'cube_prototype_light',
+    'cube_prototype_orange',
+    'cube_prototype_purple'
+];
+const getRandomPrototypeTexture = () => PROTOTYPE_TEXTURES[Math.floor(Math.random() * PROTOTYPE_TEXTURES.length)];
 
 export class EditorScene extends Level {
 
@@ -52,12 +68,14 @@ export class EditorScene extends Level {
     }
 
     addCube() {
-        const cube = new Cube(20, 0x00ff00, { wireframe: true, tags: ['test', 'marco', 'something', 'else'] });
+        const cube = new Cube(20, 0xeeeeee, { tags: ['test', 'marco', 'something', 'else'] });
         cube.setPosition({
             x: (Math.random() * 200) - 100,
             y: (Math.random() * 200) - 100,
             z: (Math.random() * 200) - 100
         });
+
+        cube.setTextureMap(getRandomPrototypeTexture());
 
         return cube;
     }
@@ -263,15 +281,18 @@ export class EditorScene extends Level {
         }
     }
 
+    resize(width, height) {
+        Scene.resize(width, height);
+    }
+
     onCreate() {
-        Scene.camera.setPosition({y: 70, z: 150});
-        Scene.camera.lookAt(0, 0, 0);
+        Scene.getCamera().setPosition({y: 70, z: 150});
+        Scene.getCamera().lookAt(0, 0, 0);
 
         Scene.setClearColor(0x040d10);
 
         this.setTranformControls();
 
-        //this.sceneHelper.addGrid(2000, 100);
         this.grid = new Grid(2000, 100, 0xfb9d60, 0x5A6668);
     }
 }

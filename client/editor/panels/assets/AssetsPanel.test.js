@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import { AssetsPanel } from './AssetsPanel';
 
-describe('asset', () => {
+describe.skip('asset', () => {
 
     it('should render an AssetsMenu', () => {
         const assets = { textures: [], models: [], images: [] };

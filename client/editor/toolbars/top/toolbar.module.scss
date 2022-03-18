@@ -1,22 +1,23 @@
 @import '../../../shared/constants.scss';
 @import '../../../shared/theme.scss';
+
 .controls-settings-group {
     height: $base-unit * 3;
     border-radius: 4px;
-    background: $background-darker;
+    background: $panel-background;
 }
 
 .toolbar {
-    // min-height: $base-unit * 4;
     position: relative;
     width: 100%;
-    background: $background-lighter;
-    // padding: 4px $base-unit * 2;
+    background: $scene-toolbar-background;
+    border-top-left-radius: $base-unit;
+    border-top-right-radius: $base-unit;
+
     &>.settings-list {
-        // margin: 0;
         padding: 0;
-        // height: $base-unit * 4;
         margin: $base-unit $base-unit * 2;
+
         &>.settings-list-item {
             list-style: none;
             display: inline-block;
@@ -33,7 +34,6 @@
         font-weight: bold;
         background: transparent;
         border: 1px solid $atomic-tangerine;
-        // transition: none;
         font-size: 10px;
         font-family: "Open Sans";
         top: 1px;

@@ -12,7 +12,7 @@ $header-height: $base-unit * 4;
 
     .logo {
         color: $logo;
-        margin-right: $base-unit * 2;
+        margin: 0px $base-unit * 2 0px $base-unit;
         font-size: $base-unit * 2;
         font-style: italic;
         font-family: LeckerliOne;
@@ -25,7 +25,7 @@ $header-height: $base-unit * 4;
             position: absolute;
             background: $logo;
             top: 22px;
-            left: $base-unit * 2;
+            left: $base-unit * 3;
         }
     }
 
