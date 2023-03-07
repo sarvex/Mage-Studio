@@ -1,3 +1,3 @@
 # Mage Studio
 
-copyright 2019
+copyright 2023
