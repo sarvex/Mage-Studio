@@ -11,101 +11,127 @@ import {
     Grid,
     Cylinder,
     Cube,
-    Sphere
-} from 'mage-engine';
+    Cone,
+    Sphere,
+    math,
+    Box,
+    Color,
+    Plane,
+    constants,
+} from "mage-engine";
 
 import {
     GLOBAL_SPACE,
     LOCAL_SPACE,
     ROTATE_CONTROL,
     SCALE_CONTROL,
-    TRANSLATE_CONTROL
-} from '../../../lib/constants';
+    TRANSLATE_CONTROL,
+} from "../../../lib/constants";
 
-import {
-    observeStore
-} from './reduxStore';
+import { observeStore } from "./reduxStore";
 
 const PROTOTYPE_TEXTURES = [
-    'cube_prototype_green',
-    'cube_prototype_dark',
-    'cube_prototype_light',
-    'cube_prototype_orange',
-    'cube_prototype_purple'
+    "cube_prototype_green",
+    "cube_prototype_dark",
+    "cube_prototype_light",
+    "cube_prototype_orange",
+    "cube_prototype_purple",
 ];
-const getRandomPrototypeTexture = () => PROTOTYPE_TEXTURES[Math.floor(Math.random() * PROTOTYPE_TEXTURES.length)];
+const getRandomPrototypeTexture = () =>
+    PROTOTYPE_TEXTURES[Math.floor(Math.random() * PROTOTYPE_TEXTURES.length)];
+
+const pickRandomPosition = () => ({
+    x: math.randomIntFromInterval(-100, 100),
+    y: math.randomIntFromInterval(-100, 100),
+    z: math.randomIntFromInterval(-100, 100),
+});
 
 export class EditorScene extends Level {
-
     constructor(options) {
         super(options);
     }
 
-    loadScene() { return Promise.resolve(); }
+    loadScene() {
+        return Promise.resolve();
+    }
 
     addAmbientLight() {
         const light = new AmbientLight({
-            color:0xeeeeee,
-            intensity: 1
+            color: 0xeeeeee,
+            intensity: 1,
         });
 
-        light.addHelper('lightHolder');
+        light.addHelper("lightHolder");
     }
 
     addSunLight() {
         const light = new SunLight({
             color: 0xeeeeee,
             intensity: 1,
-            position: { x: 40, y: 40, z: 40},
-            target: { x: 1, y: 1, z: 1 }
+            position: { x: 40, y: 40, z: 40 },
+            target: { x: 1, y: 1, z: 1 },
         });
-        light.addHelper('lightHolder');
-        light.setPosition({
-            x: (Math.random() * 200) - 100,
-            y: (Math.random() * 200) - 100,
-            z: (Math.random() * 200) - 100
-        });
+        light.addHelper("lightHolder");
+        light.setPosition(pickRandomPosition());
     }
 
     addCube() {
-        const cube = new Cube(20, 0xeeeeee, { tags: ['test', 'marco', 'something', 'else'] });
-        cube.setPosition({
-            x: (Math.random() * 200) - 100,
-            y: (Math.random() * 200) - 100,
-            z: (Math.random() * 200) - 100
-        });
+        const cube = new Cube(20, 0xeeeeee);
 
+        cube.setPosition(pickRandomPosition());
         cube.setTextureMap(getRandomPrototypeTexture());
 
         return cube;
     }
 
     addSphere() {
-        const sphere = new Sphere(20, 0xffff00, { wireframe: true });
-        sphere.setPosition({
-            x: (Math.random() * 200) - 100,
-            y: (Math.random() * 200) - 100,
-            z: (Math.random() * 200) - 100
-        });
-
+        const sphere = new Sphere(20, 0xffff00);
+        sphere.setPosition(pickRandomPosition());
+        sphere.setTextureMap(getRandomPrototypeTexture());
         return sphere;
     }
 
     addCylinder() {
-        const cylinder = new Cylinder(10, 10, 30, 0x0fff00, { wireframe: true });
-        cylinder.setPosition({
-            x: (Math.random() * 200) - 100,
-            y: (Math.random() * 200) - 100,
-            z: (Math.random() * 200) - 100
-        });
-
+        const cylinder = new Cylinder(10, 10, 30, 0x0fff00);
+        cylinder.setPosition(pickRandomPosition());
+        cylinder.setTextureMap(getRandomPrototypeTexture());
         return cylinder;
+    }
+
+    addCone() {
+        const radius = 10;
+        const height = 15;
+
+        const cone = new Cone(radius, height);
+        cone.setPosition(pickRandomPosition());
+        cone.setTextureMap(getRandomPrototypeTexture());
+    }
+
+    addBox() {
+        const width = math.randomIntFromInterval(10, 20);
+        const height = math.randomIntFromInterval(10, 20);
+        const depth = math.randomIntFromInterval(10, 20);
+
+        const box = new Box(width, height, depth, Color.randomColor(true));
+
+        box.setPosition(pickRandomPosition());
+        box.setTextureMap(getRandomPrototypeTexture());
+    }
+
+    addPlane() {
+        const height = math.randomIntFromInterval(10, 50);
+        const width = math.randomIntFromInterval(10, 50);
+
+        const plane = new Plane(height, width, { color: Color.randomColor(true) });
+
+        plane.setPosition(pickRandomPosition());
+        plane.setTexture(getRandomPrototypeTexture(), constants.TEXTURES.MAP);
     }
 
     loadModel(model) {
         const parsed = Models.parseModel(model);
-        parsed.setScale({x: 5, y: 5, z: 5 });
-        parsed.setPosition({x: 0, y: 0, z: 0})
+        parsed.setScale({ x: 5, y: 5, z: 5 });
+        parsed.setPosition({ x: 0, y: 0, z: 0 });
     }
 
     loadScript(scriptContent) {
@@ -113,26 +139,26 @@ export class EditorScene extends Level {
         this.currentElement.addScript(script.name());
     }
 
-    updateCurrentElement(name = '', position, rotation, scale) {
+    updateCurrentElement(name = "", position, rotation, scale) {
         if (this.currentElement && this.hasSelection) {
             this.currentElement.setPosition(position);
             this.currentElement.setRotation(rotation);
             this.currentElement.setScale(scale);
-            this.currentElement.setName(name, { replace: true })
+            this.currentElement.setName(name, { replace: true });
 
             this.dispatchEvent({
-                type: 'elementChanged',
+                type: "elementChanged",
                 name: this.currentElement.name,
                 position,
                 rotation,
-                scale
+                scale,
             });
         }
     }
 
     getCurrentElement() {
         return this.currentElement;
-    };
+    }
 
     onElementClick({ elements = [] }) {
         const { element } = elements[0];
@@ -141,21 +167,23 @@ export class EditorScene extends Level {
         this.transform.attach(element);
 
         this.dispatchEvent({
-            type: 'elementAttached',
+            type: "elementAttached",
             name: element.name,
             rotation: element.getRotation(),
             scale: element.getScale(),
-            position: element.getPosition()
+            position: element.getPosition(),
         });
     }
 
     onElementDeselect() {
-        console.log('deselecting');
+        console.log("deselecting");
         this.hasSelection = false;
-        this.dispatchEvent({ type: 'elementDetached' });
+        this.dispatchEvent({ type: "elementDetached" });
     }
 
-    onKeyDown(e){ console.log(e); }
+    onKeyDown(e) {
+        console.log(e);
+    }
     onKeyUp(e) {}
 
     onKeyPress({ event }) {
@@ -184,20 +212,20 @@ export class EditorScene extends Level {
             case 109: // -, _, num-
                 this.transform.setSize(Math.max(this.transform.size - 0.1, 0.1));
                 break;
-            case 'x': // X
-                this.transform.showX = ! this.transform.showX;
+            case "x": // X
+                this.transform.showX = !this.transform.showX;
                 break;
-            case 'y': // Y
-                this.transform.showY = ! this.transform.showY;
+            case "y": // Y
+                this.transform.showY = !this.transform.showY;
                 break;
-            case 'z': // Z
-                this.transform.showZ = ! this.transform.showZ;
+            case "z": // Z
+                this.transform.showZ = !this.transform.showZ;
                 break;
             case 32: // Spacebar
-                this.transform.enabled = ! this.transform.enabled;
+                this.transform.enabled = !this.transform.enabled;
                 break;
-            case 'escape':
-                this.transform.detach()
+            case "escape":
+                this.transform.detach();
                 break;
         }
     }
@@ -206,8 +234,8 @@ export class EditorScene extends Level {
         Controls.setOrbitControl();
         Controls.setTransformControl();
 
-        this.transform = Controls.getControl('transform');
-        this.transform.addEventListener('objectChange', this.dispatchElementChange.bind(this));
+        this.transform = Controls.getControl("transform");
+        this.transform.addEventListener("objectChange", this.dispatchElementChange.bind(this));
     }
 
     changeTransformControl(control) {
@@ -240,17 +268,15 @@ export class EditorScene extends Level {
 
     changeFog(fog) {
         if (fog.color && fog.density && fog.enabled) {
-            Scene.fog(fog.color, fog.density/1000);
+            Scene.fog(fog.color, fog.density / 1000);
         }
     }
 
     changeTexture(textureId, texturePath) {
         if (this.currentElement) {
-            Images
-                .loadSingleTexture(textureId, texturePath)
-                .then((texture) => {
-                    this.currentElement.setTexture(textureId);
-                });
+            Images.loadSingleTexture(textureId, texturePath).then(texture => {
+                this.currentElement.setTexture(textureId);
+            });
         }
     }
 
@@ -264,19 +290,19 @@ export class EditorScene extends Level {
         if (!this.transform.object || !this.currentElement) return;
 
         this.dispatchEvent({
-            type: 'elementChanged',
+            type: "elementChanged",
             name: this.currentElement.name,
             rotation: this.currentElement.getRotation(),
             scale: this.currentElement.getScale(),
-            position: this.currentElement.getPosition()
+            position: this.currentElement.getPosition(),
         });
     }
-    
+
     handleSceneChange(state) {
         if (state.requested) {
             this.dispatchEvent({
-                type: 'sceneExported',
-                data: this.toJSON()
+                type: "sceneExported",
+                data: this.toJSON(),
             });
         }
     }
@@ -286,13 +312,13 @@ export class EditorScene extends Level {
     }
 
     onCreate() {
-        Scene.getCamera().setPosition({y: 70, z: 150});
+        Scene.getCamera().setPosition({ y: 70, z: 150 });
         Scene.getCamera().lookAt(0, 0, 0);
 
         Scene.setClearColor(0x040d10);
 
         this.setTranformControls();
 
-        this.grid = new Grid(2000, 100, 0xfb9d60, 0x5A6668);
+        this.grid = new Grid(2000, 100, 0xfb9d60, 0x5a6668);
     }
 }

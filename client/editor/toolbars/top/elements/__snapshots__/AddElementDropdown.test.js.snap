@@ -11,49 +11,66 @@ exports[`AddElementDropdown render should render properly 1`] = `
       <Menu
         onClick={[Function]}
       >
-        <MenuItem
-          title="model"
-        >
-          model
-        </MenuItem>
         <SubMenu
-          title="mesh"
+          title="Model"
         >
-          <MenuItem
-            title="cube"
-          >
-            cube
-          </MenuItem>
-          <MenuItem
-            title="sphere"
-          >
-            sphere
-          </MenuItem>
-          <MenuItem
-            title="cylinder"
-          >
-            cylinder
+          <MenuItem>
+            Import
           </MenuItem>
         </SubMenu>
         <SubMenu
-          title="sound"
+          title="Element"
+        >
+          <MenuItem
+            title="CUBE"
+          >
+            Cube
+          </MenuItem>
+          <MenuItem
+            title="SPHERE"
+          >
+            Sphere
+          </MenuItem>
+          <MenuItem
+            title="CYLINDER"
+          >
+            Cylinder
+          </MenuItem>
+          <MenuItem
+            title="CONE"
+          >
+            Cone
+          </MenuItem>
+          <MenuItem
+            title="BOX"
+          >
+            Box
+          </MenuItem>
+          <MenuItem
+            title="PLANE"
+          >
+            Plane
+          </MenuItem>
+        </SubMenu>
+        <SubMenu
+          title="Sound"
         >
           <MenuItem>
             sorry
           </MenuItem>
         </SubMenu>
         <SubMenu
-          title="light"
+          title="Light"
         >
           <MenuItem
-            title="ambient"
+            title="AMBIENT"
           >
-            ambient light
+            Ambient
           </MenuItem>
           <MenuItem
-            title="sun"
+            title="SUN"
           >
-            sun light
+            Sun 
           </MenuItem>
         </SubMenu>
       </Menu>
@@ -66,7 +83,7 @@ exports[`AddElementDropdown render should render properly 1`] = `
     }
   >
     <Button
-      className="space-settings-button"
+      className="add-element-button"
     >
       <ForwardRef(PlusOutlined) />
       Add

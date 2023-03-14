@@ -1,5 +1,5 @@
-@import '../../../shared/constants.scss';
-@import '../../../shared/theme.scss';
+@import "../../../shared/constants.scss";
+@import "../../../shared/theme.scss";
 
 .controls-settings-group {
     height: $base-unit * 3;
@@ -14,11 +14,11 @@
     border-top-left-radius: $base-unit;
     border-top-right-radius: $base-unit;
 
-    &>.settings-list {
+    & > .settings-list {
         padding: 0;
         margin: $base-unit $base-unit * 2;
 
-        &>.settings-list-item {
+        & > .settings-list-item {
             list-style: none;
             display: inline-block;
             line-height: $base-unit * 3;
@@ -27,7 +27,8 @@
         }
     }
 
-    & .space-settings-button {
+    & .space-settings-button,
+    & .add-element-button {
         height: $base-unit * 3;
         border-radius: $base-unit / 2;
         color: $atomic-tangerine;
@@ -83,7 +84,6 @@
                 border-bottom: 2px solid $atomic-tangerine !important;
             }
         }
-
     }
     & .snap-settings-group {
         padding: 0 $base-unit;
