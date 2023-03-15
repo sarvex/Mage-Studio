@@ -1,5 +1,5 @@
 {
-    "name": "MageStudio",
+    "name": "magestudio",
     "version": "0.0.3",
     "description": "Mage Studio",
     "main": "main.js",
@@ -78,7 +78,7 @@
         "express-fileupload": "1.1.10",
         "js-yaml": "3.13.1",
         "lodash": "4.17.19",
-        "mage-engine": "3.17.1",
+        "mage-engine": "3.21.2",
         "morgan": "1.9.1",
         "ncp": "2.0.0",
         "next": "12.0.4",

@@ -1,26 +1,32 @@
-import React from 'react';
-import { Dropdown, Button, Menu } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React from "react";
+import { Dropdown, Button, Menu } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
-import style from '../toolbar.module.scss';
+import style from "../toolbar.module.scss";
+import { ELEMENTS, ELEMENTS_LABELS } from "../../../../contants";
 const { Item, SubMenu } = Menu;
 
-const getAddMenu = (onItemSelect) => (
+export const getDropdownOverlay = onItemSelect => (
     <Menu onClick={onItemSelect}>
-        <Item title='model'>
-            model
-        </Item>
-        <SubMenu title="mesh">
-            <Item key='cube' title='cube'>cube</Item>
-            <Item key='sphere' title='sphere'>sphere</Item>
-            <Item key='cylinder' title='cylinder'>cylinder</Item>
+        <SubMenu title="Model">
+            <Item>Import</Item>
         </SubMenu>
-        <SubMenu title="sound">
+        <SubMenu title="Element">
+            {Object.keys(ELEMENTS.BASE).map(k => (
+                <Item key={k} title={k}>
+                    {ELEMENTS_LABELS.BASE[k]}
+                </Item>
+            ))}
+        </SubMenu>
+        <SubMenu title="Sound">
             <Item>sorry</Item>
         </SubMenu>
-        <SubMenu title="light">
-            <Item key='ambient' title='ambient'>ambient light</Item>
-            <Item key='sun' title='sun'>sun light</Item>
+        <SubMenu title="Light">
+            {Object.keys(ELEMENTS.LIGHTS).map(k => (
+                <Item key={k} title={k}>
+                    {ELEMENTS_LABELS.LIGHTS[k]}
+                </Item>
+            ))}
         </SubMenu>
     </Menu>
 );
@@ -31,17 +37,19 @@ const AddElementDropdown = ({ onElementSelection = f => f }) => {
     };
 
     return (
-        <div className={style['controls-settings-group']}>
+        <div className={style["controls-settings-group"]}>
             <Dropdown
-                overlay={getAddMenu(onItemSelect)}
-                trigger={['click']}
-                placement={'topLeft'}>
-                <Button className={style['space-settings-button']}>
-                    <PlusOutlined/>Add
+                overlay={getDropdownOverlay(onItemSelect)}
+                trigger={["click"]}
+                placement={"topLeft"}
+            >
+                <Button className={style["add-element-button"]}>
+                    <PlusOutlined />
+                    Add
                 </Button>
             </Dropdown>
         </div>
-    )
+    );
 };
 
 export default AddElementDropdown;
