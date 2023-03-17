@@ -18,6 +18,10 @@ import {
     Color,
     Plane,
     constants,
+    SpotLight,
+    PointLight,
+    HemisphereLight,
+    PALETTES,
 } from "mage-engine";
 
 import {
@@ -61,7 +65,7 @@ export class EditorScene extends Level {
             intensity: 1,
         });
 
-        light.addHelper("lightHolder");
+        light.addHelpers();
     }
 
     addSunLight() {
@@ -71,8 +75,44 @@ export class EditorScene extends Level {
             position: { x: 40, y: 40, z: 40 },
             target: { x: 1, y: 1, z: 1 },
         });
-        light.addHelper("lightHolder");
+        light.addHelpers();
         light.setPosition(pickRandomPosition());
+    }
+
+    addPointLight() {
+        const pointLight = PointLight.create({
+            color: Color.randomColor(true),
+            intensity: 1,
+            distance: 20,
+            decay: 1,
+        });
+
+        pointLight.addHelpers();
+        pointLight.setPosition(pickRandomPosition());
+    }
+
+    addSpotLight() {
+        const spotlight = SpotLight.create({
+            color: Color.randomColor(true),
+            intensity: 1,
+            distance: 10,
+        });
+
+        spotlight.addHelpers();
+        spotlight.setPosition(pickRandomPosition());
+    }
+
+    addHemisphereLight() {
+        const hemispherelight = HemisphereLight.create({
+            color: {
+                sky: PALETTES.BASE.WHITE,
+                ground: PALETTES.BASE.BLACK,
+            },
+            intensity: 1,
+        });
+
+        hemispherelight.addHelpers();
+        hemispherelight.setPosition(pickRandomPosition());
     }
 
     addCube() {

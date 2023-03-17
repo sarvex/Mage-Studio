@@ -10,6 +10,9 @@ export const ELEMENTS = {
     LIGHTS: {
         AMBIENT: "AMBIENT",
         SUN: "SUN",
+        POINTLIGHT: "POINTLIGHT",
+        SPOTLIGHT: "SPOTLIGHT",
+        HEMISPHERE: "HEMISPHERE",
     },
 };
 
@@ -23,7 +26,10 @@ export const ELEMENTS_LABELS = {
         PLANE: "Plane",
     },
     LIGHTS: {
-        AMBIENT: "Ambient",
+        AMBIENT: "Ambient Light",
         SUN: "Sun ",
+        POINTLIGHT: "Point Light",
+        SPOTLIGHT: "Spot Light",
+        HEMISPHERE: "Hemisphere Light",
     },
 };

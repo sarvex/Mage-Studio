@@ -45,6 +45,7 @@ export const projectPlayerVisible = visible => dispatch => {
 };
 
 export const addElement = type => {
+    console.log(type);
     getOrCreateApp().then(app => {
         switch (type) {
             case ELEMENTS.BASE.CUBE:
@@ -70,6 +71,15 @@ export const addElement = type => {
                 break;
             case ELEMENTS.LIGHTS.SUN:
                 app.addSunLight();
+                break;
+            case ELEMENTS.LIGHTS.SPOTLIGHT:
+                app.addSpotLight();
+                break;
+            case ELEMENTS.LIGHTS.POINTLIGHT:
+                app.addPointLight();
+                break;
+            case ELEMENTS.LIGHTS.HEMISPHERE:
+                app.addHemisphereLight();
                 break;
             default:
                 break;
