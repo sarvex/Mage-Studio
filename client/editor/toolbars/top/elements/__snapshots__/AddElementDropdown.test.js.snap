@@ -65,12 +65,27 @@ exports[`AddElementDropdown render should render properly 1`] = `
           <MenuItem
             title="AMBIENT"
           >
-            Ambient
+            Ambient Light
           </MenuItem>
           <MenuItem
             title="SUN"
           >
             Sun 
+          </MenuItem>
+          <MenuItem
+            title="POINTLIGHT"
+          >
+            Point Light
+          </MenuItem>
+          <MenuItem
+            title="SPOTLIGHT"
+          >
+            Spot Light
+          </MenuItem>
+          <MenuItem
+            title="HEMISPHERE"
+          >
+            Hemisphere Light
           </MenuItem>
         </SubMenu>
       </Menu>

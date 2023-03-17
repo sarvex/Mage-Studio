@@ -19,7 +19,7 @@ exports[`Footer should render fine 1`] = `
       className="version"
     >
       v
-      3.21.2
+      3.22.1
     </span>
   </p>
 </Row>
