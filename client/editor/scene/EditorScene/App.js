@@ -5,71 +5,45 @@ import {
     Scripts,
     Controls,
     Images,
-    AmbientLight,
-    SunLight,
     THREE,
     Grid,
-    Cylinder,
-    Cube,
-    Cone,
-    Sphere,
-    math,
-    Box,
-    Color,
-    Plane,
-    constants,
-    SpotLight,
+    store,
+    AmbientLight,
+    SunLight,
     PointLight,
+    SpotLight,
     HemisphereLight,
-    PALETTES,
+    Cube,
+    Sphere,
+    Cylinder,
+    Cone,
+    Box,
+    Plane,
 } from "mage-engine";
+import { hierarchyChange } from "../../../actions/hierarchy";
 
-import {
-    GLOBAL_SPACE,
-    LOCAL_SPACE,
-    ROTATE_CONTROL,
-    SCALE_CONTROL,
-    TRANSLATE_CONTROL,
-} from "../../../lib/constants";
-
-import { observeStore } from "./reduxStore";
-
-const PROTOTYPE_TEXTURES = [
-    "cube_prototype_green",
-    "cube_prototype_dark",
-    "cube_prototype_light",
-    "cube_prototype_orange",
-    "cube_prototype_purple",
-];
-const getRandomPrototypeTexture = () =>
-    PROTOTYPE_TEXTURES[Math.floor(Math.random() * PROTOTYPE_TEXTURES.length)];
-
-const pickRandomPosition = () => ({
-    x: math.randomIntFromInterval(-100, 100),
-    y: math.randomIntFromInterval(-100, 100),
-    z: math.randomIntFromInterval(-100, 100),
-});
-
+import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL } from "../../../lib/constants";
+import { getRandomPrototypeTexture, pickRandomPosition } from "../../../lib/util";
 export class EditorScene extends Level {
     constructor(options) {
         super(options);
     }
 
-    loadScene() {
-        return Promise.resolve();
+    dispatchUpdatedHierarchy() {
+        store.dispatch(hierarchyChange(Scene.getHierarchy()));
     }
 
-    addAmbientLight() {
-        const light = new AmbientLight({
+    addAmbientLight = () => {
+        AmbientLight.create({
             color: 0xeeeeee,
             intensity: 1,
-        });
+        }).addHelpers();
 
-        light.addHelpers();
-    }
+        this.dispatchUpdatedHierarchy();
+    };
 
-    addSunLight() {
-        const light = new SunLight({
+    addSunLight = () => {
+        const light = SunLight({
             color: 0xeeeeee,
             intensity: 1,
             position: { x: 40, y: 40, z: 40 },
@@ -77,9 +51,11 @@ export class EditorScene extends Level {
         });
         light.addHelpers();
         light.setPosition(pickRandomPosition());
-    }
 
-    addPointLight() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addPointLight = () => {
         const pointLight = PointLight.create({
             color: Color.randomColor(true),
             intensity: 1,
@@ -89,9 +65,11 @@ export class EditorScene extends Level {
 
         pointLight.addHelpers();
         pointLight.setPosition(pickRandomPosition());
-    }
 
-    addSpotLight() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addSpotLight = () => {
         const spotlight = SpotLight.create({
             color: Color.randomColor(true),
             intensity: 1,
@@ -100,54 +78,62 @@ export class EditorScene extends Level {
 
         spotlight.addHelpers();
         spotlight.setPosition(pickRandomPosition());
-    }
 
-    addHemisphereLight() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addHemisphereLight = () => {
         const hemispherelight = HemisphereLight.create({
             color: {
-                sky: PALETTES.BASE.WHITE,
-                ground: PALETTES.BASE.BLACK,
+                sky: constants.PALETTES.BASE.WHITE,
+                ground: constants.PALETTES.BASE.BLACK,
             },
             intensity: 1,
         });
 
         hemispherelight.addHelpers();
         hemispherelight.setPosition(pickRandomPosition());
-    }
 
-    addCube() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addCube = () => {
         const cube = new Cube(20, 0xeeeeee);
 
         cube.setPosition(pickRandomPosition());
         cube.setTextureMap(getRandomPrototypeTexture());
 
-        return cube;
-    }
+        this.dispatchUpdatedHierarchy();
+    };
 
-    addSphere() {
+    addSphere = () => {
         const sphere = new Sphere(20, 0xffff00);
         sphere.setPosition(pickRandomPosition());
         sphere.setTextureMap(getRandomPrototypeTexture());
-        return sphere;
-    }
 
-    addCylinder() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addCylinder = () => {
         const cylinder = new Cylinder(10, 10, 30, 0x0fff00);
         cylinder.setPosition(pickRandomPosition());
         cylinder.setTextureMap(getRandomPrototypeTexture());
-        return cylinder;
-    }
 
-    addCone() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addCone = () => {
         const radius = 10;
         const height = 15;
 
         const cone = new Cone(radius, height);
         cone.setPosition(pickRandomPosition());
         cone.setTextureMap(getRandomPrototypeTexture());
-    }
 
-    addBox() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addBox = () => {
         const width = math.randomIntFromInterval(10, 20);
         const height = math.randomIntFromInterval(10, 20);
         const depth = math.randomIntFromInterval(10, 20);
@@ -156,9 +142,11 @@ export class EditorScene extends Level {
 
         box.setPosition(pickRandomPosition());
         box.setTextureMap(getRandomPrototypeTexture());
-    }
 
-    addPlane() {
+        this.dispatchUpdatedHierarchy();
+    };
+
+    addPlane = () => {
         const height = math.randomIntFromInterval(10, 50);
         const width = math.randomIntFromInterval(10, 50);
 
@@ -166,7 +154,9 @@ export class EditorScene extends Level {
 
         plane.setPosition(pickRandomPosition());
         plane.setTexture(getRandomPrototypeTexture(), constants.TEXTURES.MAP);
-    }
+
+        this.dispatchUpdatedHierarchy();
+    };
 
     loadModel(model) {
         const parsed = Models.parseModel(model);
