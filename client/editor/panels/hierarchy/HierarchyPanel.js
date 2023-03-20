@@ -56,7 +56,6 @@ export class Hierarchy extends React.Component {
 
         this.state = {
             expandedKeys: [DEFAULT_EXPANDED_KEY],
-            // searchValue: "",
             autoExpandParent: true,
         };
     }
@@ -67,23 +66,6 @@ export class Hierarchy extends React.Component {
             autoExpandParent: false,
         });
     };
-
-    // onChange = e => {
-    //     const value = e.target.value;
-    //     const expandedKeys = dataList
-    //         .map(item => {
-    //             if (item.title.indexOf(value) > -1) {
-    //                 return getParentKey(item.key, gData);
-    //             }
-    //             return null;
-    //         })
-    //         .filter((item, i, self) => item && self.indexOf(item) === i);
-    //     this.setState({
-    //         expandedKeys,
-    //         searchValue: value,
-    //         autoExpandParent: true,
-    //     });
-    // };
 
     getIcon(entityType) {
         const EntityIconComponent =
@@ -98,31 +80,16 @@ export class Hierarchy extends React.Component {
                 [ENTITY_TYPES.LIGHT.SUN]: BulbOutlined,
             }[entityType] || FolderViewOutlined;
 
-        console.log(entityType, EntityIconComponent);
-
         return <EntityIconComponent height="4px" width="4px" className={style["label-icon"]} />;
     }
 
     render() {
-        const { searchValue, expandedKeys, autoExpandParent } = this.state;
+        const { expandedKeys, autoExpandParent } = this.state;
         const { graph = [] } = this.props;
         const loop = data => {
-            console.log(data);
             return data.map(({ element, children }) => {
                 const name = element.name || "Level";
-                // const index = name.indexOf(searchValue);
-                // const beforeStr = name.substr(0, index);
-                // const afterStr = name.substr(index + searchValue.length);
-                // const title =
-                //     index > -1 ? (
-                //         <span>
-                //             {beforeStr}
-                //             <span style={{ color: "#f50" }}>{searchValue}</span>
-                //             {afterStr}
-                //         </span>
-                //     ) : (
-                //         <span>{name}</span>
-                //     );
+
                 if (children) {
                     return (
                         <TreeNode icon={this.getIcon(element.entityType)} key={name} title={name}>

@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HierarchyPanel render should render properly when empty 1`] = `
+<div
+  className="panel hierarchy"
+>
+  <h3
+    className="title"
+  >
+    Hierarchy
+  </h3>
+  <div
+    className="content"
+  >
+    <ForwardRef
+      autoExpandParent={true}
+      blockNode={false}
+      checkable={false}
+      className="hierarchy"
+      expandedKeys={
+        Array [
+          "Level",
+        ]
+      }
+      motion={
+        Object {
+          "motionAppear": false,
+          "motionDeadline": 500,
+          "motionName": "ant-motion-collapse",
+          "onAppearActive": [Function],
+          "onAppearEnd": [Function],
+          "onAppearStart": [Function],
+          "onEnterActive": [Function],
+          "onEnterEnd": [Function],
+          "onEnterStart": [Function],
+          "onLeaveActive": [Function],
+          "onLeaveEnd": [Function],
+          "onLeaveStart": [Function],
+        }
+      }
+      onExpand={[Function]}
+      selectable={true}
+      showIcon={true}
+      showLine={true}
+    />
+  </div>
+</div>
+`;
+
+exports[`HierarchyPanel render should render properly when receives a graph 1`] = `
+<div
+  className="panel hierarchy"
+>
+  <h3
+    className="title"
+  >
+    Hierarchy
+  </h3>
+  <div
+    className="content"
+  >
+    <ForwardRef
+      autoExpandParent={true}
+      blockNode={false}
+      checkable={false}
+      className="hierarchy"
+      expandedKeys={
+        Array [
+          "Level",
+        ]
+      }
+      motion={
+        Object {
+          "motionAppear": false,
+          "motionDeadline": 500,
+          "motionName": "ant-motion-collapse",
+          "onAppearActive": [Function],
+          "onAppearEnd": [Function],
+          "onAppearStart": [Function],
+          "onEnterActive": [Function],
+          "onEnterEnd": [Function],
+          "onEnterStart": [Function],
+          "onLeaveActive": [Function],
+          "onLeaveEnd": [Function],
+          "onLeaveStart": [Function],
+        }
+      }
+      onExpand={[Function]}
+      selectable={true}
+      showIcon={true}
+      showLine={true}
+    >
+      <TreeNode
+        icon={
+          <ForwardRef(FolderViewOutlined)
+            className="label-icon"
+            height="4px"
+            width="4px"
+          />
+        }
+        key="Level"
+        title="Level"
+      >
+        <TreeNode
+          icon={
+            <ForwardRef(FolderViewOutlined)
+              className="label-icon"
+              height="4px"
+              width="4px"
+            />
+          }
+          key="Cube"
+          title="Cube"
+        />
+      </TreeNode>
+    </ForwardRef>
+  </div>
+</div>
+`;
