@@ -12,8 +12,6 @@ import style from "./hierarchypanel.module.scss";
 import { connect } from "react-redux";
 import _ from "lodash";
 
-console.log(style);
-
 const { TreeNode } = Tree;
 
 const ENTITY_TYPES = {
