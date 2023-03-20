@@ -1,8 +1,11 @@
+import classnames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
 import { hierarchyChange } from "../../actions/hierarchy";
 import debounce from "../../lib/debounce";
 import { getOrCreateApp } from "./AppProxy";
+
+import TopToolbar from "../toolbars/top";
 
 import style from "./scene.module.scss";
 
@@ -21,24 +24,12 @@ export class Scene extends React.Component {
     }
 
     componentDidMount() {
-        const {
-            store,
-            onMeshChanged,
-            onElementAttached,
-            onElementDetached,
-            onHierarchyChange,
-            onSceneExported,
-            config,
-            onSceneLoad,
-        } = this.props;
+        const { onHierarchyChange } = this.props;
 
         getOrCreateApp().then(app => {
             if (app) {
                 this.app = app;
-                // this.app.addEventListener('elementChanged', debounce(onMeshChanged, 15));
-                // console.log("attaching listeners");
-                this.app.addEventListener("elementAttached", onElementAttached);
-                this.app.addEventListener("elementDetached", onElementDetached);
+
                 this.app.addEventListener("hierarchyChange", onHierarchyChange);
 
                 this.app.resize(this.levelRef.offsetWidth, this.levelRef.offsetHeight);
@@ -57,20 +48,23 @@ export class Scene extends React.Component {
     }
 
     render() {
+        const sceneContainerClassnames = classnames(style["scene-container"], style.panel);
         return (
-            <div
-                id="gameContainer"
-                ref={this.storeLevelRef}
-                className={style.gameContainer}
-                tabIndex={0}
-            ></div>
+            <div className={sceneContainerClassnames}>
+                <TopToolbar />
+                <div
+                    id="gameContainer"
+                    ref={this.storeLevelRef}
+                    className={style.gameContainer}
+                    tabIndex={0}
+                ></div>
+            </div>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     onHierarchyChange: ({ graph }) => dispatch(hierarchyChange(graph)),
-    // onHierarchyChange: console.log,
 });
 
 export default connect(null, mapDispatchToProps)(Scene);

@@ -17,7 +17,7 @@ exports[`App should render fine 1`] = `
     <div
       className="right-container"
     >
-      <Hierarchy />
+      <Connect(Hierarchy) />
       <Connect(Inspector) />
     </div>
   </div>
