@@ -1,150 +1,161 @@
-import React from 'react';
-import { Tree, Input } from 'antd';
-import classnames from 'classnames';
-import { FolderOutlined } from '@ant-design/icons';
+import React from "react";
+import { Tree, Input } from "antd";
+import classnames from "classnames";
+import {
+    GatewayOutlined,
+    VideoCameraOutlined,
+    FolderViewOutlined,
+    BulbOutlined,
+} from "@ant-design/icons";
 
-import style from './hierarchypanel.module.scss';
+import style from "./hierarchypanel.module.scss";
+import { connect } from "react-redux";
+import _ from "lodash";
 
 console.log(style);
 
 const { TreeNode } = Tree;
-const Search = Input.Search;
 
-const x = 3;
-const y = 2;
-const z = 1;
-const gData = [];
-
-const generateData = (_level, _preKey, _tns) => {
-  const preKey = _preKey || '0';
-  const tns = _tns || gData;
-
-  const children = [];
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({ title: key, key });
-    if (i < y) {
-      children.push(key);
-    }
-  }
-  if (_level < 0) {
-    return tns;
-  }
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
+const ENTITY_TYPES = {
+    SCENE: "SCENE",
+    CAMERA: "CAMERA",
+    MESH: "MESH",
+    LABEL: "LABEL",
+    LIGHT: {
+        DEFAULT: "LIGHT.DEFAULT",
+        AMBIENT: "LIGHT.AMBIENT",
+        SUN: "LIGHT.SUN",
+        HEMISPHERE: "LIGHT.HEMISPHERE",
+        POINT: "LIGHT.POINT",
+        SPOT: "LIGHT.SPOT",
+    },
+    AUDIO: {
+        DEFAULT: "AUDIO.DEFAULT",
+        DIRECTIONAL: "AUDIO.DIRECTIONAL",
+        AMBIENT: "AUDIO.AMBIENT",
+    },
+    MODEL: "MODEL",
+    SPRITE: "SPRITE",
+    PARTICLE: "PARTICLE",
+    EFFECT: {
+        PARTICLE: "EFFECT.PARTICLE",
+        SCENERY: "EFFECT.SCENERY",
+    },
+    HELPER: {
+        GRID: "HELPER.GRID",
+        AXES: "HELPER.AXES",
+    },
+    UNKNOWN: "UNKNOWN",
 };
-generateData(z);
 
-const dataList = [];
-const generateList = (data) => {
-  for (let i = 0; i < data.length; i++) {
-    const node = data[i];
-    const key = node.key;
-    dataList.push({ key, title: key });
-    if (node.children) {
-      generateList(node.children, node.key);
-    }
-  }
-};
-generateList(gData);
-
-const getParentKey = (key, tree) => {
-  let parentKey;
-  for (let i = 0; i < tree.length; i++) {
-    const node = tree[i];
-    if (node.children) {
-      if (node.children.some(item => item.key === key)) {
-        parentKey = node.key;
-      } else if (getParentKey(key, node.children)) {
-        parentKey = getParentKey(key, node.children);
-      }
-    }
-  }
-  return parentKey;
-};
+const DEFAULT_EXPANDED_KEY = "Level";
 
 export class Hierarchy extends React.Component {
-  state = {
-    expandedKeys: [],
-    searchValue: '',
-    autoExpandParent: true,
-  }
+    constructor(props) {
+        super(props);
 
-  onExpand = (expandedKeys) => {
-    this.setState({
-      expandedKeys,
-      autoExpandParent: false,
-    });
-  }
+        this.state = {
+            expandedKeys: [DEFAULT_EXPANDED_KEY],
+            // searchValue: "",
+            autoExpandParent: true,
+        };
+    }
 
-  onChange = (e) => {
-    const value = e.target.value;
-    const expandedKeys = dataList.map((item) => {
-      if (item.title.indexOf(value) > -1) {
-        return getParentKey(item.key, gData);
-      }
-      return null;
-    }).filter((item, i, self) => item && self.indexOf(item) === i);
-    this.setState({
-      expandedKeys,
-      searchValue: value,
-      autoExpandParent: true,
-    });
-  }
+    onExpand = expandedKeys => {
+        this.setState({
+            expandedKeys: [...expandedKeys, DEFAULT_EXPANDED_KEY],
+            autoExpandParent: false,
+        });
+    };
 
-  getIcon() {
-      return (
-          <FolderOutlined height='4px' width='4px' className={style['label-icon']}/>
-      )
-  }
+    // onChange = e => {
+    //     const value = e.target.value;
+    //     const expandedKeys = dataList
+    //         .map(item => {
+    //             if (item.title.indexOf(value) > -1) {
+    //                 return getParentKey(item.key, gData);
+    //             }
+    //             return null;
+    //         })
+    //         .filter((item, i, self) => item && self.indexOf(item) === i);
+    //     this.setState({
+    //         expandedKeys,
+    //         searchValue: value,
+    //         autoExpandParent: true,
+    //     });
+    // };
 
-  render() {
-    const { searchValue, expandedKeys, autoExpandParent } = this.state;
-    const loop = data => data.map((item) => {
-      const index = item.title.indexOf(searchValue);
-      const beforeStr = item.title.substr(0, index);
-      const afterStr = item.title.substr(index + searchValue.length);
-      const title = index > -1 ? (
-        <span>
-          {beforeStr}
-          <span style={{ color: '#f50' }}>{searchValue}</span>
-          {afterStr}
-        </span>
-      ) : <span>{item.title}</span>;
-      if (item.children) {
+    getIcon(entityType) {
+        const EntityIconComponent =
+            {
+                [ENTITY_TYPES.MESH]: GatewayOutlined,
+                [ENTITY_TYPES.CAMERA]: VideoCameraOutlined,
+                [ENTITY_TYPES.LIGHT.AMBIENT]: BulbOutlined,
+                [ENTITY_TYPES.LIGHT.DEFAULT]: BulbOutlined,
+                [ENTITY_TYPES.LIGHT.HEMISPHERE]: BulbOutlined,
+                [ENTITY_TYPES.LIGHT.POINT]: BulbOutlined,
+                [ENTITY_TYPES.LIGHT.SPOT]: BulbOutlined,
+                [ENTITY_TYPES.LIGHT.SUN]: BulbOutlined,
+            }[entityType] || FolderViewOutlined;
+
+        console.log(entityType, EntityIconComponent);
+
+        return <EntityIconComponent height="4px" width="4px" className={style["label-icon"]} />;
+    }
+
+    render() {
+        const { searchValue, expandedKeys, autoExpandParent } = this.state;
+        const { graph = [] } = this.props;
+        const loop = data => {
+            console.log(data);
+            return data.map(({ element, children }) => {
+                const name = element.name || "Level";
+                // const index = name.indexOf(searchValue);
+                // const beforeStr = name.substr(0, index);
+                // const afterStr = name.substr(index + searchValue.length);
+                // const title =
+                //     index > -1 ? (
+                //         <span>
+                //             {beforeStr}
+                //             <span style={{ color: "#f50" }}>{searchValue}</span>
+                //             {afterStr}
+                //         </span>
+                //     ) : (
+                //         <span>{name}</span>
+                //     );
+                if (children) {
+                    return (
+                        <TreeNode icon={this.getIcon(element.entityType)} key={name} title={name}>
+                            {loop(children)}
+                        </TreeNode>
+                    );
+                }
+                return <TreeNode icon={this.getIcon(element.entityType)} key={name} title={name} />;
+            });
+        };
+
         return (
-          <TreeNode icon={this.getIcon()} key={item.key} title={title}>
-            {loop(item.children)}
-          </TreeNode>
+            <div className={classnames(style.panel, style.hierarchy)}>
+                <h3 className={style.title}>Hierarchy</h3>
+                <div className={style.content}>
+                    <Tree
+                        className={style.hierarchy}
+                        showIcon
+                        showLine
+                        onExpand={this.onExpand}
+                        expandedKeys={expandedKeys}
+                        autoExpandParent={autoExpandParent}
+                    >
+                        {loop(graph)}
+                    </Tree>
+                </div>
+            </div>
         );
-      }
-      return <TreeNode icon={this.getIcon()} key={item.key} title={title} />;
-    });
-
-    return (
-      <div className={classnames(style.panel, style.hierarchy)}>
-        {/* <div className={style['hierarchy-search-filter']}>
-            <Search placeholder="Search" onChange={this.onChange} />
-        </div>
-        <Tree
-            className={style.hierarchy}
-            showIcon
-            showLine
-            onExpand={this.onExpand}
-            expandedKeys={expandedKeys}
-            autoExpandParent={autoExpandParent}>
-            { loop(gData) }
-        </Tree> */}
-        <h3 className={style.title}>Hierarchy</h3>
-        <div className={style.content}>
-
-        </div>
-      </div>
-    );
-  }
+    }
 }
 
-export default Hierarchy;
+const mapStateToProps = state => ({
+    graph: state.hierarchy.graph,
+});
+
+export default connect(mapStateToProps)(Hierarchy);

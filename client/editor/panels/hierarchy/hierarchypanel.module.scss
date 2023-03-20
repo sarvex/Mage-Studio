@@ -1,6 +1,6 @@
-@import '../../../shared/constants.scss';
-@import '../../../shared/theme.scss';
-@import '../panel.module.scss';
+@import "../../../shared/constants.scss";
+@import "../../../shared/theme.scss";
+@import "../panel.module.scss";
 
 // .hierarchy-search-filter {
 //     /* align-self: center; */
@@ -38,6 +38,7 @@
 .hierarchy {
     flex-grow: 1;
     margin-bottom: 0px;
+    max-height: 320px;
     // overflow-y: auto;
     // // background: $background;
     // & li,

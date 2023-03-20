@@ -18,5 +18,6 @@
         border-radius: $base-unit;
         background-color: $panel-content;
         flex: 1 1 auto;
+        overflow: auto;
     }
 }

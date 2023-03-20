@@ -1,7 +1,7 @@
 import { HIERARCHY_CHANGE } from "../actions/types";
 
 const DEFAULT_STATE = {
-    graph: {},
+    graph: [],
 };
 
 const reducer = (state = DEFAULT_STATE, action) => {

@@ -7,7 +7,6 @@ import {
     Images,
     THREE,
     Grid,
-    store,
     AmbientLight,
     SunLight,
     PointLight,
@@ -19,6 +18,9 @@ import {
     Cone,
     Box,
     Plane,
+    Color,
+    math,
+    constants,
 } from "mage-engine";
 import { hierarchyChange } from "../../../actions/hierarchy";
 
@@ -29,9 +31,13 @@ export class EditorScene extends Level {
         super(options);
     }
 
-    dispatchUpdatedHierarchy() {
-        store.dispatch(hierarchyChange(Scene.getHierarchy()));
-    }
+    dispatchUpdatedHierarchy = () => {
+        console.log("dispatching hierarchy change", Scene.getHierarchy());
+        this.dispatchEvent({
+            type: "hierarchyChange",
+            graph: Scene.getHierarchy(),
+        });
+    };
 
     addAmbientLight = () => {
         AmbientLight.create({
@@ -344,8 +350,9 @@ export class EditorScene extends Level {
     onCreate() {
         Scene.getCamera().setPosition({ y: 70, z: 150 });
         Scene.getCamera().lookAt(0, 0, 0);
-
         Scene.setClearColor(0x040d10);
+
+        // this.dispatchUpdatedHierarchy();
 
         this.setTranformControls();
 
