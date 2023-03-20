@@ -1,8 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import controls from './controls';
-import inspector from './inspector';
-import scene from './scene';
+import controls from "./controls";
+import inspector from "./inspector";
+import scene from "./scene";
+import hierarchy from "./hierarchy";
 
 // import shadows from './shadows';
 // import fog from './fog';
@@ -19,5 +20,6 @@ import scene from './scene';
 export default combineReducers({
     controls,
     scene,
-    inspector
+    inspector,
+    hierarchy,
 });
