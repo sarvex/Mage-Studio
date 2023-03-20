@@ -11,7 +11,7 @@ exports[`App should render fine 1`] = `
     <div
       className="left-container"
     >
-      <Connect(SceneContainer) />
+      <Connect(Scene) />
       <Connect(AssetsPanel) />
     </div>
     <div
