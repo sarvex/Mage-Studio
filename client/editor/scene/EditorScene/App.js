@@ -21,11 +21,14 @@ import {
     Color,
     math,
     constants,
+    Input,
+    INPUT_EVENTS,
 } from "mage-engine";
 import { hierarchyChange } from "../../../actions/hierarchy";
 
 import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL } from "../../../lib/constants";
 import { getRandomPrototypeTexture, pickRandomPosition } from "../../../lib/util";
+import { DEFAULT_SELECTABLE_TAG } from "./constants";
 export class EditorScene extends Level {
     constructor(options) {
         super(options);
@@ -103,29 +106,28 @@ export class EditorScene extends Level {
         this.dispatchUpdatedHierarchy();
     };
 
+    postNewElementAddition(element) {
+        element.setPosition(pickRandomPosition());
+        element.setTextureMap(getRandomPrototypeTexture());
+        element.addTag(DEFAULT_SELECTABLE_TAG);
+
+        this.dispatchUpdatedHierarchy();
+    }
+
     addCube = () => {
         const cube = new Cube(20, 0xeeeeee);
 
-        cube.setPosition(pickRandomPosition());
-        cube.setTextureMap(getRandomPrototypeTexture());
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(cube);
     };
 
     addSphere = () => {
         const sphere = new Sphere(20, 0xffff00);
-        sphere.setPosition(pickRandomPosition());
-        sphere.setTextureMap(getRandomPrototypeTexture());
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(sphere);
     };
 
     addCylinder = () => {
         const cylinder = new Cylinder(10, 10, 30, 0x0fff00);
-        cylinder.setPosition(pickRandomPosition());
-        cylinder.setTextureMap(getRandomPrototypeTexture());
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(cylinder);
     };
 
     addCone = () => {
@@ -133,10 +135,7 @@ export class EditorScene extends Level {
         const height = 15;
 
         const cone = new Cone(radius, height);
-        cone.setPosition(pickRandomPosition());
-        cone.setTextureMap(getRandomPrototypeTexture());
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(cone);
     };
 
     addBox = () => {
@@ -146,10 +145,7 @@ export class EditorScene extends Level {
 
         const box = new Box(width, height, depth, Color.randomColor(true));
 
-        box.setPosition(pickRandomPosition());
-        box.setTextureMap(getRandomPrototypeTexture());
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(box);
     };
 
     addPlane = () => {
@@ -158,10 +154,7 @@ export class EditorScene extends Level {
 
         const plane = new Plane(height, width, { color: Color.randomColor(true) });
 
-        plane.setPosition(pickRandomPosition());
-        plane.setTexture(getRandomPrototypeTexture(), constants.TEXTURES.MAP);
-
-        this.dispatchUpdatedHierarchy();
+        this.postNewElementAddition(plane);
     };
 
     loadModel(model) {
@@ -170,57 +163,15 @@ export class EditorScene extends Level {
         parsed.setPosition({ x: 0, y: 0, z: 0 });
     }
 
-    loadScript(scriptContent) {
-        const script = Scripts.createFromString(scriptContent);
-        this.currentElement.addScript(script.name());
-    }
+    onElementClick = ({ elements }) => {
+        const filtered =
+            elements.filter(({ element }) => element.hasTag(DEFAULT_SELECTABLE_TAG))[0] || {};
+        this.transform.attach(filtered.element);
+    };
 
-    updateCurrentElement(name = "", position, rotation, scale) {
-        if (this.currentElement && this.hasSelection) {
-            this.currentElement.setPosition(position);
-            this.currentElement.setRotation(rotation);
-            this.currentElement.setScale(scale);
-            this.currentElement.setName(name, { replace: true });
-
-            this.dispatchEvent({
-                type: "elementChanged",
-                name: this.currentElement.name,
-                position,
-                rotation,
-                scale,
-            });
-        }
-    }
-
-    getCurrentElement() {
-        return this.currentElement;
-    }
-
-    onElementClick({ elements = [] }) {
-        const { element } = elements[0];
-        this.currentElement = element;
-        this.hasSelection = true;
-        this.transform.attach(element);
-
-        this.dispatchEvent({
-            type: "elementAttached",
-            name: element.name,
-            rotation: element.getRotation(),
-            scale: element.getScale(),
-            position: element.getPosition(),
-        });
-    }
-
-    onElementDeselect() {
-        console.log("deselecting");
-        this.hasSelection = false;
-        this.dispatchEvent({ type: "elementDetached" });
-    }
-
-    onKeyDown(e) {
-        console.log(e);
-    }
-    onKeyUp(e) {}
+    // onElementDeselect = () => {
+    //     this.transform.detach();
+    // };
 
     onKeyPress({ event }) {
         switch (event.key) {
@@ -261,7 +212,7 @@ export class EditorScene extends Level {
                 this.transform.enabled = !this.transform.enabled;
                 break;
             case "escape":
-                this.transform.detach();
+                this.onElementDeselect();
                 break;
         }
     }
@@ -271,7 +222,6 @@ export class EditorScene extends Level {
         Controls.setTransformControl();
 
         this.transform = Controls.getControl("transform");
-        this.transform.addEventListener("objectChange", this.dispatchElementChange.bind(this));
     }
 
     changeTransformControl(control) {
@@ -322,26 +272,26 @@ export class EditorScene extends Level {
         }
     }
 
-    dispatchElementChange() {
-        if (!this.transform.object || !this.currentElement) return;
+    // dispatchElementChange() {
+    //     if (!this.transform.object || !this.currentElement) return;
 
-        this.dispatchEvent({
-            type: "elementChanged",
-            name: this.currentElement.name,
-            rotation: this.currentElement.getRotation(),
-            scale: this.currentElement.getScale(),
-            position: this.currentElement.getPosition(),
-        });
-    }
+    //     this.dispatchEvent({
+    //         type: "elementChanged",
+    //         name: this.currentElement.name,
+    //         rotation: this.currentElement.getRotation(),
+    //         scale: this.currentElement.getScale(),
+    //         position: this.currentElement.getPosition(),
+    //     });
+    // }
 
-    handleSceneChange(state) {
-        if (state.requested) {
-            this.dispatchEvent({
-                type: "sceneExported",
-                data: this.toJSON(),
-            });
-        }
-    }
+    // handleSceneChange(state) {
+    //     if (state.requested) {
+    //         this.dispatchEvent({
+    //             type: "sceneExported",
+    //             data: this.toJSON(),
+    //         });
+    //     }
+    // }
 
     resize(width, height) {
         Scene.resize(width, height);
@@ -352,7 +302,9 @@ export class EditorScene extends Level {
         Scene.getCamera().lookAt(0, 0, 0);
         Scene.setClearColor(0x040d10);
 
-        // this.dispatchUpdatedHierarchy();
+        Input.enableMouse();
+        Input.addEventListener(INPUT_EVENTS.ELEMENT_CLICK, this.onElementClick);
+        // Input.addEventListener(INPUT_EVENTS.ELEMENT_DESELECT, this.onElementDeselect);
 
         this.setTranformControls();
 
