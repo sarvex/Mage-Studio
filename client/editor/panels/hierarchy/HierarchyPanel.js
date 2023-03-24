@@ -10,7 +10,7 @@ import {
 
 import style from "./hierarchypanel.module.scss";
 import { connect } from "react-redux";
-import _ from "lodash";
+import { selectionChange } from "../../../actions/selection";
 
 const { TreeNode } = Tree;
 
@@ -58,6 +58,19 @@ export class Hierarchy extends React.Component {
         };
     }
 
+    onTreeNodeSelect = (_, e) => {
+        const graphPosition = e.node.pos.split("-").slice(1);
+        const { graph, onSelectionChange } = this.props;
+        const find = (graph, indices) =>
+            indices.length === 1
+                ? graph[indices[0]]
+                : find(graph[indices[0]].children, indices.slice(1));
+
+        const selection = find(graph, graphPosition);
+
+        onSelectionChange(selection);
+    };
+
     onExpand = expandedKeys => {
         this.setState({
             expandedKeys: [...expandedKeys, DEFAULT_EXPANDED_KEY],
@@ -83,21 +96,32 @@ export class Hierarchy extends React.Component {
 
     render() {
         const { expandedKeys, autoExpandParent } = this.state;
-        const { graph = [] } = this.props;
+        const { graph = [], selection } = this.props;
         const loop = data => {
             return data.map(({ element, children }) => {
                 const name = element.name || "Level";
-
                 if (children) {
                     return (
-                        <TreeNode icon={this.getIcon(element.entityType)} key={name} title={name}>
+                        <TreeNode
+                            icon={this.getIcon(element.entityType)}
+                            key={element.uuid}
+                            title={name}
+                        >
                             {loop(children)}
                         </TreeNode>
                     );
                 }
-                return <TreeNode icon={this.getIcon(element.entityType)} key={name} title={name} />;
+                return (
+                    <TreeNode
+                        icon={this.getIcon(element.entityType)}
+                        key={element.uuid}
+                        title={name}
+                    />
+                );
             });
         };
+
+        const selectedKeys = selection.element.uuid ? [selection.element.uuid] : [];
 
         return (
             <div className={classnames(style.panel, style.hierarchy)}>
@@ -108,7 +132,9 @@ export class Hierarchy extends React.Component {
                         showIcon
                         showLine
                         onExpand={this.onExpand}
+                        onSelect={this.onTreeNodeSelect}
                         expandedKeys={expandedKeys}
+                        selectedKeys={selectedKeys}
                         autoExpandParent={autoExpandParent}
                     >
                         {loop(graph)}
@@ -121,6 +147,11 @@ export class Hierarchy extends React.Component {
 
 const mapStateToProps = state => ({
     graph: state.hierarchy.graph,
+    selection: state.selection,
 });
 
-export default connect(mapStateToProps)(Hierarchy);
+const mapDispatchToProps = dispatch => ({
+    onSelectionChange: selection => dispatch(selectionChange(selection)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hierarchy);

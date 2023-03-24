@@ -115,9 +115,11 @@
 
     &-node-selected {
         color: $atomic-tangerine !important;
-        outline-offset: 1px;
+        outline-offset: 0px;
         outline: solid;
         outline-width: 1px;
+        outline-style: dashed;
+        border-radius: 0px !important;
     }
 
     &-show-line .ant-tree-indent-unit:before {

@@ -23,11 +23,13 @@ import {
     constants,
     Input,
     INPUT_EVENTS,
+    Universe,
 } from "mage-engine";
 import { hierarchyChange } from "../../../actions/hierarchy";
 
 import { GLOBAL_SPACE, LOCAL_SPACE, ROTATE_CONTROL } from "../../../lib/constants";
 import { getRandomPrototypeTexture, pickRandomPosition } from "../../../lib/util";
+import { EVENTS } from "../constants";
 import { DEFAULT_SELECTABLE_TAG } from "./constants";
 export class EditorScene extends Level {
     constructor(options) {
@@ -35,10 +37,16 @@ export class EditorScene extends Level {
     }
 
     dispatchUpdatedHierarchy = () => {
-        console.log("dispatching hierarchy change", Scene.getHierarchy());
         this.dispatchEvent({
-            type: "hierarchyChange",
+            type: EVENTS.HIERARCHY_CHANGE,
             graph: Scene.getHierarchy(),
+        });
+    };
+
+    dispatchElementSelected = element => {
+        this.dispatchEvent({
+            type: EVENTS.ELEMENT.SELECTED,
+            element: element.toJSON(),
         });
     };
 
@@ -166,12 +174,15 @@ export class EditorScene extends Level {
     onElementClick = ({ elements }) => {
         const filtered =
             elements.filter(({ element }) => element.hasTag(DEFAULT_SELECTABLE_TAG))[0] || {};
-        this.transform.attach(filtered.element);
+
+        if (filtered.element) {
+            this.dispatchElementSelected(filtered.element);
+        }
     };
 
-    // onElementDeselect = () => {
-    //     this.transform.detach();
-    // };
+    selectElementByName(name) {
+        this.transform.attach(Universe.get(name));
+    }
 
     onKeyPress({ event }) {
         switch (event.key) {
