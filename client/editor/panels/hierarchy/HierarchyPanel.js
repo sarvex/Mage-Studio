@@ -96,7 +96,7 @@ export class Hierarchy extends React.Component {
 
     render() {
         const { expandedKeys, autoExpandParent } = this.state;
-        const { graph = [], selection } = this.props;
+        const { graph = [], selection = { element: {} } } = this.props;
         const loop = data => {
             return data.map(({ element, children }) => {
                 const name = element.name || "Level";
