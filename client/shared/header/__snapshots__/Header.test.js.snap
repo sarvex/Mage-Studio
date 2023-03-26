@@ -5,9 +5,7 @@ exports[`Header should render fine 1`] = `
   className="header"
 >
   <Logo />
-  <FileMenu
-    onSaveScript={[Function]}
-  />
+  <FileMenu />
   <ViewMenu />
   <HelpMenu />
 </div>

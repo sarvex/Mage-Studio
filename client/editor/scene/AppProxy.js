@@ -1,3 +1,5 @@
+import { ELEMENTS } from "../../contants";
+
 const config = {
     screen: {
         frameRate: 60,
@@ -72,3 +74,48 @@ export async function getOrCreateApp() {
 
     return Promise.resolve(app);
 }
+
+export const addElement = type => {
+    console.log(type);
+    getOrCreateApp().then(app => {
+        switch (type) {
+            case ELEMENTS.BASE.CUBE:
+                app.addCube();
+                break;
+            case ELEMENTS.BASE.SPHERE:
+                app.addSphere();
+                break;
+            case ELEMENTS.BASE.CYLINDER:
+                app.addCylinder();
+                break;
+            case ELEMENTS.BASE.CONE:
+                app.addCone();
+                break;
+            case ELEMENTS.BASE.BOX:
+                app.addBox();
+                break;
+            case ELEMENTS.BASE.PLANE:
+                app.addPlane();
+                break;
+            case ELEMENTS.LIGHTS.AMBIENT:
+                app.addAmbientLight();
+                break;
+            case ELEMENTS.LIGHTS.SUN:
+                app.addSunLight();
+                break;
+            case ELEMENTS.LIGHTS.SPOTLIGHT:
+                app.addSpotLight();
+                break;
+            case ELEMENTS.LIGHTS.POINTLIGHT:
+                app.addPointLight();
+                break;
+            case ELEMENTS.LIGHTS.HEMISPHERE:
+                app.addHemisphereLight();
+                break;
+            default:
+                break;
+        }
+    });
+};
+
+// export const attachElement = (element)

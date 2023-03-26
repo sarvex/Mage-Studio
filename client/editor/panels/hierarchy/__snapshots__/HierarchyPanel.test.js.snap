@@ -39,7 +39,9 @@ exports[`HierarchyPanel render should render properly when empty 1`] = `
         }
       }
       onExpand={[Function]}
+      onSelect={[Function]}
       selectable={true}
+      selectedKeys={Array []}
       showIcon={true}
       showLine={true}
     />
@@ -86,7 +88,9 @@ exports[`HierarchyPanel render should render properly when receives a graph 1`] 
         }
       }
       onExpand={[Function]}
+      onSelect={[Function]}
       selectable={true}
+      selectedKeys={Array []}
       showIcon={true}
       showLine={true}
     >
@@ -98,7 +102,6 @@ exports[`HierarchyPanel render should render properly when receives a graph 1`] 
             width="4px"
           />
         }
-        key="Level"
         title="Level"
       >
         <TreeNode
@@ -109,7 +112,6 @@ exports[`HierarchyPanel render should render properly when receives a graph 1`] 
               width="4px"
             />
           }
-          key="Cube"
           title="Cube"
         />
       </TreeNode>

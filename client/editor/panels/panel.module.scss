@@ -19,5 +19,6 @@
         background-color: $panel-content;
         flex: 1 1 auto;
         overflow: auto;
+        padding-top: $base-unit * 2;
     }
 }

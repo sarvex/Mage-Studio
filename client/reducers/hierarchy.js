@@ -5,7 +5,6 @@ const DEFAULT_STATE = {
 };
 
 const reducer = (state = DEFAULT_STATE, action) => {
-    console.log(state, action);
     switch (action.type) {
         case HIERARCHY_CHANGE:
             return {

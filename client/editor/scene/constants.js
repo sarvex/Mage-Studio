@@ -1,0 +1,6 @@
+export const EVENTS = {
+    HIERARCHY_CHANGE: "HIERARCHY_CHANGE",
+    ELEMENT: {
+        SELECTED: "ELEMENT.SELECTED",
+    },
+};

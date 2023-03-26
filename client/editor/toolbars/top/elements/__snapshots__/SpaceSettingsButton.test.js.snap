@@ -13,6 +13,8 @@ exports[`SpaceSettingsButton should render properly 1`] = `
   <Button
     className="space-settings-button"
     onClick={[Function]}
-  />
+  >
+    global
+  </Button>
 </Tooltip>
 `;

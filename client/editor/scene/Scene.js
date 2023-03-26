@@ -8,6 +8,8 @@ import { getOrCreateApp } from "./AppProxy";
 import TopToolbar from "../toolbars/top";
 
 import style from "./scene.module.scss";
+import { EVENTS } from "./constants";
+import { selectionChange } from "../../actions/selection";
 
 const getContainerSize = element => {
     const { height, width } = element.getBoundingClientRect();
@@ -24,13 +26,14 @@ export class Scene extends React.Component {
     }
 
     componentDidMount() {
-        const { onHierarchyChange } = this.props;
+        const { onHierarchyChange, onElementSelected } = this.props;
 
         getOrCreateApp().then(app => {
             if (app) {
                 this.app = app;
 
-                this.app.addEventListener("hierarchyChange", onHierarchyChange);
+                this.app.addEventListener(EVENTS.HIERARCHY_CHANGE, onHierarchyChange);
+                this.app.addEventListener(EVENTS.ELEMENT.SELECTED, onElementSelected);
 
                 this.app.resize(this.levelRef.offsetWidth, this.levelRef.offsetHeight);
                 this.app.dispatchUpdatedHierarchy();
@@ -65,6 +68,7 @@ export class Scene extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
     onHierarchyChange: ({ graph }) => dispatch(hierarchyChange(graph)),
+    onElementSelected: selection => dispatch(selectionChange(selection)),
 });
 
 export default connect(null, mapDispatchToProps)(Scene);
