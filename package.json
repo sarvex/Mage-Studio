@@ -96,7 +96,7 @@
     "redux": "4.0.1",
     "redux-devtools-extension": "2.13.5",
     "redux-thunk": "2.3.0",
-    "tar": "^5.0.5",
+    "tar": "^5.0.10",
     "uuid": "3.3.2"
   }
 }
